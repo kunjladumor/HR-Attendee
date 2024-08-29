@@ -5,6 +5,8 @@ import CustomText from "../components/CustomText/CustomText"; // Import the Cust
 import { CommonStyles } from "../styles/style"; // Import the CommonStyles component
 import Button from "../components/Buttons/Button"; // Import the Button component
 import ButtonStyles from "../components/Buttons/ButtonStyles";
+import CustomButton, {colors} from "../components/Buttons/ButtonComponent"; // Import the CustomButton component
+
 
 export default function HomeScreen({ navigation }) {
   const handleLogout = () => {
@@ -27,73 +29,42 @@ export default function HomeScreen({ navigation }) {
         <CustomText style={CommonStyles.description}>
           Manage your attendance and profile with ease.
         </CustomText>
-        {/* <TouchableOpacity
-          style={CommonStyles.button}
-          onPress={() => navigation.navigate("CheckIn")}
-        >
-          <Ionicons name="checkmark-circle" size={24} color="#fff" />
-          <CustomText style={CommonStyles.buttonText}>
-            Go to Check-In
-          </CustomText>
-        </TouchableOpacity> */}
-        {/* <TouchableOpacity
-          style={CommonStyles.button}
-          onPress={() => navigation.navigate("Profile")}
-        >
-          <Ionicons name="person" size={24} color="#fff" />
-          <CustomText style={CommonStyles.buttonText}>View Profile</CustomText>
-        </TouchableOpacity> */}
-        {/* <TouchableOpacity
-          style={CommonStyles.button}
-          onPress={() => navigation.navigate("TrackCheckIns")}
-        >
-          <Ionicons name="list" size={24} color="#fff" />
-          <CustomText style={CommonStyles.buttonText}>
-            Track Check-Ins
-          </CustomText>
-        </TouchableOpacity> */}
-        {/* <TouchableOpacity
-          style={CommonStyles.logoutButton}
-          onPress={handleLogout}
-        >
-          <Ionicons name="log-out" size={24} color="#fff" />
-          <CustomText style={CommonStyles.buttonText}>Logout</CustomText>
-        </TouchableOpacity> */}
-
-        <Button
+        <CustomButton
           title="Go to Check-In"
+          iconName="checkmark-circle"
+          iconSize={24}
+          iconColor="#fff"
           onPress={() => navigation.navigate("CheckIn")}
-          icon="checkmark-circle"
-          buttonStyle={[ButtonStyles.button, ButtonStyles.outlinePrimary]}
-          // textStyle={[CommonStyles.buttonText]}
-          textStyle={[ButtonStyles.outlinePrimarytext]}
-          iconStyle={{ color: "#fff" }}
+          color="primary"
         />
-        <Button
+        <CustomButton
           title="View Profile"
+          iconName="person"
+          iconSize={24}
+          iconColor="#fff"
           onPress={() => navigation.navigate("Profile")}
-          icon="person"
-          buttonStyle={CommonStyles.button}
-          textStyle={CommonStyles.buttonText}
-          iconStyle={{ color: "#fff" }}
+          color="primary"
         />
-        <Button
+        <CustomButton
           title="Track Check-Ins"
+          iconName="list"
+          iconSize={24}
+          iconColor="#fff"
           onPress={() => navigation.navigate("TrackCheckIns")}
-          icon="list"
-          buttonStyle={CommonStyles.button}
-          textStyle={CommonStyles.buttonText}
-          iconStyle={{ color: "#fff" }}
+          color="primary"
         />
-        <Button
+        <CustomButton
           title="Logout"
+          iconName="log-out"
+          iconSize={24}
+          iconColor="#fff"
           onPress={handleLogout}
-          icon="log-out"
-          buttonStyle={[CommonStyles.Button, CommonStyles.logoutButton]}
-          textStyle={CommonStyles.buttonText}
-          iconStyle={{ color: "#fff" }}
+          color="primary"
         />
+
       </View>
+
     </View>
+
   );
 }
