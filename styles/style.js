@@ -24,7 +24,8 @@ export const CommonStyles = StyleSheet.create({
   content: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    // alignItems: "center",
+    gap: 10,
     padding: 20,
   },
   welcomeText: {
@@ -96,7 +97,7 @@ export const login = StyleSheet.create({
   innerContainer: {
     flex: 1,
     justifyContent: "center",
-    gap: 15,
+    gap: 10,
   },
   logo: {
     width: 100,
@@ -131,40 +132,39 @@ export const login = StyleSheet.create({
     textAlign: "right",
     marginBottom: 20,
   },
-  loginButton: {
-    backgroundColor: "#3185ff",
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  loginButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  googleButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#ffffff",
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 20,
-    borderWidth: 1,
-    borderColor: "#ddd",
-  },
+  // loginButton: {
+  //   backgroundColor: "#3185ff",
+  //   padding: 10,
+  //   borderRadius: 5,
+  //   alignItems: "center",
+  //   marginBottom: 20,
+  // },
+  // loginButtonText: {
+  //   color: "#fff",
+  //   fontSize: 16,
+  //   fontWeight: "bold",
+  // },
+  // googleButton: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   backgroundColor: "#ffffff",
+  //   padding: 10,
+  //   borderRadius: 5,
+  //   marginTop: 20,
+  //   borderWidth: 1,
+  //   borderColor: "#ddd",
+  // },
   googleIcon: {
     width: 32,
     height: 32,
-    marginRight: 10,
   },
-  googleButtonText: {
-    color: "#757575",
-    fontSize: 16,
-    fontWeight: "bold",
-    lineHeight: 32,
-  },
+  // googleButtonText: {
+  //   color: "#757575",
+  //   fontSize: 16,
+  //   fontWeight: "bold",
+  //   lineHeight: 32,
+  // },
   registerContainer: {
     flexDirection: "row",
     justifyContent: "center",
@@ -206,9 +206,9 @@ export const CheckIn = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#f5f5f5",
     padding: 20,
+    gap: 10,
   },
   title: {
     fontSize: 28,
