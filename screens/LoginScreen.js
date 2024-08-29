@@ -12,19 +12,15 @@ import {
   Animated,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import * as Font from "expo-font";
-import AppLoading from "expo-app-loading";
 import CustomText from "../components/CustomText/CustomText";
+import CustomButton from "../components/Buttons/ButtonComponent";
 import { login } from "../styles/style"; // Import the styles object
 
 // Import the logo image
 import logo from "../assets/images/logo.png";
 
-const fetchFonts = () => {
-  return Font.loadAsync({
-    Poppins: require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
-  });
-};
+// Import the useFonts hook
+import { useFonts } from "expo-font";
 
 const AnimatedTextInput = React.forwardRef(
   (
@@ -97,23 +93,18 @@ const LoginScreen = () => {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
   const navigation = useNavigation();
   const passwordInputRef = useRef(null); // Reference to the password input field
+
+  const [fontsLoaded] = useFonts({
+    Poppins: require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+  });
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, [navigation]);
-
-  useEffect(() => {
-    const loadFonts = async () => {
-      await fetchFonts();
-      setFontsLoaded(true);
-    };
-    loadFonts();
-  }, []);
 
   const validateInputs = () => {
     let valid = true;
@@ -161,7 +152,7 @@ const LoginScreen = () => {
   };
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return <ActivityIndicator size="large" />;
   }
 
   return (
@@ -201,29 +192,35 @@ const LoginScreen = () => {
               Forgot Password?
             </CustomText>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={login.loginButton}
+
+          <CustomButton
+            title="Login"
             onPress={handleLogin}
             disabled={loading}
+            color="primary"
+            loading={loading}
+            padding={12}
+            borderRadius={10}
           >
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <CustomText style={login.loginButtonText}>Login</CustomText>
-            )}
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={login.googleButton}
+            {loading && <ActivityIndicator color="#fff" />}
+          </CustomButton>
+
+          <CustomButton
+            title="Google"
             onPress={handleGoogleLogin}
+            color="neutral70"
+            outlined={true}
+            fontweight="bold"
+            borderRadius={10}
+            textColor="neutral70" // Set custom text color
+            gap={0}
           >
             <Image
               source={require("../assets/images/google_logo.png")}
               style={login.googleIcon}
             />
-            <CustomText style={login.googleButtonText}>
-              Login with Google
-            </CustomText>
-          </TouchableOpacity>
+          </CustomButton>
+
           <View style={login.registerContainer}>
             <CustomText style={login.registerText}>
               Don't have an account?
