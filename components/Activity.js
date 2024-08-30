@@ -1,0 +1,146 @@
+// Activity.js
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import PropTypes from "prop-types";
+import colors from "./Colors/ColorStyles";
+
+// ActivityCard Component
+const ActivityCard = ({ iconName, title, time, date, stat }) => {
+  return (
+    <View style={styles.card}>
+      <View style={styles.iconContainer}>
+        <Ionicons
+          name={iconName}
+          size={24}
+          color={colors.primary}
+          style={styles.icon}
+        />
+      </View>
+      <View style={styles.infoContainer}>
+        <View style={styles.titleRow}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.time}>{time}</Text>
+        </View>
+        <View style={styles.titleRow}>
+          <Text style={styles.date}>{date}</Text>
+          <Text style={styles.stat}>{stat}</Text>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+ActivityCard.propTypes = {
+  iconName: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  stat: PropTypes.string.isRequired,
+};
+
+// Activity Component
+const Activity = ({ activities }) => {
+  const renderItem = ({ item }) => (
+    <ActivityCard
+      iconName={item.iconName}
+      title={item.title}
+      time={item.time}
+      date={item.date}
+      stat={item.stat}
+    />
+  );
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Activity</Text>
+        <TouchableOpacity>
+          <Text style={styles.viewMore}>View More</Text>
+        </TouchableOpacity>
+      </View>
+      <FlatList
+        data={activities}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </View>
+  );
+};
+
+Activity.propTypes = {
+  activities: PropTypes.arrayOf(
+    PropTypes.shape({
+      iconName: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      stat: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  viewMore: {
+    fontSize: 16,
+    color: colors.primary,
+  },
+  card: {
+    flexDirection: "row",
+    padding: 10,
+    backgroundColor: colors.white,
+    marginBottom: 10,
+    alignItems: "center",
+    borderRadius: 5,
+  },
+  icon: {},
+  iconContainer: {
+    backgroundColor: "#3185ff1A",
+    padding: 5,
+    marginRight: 10,
+    borderRadius: 10,
+  },
+  infoContainer: {
+    flex: 1,
+  },
+  titleRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  time: {
+    fontSize: 14,
+    fontWeight: "500",
+    fontFamily: "Poppins",
+    lineHeight: 20,
+  },
+  date: {
+    fontSize: 14,
+    color: "#888",
+  },
+  stat: {
+    fontSize: 14,
+    color: "#888",
+  },
+});
+
+export default Activity;
