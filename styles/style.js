@@ -1,4 +1,22 @@
 import { StyleSheet } from "react-native";
+import colors from "../components/Colors/ColorStyles";
+import * as Device from "expo-device";
+import { StatusBar } from "react-native";
+
+// Function to check if the device has a notch
+const hasNotch =
+  Device.modelName.includes("iPhone X") ||
+  Device.modelName.includes("iPhone 11") ||
+  Device.modelName.includes("iPhone 12") ||
+  Device.modelName.includes("iPhone 13") ||
+  Device.modelName.includes("iPhone 14") ||
+  Device.modelName.includes("Pixel 3 XL") ||
+  Device.modelName.includes("Pixel 4 XL") ||
+  Device.modelName.includes("Pixel 5") ||
+  Device.modelName.includes("Pixel 6");
+
+// Get the status bar height
+export const statusBarHeight = StatusBar.currentHeight;
 
 export const CommonStyles = StyleSheet.create({
   container: {
@@ -7,8 +25,7 @@ export const CommonStyles = StyleSheet.create({
   },
   header: {
     backgroundColor: "#007BFF",
-    paddingVertical: 40,
-    paddingHorizontal: 20,
+    marginVertical: 20,
     alignItems: "center",
   },
   logo: {
@@ -22,11 +39,13 @@ export const CommonStyles = StyleSheet.create({
     fontWeight: "bold",
   },
   content: {
-    flex: 1,
-    justifyContent: "center",
+    flexGrow: 1,
+    // justifyContent: "center",
     // alignItems: "center",
     gap: 10,
     padding: 20,
+    paddingTop: statusBarHeight, // Conditional padding based on notch status
+    paddingBottom: 150,
   },
   welcomeText: {
     fontSize: 28,
@@ -79,7 +98,7 @@ export const CommonStyles = StyleSheet.create({
   centerIcon: {
     justifyContent: "center",
     alignItems: "center",
-    top: 0,
+    top: 10,
     width: 70,
     height: 70,
     borderRadius: 35,
@@ -196,6 +215,8 @@ export const login = StyleSheet.create({
     height: 40,
     fontSize: 16,
     color: "#000",
+    fontFamily: "Poppins", // Apply custom font
+    padding: 5,
   },
   inputError: {
     borderColor: "red",
@@ -248,5 +269,141 @@ export const CheckIn = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     marginLeft: 10,
+  },
+});
+
+export const HomeScreen = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 10,
+    backgroundColor: "transparent",
+    paddingHorizontal: 0,
+    fontFamily: "Poppins",
+  },
+
+  headerContainer: {
+    flexDirection: "row",
+    gap: 10,
+  },
+  headerContent: {
+    flexDirection: "column",
+  },
+
+  userName: {
+    fontSize: 20,
+    color: colors.neutral90,
+    fontWeight: "bold",
+    fontFamily: "Poppins",
+  },
+  userDesignation: {
+    fontSize: 16,
+    color: colors.neutral60,
+    fontFamily: "Poppins",
+  },
+  userImage: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+  },
+  notificationButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 50,
+    backgroundColor: "transparent",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
+export const CalendarStyles = StyleSheet.create({
+  container: {
+    paddingBottom: 10,
+  },
+  listContainer: {
+    paddingBottom: 10,
+  },
+  item: {
+    justifyContent: "center", // Center content vertically
+    alignItems: "center", // Center content horizontally
+    marginRight: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderColor: colors.neutral30,
+  },
+  activeItem: {
+    backgroundColor: "#007bff", // Active background color
+  },
+  date: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  activeDate: {
+    color: "white", // Active date color
+  },
+  day: {
+    fontSize: 16,
+    color: "gray",
+  },
+  activeDay: {
+    color: "white", // Active day color
+  },
+});
+
+export const AttendanceStyles = StyleSheet.create({
+  title: {
+    fontSize: 16,
+    fontFamily: "Poppins",
+    marginBottom: 10,
+    fontWeight: "500",
+  },
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  card: {
+    width: "48%", // Adjust width to fit 2 cards per row
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  iconContainer: {
+    width: 36,
+    height: 36,
+    borderRadius: 36,
+    backgroundColor: "#007bff1A",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  cardTitle: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: colors.neutral60,
+    flexWrap: "wrap",
+  },
+  cardValue: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 4,
+  },
+  stat: {
+    fontSize: 14,
+    fontFamily: "Poppins",
   },
 });

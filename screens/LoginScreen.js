@@ -10,17 +10,20 @@ import {
   KeyboardAvoidingView,
   Platform,
   Animated,
+  Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CustomText from "../components/CustomText/CustomText";
 import CustomButton from "../components/Buttons/ButtonComponent";
-import { login } from "../styles/style"; // Import the styles object
+import { login } from "../styles/LoginStyles"; // Import the styles object
 
 // Import the logo image
 import logo from "../assets/images/logo.png";
 
 // Import the useFonts hook
 import { useFonts } from "expo-font";
+
+const { width, height } = Dimensions.get("window");
 
 const AnimatedTextInput = React.forwardRef(
   (
@@ -50,7 +53,11 @@ const AnimatedTextInput = React.forwardRef(
       left: 10,
       top: animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [18, -10],
+        outputRange: [18, -8],
+      }),
+      top: animatedIsFocused.interpolate({
+        inputRange: [0, 1],
+        outputRange: [height * 0.02, height * -0.01], // Adjusted top position based on screen height
       }),
       fontSize: animatedIsFocused.interpolate({
         inputRange: [0, 1],
