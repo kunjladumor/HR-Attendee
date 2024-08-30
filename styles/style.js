@@ -407,3 +407,60 @@ export const AttendanceStyles = StyleSheet.create({
     fontFamily: "Poppins",
   },
 });
+
+export const ActivityStyles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  viewMore: {
+    fontSize: 16,
+    color: colors.primary,
+  },
+  card: {
+    flexDirection: "row",
+    padding: 10,
+    backgroundColor: colors.white,
+    marginBottom: 10,
+    alignItems: "center",
+    borderRadius: 5,
+  },
+  icon: {},
+  iconContainer: {
+    backgroundColor: "#3185ff1A",
+    padding: 5,
+    marginRight: 10,
+    borderRadius: 10,
+  },
+  infoContainer: {
+    flex: 1,
+  },
+  titleRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  time: {
+    fontSize: 14,
+    fontWeight: "500",
+    fontFamily: "Poppins",
+    lineHeight: 20,
+  },
+  date: {
+    fontSize: 14,
+    color: "#888",
+  },
+  stat: {
+    fontSize: 14,
+    color: "#888",
+  },
+});
