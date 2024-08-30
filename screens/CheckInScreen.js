@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import CustomButton from "../components/Buttons/ButtonComponent";
 import { CheckIn } from "../styles/style";
+import SwipeButton from "../components/SwipeButton";
 
 export default function CheckInScreen() {
   const [isCheckedIn, setIsCheckedIn] = useState(false);
@@ -21,7 +22,7 @@ export default function CheckInScreen() {
   return (
     <View style={CheckIn.container}>
       {/* <CustomText style={CheckIn.title}>Check In</CustomText> */}
-      {isCheckedIn ? (
+      {/* {isCheckedIn ? (
         <CustomButton
           color={"secondary"}
           iconName="log-out-outline"
@@ -33,6 +34,7 @@ export default function CheckInScreen() {
           buttonStyle={CheckIn.checkOutButton}
           textStyle={CheckIn.buttonText}
         />
+        
       ) : (
         <CustomButton
           color={"primary"}
@@ -45,7 +47,8 @@ export default function CheckInScreen() {
           buttonStyle={CheckIn.checkInButton}
           textStyle={CheckIn.buttonText}
         />
-      )}
+      )} */}
+      <SwipeButton />
       <CustomButton
         title="Track Check-Ins"
         iconName="list"

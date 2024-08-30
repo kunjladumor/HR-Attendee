@@ -1,70 +1,85 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Import icons from Expo
-import CustomText from "../components/CustomText/CustomText"; // Import the CustomText component
-import { CommonStyles } from "../styles/style"; // Import the CommonStyles component
-import Button from "../components/Buttons/Button"; // Import the Button component
-import ButtonStyles from "../components/Buttons/ButtonStyles";
-import CustomButton, {colors} from "../components/Buttons/ButtonComponent"; // Import the CustomButton component
+import { View, FlatList, StyleSheet } from "react-native";
+import HomeHeader from "../components/HomeHeader";
+import Calendar from "../components/Calendar";
+import Attendance from "../components/Attendance";
+import SwipeButton from "../components/SwipeButton";
+import Activity from "../components/Activity";
+import { CommonStyles } from "../styles/style";
 
-
-export default function HomeScreen({ navigation }) {
-  const handleLogout = () => {
-    navigation.replace("Login");
+const HomeScreen = () => {
+  const attendanceData = {
+    checkInTime: "09:00 AM",
+    checkOutTime: "05:00 PM",
+    breakTime: "30 min",
+    totalDays: "20",
   };
+
+  const activities = [
+    {
+      iconName: "log-in-outline",
+      title: "Check-In",
+      time: "09:00 AM",
+      date: "2023-10-01",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-out-outline",
+      title: "Check-Out",
+      time: "05:00 PM",
+      date: "2023-10-01",
+      stat: "On-Time",
+    },
+    {
+      iconName: "time-outline",
+      title: "Break",
+      time: "12:00 PM",
+      date: "2023-10-01",
+      stat: "30 min",
+    },
+    {
+      iconName: "calendar-outline",
+      title: "Leave",
+      time: "All Day",
+      date: "2023-10-02",
+      stat: "Approved",
+    },
+  ];
+
+  const renderItem = ({ item }) => {
+    switch (item.type) {
+      case "header":
+        return <HomeHeader />;
+      case "calendar":
+        return <Calendar />;
+      case "attendance":
+        return <Attendance attendanceData={attendanceData} />;
+
+      case "activity":
+        return <Activity activities={activities} />;
+      default:
+        return null;
+    }
+  };
+
+  const data = [
+    { type: "header" },
+    { type: "calendar" },
+    { type: "attendance" },
+    { type: "activity" },
+  ];
 
   return (
     <View style={CommonStyles.container}>
-      <View style={CommonStyles.header}>
-        <Image
-          source={{ uri: "https://example.com/logo.png" }} // Replace with your logo URL
-          style={CommonStyles.logo}
-        />
-        <CustomText style={CommonStyles.headerText}>
-          Welcome to HR Attendance App
-        </CustomText>
-      </View>
-      <View style={CommonStyles.content}>
-        <CustomText style={CommonStyles.welcomeText}>Hello, User!</CustomText>
-        <CustomText style={CommonStyles.description}>
-          Manage your attendance and profile with ease.
-        </CustomText>
-        <CustomButton
-          title="Go to Check-In"
-          iconName="checkmark-circle"
-          iconSize={24}
-          iconColor="#fff"
-          onPress={() => navigation.navigate("CheckIn")}
-          color="primary"
-        />
-        <CustomButton
-          title="View Profile"
-          iconName="person"
-          iconSize={24}
-          iconColor="#fff"
-          onPress={() => navigation.navigate("Profile")}
-          color="primary"
-        />
-        <CustomButton
-          title="Track Check-Ins"
-          iconName="list"
-          iconSize={24}
-          iconColor="#fff"
-          onPress={() => navigation.navigate("TrackCheckIns")}
-          color="primary"
-        />
-        <CustomButton
-          title="Logout"
-          iconName="log-out"
-          iconSize={24}
-          iconColor="#fff"
-          onPress={handleLogout}
-          color="primary"
-        />
-
-      </View>
-
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        contentContainerStyle={CommonStyles.content}
+      />
+      <SwipeButton />
     </View>
-
   );
-}
+};
+
+export default HomeScreen;
