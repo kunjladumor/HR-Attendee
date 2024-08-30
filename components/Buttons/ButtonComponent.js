@@ -31,7 +31,7 @@ const CustomButton = ({
   const defaultTextColor = outlined ? color : "white";
   const finalTextColor = textColor || defaultTextColor;
 
-  const styles = generateDynamicStyles({
+  const CustomStyles = generateDynamicStyles({
     name: title,
     color,
     textColor: finalTextColor,
@@ -47,8 +47,8 @@ const CustomButton = ({
       disabled={disabled}
       style={[
         outlined
-          ? styles[`buttonOutlined_${title}`]
-          : styles[`button_${title}`],
+          ? CustomStyles[`buttonOutlined_${title}`]
+          : CustomStyles[`button_${title}`],
         {
           flexDirection: "row",
           alignItems: "center",
@@ -66,7 +66,9 @@ const CustomButton = ({
           {iconName && (
             <Ionicons name={iconName} size={iconSize} color={iconColor} />
           )}
-          {title && <Text style={[styles[`text_${title}`]]}>{title}</Text>}
+          {title && (
+            <Text style={[CustomStyles[`text_${title}`]]}>{title}</Text>
+          )}
         </>
       )}
     </TouchableOpacity>
