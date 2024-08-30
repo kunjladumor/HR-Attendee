@@ -60,11 +60,11 @@
 //   return (
 //     <View
 //       style={[
-//         styles.container,
-//         isCheckedIn ? styles.checkedIn : styles.checkedOut,
+//         SwipeStyles.container,
+//         isCheckedIn ? SwipeStyles.checkedIn : SwipeStyles.checkedOut,
 //       ]}
 //     >
-//       <Text style={styles.text}>
+//       <Text style={SwipeStyles.text}>
 //         {isCheckedIn ? "Swipe to Check Out" : "Swipe to Check In"}
 //       </Text>
 //       <PanGestureHandler
@@ -72,7 +72,7 @@
 //         onHandlerStateChange={handleHandlerStateChange}
 //       >
 //         <Animated.View
-//           style={[styles.iconContainer, { transform: [{ translateX }] }]}
+//           style={[SwipeStyles.iconContainer, { transform: [{ translateX }] }]}
 //         >
 //           <Ionicons name="arrow-forward" size={24} color="#2980b9" />
 //         </Animated.View>
@@ -123,6 +123,7 @@ import { PanGestureHandler, State } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons"; // Ensure you have expo-vector-icons installed
 import colors from "./Colors/ColorStyles";
+import { SwipeStyles } from "../styles/style";
 
 const SwipeButton = () => {
   const [isCheckedIn, setIsCheckedIn] = useState(false);
@@ -177,14 +178,14 @@ const SwipeButton = () => {
   };
 
   return (
-    <View style={styles.absoluteContainer}>
+    <View style={SwipeStyles.absoluteContainer}>
       <View
         style={[
-          styles.container,
-          isCheckedIn ? styles.checkedIn : styles.checkedOut,
+          SwipeStyles.container,
+          isCheckedIn ? SwipeStyles.checkedIn : SwipeStyles.checkedOut,
         ]}
       >
-        <Text style={styles.text}>
+        <Text style={SwipeStyles.text}>
           {isCheckedIn ? "Swipe to Check Out" : "Swipe to Check In"}
         </Text>
         <PanGestureHandler
@@ -192,7 +193,7 @@ const SwipeButton = () => {
           onHandlerStateChange={handleHandlerStateChange}
         >
           <Animated.View
-            style={[styles.iconContainer, { transform: [{ translateX }] }]}
+            style={[SwipeStyles.iconContainer, { transform: [{ translateX }] }]}
           >
             <Ionicons
               name="arrow-forward"
@@ -205,46 +206,5 @@ const SwipeButton = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  absoluteContainer: {
-    position: "absolute",
-    bottom: 90, // Adjust this value based on the height of your main tabs
-    left: 0,
-    right: 0,
-    alignItems: "center",
-  },
-  container: {
-    width: "90%",
-    height: 50,
-    borderRadius: 5,
-    justifyContent: "center",
-    overflow: "hidden",
-    position: "relative",
-  },
-  text: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-    position: "absolute",
-    alignSelf: "center",
-  },
-  iconContainer: {
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 5,
-    position: "absolute",
-    left: 5,
-    backgroundColor: "#fff", // White background for the icon
-  },
-  checkedIn: {
-    backgroundColor: colors.secondary, // Red color for checked-in status
-  },
-  checkedOut: {
-    backgroundColor: colors.primary, // Blue color for checked-out status
-  },
-});
 
 export default SwipeButton;

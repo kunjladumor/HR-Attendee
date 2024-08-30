@@ -464,3 +464,44 @@ export const ActivityStyles = StyleSheet.create({
     color: "#888",
   },
 });
+
+export const SwipeStyles = StyleSheet.create({
+  absoluteContainer: {
+    position: "absolute",
+    bottom: 90, // Adjust this value based on the height of your main tabs
+    left: 0,
+    right: 0,
+    alignItems: "center",
+  },
+  container: {
+    width: "90%",
+    height: 50,
+    borderRadius: 5,
+    justifyContent: "center",
+    overflow: "hidden",
+    position: "relative",
+  },
+  text: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+    position: "absolute",
+    alignSelf: "center",
+  },
+  iconContainer: {
+    width: 40,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
+    position: "absolute",
+    left: 5,
+    backgroundColor: "#fff", // White background for the icon
+  },
+  checkedIn: {
+    backgroundColor: colors.secondary, // Red color for checked-in status
+  },
+  checkedOut: {
+    backgroundColor: colors.primary, // Blue color for checked-out status
+  },
+});
