@@ -5,13 +5,11 @@ import * as SplashScreen from "expo-splash-screen";
 import * as Device from "expo-device";
 import LoginScreen from "./screens/LoginScreen";
 import MainTabs from "./MainTabs";
-import { StatusBar } from "react-native";
-import { CommonStyles } from "./styles/style";
 const Stack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  const [hasNotch, setHasNotch] = useState(false);
+  const [setHasNotch] = useState(false);
 
   useEffect(() => {
     async function loadResourcesAndDataAsync() {

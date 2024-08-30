@@ -151,39 +151,7 @@ export const login = StyleSheet.create({
     textAlign: "right",
     marginBottom: 20,
   },
-  // loginButton: {
-  //   backgroundColor: "#3185ff",
-  //   padding: 10,
-  //   borderRadius: 5,
-  //   alignItems: "center",
-  //   marginBottom: 20,
-  // },
-  // loginButtonText: {
-  //   color: "#fff",
-  //   fontSize: 16,
-  //   fontWeight: "bold",
-  // },
-  // googleButton: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   backgroundColor: "#ffffff",
-  //   padding: 10,
-  //   borderRadius: 5,
-  //   marginTop: 20,
-  //   borderWidth: 1,
-  //   borderColor: "#ddd",
-  // },
-  googleIcon: {
-    width: 32,
-    height: 32,
-  },
-  // googleButtonText: {
-  //   color: "#757575",
-  //   fontSize: 16,
-  //   fontWeight: "bold",
-  //   lineHeight: 32,
-  // },
+
   registerContainer: {
     flexDirection: "row",
     justifyContent: "center",

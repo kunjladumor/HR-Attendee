@@ -1,5 +1,5 @@
 import React from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { View, FlatList } from "react-native";
 import HomeHeader from "../components/HomeHeader";
 import Calendar from "../components/Calendar";
 import Attendance from "../components/Attendance";

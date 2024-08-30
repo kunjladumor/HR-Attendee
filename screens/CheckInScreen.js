@@ -21,33 +21,6 @@ export default function CheckInScreen() {
 
   return (
     <View style={CheckIn.container}>
-      {/* <CustomText style={CheckIn.title}>Check In</CustomText> */}
-      {/* {isCheckedIn ? (
-        <CustomButton
-          color={"secondary"}
-          iconName="log-out-outline"
-          iconSize={20}
-          iconColor="#fff"
-          iconStyle={CheckIn.iconStyle} // Optional: Add any custom styles for the icon
-          onPress={handleCheckOut}
-          title="Check Out"
-          buttonStyle={CheckIn.checkOutButton}
-          textStyle={CheckIn.buttonText}
-        />
-        
-      ) : (
-        <CustomButton
-          color={"primary"}
-          iconName="log-in-outline"
-          iconSize={20}
-          iconColor="#fff"
-          iconStyle={CheckIn.iconStyle} // Optional: Add any custom styles for the icon
-          onPress={handleCheckIn}
-          title="Check In"
-          buttonStyle={CheckIn.checkInButton}
-          textStyle={CheckIn.buttonText}
-        />
-      )} */}
       <SwipeButton />
       <CustomButton
         title="Track Check-Ins"

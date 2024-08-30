@@ -23,7 +23,7 @@ import logo from "../assets/images/logo.png";
 // Import the useFonts hook
 import { useFonts } from "expo-font";
 
-const { width, height } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
 const AnimatedTextInput = React.forwardRef(
   (
