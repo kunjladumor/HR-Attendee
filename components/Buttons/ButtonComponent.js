@@ -26,6 +26,7 @@ const CustomButton = ({
   iconColor,
   children,
   fontweight,
+  style,
 }) => {
   const defaultTextColor = outlined ? color : "white";
   const finalTextColor = textColor || defaultTextColor;
@@ -54,6 +55,7 @@ const CustomButton = ({
           justifyContent: "center",
           gap: gap,
         },
+        style,
       ]}
     >
       {loading ? (

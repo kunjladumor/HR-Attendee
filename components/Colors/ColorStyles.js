@@ -2,8 +2,8 @@
 const colors = {
   primary: "#3185ff", // Blue
   secondary: "#F44336", // Red
-  outlinePrimary: "#3185ff", // Blue for outlined
-  outlineSecondary: "#F44336", // Red for outlined
+  // outlinePrimary: "#3185ff", // Blue for outlined
+  // outlineSecondary: "#F44336", // Red for outlined
   white: "#FFFFFF",
   black: "#242124",
   neutral10: "#F7F7F7",
