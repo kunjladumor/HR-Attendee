@@ -12,9 +12,6 @@ export const generateDynamicStyles = ({
   textSize = 15,
   fontweight = "normal",
 }) => {
-  const capitalizedColor = capitalize(color);
-  const capitalizedName = capitalize(name);
-
   return StyleSheet.create({
     [`button_${name}`]: {
       backgroundColor: colors[color],
@@ -23,7 +20,7 @@ export const generateDynamicStyles = ({
       borderRadius: borderRadius,
     },
     [`buttonOutlined_${name}`]: {
-      borderColor: colors[`outline${capitalizedColor}`],
+      borderColor: colors[color],
       borderWidth: borderWidth,
       backgroundColor: "transparent",
       padding: padding,
@@ -38,10 +35,4 @@ export const generateDynamicStyles = ({
       lineHeight: textSize * 1.25, // Example of text lineHeight
     },
   });
-};
-const capitalize = (str) => {
-  if (typeof str !== "string" || str.length === 0) {
-    return "";
-  }
-  return str.charAt(0).toUpperCase() + str.slice(1);
 };
