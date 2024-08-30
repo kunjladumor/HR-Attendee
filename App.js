@@ -1,81 +1,38 @@
-// import React, { useEffect, useState } from "react";
-// import { NavigationContainer } from "@react-navigation/native";
-// import { createStackNavigator } from "@react-navigation/stack";
-// import * as Font from "expo-font";
-// import * as SplashScreen from "expo-splash-screen";
-// import LoginScreen from "./screens/LoginScreen"; // Import LoginScreen component
-// import MainTabs from "./MainTabs"; // Import MainTabs component
-
-// const Stack = createStackNavigator();
-
-// export default function App() {
-//   const [fontsLoaded, setFontsLoaded] = useState(false);
-
-//   useEffect(() => {
-//     async function loadResourcesAndDataAsync() {
-//       try {
-//         SplashScreen.preventAutoHideAsync();
-
-//         await Font.loadAsync({
-//           "Poppins-Regular": require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
-//           "Poppins-Bold": require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
-//         });
-
-//         setFontsLoaded(true);
-//       } catch (e) {
-//         console.warn(e);
-//       } finally {
-//         SplashScreen.hideAsync();
-//       }
-//     }
-
-//     loadResourcesAndDataAsync();
-//   }, []);
-
-//   if (!fontsLoaded) {
-//     return null;
-//   }
-
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator initialRouteName="Login">
-//         <Stack.Screen name="Login" component={LoginScreen} />
-//         <Stack.Screen
-//           name="Main"
-//           component={MainTabs}
-//           options={{ headerShown: false }}
-//         />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// }
-
-
-
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import LoginScreen from "./screens/LoginScreen"; // Import LoginScreen component
-import MainTabs from "./MainTabs"; // Import MainTabs component
-
+import * as Device from "expo-device";
+import LoginScreen from "./screens/LoginScreen";
+import MainTabs from "./MainTabs";
+import { StatusBar } from "react-native";
+import { CommonStyles } from "./styles/style";
 const Stack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [hasNotch, setHasNotch] = useState(false);
 
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        // Prevent the splash screen from auto-hiding
-        await SplashScreen.preventAutoHideAsync();
+        SplashScreen.preventAutoHideAsync();
 
-        // Load fonts
-        await Font.loadAsync({
-          "Poppins-Regular": require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
-          "Poppins-Bold": require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
-        });
+        // Load fonts and other resources
+        // Example: await Font.loadAsync({ ... });
+
+        // Check if the device has a notch
+        const notchStatus =
+          Device.modelName.includes("iPhone X") ||
+          Device.modelName.includes("iPhone 11") ||
+          Device.modelName.includes("iPhone 12") ||
+          Device.modelName.includes("iPhone 13") ||
+          Device.modelName.includes("iPhone 14") ||
+          Device.modelName.includes("Pixel 3 XL") ||
+          Device.modelName.includes("Pixel 4 XL") ||
+          Device.modelName.includes("Pixel 5") ||
+          Device.modelName.includes("Pixel 6");
+        setHasNotch(notchStatus);
 
         // Set fonts loaded state to true
         setFontsLoaded(true);
