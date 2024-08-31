@@ -13,8 +13,8 @@ import {
   Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import CustomText from "../components/CustomText/CustomText";
-import CustomButton from "../components/Buttons/ButtonComponent";
+import CustomText from "../components/CustomText";
+import CustomButton from "../components/ButtonComponent";
 import { login } from "../styles/LoginStyles"; // Import the styles object
 
 // Import the logo image
@@ -105,6 +105,7 @@ const LoginScreen = () => {
 
   const [fontsLoaded] = useFonts({
     Poppins: require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    PoppinsBold: require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
   });
 
   React.useLayoutEffect(() => {

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Animated, Alert } from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Ionicons } from "@expo/vector-icons"; // Ensure you have expo-vector-icons installed
-import colors from "./Colors/ColorStyles";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import colors from "./ColorStyles";
 import { SwipeStyles } from "../styles/style";
 
 const SwipeButton = () => {

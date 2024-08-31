@@ -1,19 +1,6 @@
 import { StyleSheet } from "react-native";
-import colors from "../components/Colors/ColorStyles";
-import * as Device from "expo-device";
+import colors from "../components/ColorStyles";
 import { StatusBar } from "react-native";
-
-// Function to check if the device has a notch
-const hasNotch =
-  Device.modelName.includes("iPhone X") ||
-  Device.modelName.includes("iPhone 11") ||
-  Device.modelName.includes("iPhone 12") ||
-  Device.modelName.includes("iPhone 13") ||
-  Device.modelName.includes("iPhone 14") ||
-  Device.modelName.includes("Pixel 3 XL") ||
-  Device.modelName.includes("Pixel 4 XL") ||
-  Device.modelName.includes("Pixel 5") ||
-  Device.modelName.includes("Pixel 6");
 
 // Get the status bar height
 export const statusBarHeight = StatusBar.currentHeight;
@@ -24,9 +11,9 @@ export const CommonStyles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
   },
   header: {
-    backgroundColor: "#007BFF",
-    marginVertical: 20,
-    alignItems: "center",
+    fontSize: 24,
+    fontWeight: "500",
+    fontFamily: "Poppins", // Apply custom font
   },
   logo: {
     width: 100,
@@ -40,11 +27,9 @@ export const CommonStyles = StyleSheet.create({
   },
   content: {
     flexGrow: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
     gap: 10,
     padding: 20,
-    paddingTop: statusBarHeight, // Conditional padding based on notch status
+    paddingTop: statusBarHeight + 20,
     paddingBottom: 150,
   },
   welcomeText: {
@@ -290,7 +275,9 @@ export const CalendarStyles = StyleSheet.create({
   container: {
     paddingBottom: 10,
   },
+
   listContainer: {
+    flexDirection: "row-reverse",
     paddingBottom: 10,
   },
   item: {
@@ -301,7 +288,8 @@ export const CalendarStyles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    borderColor: colors.neutral30,
+    borderColor: colors.neutral20,
+    backgroundColor: colors.neutral10,
   },
   activeItem: {
     backgroundColor: "#007bff", // Active background color
@@ -471,5 +459,176 @@ export const SwipeStyles = StyleSheet.create({
   },
   checkedOut: {
     backgroundColor: colors.primary, // Blue color for checked-out status
+  },
+});
+
+export const LeavesCard = StyleSheet.create({
+  card: {
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    padding: 16,
+    marginVertical: 8,
+    shadowColor: "rgba(0, 0, 0, 0.2)", // Light black shadow color with reduced opacity
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2, // Increase opacity slightly to make the shadow more visible
+    shadowRadius: 6, // Increase the radius to make the shadow softer
+    elevation: 3, // Increase elevation for a more pronounced shadow on Android
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+
+  status: {
+    fontSize: 12,
+    fontWeight: "500",
+    fontFamily: "Poppins",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    alignItems: "center",
+    borderRadius: 10,
+  },
+  approved: {
+    color: colors.secondary2,
+    backgroundColor: "#e6f4ea",
+  },
+  rejected: {
+    color: colors.secondary,
+    backgroundColor: "#fde8e8",
+  },
+  content: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderTopWidth: 1,
+    borderTopColor: "#eee",
+    paddingTop: 16,
+  },
+  row: {
+    flex: 1,
+  },
+  label: {
+    fontSize: 16,
+    color: colors.neutral70,
+  },
+  value: {
+    fontSize: 16,
+    fontFamily: "Poppins",
+    fontWeight: "500",
+  },
+});
+
+export const LeavesGridStyles = StyleSheet.create({
+  row: {
+    flex: 1,
+    justifyContent: "space-between",
+  },
+  card: {
+    flex: 1,
+    padding: 20,
+    margin: 5,
+    borderRadius: 20,
+    borderWidth: 1, // Add border width to show the border color
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontFamily: "Poppins",
+    fontWeight: "500",
+    marginBottom: 5,
+    textAlign: "left",
+  },
+  cardCount: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+});
+
+export const TabsStyle = StyleSheet.create({
+  tabContainer: {
+    flexDirection: "row",
+    borderWidth: 1,
+    borderColor: colors.neutral10,
+    borderRadius: 5,
+    marginTop: 10,
+    backgroundColor: colors.neutral10,
+  },
+  tab: {
+    flex: 1,
+    padding: 10,
+    paddingVertical: 15,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  activeTab: {
+    backgroundColor: colors.primary,
+    borderRadius: 20,
+  },
+  tabText: {
+    fontSize: 14,
+    color: colors.primary,
+    fontFamily: "Poppins",
+  },
+  activeTabText: {
+    color: colors.white, // White color for active tab text
+  },
+  contentContainer: {
+    paddingVertical: 20,
+  },
+});
+
+export const LeaveRequestStyles = StyleSheet.create({
+  leaveRequestContainer: {
+    flexDirection: "column",
+    padding: 16,
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    marginVertical: 8,
+    shadowColor: "rgba(0, 0, 0, 0.2)", // Light black shadow color with reduced opacity
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2, // Increase opacity slightly to make the shadow more visible
+    shadowRadius: 6, // Increase the radius to make the shadow softer
+    elevation: 3, // Increase elevation for a more pronounced shadow on Android
+    gap: 10,
+  },
+  profileImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 16,
+  },
+  header: {
+    flexDirection: "row",
+  },
+  infoContainer: {
+    flexDirection: "column",
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: "500",
+    fontFamily: "Poppins",
+  },
+  leaveDates: {
+    fontSize: 14,
+    fontWeight: "500",
+    fontFamily: "Poppins",
+    color: colors.neutral90,
+  },
+  actionsContainer: {
+    flexDirection: "row",
+    gap: 10,
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: "#4CAF50",
+    marginHorizontal: 5,
+  },
+  rejectButton: {
+    backgroundColor: "#F44336",
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });

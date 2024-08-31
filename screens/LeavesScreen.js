@@ -1,57 +1,82 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
-import CustomText from "../components/CustomText/CustomText"; // Import the CustomText component
-
-const leavesData = [
-  { id: "1", type: "Paid Leaves", status: "Approved" },
-  { id: "2", type: "Sick Leaves", status: "Pending" },
-  { id: "3", type: "Unpaid Leaves", status: "Unapproved" },
-  // Add more leaves data here
-];
+import { View, StyleSheet, FlatList } from "react-native";
+import CustomText from "../components/CustomText";
+import LeavesGrid from "../components/LeavesGrid"; // Import the LeavesGrid component
+import Tabs from "../components/Tabs";
+import LeavesList from "../components/LeavesList"; // Import the LeavesList component
+import { CommonStyles } from "../styles/style";
+import LeaveRequest from "../components/LeaveRequest"; // Import the LeaveRequest component
 
 const LeavesScreen = () => {
-  const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <CustomText style={styles.title}>{item.type}</CustomText>
-      <CustomText style={styles.status}>{item.status}</CustomText>
-    </View>
-  );
+  const leaves = [
+    {
+      date: "2023-10-01",
+      dateRange: "Apr 15, 2023 - Apr 18, 2023",
+      status: "Approved",
+      applyDays: 5,
+      leaveBalance: 10,
+      approvedBy: "Manager A",
+    },
+    {
+      date: "2023-09-15",
+      dateRange: "Apr 15, 2023 - Apr 18, 2023",
+      status: "Rejected",
+      applyDays: 6,
+      leaveBalance: 8,
+      approvedBy: "Manager B",
+    },
+  ];
+
+  const leaveRequests = [
+    {
+      profileImage: require("../assets/images/user.png"), // Ensure the path is correct
+      name: "John Doe",
+      leaveDates: "2023-10-01 to 2023-10-05",
+    },
+    {
+      profileImage: require("../assets/images/user.png"), // Ensure the path is correct
+      name: "Jane Smith",
+      leaveDates: "2023-09-15 to 2023-09-20",
+    },
+  ];
+  const tabs = [
+    { title: "Upcoming", content: <LeavesList leaves={leaves} /> },
+    { title: "Past", content: <LeavesList leaves={leaves} /> },
+    // { title: "Team leaves", content: <LeavesList leaves={leaves} /> }, // Pass leaves data to LeavesList
+    {
+      title: "Team leaves",
+      content: (
+        <LeaveRequest
+          leaveRequests={leaveRequests}
+          onApprove={handleApprove}
+          onReject={handleReject}
+        />
+      ),
+    },
+  ];
+
+  const handleApprove = (index) => {
+    console.log(`Approved leave request ${index}`);
+  };
+
+  const handleReject = (index) => {
+    console.log(`Rejected leave request ${index}`);
+  };
 
   return (
-    <View style={styles.container}>
-      <CustomText style={styles.header}>Leaves</CustomText>
-      <FlatList
-        data={leavesData}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
-    </View>
+    <FlatList
+      ListHeaderComponent={
+        <View style={CommonStyles.content}>
+          <CustomText style={CommonStyles.header}>All Leaves</CustomText>
+          <LeavesGrid />
+          <Tabs tabs={tabs} />
+        </View>
+      }
+      data={[]} // Empty data to render the header component
+      renderItem={null} // No need to render any items
+      keyExtractor={(item, index) => index.toString()}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    marginTop: 20,
-  },
-  item: {
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-  },
-  title: {
-    fontSize: 18,
-  },
-  status: {
-    fontSize: 14,
-    color: "gray",
-  },
-});
 
 export default LeavesScreen;

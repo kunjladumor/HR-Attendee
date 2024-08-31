@@ -3,7 +3,7 @@ import React from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
-import colors from "./Colors/ColorStyles";
+import colors from "./ColorStyles";
 import { ActivityStyles } from "../styles/style";
 
 // ActivityCard Component

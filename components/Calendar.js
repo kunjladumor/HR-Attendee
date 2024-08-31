@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
 import { CalendarStyles } from "../styles/style";
-
 const generateDates = () => {
   const dates = [];
   const today = new Date();
@@ -14,7 +13,7 @@ const generateDates = () => {
       isToday: i === 0, // Mark the current date
     });
   }
-  return dates; // Reverse the array to have the current day at the end
+  return dates.reverse(); // Reverse the array to have the current day at the end
 };
 
 const Calendar = () => {
@@ -51,6 +50,7 @@ const Calendar = () => {
             </Text>
           </View>
         )}
+        inverted // Invert the list to have the current day at the end
         contentContainerStyle={CalendarStyles.listContainer}
       />
     </View>

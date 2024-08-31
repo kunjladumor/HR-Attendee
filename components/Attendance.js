@@ -3,8 +3,8 @@ import { View, Text } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
 import { AttendanceStyles } from "../styles/style";
-import colors from "./Colors/ColorStyles";
-import CustomText from "./CustomText/CustomText";
+import colors from "./ColorStyles";
+import CustomText from "./CustomText";
 
 const Attendance = ({
   attendanceData: {

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import colors from "../components/Colors/ColorStyles"; // Adjust the import path as necessary
+import colors from "../components/ColorStyles"; // Adjust the import path as necessary
 
 export const generateDynamicStyles = ({
   name,

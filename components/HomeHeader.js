@@ -1,7 +1,7 @@
 import { View, Image } from "react-native";
 import { CommonStyles, HomeScreen } from "../styles/style";
-import CustomText from "../components/CustomText/CustomText";
-import CustomButton from "../components/Buttons/ButtonComponent";
+import CustomText from "../components/CustomText";
+import CustomButton from "./ButtonComponent";
 
 export const HomeHeader = () => {
   return (
