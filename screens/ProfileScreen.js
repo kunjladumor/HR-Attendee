@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import CustomText from "../components/CustomText/CustomText"; // Import the CustomText component
+import CustomText from "../components/CustomText"; // Import the CustomText component
 
 const ProfileScreen = ({ navigation }) => {
   const handleLogout = () => {

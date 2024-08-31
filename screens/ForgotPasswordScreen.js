@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  ScrollView,
 } from "react-native";
 
 export default function ForgotPasswordScreen({ navigation }) {
@@ -31,7 +32,7 @@ export default function ForgotPasswordScreen({ navigation }) {
       source={{ uri: "https://example.com/background.jpg" }}
       style={styles.background}
     >
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <CustomText style={styles.title}>Forgot Password</CustomText>
         <View style={styles.inputContainer}>
           <TextInput
@@ -49,7 +50,7 @@ export default function ForgotPasswordScreen({ navigation }) {
         <TouchableOpacity style={styles.button} onPress={handleResetPassword}>
           <CustomText style={styles.buttonText}>Reset Password</CustomText>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </ImageBackground>
   );
 }

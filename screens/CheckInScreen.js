@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import CustomButton from "../components/Buttons/ButtonComponent";
+import CustomButton from "../components/ButtonComponent";
 import { CheckIn } from "../styles/style";
 import SwipeButton from "../components/SwipeButton";
 
