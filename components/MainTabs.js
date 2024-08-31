@@ -2,12 +2,12 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { View, TouchableOpacity } from "react-native";
-import HomeScreen from "./screens/HomeScreen";
-import CheckInScreen from "./screens/CheckInScreen";
-import ProfileScreen from "./screens/ProfileScreen";
-import TrackCheckInsScreen from "./screens/TrackCheckInsScreen";
-import LeavesScreen from "./screens/LeavesScreen";
-import { CommonStyles } from "./styles/style";
+import HomeScreen from "../screens/HomeScreen";
+import CheckInScreen from "../screens/CheckInScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import TrackCheckInsScreen from "../screens/TrackCheckInsScreen";
+import LeavesScreen from "../screens/LeavesScreen";
+import { CommonStyles } from "../styles/style";
 
 const Tab = createBottomTabNavigator();
 
@@ -45,13 +45,13 @@ export default function MainTabs() {
           if (route.name === "Home") {
             iconName = "home-outline";
           } else if (route.name === "CheckIn") {
-            iconName = "calendar-outline";
+            iconName = "leaf-outline";
           } else if (route.name === "Profile") {
             iconName = "person-outline";
           } else if (route.name === "TrackCheckIns") {
             iconName = "list-outline";
           } else if (route.name === "Leaves") {
-            iconName = "leaf-outline";
+            iconName = "calendar-outline";
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -75,7 +75,7 @@ export default function MainTabs() {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="CheckIn" component={CheckInScreen} />
+      <Tab.Screen name="Leaves" component={LeavesScreen} />
       <Tab.Screen
         name="TrackCheckIns"
         component={TrackCheckInsScreen}
@@ -88,7 +88,7 @@ export default function MainTabs() {
           tabBarButton: (props) => <CustomTabBarButton {...props} />,
         }}
       />
-      <Tab.Screen name="Leaves" component={LeavesScreen} />
+      <Tab.Screen name="CheckIn" component={CheckInScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );

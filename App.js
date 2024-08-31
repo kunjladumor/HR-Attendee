@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as SplashScreen from "expo-splash-screen";
-import * as Device from "expo-device";
+
 import LoginScreen from "./screens/LoginScreen";
-import MainTabs from "./MainTabs";
+import MainTabs from "./components/MainTabs";
+
 const Stack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  const [setHasNotch] = useState(false);
 
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
@@ -18,19 +18,6 @@ export default function App() {
 
         // Load fonts and other resources
         // Example: await Font.loadAsync({ ... });
-
-        // Check if the device has a notch
-        const notchStatus =
-          Device.modelName.includes("iPhone X") ||
-          Device.modelName.includes("iPhone 11") ||
-          Device.modelName.includes("iPhone 12") ||
-          Device.modelName.includes("iPhone 13") ||
-          Device.modelName.includes("iPhone 14") ||
-          Device.modelName.includes("Pixel 3 XL") ||
-          Device.modelName.includes("Pixel 4 XL") ||
-          Device.modelName.includes("Pixel 5") ||
-          Device.modelName.includes("Pixel 6");
-        setHasNotch(notchStatus);
 
         // Set fonts loaded state to true
         setFontsLoaded(true);
