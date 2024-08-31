@@ -4,9 +4,11 @@ import CustomText from "../components/CustomText"; // Import the CustomText comp
 
 export default function TrackCheckInsScreen() {
   return (
-    <ScrollView style={styles.container}>
-      <CustomText style={styles.text}>Track Check-Ins</CustomText>
-      {/* Add your tracking check-ins logic here */}
+    <ScrollView contentContainerStyle={styles.scrollView}>
+      <View style={styles.container}>
+        <CustomText style={styles.text}>Track Check-Ins</CustomText>
+        {/* Add your tracking check-ins logic here */}
+      </View>
     </ScrollView>
   );
 }
@@ -19,5 +21,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 24,
+  },
+  scrollView: {
+    flex: 1,
+    alignItems: "center", // This should be moved
+    justifyContent: "center", // This should be moved
   },
 });

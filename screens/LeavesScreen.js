@@ -6,6 +6,8 @@ import Tabs from "../components/Tabs";
 import LeavesList from "../components/LeavesList"; // Import the LeavesList component
 import { CommonStyles } from "../styles/style";
 import LeaveRequest from "../components/LeaveRequest"; // Import the LeaveRequest component
+import CustomButton from "../components/ButtonComponent";
+import colors from "../components/ColorStyles";
 
 const LeavesScreen = () => {
   const leaves = [
@@ -67,7 +69,26 @@ const LeavesScreen = () => {
     <FlatList
       ListHeaderComponent={
         <View style={CommonStyles.content}>
-          <CustomText style={CommonStyles.header}>All Leaves</CustomText>
+          <View style={CommonStyles.rowSpaceBetween}>
+            <CustomText style={CommonStyles.header}>All Leaves</CustomText>
+            <View style={CommonStyles.row}>
+              <CustomButton
+                color={"transparent"}
+                borderRadius={10}
+                style={{ marginRight: 10, fontWeight: "bold" }}
+                iconName={"create-outline"}
+                iconSize={24}
+                iconColor={colors.black}
+              />
+              <CustomButton
+                color={"transparent"}
+                borderRadius={10}
+                iconName={"options-outline"}
+                iconSize={24}
+                iconColor={colors.black}
+              />
+            </View>
+          </View>
           <LeavesGrid />
           <Tabs tabs={tabs} />
         </View>

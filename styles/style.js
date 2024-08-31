@@ -20,6 +20,15 @@ export const CommonStyles = StyleSheet.create({
     height: 100,
     marginBottom: 10,
   },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  rowSpaceBetween: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   headerText: {
     fontSize: 24,
     color: "#fff",
