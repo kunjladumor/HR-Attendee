@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Alert } from "react-native";
 import { CommonStyles } from "../styles/style";
 import Inputs from "../components/Inputs";
 import CustomText from "../components/CustomText";
 import CustomButton from "../components/ButtonComponent";
+import SuccessModal from "../components/LeaveApplied";
 
 const ApplyLeaveScreen = () => {
   const [textValue, setTextValue] = useState("");
   const [textareaValue, setTextareaValue] = useState("");
   0;
-  const [dateValue, setDateValue] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [numberValue, setNumberValue] = useState("");
   const [pickerValue, setPickerValue] = useState("");
 
@@ -22,6 +24,24 @@ const ApplyLeaveScreen = () => {
     { label: "Working Holiday", value: "Working Holiday" },
     { label: "Compensation Off", value: "Compensation Off" },
   ];
+
+  const [isModalVisible, setIsModalVisible] = useState(false); // Default state is false
+
+  const handleButtonClick = () => {
+    // Validate dates
+    if (new Date(endDate) < new Date(startDate)) {
+      Alert.alert("Validation Error", "End date cannot be before start date.");
+      return;
+    }
+
+    // Handle button click logic here
+    setIsModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <ScrollView contentContainerStyle={CommonStyles.container}>
       <View style={CommonStyles.content}>
@@ -62,17 +82,17 @@ const ApplyLeaveScreen = () => {
         <Inputs
           type="date"
           placeholder="Start date"
-          value={dateValue}
-          onChangeText={setDateValue}
-          error={dateValue === "" ? "This field is required" : ""}
+          value={startDate}
+          onChangeText={setStartDate}
+          error={startDate === "" ? "This field is required" : ""}
         />
 
         <Inputs
           type="date"
           placeholder="End date"
-          value={dateValue}
-          onChangeText={setDateValue}
-          error={dateValue === "" ? "This field is required" : ""}
+          value={endDate}
+          onChangeText={setEndDate}
+          error={endDate === "" ? "This field is required" : ""}
         />
 
         <Inputs
@@ -87,9 +107,11 @@ const ApplyLeaveScreen = () => {
             title="Apply Leave"
             color={"primary"}
             onPress={() => {
-              alert("Leave applied successfully");
+              handleButtonClick();
             }}
           />
+
+          <SuccessModal isVisible={isModalVisible} onClose={handleCloseModal} />
         </View>
       </View>
     </ScrollView>
