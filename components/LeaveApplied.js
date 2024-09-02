@@ -1,10 +1,17 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Modal from "react-native-modal";
 import { MaterialIcons } from "@expo/vector-icons"; // Ensure you have this package installed or replace it with another icon
 import CustomButton from "./ButtonComponent";
 
 const SuccessModal = ({ isVisible, onClose }) => {
+  const navigation = useNavigation();
+
+  const handleDonePress = () => {
+    onClose(); // Close the modal
+    navigation.navigate("Leaves"); // Navigate to the home screen
+  };
   return (
     <Modal
       isVisible={isVisible}
@@ -23,7 +30,7 @@ const SuccessModal = ({ isVisible, onClose }) => {
         </Text>
         <CustomButton
           title="Done"
-          onPress={onClose}
+          onPress={handleDonePress}
           color="primary"
           padding={10}
           margin={10}

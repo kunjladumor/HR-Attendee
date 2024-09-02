@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Pressable,
-  ScrollView,
-} from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { View, StyleSheet, Image, ScrollView } from "react-native";
 import CustomText from "../components/CustomText"; // Import the CustomText component
+import { CommonStyles } from "../styles/style"; // Import the common styles
+import CustomButton from "../components/ButtonComponent";
+import colors from "../styles/ColorStyles";
+import ProfileButtonTab from "../components/ProfileButton";
+import { useNavigation } from "@react-navigation/native";
 
 const ProfileScreen = ({ navigation }) => {
   const handleLogout = () => {
@@ -16,123 +13,115 @@ const ProfileScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Image
-          style={styles.profileImage}
-          source={{ uri: "https://via.placeholder.com/150" }} // Replace with actual image URL
-        />
-        <CustomText style={styles.name}>John Doe</CustomText>
-        <CustomText style={styles.username}>@johndoe</CustomText>
-      </View>
-      <View style={styles.body}>
-        <Pressable
-          style={({ pressed }) => [
-            styles.option,
-            pressed && styles.optionPressed,
-          ]}
-        >
-          <Ionicons name="person-outline" size={24} color="#3185ff" />
-          <CustomText style={styles.optionText}>Edit Profile</CustomText>
-        </Pressable>
-        <Pressable
-          style={({ pressed }) => [
-            styles.option,
-            pressed && styles.optionPressed,
-          ]}
-        >
-          <Ionicons name="lock-closed-outline" size={24} color="#3185ff" />
-          <CustomText style={styles.optionText}>Change Password</CustomText>
-        </Pressable>
-        <Pressable
-          style={({ pressed }) => [
-            styles.option,
-            pressed && styles.optionPressed,
-          ]}
-        >
-          <Ionicons name="notifications-outline" size={24} color="#3185ff" />
-          <CustomText style={styles.optionText}>
-            Notification Settings
+    <ScrollView contentContainerStyle={CommonStyles.container}>
+      <View style={CommonStyles.content}>
+        <View style={CommonStyles.header}>
+          <CustomText
+            style={{
+              fontSize: 24,
+            }}
+          >
+            Profile
           </CustomText>
-        </Pressable>
-        <Pressable
-          style={({ pressed }) => [
-            styles.option,
-            pressed && styles.optionPressed,
-          ]}
-        >
-          <Ionicons name="shield-outline" size={24} color="#3185ff" />
-          <CustomText style={styles.optionText}>Privacy Settings</CustomText>
-        </Pressable>
-        <Pressable
-          style={({ pressed }) => [
-            styles.option,
-            pressed && styles.optionPressed,
-          ]}
-          onPress={handleLogout}
-        >
-          <Ionicons name="log-out-outline" size={24} color="#ff3b30" />
-          <CustomText style={[styles.optionText, { color: "#ff3b30" }]}>
-            Logout
-          </CustomText>
-        </Pressable>
+        </View>
+        <View style={ProfileStyles.header}>
+          <Image
+            style={ProfileStyles.profileImage}
+            source={require("../assets/images/user.png")} // Replace with actual image URL
+          />
+          <CustomText style={ProfileStyles.name}>John Doe</CustomText>
+          <CustomText style={ProfileStyles.username}>@johndoe</CustomText>
+          <CustomButton
+            title="Edit Profile"
+            onPress={() => navigation.navigate("EditProfile")}
+            color="primary"
+            padding={10}
+            margin={10}
+            iconName={"person-outline"}
+            iconSize={20}
+            iconColor={colors.white}
+            style={[
+              {
+                alignSelf: "stretch",
+              },
+            ]}
+          />
+        </View>
+        <View style={ProfileStyles.options}>
+          <ProfileButtonTab
+            iconName="person-outline"
+            text="My Profile"
+            onPress={() => console.log("My Profile Pressed")}
+          />
+          <ProfileButtonTab
+            iconName="settings-outline"
+            text="Settings"
+            onPress={() => console.log("Settings Pressed")}
+          />
+          <ProfileButtonTab
+            iconName="document-text-outline"
+            text="Terms & Conditions"
+            onPress={() => console.log("Terms & Conditions Pressed")}
+          />
+          <ProfileButtonTab
+            iconName="shield-checkmark-outline"
+            text="Privacy Policy"
+            onPress={() => console.log("Privacy Policy Pressed")}
+          />
+          <ProfileButtonTab
+            iconName="log-out-outline"
+            text="Log out"
+            onPress={() => handleLogout()}
+            color={colors.secondary}
+            textColor={colors.secondary}
+            iconView
+          />
+        </View>
       </View>
     </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20,
-    backgroundColor: "#f8f8f8",
-  },
+const ProfileStyles = StyleSheet.create({
   header: {
     alignItems: "center",
-    padding: 20,
-    backgroundColor: "#fff",
-    marginBottom: 10,
   },
   profileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 125,
+    height: 125,
     marginBottom: 10,
   },
   name: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: "500",
+    textAlign: "center",
   },
   username: {
-    fontSize: 18,
-    color: "gray",
-  },
-  body: {
-    padding: 20,
+    fontSize: 16,
+    color: "#666",
+    textAlign: "center",
   },
   option: {
+    marginVertical: 10,
+    padding: 10,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 10,
-    shadowColor: "#000",
+    justifyContent: "space-between",
+    shadowColor: "#000000CC",
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowOpacity: 0.125,
+    shadowRadius: 3.84,
     elevation: 2,
-  },
-  optionPressed: {
-    backgroundColor: "#e0e0e0",
+    backgroundColor: "#f9f9f9",
+    borderRadius: 5,
   },
   optionText: {
-    fontSize: 18,
+    fontSize: 16,
     marginLeft: 10,
-    color: "#3185ff",
+    color: colors.primary,
   },
 });
 
