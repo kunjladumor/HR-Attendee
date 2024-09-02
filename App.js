@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as SplashScreen from "expo-splash-screen";
-
 import LoginScreen from "./screens/LoginScreen";
 import MainTabs from "./components/MainTabs";
+import ApplyLeaveScreen from "./screens/ApplyLeaveScreen";
 
 const Stack = createStackNavigator();
 
@@ -43,6 +43,11 @@ export default function App() {
         <Stack.Screen
           name="Main"
           component={MainTabs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ApplyLeave"
+          component={ApplyLeaveScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
