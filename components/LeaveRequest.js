@@ -27,9 +27,10 @@ const LeaveRequest = ({ leaveRequests, onApprove, onReject }) => {
               color="secondary2"
               padding={8}
               borderRadius={10}
-              iconName={"checkmark"}
-              iconSize={16}
+              iconName={"checkmark-circle-outline"}
+              iconSize={20}
               iconColor={colors.white}
+              gap={5}
               style={{ flex: 1 }}
             ></CustomButton>
             <CustomButton
@@ -37,9 +38,10 @@ const LeaveRequest = ({ leaveRequests, onApprove, onReject }) => {
               color="secondary"
               padding={8}
               borderRadius={10}
-              iconName={"close"}
-              iconSize={16}
+              iconName={"close-circle-outline"}
+              iconSize={20}
               iconColor={colors.white}
+              gap={5}
               style={{ flex: 1 }}
             ></CustomButton>
           </View>
