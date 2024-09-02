@@ -1,9 +1,8 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
-import { AttendanceStyles } from "../styles/style";
-import colors from "./ColorStyles";
+import colors from "../styles/ColorStyles";
 import CustomText from "./CustomText";
 
 const Attendance = ({
@@ -49,6 +48,60 @@ const Attendance = ({
     </View>
   );
 };
+
+const AttendanceStyles = StyleSheet.create({
+  title: {
+    fontSize: 16,
+    fontFamily: "Poppins",
+    marginBottom: 10,
+    fontWeight: "500",
+  },
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  card: {
+    width: "48%", // Adjust width to fit 2 cards per row
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  iconContainer: {
+    width: 36,
+    height: 36,
+    borderRadius: 36,
+    backgroundColor: "#007bff1A",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  cardTitle: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: colors.neutral60,
+    flexWrap: "wrap",
+  },
+  cardValue: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 4,
+  },
+  stat: {
+    fontSize: 14,
+    fontFamily: "Poppins",
+  },
+});
 
 Attendance.propTypes = {
   attendanceData: PropTypes.shape({

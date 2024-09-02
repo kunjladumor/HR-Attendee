@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, FlatList } from "react-native";
-import { CalendarStyles } from "../styles/style";
+import { View, Text, FlatList, StyleSheet } from "react-native";
+import colors from "../styles/ColorStyles";
 const generateDates = () => {
   const dates = [];
   const today = new Date();
@@ -56,5 +56,43 @@ const Calendar = () => {
     </View>
   );
 };
+const CalendarStyles = StyleSheet.create({
+  container: {
+    paddingBottom: 10,
+  },
+
+  listContainer: {
+    flexDirection: "row-reverse",
+    paddingBottom: 10,
+  },
+  item: {
+    justifyContent: "center", // Center content vertically
+    alignItems: "center", // Center content horizontally
+    marginRight: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderColor: colors.neutral20,
+    backgroundColor: colors.neutral10,
+  },
+  activeItem: {
+    backgroundColor: "#007bff", // Active background color
+  },
+  date: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  activeDate: {
+    color: "white", // Active date color
+  },
+  day: {
+    fontSize: 16,
+    color: "gray",
+  },
+  activeDay: {
+    color: "white", // Active day color
+  },
+});
 
 export default Calendar;

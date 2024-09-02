@@ -1,5 +1,6 @@
 import React from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import CustomText from "../components/CustomText";
 import LeavesGrid from "../components/LeavesGrid"; // Import the LeavesGrid component
 import Tabs from "../components/Tabs";
@@ -7,9 +8,11 @@ import LeavesList from "../components/LeavesList"; // Import the LeavesList comp
 import { CommonStyles } from "../styles/style";
 import LeaveRequest from "../components/LeaveRequest"; // Import the LeaveRequest component
 import CustomButton from "../components/ButtonComponent";
-import colors from "../components/ColorStyles";
+import colors from "../styles/ColorStyles";
 
 const LeavesScreen = () => {
+  const navigation = useNavigation();
+
   const leaves = [
     {
       date: "2023-10-01",
@@ -34,6 +37,11 @@ const LeavesScreen = () => {
       profileImage: require("../assets/images/user.png"), // Ensure the path is correct
       name: "John Doe",
       leaveDates: "2023-10-01 to 2023-10-05",
+    },
+    {
+      profileImage: require("../assets/images/user.png"), // Ensure the path is correct
+      name: "Jane Smith",
+      leaveDates: "2023-09-15 to 2023-09-20",
     },
     {
       profileImage: require("../assets/images/user.png"), // Ensure the path is correct
@@ -79,6 +87,7 @@ const LeavesScreen = () => {
                 iconName={"create-outline"}
                 iconSize={24}
                 iconColor={colors.black}
+                onPress={() => navigation.navigate("ApplyLeave")}
               />
               <CustomButton
                 color={"transparent"}

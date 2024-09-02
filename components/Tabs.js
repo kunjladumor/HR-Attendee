@@ -6,8 +6,7 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import colors from "./ColorStyles";
-import { TabsStyle } from "../styles/style";
+import colors from "../styles/ColorStyles";
 
 const Tabs = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -38,5 +37,38 @@ const Tabs = ({ tabs }) => {
     </ScrollView>
   );
 };
+
+const TabsStyle = StyleSheet.create({
+  tabContainer: {
+    flexDirection: "row",
+    borderWidth: 1,
+    borderColor: colors.neutral10,
+    borderRadius: 5,
+    marginTop: 10,
+    backgroundColor: colors.neutral10,
+  },
+  tab: {
+    flex: 1,
+    padding: 10,
+    paddingVertical: 15,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  activeTab: {
+    backgroundColor: colors.primary,
+    borderRadius: 20,
+  },
+  tabText: {
+    fontSize: 14,
+    color: colors.primary,
+    fontFamily: "Poppins",
+  },
+  activeTabText: {
+    color: colors.white, // White color for active tab text
+  },
+  contentContainer: {
+    paddingVertical: 20,
+  },
+});
 
 export default Tabs;

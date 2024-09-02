@@ -3,7 +3,12 @@ import { Text } from "react-native";
 import { CommonStyles } from "../styles/style";
 
 const CustomText = ({ style, ...props }) => {
-  return <Text style={[CommonStyles.poppinsFont, style]} {...props} />;
+  return (
+    <Text
+      style={[CommonStyles.poppinsFont, CommonStyles.customText, style]}
+      {...props}
+    />
+  );
 };
 
 export default CustomText;

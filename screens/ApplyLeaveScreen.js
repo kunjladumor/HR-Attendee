@@ -1,70 +1,96 @@
 import React, { useState } from "react";
 import { View, ScrollView } from "react-native";
 import { CommonStyles } from "../styles/style";
-import AnimatedTextInput from "../components/AnimatedTextInput"; // Adjust the import path as needed
+import Inputs from "../components/Inputs";
+import CustomText from "../components/CustomText";
+import CustomButton from "../components/ButtonComponent";
 
 const ApplyLeaveScreen = () => {
-  const [title, setTitle] = useState("");
-  const [leaveType, setLeaveType] = useState("Sick Leave");
-  const [contactNumber, setContactNumber] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [reason, setReason] = useState("");
+  const [textValue, setTextValue] = useState("");
+  const [textareaValue, setTextareaValue] = useState("");
+  0;
+  const [dateValue, setDateValue] = useState("");
+  const [numberValue, setNumberValue] = useState("");
+  const [pickerValue, setPickerValue] = useState("");
 
-  const leaveTypeOptions = [
-    { placeholder: "Sick Leave", value: "Sick Leave" },
-    { placeholder: "Casual Leave", value: "Casual Leave" },
-    { placeholder: "Annual Leave", value: "Annual Leave" },
+  const pickerOptions = [
+    { label: "Sick Leave", value: "Sick Leave" },
+    { label: "Personal Leave", value: "Personal Leave" },
+    { label: "Vacation Leave", value: "Vacation Leave" },
+    { label: "Work From Home", value: "Work From Home" },
+    { label: "Leave Early", value: "Leave Early" },
+    { label: "Working Holiday", value: "Working Holiday" },
+    { label: "Compensation Off", value: "Compensation Off" },
   ];
-
   return (
     <ScrollView contentContainerStyle={CommonStyles.container}>
       <View style={CommonStyles.content}>
-        <AnimatedTextInput
+        <View style={CommonStyles.header}>
+          <CustomText
+            style={{
+              fontSize: 24,
+            }}
+          >
+            Apply Leave
+          </CustomText>
+        </View>
+        <Inputs
+          type="text"
           placeholder="Title"
-          value={title}
-          onChangeText={setTitle}
-          type="text"
+          value={textValue}
+          onChangeText={setTextValue}
+          error={textValue === "" ? "This field is required" : ""}
         />
 
-        <AnimatedTextInput
+        <Inputs
+          type="picker"
           placeholder="Leave Type"
-          value={leaveType}
-          onChangeText={setLeaveType}
-          type="dropdown"
-          options={leaveTypeOptions}
+          value={pickerValue}
+          onChangeText={setPickerValue}
+          options={pickerOptions}
+          error={pickerValue === "" ? "This field is required" : ""}
         />
 
-        <AnimatedTextInput
+        <Inputs
+          type="number"
           placeholder="Contact Number"
-          value={contactNumber}
-          onChangeText={setContactNumber}
-          type="text"
-          keyboardType="phone-pad"
+          value={numberValue}
+          onChangeText={setNumberValue}
+          error={numberValue === "" ? "This field is required" : ""}
         />
 
-        <AnimatedTextInput
-          placeholder="Start Date"
-          dateValue={startDate}
-          setDateValue={setStartDate}
+        <Inputs
           type="date"
+          placeholder="Start date"
+          value={dateValue}
+          onChangeText={setDateValue}
+          error={dateValue === "" ? "This field is required" : ""}
         />
 
-        <AnimatedTextInput
-          placeholder="End Date"
-          dateValue={endDate}
-          setDateValue={setEndDate}
+        <Inputs
           type="date"
+          placeholder="End date"
+          value={dateValue}
+          onChangeText={setDateValue}
+          error={dateValue === "" ? "This field is required" : ""}
         />
 
-        <AnimatedTextInput
+        <Inputs
+          type="textarea"
           placeholder="Reason for Leave"
-          value={reason}
-          onChangeText={setReason}
-          type="text"
-          multiline
-          style={{ height: 100 }}
+          value={textareaValue}
+          onChangeText={setTextareaValue}
+          error={textareaValue === "" ? "This field is required" : ""}
         />
+        <View style={CommonStyles.footer}>
+          <CustomButton
+            title="Apply Leave"
+            color={"primary"}
+            onPress={() => {
+              alert("Leave applied successfully");
+            }}
+          />
+        </View>
       </View>
     </ScrollView>
   );
