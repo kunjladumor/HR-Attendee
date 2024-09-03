@@ -5,7 +5,7 @@ import Modal from "react-native-modal";
 import { MaterialIcons } from "@expo/vector-icons"; // Ensure you have this package installed or replace it with another icon
 import CustomButton from "./ButtonComponent";
 
-const SuccessModal = ({ isVisible, onClose }) => {
+const LeaveApplied = ({ isVisible, onClose }) => {
   const navigation = useNavigation();
 
   const handleDonePress = () => {
@@ -43,7 +43,7 @@ const SuccessModal = ({ isVisible, onClose }) => {
   );
 };
 
-export default SuccessModal;
+export default LeaveApplied;
 
 const styles = StyleSheet.create({
   modal: {
