@@ -182,7 +182,7 @@ const InputStyles = StyleSheet.create({
     marginTop: 5,
   },
   inputWrapper: {
-    marginBottom: 20,
+    marginVertical: 10,
   },
   inputContainer: {
     borderWidth: 1,
