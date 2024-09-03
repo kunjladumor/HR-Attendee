@@ -3,11 +3,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { View, TouchableOpacity } from "react-native";
 import HomeScreen from "../screens/HomeScreen";
-import CheckInScreen from "../screens/CheckInScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import TrackCheckInsScreen from "../screens/TrackCheckInsScreen";
 import LeavesScreen from "../screens/LeavesScreen";
 import { CommonStyles } from "../styles/style";
+import HolidayListScreen from "../screens/HolidayListScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -48,7 +48,7 @@ export default function MainTabs() {
             iconName = "leaf-outline";
           } else if (route.name === "Profile") {
             iconName = "person-outline";
-          } else if (route.name === "TrackCheckIns") {
+          } else if (route.name === "LeavesList") {
             iconName = "list-outline";
           } else if (route.name === "Leaves") {
             iconName = "calendar-outline";
@@ -88,7 +88,7 @@ export default function MainTabs() {
           tabBarButton: (props) => <CustomTabBarButton {...props} />,
         }}
       />
-      <Tab.Screen name="CheckIn" component={CheckInScreen} />
+      <Tab.Screen name="LeavesList" component={HolidayListScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );

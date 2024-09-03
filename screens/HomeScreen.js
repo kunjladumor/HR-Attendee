@@ -75,7 +75,7 @@ const HomeScreen = () => {
         data={data}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={CommonStyles.content}
+        contentContainerStyle={[CommonStyles.content, { paddingBottom: 150 }]}
       />
       <SwipeButton />
     </View>
