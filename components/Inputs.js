@@ -420,6 +420,7 @@ const InputStyles = StyleSheet.create({
   input: {
     height: 40,
     fontSize: 16,
+    paddingHorizontal: 10,
     color: colors.black,
     fontFamily: "PoppinsRegular", // Change this to your desired font
   },

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import CustomText from "../components/CustomText"; // Import the CustomText component
 import Inputs from "../components/Inputs"; // Import the Inputs component
+import { statusBarHeight } from "../styles/style";
 export default function TrackCheckInsScreen() {
   const [textValue, setTextValue] = useState("");
   const [textareaValue, setTextareaValue] = useState("");
@@ -68,11 +69,12 @@ export default function TrackCheckInsScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
     padding: 20,
+    paddingTop: statusBarHeight + 20,
+    paddingBottom: 120,
     gap: 10,
     backgroundColor: "#fff",
+    minHeight: "100%",
   },
   text: {
     fontSize: 24,
