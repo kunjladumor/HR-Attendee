@@ -28,6 +28,12 @@ const ApplyLeaveScreen = () => {
   const [isModalVisible, setIsModalVisible] = useState(false); // Default state is false
 
   const handleButtonClick = () => {
+    // Check if any required fields are empty
+    if (!startDate || !endDate || !textareaValue) {
+      Alert.alert("Validation Error", "All fields are required.");
+      return;
+    }
+
     // Validate dates
     if (new Date(endDate) < new Date(startDate)) {
       Alert.alert("Validation Error", "End date cannot be before start date.");
@@ -59,7 +65,7 @@ const ApplyLeaveScreen = () => {
           placeholder="Title"
           value={textValue}
           onChangeText={setTextValue}
-          error={textValue === "" ? "This field is required" : ""}
+          // error={textValue === "" ? "This field is Optional" : ""}
         />
 
         <Inputs
