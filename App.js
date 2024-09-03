@@ -5,8 +5,18 @@ import * as SplashScreen from "expo-splash-screen";
 import LoginScreen from "./screens/LoginScreen";
 import MainTabs from "./components/MainTabs";
 import ApplyLeaveScreen from "./screens/ApplyLeaveScreen";
-
+import * as Font from "expo-font";
 const Stack = createStackNavigator();
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    PoppinsBold: require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
+    PoppinsExtraBold: require("./assets/fonts/Poppins/Poppins-ExtraBold.ttf"),
+    PoppinsMedium: require("./assets/fonts/Poppins/Poppins-Medium.ttf"),
+    Poppins: require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
+    PoppinsSemiBold: require("./assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+  });
+};
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -15,17 +25,12 @@ export default function App() {
     async function loadResourcesAndDataAsync() {
       try {
         SplashScreen.preventAutoHideAsync();
-
-        // Load fonts and other resources
-        // Example: await Font.loadAsync({ ... });
-
-        // Set fonts loaded state to true
+        await fetchFonts();
         setFontsLoaded(true);
       } catch (e) {
         console.warn(e);
       } finally {
-        // Hide the splash screen
-        await SplashScreen.hideAsync();
+        SplashScreen.hideAsync();
       }
     }
 
@@ -33,7 +38,7 @@ export default function App() {
   }, []);
 
   if (!fontsLoaded) {
-    return null; // Render nothing while fonts are loading
+    return null; // Render nothing while waiting for fonts to load
   }
 
   return (
