@@ -5,7 +5,6 @@ import { CommonStyles } from "../styles/style"; // Import the common styles
 import CustomButton from "../components/ButtonComponent";
 import colors from "../styles/ColorStyles";
 import ProfileButtonTab from "../components/ProfileButton";
-import { useNavigation } from "@react-navigation/native";
 
 const ProfileScreen = ({ navigation }) => {
   const handleLogout = () => {
