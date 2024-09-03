@@ -6,6 +6,7 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
+import CustomText from "../components/CustomText";
 const { height } = Dimensions.get("window");
 
 const AnimatedTextInput = React.forwardRef(

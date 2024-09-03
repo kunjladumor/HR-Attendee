@@ -207,7 +207,7 @@ const InputStyles = StyleSheet.create({
     justifyContent: "center",
   },
   placeholderText: {
-    color: "#aaa", // Placeholder text color
+    color: colors.primary, // Placeholder text color
   },
 });
 
