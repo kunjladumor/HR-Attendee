@@ -8,6 +8,7 @@ import TrackCheckInsScreen from "../screens/TrackCheckInsScreen";
 import LeavesScreen from "../screens/LeavesScreen";
 import { CommonStyles } from "../styles/style";
 import HolidayListScreen from "../screens/HolidayListScreen";
+import colors from "../styles/ColorStyles";
 
 const Tab = createBottomTabNavigator();
 
@@ -66,9 +67,9 @@ export default function MainTabs() {
           left: 0,
           right: 0,
           elevation: 0,
-          backgroundColor: "#ffffff",
+          backgroundColor: colors.white,
           height: 60,
-          paddingBottom: 10,
+          paddingBottom: 5,
 
           ...CommonStyles.shadow,
         },
