@@ -35,6 +35,7 @@ const AnimatedTextInput = React.forwardRef(
     const labelStyle = {
       position: "absolute",
       left: 10,
+
       top: animatedIsFocused.interpolate({
         inputRange: [0, 1],
         outputRange: [18, -8],

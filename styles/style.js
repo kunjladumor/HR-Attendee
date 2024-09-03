@@ -6,7 +6,6 @@ export const statusBarHeight = StatusBar.currentHeight;
 
 export const CommonStyles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#ffffff",
   },
   poppinsFont: {
@@ -16,7 +15,7 @@ export const CommonStyles = StyleSheet.create({
   header: {
     fontSize: 24,
     fontWeight: "500",
-    fontFamily: "Poppins", // Apply custom font
+    fontFamily: "PoppinsMedium", // Apply custom font
   },
   logo: {
     width: 100,
@@ -41,11 +40,10 @@ export const CommonStyles = StyleSheet.create({
     lineHeight: 1.5,
   },
   content: {
-    flexGrow: 1,
     gap: 10,
     padding: 20,
     paddingTop: statusBarHeight + 20,
-    paddingBottom: 150,
+    paddingBottom: 90,
   },
   welcomeText: {
     fontSize: 28,

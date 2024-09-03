@@ -24,6 +24,7 @@ import logo from "../assets/images/logo.png";
 import { useFonts } from "expo-font";
 import AnimatedTextInput from "../components/AnimatedTextInput";
 import colors from "../styles/ColorStyles";
+import Inputs from "../components/Inputs";
 const { height } = Dimensions.get("window");
 
 // const AnimatedTextInput = React.forwardRef(
@@ -106,6 +107,8 @@ const LoginScreen = () => {
 
   const [fontsLoaded] = useFonts({
     Poppins: require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    PoppinsRegular: require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    PoppinsSemibold: require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
     PoppinsBold: require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
   });
 
@@ -180,13 +183,14 @@ const LoginScreen = () => {
           <CustomText style={login.subtitle}>
             Hello there, Login to continue
           </CustomText>
-          <AnimatedTextInput
+          {/* <AnimatedTextInput
             placeholder="Username"
             value={username}
             onChangeText={setUsername}
             onSubmitEditing={() => passwordInputRef.current.focus()}
             error={usernameError}
           />
+
           <AnimatedTextInput
             ref={passwordInputRef}
             placeholder="Password"
@@ -195,7 +199,26 @@ const LoginScreen = () => {
             secureTextEntry
             onSubmitEditing={handleLogin}
             error={passwordError}
+          /> */}
+          <Inputs
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChangeText={setUsername}
+            error={usernameError}
+            onSubmitEditing={() => passwordInputRef.current.focus()}
           />
+          <Inputs
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            error={passwordError}
+            ref={passwordInputRef}
+            onSubmitEditing={handleLogin}
+          />
+
           <TouchableOpacity>
             <CustomText style={login.forgotPassword}>
               Forgot Password?
