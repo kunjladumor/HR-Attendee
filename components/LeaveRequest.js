@@ -1,13 +1,24 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../components/ButtonComponent";
 import colors from "../styles/ColorStyles";
 
 const LeaveRequest = ({ leaveRequests, onApprove, onReject }) => {
+  const navigation = useNavigation();
+
+  const handlePress = (leaveRequest) => {
+    navigation.navigate("LeaveDetails", { leaveRequest });
+  };
+
   return (
     <View>
       {leaveRequests.map((request, index) => (
-        <View key={index} style={LeaveRequestStyles.leaveRequestContainer}>
+        <TouchableOpacity
+          key={index}
+          style={LeaveRequestStyles.leaveRequestContainer}
+          onPress={() => handlePress(request)}
+        >
           <View style={LeaveRequestStyles.header}>
             <Image
               source={request.profileImage}
@@ -30,8 +41,9 @@ const LeaveRequest = ({ leaveRequests, onApprove, onReject }) => {
               iconSize={20}
               iconColor={colors.white}
               gap={5}
+              onPress={() => onApprove(index)}
               style={{ flex: 1 }}
-            ></CustomButton>
+            />
             <CustomButton
               title="Reject"
               color="secondary"
@@ -41,10 +53,11 @@ const LeaveRequest = ({ leaveRequests, onApprove, onReject }) => {
               iconSize={20}
               iconColor={colors.white}
               gap={5}
+              onPress={() => onReject(index)}
               style={{ flex: 1 }}
-            ></CustomButton>
+            />
           </View>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );
@@ -57,11 +70,11 @@ const LeaveRequestStyles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 10,
     marginVertical: 8,
-    shadowColor: "rgba(0, 0, 0, 0.2)", // Light black shadow color with reduced opacity
+    shadowColor: "rgba(0, 0, 0, 0.2)",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2, // Increase opacity slightly to make the shadow more visible
-    shadowRadius: 6, // Increase the radius to make the shadow softer
-    elevation: 3, // Increase elevation for a more pronounced shadow on Android
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+    elevation: 3,
     gap: 10,
   },
   profileImage: {
@@ -90,19 +103,6 @@ const LeaveRequestStyles = StyleSheet.create({
   actionsContainer: {
     flexDirection: "row",
     gap: 10,
-  },
-  button: {
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: "#4CAF50",
-    marginHorizontal: 5,
-  },
-  rejectButton: {
-    backgroundColor: "#F44336",
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
   },
 });
 

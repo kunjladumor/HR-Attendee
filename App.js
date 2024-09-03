@@ -6,6 +6,7 @@ import LoginScreen from "./screens/LoginScreen";
 import MainTabs from "./components/MainTabs";
 import ApplyLeaveScreen from "./screens/ApplyLeaveScreen";
 import * as Font from "expo-font";
+import LeaveDetailsScreen from "./screens/LeaveDetailScreen";
 const Stack = createStackNavigator();
 
 const fetchFonts = () => {
@@ -53,6 +54,11 @@ export default function App() {
         <Stack.Screen
           name="ApplyLeave"
           component={ApplyLeaveScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="LeaveDetails"
+          component={LeaveDetailsScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

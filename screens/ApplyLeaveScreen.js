@@ -9,11 +9,11 @@ import SuccessModal from "../components/LeaveApplied";
 const ApplyLeaveScreen = () => {
   const [textValue, setTextValue] = useState("");
   const [textareaValue, setTextareaValue] = useState("");
-  0;
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [numberValue, setNumberValue] = useState("");
   const [pickerValue, setPickerValue] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const pickerOptions = [
     { label: "Sick Leave", value: "Sick Leave" },
@@ -25,20 +25,28 @@ const ApplyLeaveScreen = () => {
     { label: "Compensation Off", value: "Compensation Off" },
   ];
 
-  const [isModalVisible, setIsModalVisible] = useState(false); // Default state is false
-
   const handleButtonClick = () => {
-    // Check if any required fields are empty
     if (!startDate || !endDate || !textareaValue) {
       Alert.alert("Validation Error", "All fields are required.");
       return;
     }
 
-    // Validate dates
     if (new Date(endDate) < new Date(startDate)) {
       Alert.alert("Validation Error", "End date cannot be before start date.");
       return;
     }
+
+    const newLeaveRequest = {
+      profileImage: require("../assets/images/user.png"),
+      name: "John Doe", // Replace with actual user name
+      startDate: startDate,
+      endDate: endDate,
+      leaveDates: `${startDate} to ${endDate}`,
+      title: textValue,
+      leaveType: pickerValue,
+      contactNumber: numberValue,
+      reason: textareaValue,
+    };
 
     // Handle button click logic here
     setIsModalVisible(true);
@@ -52,22 +60,14 @@ const ApplyLeaveScreen = () => {
     <ScrollView contentContainerStyle={CommonStyles.container}>
       <View style={CommonStyles.content}>
         <View style={CommonStyles.header}>
-          <CustomText
-            style={{
-              fontSize: 24,
-            }}
-          >
-            Apply Leave
-          </CustomText>
+          <CustomText style={{ fontSize: 24 }}>Apply Leave</CustomText>
         </View>
         <Inputs
           type="text"
           placeholder="Title"
           value={textValue}
           onChangeText={setTextValue}
-          // error={textValue === "" ? "This field is Optional" : ""}
         />
-
         <Inputs
           type="picker"
           placeholder="Leave Type"
@@ -76,7 +76,6 @@ const ApplyLeaveScreen = () => {
           options={pickerOptions}
           error={pickerValue === "" ? "This field is required" : ""}
         />
-
         <Inputs
           type="number"
           placeholder="Contact Number"
@@ -84,7 +83,6 @@ const ApplyLeaveScreen = () => {
           onChangeText={setNumberValue}
           error={numberValue === "" ? "This field is required" : ""}
         />
-
         <Inputs
           type="date"
           placeholder="Start date"
@@ -92,7 +90,6 @@ const ApplyLeaveScreen = () => {
           onChangeText={setStartDate}
           error={startDate === "" ? "This field is required" : ""}
         />
-
         <Inputs
           type="date"
           placeholder="End date"
@@ -100,7 +97,6 @@ const ApplyLeaveScreen = () => {
           onChangeText={setEndDate}
           error={endDate === "" ? "This field is required" : ""}
         />
-
         <Inputs
           type="textarea"
           placeholder="Reason for Leave"
@@ -112,11 +108,8 @@ const ApplyLeaveScreen = () => {
           <CustomButton
             title="Apply Leave"
             color={"primary"}
-            onPress={() => {
-              handleButtonClick();
-            }}
+            onPress={handleButtonClick}
           />
-
           <SuccessModal isVisible={isModalVisible} onClose={handleCloseModal} />
         </View>
       </View>

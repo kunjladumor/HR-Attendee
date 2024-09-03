@@ -9,6 +9,7 @@ import { CommonStyles } from "../styles/style";
 import LeaveRequest from "../components/LeaveRequest"; // Import the LeaveRequest component
 import CustomButton from "../components/ButtonComponent";
 import colors from "../styles/ColorStyles";
+import LeaveApplied from "../components/LeaveApplied";
 
 const LeavesScreen = () => {
   const navigation = useNavigation();
@@ -37,22 +38,36 @@ const LeavesScreen = () => {
       profileImage: require("../assets/images/user.png"), // Ensure the path is correct
       name: "John Doe",
       leaveDates: "2023-10-01 to 2023-10-05",
+      startDate: "2023-10-01",
+      endDate: "2023-10-05",
+      title: "Family Emergency",
+      leaveType: "Personal Leave",
+      contactNumber: "123-456-7890",
+      leaveApplied: "2023-09-25",
+      leaveStatus: "Pending",
+      approvedBy: "Manager A",
+      reason:
+        "I need to attend to a family emergency and will be unavailable during this period.",
     },
     {
       profileImage: require("../assets/images/user.png"), // Ensure the path is correct
       name: "Jane Smith",
       leaveDates: "2023-09-15 to 2023-09-20",
-    },
-    {
-      profileImage: require("../assets/images/user.png"), // Ensure the path is correct
-      name: "Jane Smith",
-      leaveDates: "2023-09-15 to 2023-09-20",
+      startDate: "2023-09-15",
+      endDate: "2023-09-20",
+      title: "Medical Leave",
+      leaveType: "Sick Leave",
+      contactNumber: "987-654-3210",
+      leaveApplied: "2023-09-25",
+      leaveStatus: "Pending",
+      approvedBy: "Manager A",
+      reason: "I am unwell and need to take some time off to recover.",
     },
   ];
+
   const tabs = [
     { title: "Upcoming", content: <LeavesList leaves={leaves} /> },
     { title: "Past", content: <LeavesList leaves={leaves} /> },
-    // { title: "Team leaves", content: <LeavesList leaves={leaves} /> }, // Pass leaves data to LeavesList
     {
       title: "Team leaves",
       content: (
