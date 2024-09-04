@@ -21,6 +21,7 @@ const CustomButton = ({
   children,
   fontweight,
   style,
+  fontfamily,
 }) => {
   const defaultTextColor = outlined ? color : "white";
   const finalTextColor = textColor || defaultTextColor;
@@ -33,6 +34,7 @@ const CustomButton = ({
     margin,
     borderRadius,
     fontweight,
+    fontfamily: fontfamily || "PoppinsRegular",
   });
 
   return (

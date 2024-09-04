@@ -4,6 +4,7 @@ import Modal from "react-native-modal";
 import { CheckBox } from "react-native-elements";
 import Inputs from "./Inputs"; // Import the Inputs component
 import colors from "../styles/ColorStyles"; // Adjust the import based on your project structure
+import CustomButton from "./ButtonComponent";
 
 const FiltersModal = ({
   isVisible = false,
@@ -116,12 +117,25 @@ const FiltersModal = ({
         />
 
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.button} onPress={onReset}>
-            <Text style={styles.buttonText}>Reset</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={onApply}>
-            <Text style={styles.buttonText}>Apply</Text>
-          </TouchableOpacity>
+          <CustomButton
+            color={"neutral90"}
+            outlined={true}
+            borderRadius={10}
+            title="Reset"
+            onPress={onReset}
+            style={{ flex: 1 }}
+            fontfamily={"Poppins"}
+          />
+
+          <CustomButton
+            color={"primary"}
+            borderRadius={10}
+            title="Apply"
+            onPress={onApply}
+            style={{ flex: 1 }}
+            fontweight={"auto"}
+            fontfamily={"Poppins"}
+          />
         </View>
       </View>
     </Modal>

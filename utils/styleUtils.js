@@ -11,6 +11,7 @@ export const generateDynamicStyles = ({
   borderWidth = 1,
   textSize = 15,
   fontweight = "normal",
+  fontfamily,
 }) => {
   return StyleSheet.create({
     [`button_${name}`]: {
@@ -33,6 +34,7 @@ export const generateDynamicStyles = ({
       fontSize: textSize, // Example of text fontSize
       fontWeight: fontweight, // Example of text fontWeight
       lineHeight: textSize * 1.25, // Example of text lineHeight
+      fontFamily: fontfamily, // Example of text fontFamily
     },
   });
 };
