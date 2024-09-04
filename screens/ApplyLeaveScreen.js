@@ -5,8 +5,9 @@ import Inputs from "../components/Inputs";
 import CustomText from "../components/CustomText";
 import CustomButton from "../components/ButtonComponent";
 import SuccessModal from "../components/LeaveApplied";
+import { Ionicons } from "@expo/vector-icons";
 
-const ApplyLeaveScreen = () => {
+const ApplyLeaveScreen = ({ navigation }) => {
   const [textValue, setTextValue] = useState("");
   const [textareaValue, setTextareaValue] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -60,6 +61,11 @@ const ApplyLeaveScreen = () => {
     <ScrollView contentContainerStyle={CommonStyles.container}>
       <View style={CommonStyles.content}>
         <View style={CommonStyles.header}>
+          <Ionicons
+            name="chevron-back-outline"
+            size={24}
+            onPress={() => navigation.goBack()}
+          />
           <CustomText style={{ fontSize: 24 }}>Apply Leave</CustomText>
         </View>
         <Inputs
