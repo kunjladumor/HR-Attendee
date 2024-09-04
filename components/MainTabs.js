@@ -85,7 +85,7 @@ export default function MainTabs() {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={CommonStyles.centerIcon}>
-              <Ionicons name="home-outline" size={30} color={"white"} />
+              <Ionicons name="home-outline" size={24} color={"white"} />
             </View>
           ),
           tabBarButton: (props) => <CustomTabBarButton {...props} />,
