@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CustomText from "../components/CustomText";
@@ -9,10 +9,17 @@ import { CommonStyles } from "../styles/style";
 import LeaveRequest from "../components/LeaveRequest"; // Import the LeaveRequest component
 import CustomButton from "../components/ButtonComponent";
 import colors from "../styles/ColorStyles";
-import LeaveApplied from "../components/LeaveApplied";
+import FiltersModal from "../components/FiltersModal"; // Import the FiltersModal component
 
 const LeavesScreen = () => {
   const navigation = useNavigation();
+
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [filters, setFilters] = useState({
+    status: "",
+    type: "",
+    teamMember: "",
+  });
 
   const leaves = [
     {
@@ -88,39 +95,63 @@ const LeavesScreen = () => {
     console.log(`Rejected leave request ${index}`);
   };
 
+  const handleApplyFilters = () => {
+    // Apply the filters logic here
+    setModalVisible(false);
+  };
+
+  const handleResetFilters = () => {
+    setFilters({
+      status: "",
+      type: "",
+      teamMember: "",
+    });
+  };
+
   return (
-    <FlatList
-      ListHeaderComponent={
-        <View style={CommonStyles.content}>
-          <View style={CommonStyles.rowSpaceBetween}>
-            <CustomText style={CommonStyles.header}>All Leaves</CustomText>
-            <View style={CommonStyles.row}>
-              <CustomButton
-                color={"transparent"}
-                borderRadius={10}
-                style={{ marginRight: 10, fontWeight: "bold" }}
-                iconName={"create-outline"}
-                iconSize={24}
-                iconColor={colors.black}
-                onPress={() => navigation.navigate("ApplyLeave")}
-              />
-              <CustomButton
-                color={"transparent"}
-                borderRadius={10}
-                iconName={"options-outline"}
-                iconSize={24}
-                iconColor={colors.black}
-              />
+    <View style={{ flex: 1 }}>
+      <FlatList
+        ListHeaderComponent={
+          <View style={CommonStyles.content}>
+            <View style={CommonStyles.rowSpaceBetween}>
+              <CustomText style={CommonStyles.header}>All Leaves</CustomText>
+              <View style={CommonStyles.row}>
+                <CustomButton
+                  color={"transparent"}
+                  borderRadius={10}
+                  style={{ marginRight: 10, fontWeight: "bold" }}
+                  iconName={"create-outline"}
+                  iconSize={24}
+                  iconColor={colors.black}
+                  onPress={() => navigation.navigate("ApplyLeave")}
+                />
+                <CustomButton
+                  color={"transparent"}
+                  borderRadius={10}
+                  iconName={"options-outline"}
+                  iconSize={24}
+                  iconColor={colors.black}
+                  onPress={() => setModalVisible(true)}
+                />
+              </View>
             </View>
+            <LeavesGrid />
+            <Tabs tabs={tabs} />
           </View>
-          <LeavesGrid />
-          <Tabs tabs={tabs} />
-        </View>
-      }
-      data={[]} // Empty data to render the header component
-      renderItem={null} // No need to render any items
-      keyExtractor={(item, index) => index.toString()}
-    />
+        }
+        data={[]} // Empty data to render the header component
+        renderItem={null} // No need to render any items
+        keyExtractor={(item, index) => index.toString()}
+      />
+      <FiltersModal
+        isVisible={isModalVisible}
+        onClose={() => setModalVisible(false)}
+        filters={filters}
+        setFilters={setFilters}
+        onApply={handleApplyFilters}
+        onReset={handleResetFilters}
+      />
+    </View>
   );
 };
 
