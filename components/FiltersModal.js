@@ -6,12 +6,12 @@ import Inputs from "./Inputs"; // Import the Inputs component
 import colors from "../styles/ColorStyles"; // Adjust the import based on your project structure
 
 const FiltersModal = ({
-  isVisible,
-  onClose,
-  filters,
-  setFilters,
-  onApply,
-  onReset,
+  isVisible = false,
+  onClose = () => {},
+  filters = { status: [], type: [], teamMember: "" },
+  setFilters = () => {},
+  onApply = () => {},
+  onReset = () => {},
 }) => {
   const leaveStatusOptions = [
     { id: "approved", label: "Approved", value: "approved" },
@@ -20,10 +20,10 @@ const FiltersModal = ({
   ];
 
   const leaveTypeOptions = [
-    { id: "paid", label: "Paid", value: "paid" },
-    { id: "casual", label: "Casual", value: "casual" },
-    { id: "sick", label: "Sick", value: "sick" },
-    { id: "vacation", label: "Vacation", value: "vacation" },
+    { id: "paid Leave", label: "Paid", value: "paid" },
+    { id: "casual Leave", label: "Casual", value: "casual" },
+    { id: "sick Leave", label: "Sick", value: "sick" },
+    { id: "vacation Leave", label: "Vacation", value: "vacation" },
     { id: "half-day", label: "Half-day", value: "half-day" },
   ];
 
@@ -67,8 +67,16 @@ const FiltersModal = ({
             textStyle={styles.checkboxText}
             checkedColor={colors.primary}
             iconType="material"
-            checkedIcon="check-box"
-            uncheckedIcon="check-box-outline-blank"
+            checkedIcon={
+              <View style={styles.customCheckedIcon}>
+                <Text style={styles.customCheckmark}>✓</Text>
+              </View>
+            }
+            uncheckedIcon={
+              <View style={styles.customUncheckedIcon}>
+                <Text style={styles.customCheckmark}>✗</Text>
+              </View>
+            }
           />
         ))}
 
@@ -83,8 +91,16 @@ const FiltersModal = ({
             textStyle={styles.checkboxText}
             checkedColor={colors.primary}
             iconType="material"
-            checkedIcon="check-box"
-            uncheckedIcon="check-box-outline-blank"
+            checkedIcon={
+              <View style={styles.customCheckedIcon}>
+                <Text style={styles.customCheckmark}>✓</Text>
+              </View>
+            }
+            uncheckedIcon={
+              <View style={styles.customUncheckedIcon}>
+                <Text style={styles.customCheckmark}>✗</Text>
+              </View>
+            }
           />
         ))}
 
@@ -135,17 +151,22 @@ const styles = StyleSheet.create({
   },
   footer: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 20,
+    marginTop: 10,
+    gap: 10,
   },
   button: {
     padding: 10,
     backgroundColor: colors.primary,
     borderRadius: 5,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonText: {
     color: "white",
-    fontWeight: "bold",
+    fontSize: 16,
+    fontFamily: "Poppins",
+    fontWeight: "500",
   },
   checkboxContainer: {
     backgroundColor: "transparent",
@@ -158,6 +179,28 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins",
     fontWeight: "500",
     color: colors.neutral90,
+  },
+  customCheckedIcon: {
+    width: 24,
+    height: 24,
+    backgroundColor: colors.primary,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+  },
+  customUncheckedIcon: {
+    width: 24,
+    height: 24,
+    backgroundColor: "white",
+    borderColor: colors.primary,
+    borderWidth: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+  },
+  customCheckmark: {
+    color: "white",
+    fontSize: 16,
   },
 });
 
