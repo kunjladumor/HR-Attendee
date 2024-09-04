@@ -4,7 +4,7 @@ import CustomText from "../components/CustomText";
 import CustomButton from "./ButtonComponent";
 import colors from "../styles/ColorStyles";
 
-export const HomeHeader = () => {
+export const HomeHeader = ({ navigation }) => {
   return (
     <View style={[CommonStyles.header, HomeScreens.header]}>
       <View style={HomeScreens.headerContainer}>
@@ -24,7 +24,7 @@ export const HomeHeader = () => {
           color="neutral50"
           outlined={true}
           padding={0}
-          // onPress={() => navigation.navigate("Notifications")}
+          onPress={() => navigation.navigate("Notifications")}
           iconName="notifications-outline"
           iconSize={24}
           iconColor="#000"
