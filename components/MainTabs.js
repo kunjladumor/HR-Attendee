@@ -39,8 +39,9 @@ function CustomTabBarButton({ children, onPress }) {
 export default function MainTabs() {
   return (
     <Tab.Navigator
+      initialRouteName="Home" // Set the default tab here
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({ color, size }) => {
           let iconName;
 
           if (route.name === "Home") {
@@ -53,6 +54,8 @@ export default function MainTabs() {
             iconName = "list-outline";
           } else if (route.name === "Leaves") {
             iconName = "calendar-outline";
+          } else if (route.name === "TrackCheckIns") {
+            iconName = "people-outline";
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -70,20 +73,19 @@ export default function MainTabs() {
           backgroundColor: colors.white,
           height: 60,
           paddingBottom: 5,
-
           ...CommonStyles.shadow,
         },
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="TrackCheckIns" component={TrackCheckInsScreen} />
       <Tab.Screen name="Leaves" component={LeavesScreen} />
       <Tab.Screen
-        name="TrackCheckIns"
-        component={TrackCheckInsScreen}
+        name="Home"
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={CommonStyles.centerIcon}>
-              <Ionicons name="people-outline" size={30} color={"white"} />
+              <Ionicons name="home-outline" size={30} color={"white"} />
             </View>
           ),
           tabBarButton: (props) => <CustomTabBarButton {...props} />,
