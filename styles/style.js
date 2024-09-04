@@ -18,7 +18,10 @@ export const CommonStyles = StyleSheet.create({
     lineHeight: 1.5,
   },
   header: {
+    flexDirection: "row",
+    alignItems: "center",
     fontSize: 24,
+    gap: 10,
     fontWeight: "500",
     fontFamily: "PoppinsMedium", // Apply custom font
   },

@@ -50,7 +50,10 @@ const ProfileScreen = ({ navigation }) => {
           <ProfileButtonTab
             iconName="person-outline"
             text="My Profile"
-            onPress={() => console.log("My Profile Pressed")}
+            onPress={() => {
+              console.log("My Profile Pressed");
+              navigation.replace("MyProfile");
+            }}
           />
           <ProfileButtonTab
             iconName="settings-outline"
