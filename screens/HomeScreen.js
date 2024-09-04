@@ -7,7 +7,7 @@ import SwipeButton from "../components/SwipeButton";
 import Activity from "../components/Activity";
 import { CommonStyles } from "../styles/style";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const attendanceData = {
     checkInTime: "09:00 AM",
     checkOutTime: "05:00 PM",
@@ -49,7 +49,7 @@ const HomeScreen = () => {
   const renderItem = ({ item }) => {
     switch (item.type) {
       case "header":
-        return <HomeHeader />;
+        return <HomeHeader navigation={navigation} />;
       case "calendar":
         return <Calendar />;
       case "attendance":

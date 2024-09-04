@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Animated, Alert } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Animated,
+  Alert,
+  Dimensions,
+} from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import colors from "../styles/ColorStyles";
+import * as Location from "expo-location";
 
 const SwipeButton = () => {
   const [isCheckedIn, setIsCheckedIn] = useState(false);
-  const translateX = new Animated.Value(0);
+  const translateX = useRef(new Animated.Value(0)).current;
+  const containerWidth = Dimensions.get("window").width * 0.9; // 90% of screen width
+  const iconWidth = 40; // Width of the icon container
+  const maxTranslation = containerWidth - iconWidth - 10; // Maximum translation value
 
   useEffect(() => {
-    // Retrieve check-in status from AsyncStorage
     const getCheckInStatus = async () => {
       try {
         const status = await AsyncStorage.getItem("checkInStatus");
@@ -25,6 +35,13 @@ const SwipeButton = () => {
     getCheckInStatus();
   }, []);
 
+  const resetSwipeButton = () => {
+    Animated.spring(translateX, {
+      toValue: 0,
+      useNativeDriver: true,
+    }).start();
+  };
+
   const handleGestureEvent = Animated.event(
     [{ nativeEvent: { translationX: translateX } }],
     { useNativeDriver: true }
@@ -32,28 +49,58 @@ const SwipeButton = () => {
 
   const handleHandlerStateChange = async (event) => {
     if (event.nativeEvent.state === State.END) {
-      if (event.nativeEvent.translationX > 100) {
-        const newStatus = !isCheckedIn;
-        setIsCheckedIn(newStatus);
-        try {
-          await AsyncStorage.setItem(
-            "checkInStatus",
-            JSON.stringify(newStatus)
-          );
-          Alert.alert(
-            "Success",
-            newStatus
-              ? "You have checked in successfully!"
-              : "You have checked out successfully!"
-          );
-        } catch (error) {
-          console.error("Failed to save check-in status", error);
-        }
+      const translationX = event.nativeEvent.translationX;
+
+      // Check if the button has been swiped beyond the allowed range
+      if (translationX < maxTranslation) {
+        resetSwipeButton();
+        return;
       }
-      Animated.spring(translateX, {
-        toValue: 0,
-        useNativeDriver: true,
-      }).start();
+
+      // Request location permissions
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert(
+          "Permission Denied",
+          "Permission to access location was denied. Please enable location services to use this feature."
+        );
+        resetSwipeButton();
+        return;
+      }
+
+      try {
+        // Fetch user's location
+        let location = await Location.getCurrentPositionAsync({});
+        const { latitude, longitude } = location.coords;
+
+        // Reverse geocode to get address
+        let address = await Location.reverseGeocodeAsync({
+          latitude,
+          longitude,
+        });
+        const addressString = `${address[0].street}, ${address[0].city}, ${address[0].region}, ${address[0].country}`;
+
+        // Handle check-in or check-out logic here
+        setIsCheckedIn(!isCheckedIn);
+        await AsyncStorage.setItem(
+          "checkInStatus",
+          JSON.stringify(!isCheckedIn)
+        );
+        console.log(
+          "Location",
+          `Latitude: ${latitude}, Longitude: ${longitude}\nAddress: ${addressString}`
+        );
+        Alert.alert(
+          "Location",
+          `Latitude: ${latitude}, Longitude: ${longitude}\nAddress: ${addressString}`
+        );
+      } catch (error) {
+        console.error("Failed to fetch location", error);
+        console.log("Error", "Failed to fetch location");
+        Alert.alert("Error", "Failed to fetch location");
+      }
+
+      resetSwipeButton();
     }
   };
 
@@ -73,7 +120,20 @@ const SwipeButton = () => {
           onHandlerStateChange={handleHandlerStateChange}
         >
           <Animated.View
-            style={[SwipeStyles.iconContainer, { transform: [{ translateX }] }]}
+            style={[
+              SwipeStyles.iconContainer,
+              {
+                transform: [
+                  {
+                    translateX: translateX.interpolate({
+                      inputRange: [0, maxTranslation],
+                      outputRange: [0, maxTranslation],
+                      extrapolate: "clamp",
+                    }),
+                  },
+                ],
+              },
+            ]}
           >
             <Ionicons
               name="arrow-forward"
