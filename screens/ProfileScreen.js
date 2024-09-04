@@ -14,15 +14,7 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={CommonStyles.container}>
       <View style={CommonStyles.content}>
-        <View style={CommonStyles.header}>
-          <CustomText
-            style={{
-              fontSize: 24,
-            }}
-          >
-            Profile
-          </CustomText>
-        </View>
+        <CustomText style={CommonStyles.header}>Profile</CustomText>
         <View style={ProfileStyles.header}>
           <Image
             style={ProfileStyles.profileImage}
@@ -50,10 +42,7 @@ const ProfileScreen = ({ navigation }) => {
           <ProfileButtonTab
             iconName="person-outline"
             text="My Profile"
-            onPress={() => {
-              console.log("My Profile Pressed");
-              navigation.replace("MyProfile");
-            }}
+            onPress={() => navigation.navigate("MyProfile")}
           />
           <ProfileButtonTab
             iconName="settings-outline"
@@ -63,12 +52,12 @@ const ProfileScreen = ({ navigation }) => {
           <ProfileButtonTab
             iconName="document-text-outline"
             text="Terms & Conditions"
-            onPress={() => console.log("Terms & Conditions Pressed")}
+            onPress={() => navigation.navigate("TermsConditions")}
           />
           <ProfileButtonTab
             iconName="shield-checkmark-outline"
             text="Privacy Policy"
-            onPress={() => console.log("Privacy Policy Pressed")}
+            onPress={() => navigation.navigate("PrivacyPolicy")}
           />
           <ProfileButtonTab
             iconName="log-out-outline"

@@ -1,10 +1,10 @@
-// screens/MyProfileScreen.js
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { useNavigation } from "@react-navigation/native";
 import Tabs from "../components/Tabs";
 import CustomText from "../components/CustomText";
+import { statusBarHeight } from "../styles/style";
+import colors from "../styles/ColorStyles";
+import { Ionicons } from "@expo/vector-icons";
 
 const Profile = {
   fullName: "John Doe",
@@ -22,19 +22,27 @@ const Profile = {
 
 const PersonalTab = () => {
   return (
-    <View style={styles.tabsContent}>
-      <View style={styles.detailsContainer}>
-        <CustomText style={styles.detailLabel}>Full Name:</CustomText>
-        <CustomText style={styles.detailValue}>{Profile.fullName}</CustomText>
+    <View style={MyProfileStyles.tabsContent}>
+      <View style={MyProfileStyles.detailsContainer}>
+        <CustomText style={MyProfileStyles.detailLabel}>Full Name:</CustomText>
+        <CustomText style={MyProfileStyles.detailValue}>
+          {Profile.fullName}
+        </CustomText>
 
-        <CustomText style={styles.detailLabel}>Email:</CustomText>
-        <CustomText style={styles.detailValue}>{Profile.email}</CustomText>
+        <CustomText style={MyProfileStyles.detailLabel}>Email:</CustomText>
+        <CustomText style={MyProfileStyles.detailValue}>
+          {Profile.email}
+        </CustomText>
 
-        <CustomText style={styles.detailLabel}>Phone:</CustomText>
-        <CustomText style={styles.detailValue}>{Profile.phone}</CustomText>
+        <CustomText style={MyProfileStyles.detailLabel}>Phone:</CustomText>
+        <CustomText style={MyProfileStyles.detailValue}>
+          {Profile.phone}
+        </CustomText>
 
-        <CustomText style={styles.detailLabel}>Address:</CustomText>
-        <CustomText style={styles.detailValue}>{Profile.address}</CustomText>
+        <CustomText style={MyProfileStyles.detailLabel}>Address:</CustomText>
+        <CustomText style={MyProfileStyles.detailValue}>
+          {Profile.address}
+        </CustomText>
       </View>
     </View>
   );
@@ -42,34 +50,54 @@ const PersonalTab = () => {
 
 const ProfessionalTab = () => {
   return (
-    <View style={styles.tabsContent}>
-      <View style={styles.detailsContainer}>
-        <CustomText style={styles.detailLabel}>Employee ID:</CustomText>
-        <CustomText style={styles.detailValue}>{Profile.employeeId}</CustomText>
+    <View style={MyProfileStyles.tabsContent}>
+      <View style={MyProfileStyles.detailsContainer}>
+        <CustomText style={MyProfileStyles.detailLabel}>
+          Employee ID:
+        </CustomText>
+        <CustomText style={MyProfileStyles.detailValue}>
+          {Profile.employeeId}
+        </CustomText>
 
-        <CustomText style={styles.detailLabel}>Designation:</CustomText>
-        <CustomText style={styles.detailValue}>
+        <CustomText style={MyProfileStyles.detailLabel}>
+          Designation:
+        </CustomText>
+        <CustomText style={MyProfileStyles.detailValue}>
           {Profile.designation}
         </CustomText>
 
-        <CustomText style={styles.detailLabel}>Company Email:</CustomText>
-        <CustomText style={styles.detailValue}>
+        <CustomText style={MyProfileStyles.detailLabel}>
+          Company Email Address:
+        </CustomText>
+        <CustomText style={MyProfileStyles.detailValue}>
           {Profile.companyEmail}
         </CustomText>
 
-        <CustomText style={styles.detailLabel}>Department:</CustomText>
-        <CustomText style={styles.detailValue}>{Profile.department}</CustomText>
+        <CustomText style={MyProfileStyles.detailLabel}>Department:</CustomText>
+        <CustomText style={MyProfileStyles.detailValue}>
+          {Profile.department}
+        </CustomText>
 
-        <CustomText style={styles.detailLabel}>Reporting Manager:</CustomText>
-        <CustomText style={styles.detailValue}>
+        <CustomText style={MyProfileStyles.detailLabel}>
+          Reporting Manager:
+        </CustomText>
+        <CustomText style={MyProfileStyles.detailValue}>
           {Profile.reportingManager}
         </CustomText>
 
-        <CustomText style={styles.detailLabel}>Experience:</CustomText>
-        <CustomText style={styles.detailValue}>{Profile.experience}</CustomText>
+        <CustomText style={MyProfileStyles.detailLabel}>
+          Company Experience:
+        </CustomText>
+        <CustomText style={MyProfileStyles.detailValue}>
+          {Profile.experience}
+        </CustomText>
 
-        <CustomText style={styles.detailLabel}>Office Time:</CustomText>
-        <CustomText style={styles.detailValue}>{Profile.officeTime}</CustomText>
+        <CustomText style={MyProfileStyles.detailLabel}>
+          Office Time:
+        </CustomText>
+        <CustomText style={MyProfileStyles.detailValue}>
+          {Profile.officeTime}
+        </CustomText>
       </View>
     </View>
   );
@@ -84,23 +112,27 @@ const documents = [
     title: "Non-Disclosure Agreement",
     url: "https://example.com/document5.pdf",
   },
+  // Add more documents here
 ];
 
 const DocumentsTab = () => {
   return (
-    <View style={styles.container}>
+    <View style={DocumentStyles.container}>
       {documents.map((document, index) => (
-        <View key={index} style={styles.card}>
+        <View key={index} style={DocumentStyles.card}>
           <Ionicons
             name="document-text-outline"
             size={24}
-            style={styles.icon}
+            color={colors.black}
+            style={DocumentStyles.icon}
           />
-          <CustomText style={styles.documentTitle}>{document.title}</CustomText>
+          <CustomText style={DocumentStyles.documentTitle}>
+            {document.title}
+          </CustomText>
           <Ionicons
             name="download-outline"
-            size={24}
-            style={styles.downloadButton}
+            size={20}
+            style={DocumentStyles.downloadIcon}
           />
         </View>
       ))}
@@ -109,81 +141,97 @@ const DocumentsTab = () => {
 };
 
 const tabs = [
-  { title: "Personal", content: <PersonalTab /> },
-  { title: "Professional", content: <ProfessionalTab /> },
-  { title: "Documents", content: <DocumentsTab /> },
+  {
+    title: "Personal",
+    content: <PersonalTab />,
+  },
+  {
+    title: "Professional",
+    content: <ProfessionalTab />,
+  },
+  {
+    title: "Documents",
+    content: <DocumentsTab />,
+  },
 ];
 
-const MyProfileScreen = () => {
-  const navigation = useNavigation();
-
+const MyProfileScreen = ({ navigation }) => {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
+    <ScrollView contentContainerStyle={MyProfileStyles.container}>
+      <View style={MyProfileStyles.header}>
         <Ionicons
           name="chevron-back-outline"
           size={24}
           onPress={() => navigation.goBack()}
         />
-        <CustomText style={styles.headerText}>Leave Details</CustomText>
+        <CustomText style={MyProfileStyles.headerTitle}>My Profile</CustomText>
       </View>
       <Tabs tabs={tabs} />
     </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
+const MyProfileStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 16,
-    backgroundColor: "#fff",
+    paddingTop: statusBarHeight + 20,
+    backgroundColor: colors.white,
   },
   header: {
     flexDirection: "row",
+    gap: 10,
+    marginBottom: 20,
     alignItems: "center",
-    marginBottom: 16,
   },
-  headerText: {
+  headerTitle: {
     fontSize: 24,
-    marginLeft: 16,
   },
   tabsContent: {
     padding: 16,
   },
-  detailsContainer: {
-    marginBottom: 16,
-  },
   detailLabel: {
     fontSize: 14,
-    color: "#666",
+    fontFamily: "PoppinsRegular",
+    color: colors.neutral50,
+    paddingTop: 10,
     marginBottom: 4,
   },
   detailValue: {
     fontSize: 16,
-    marginBottom: 8,
+    fontFamily: "PoppinsMedium",
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.neutral20,
+  },
+});
+
+const DocumentStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "#fff",
   },
   card: {
     flexDirection: "row",
     alignItems: "center",
     padding: 16,
-    marginVertical: 8,
     borderRadius: 8,
-    backgroundColor: "#f9f9f9",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.neutral20,
   },
   icon: {
+    width: 24,
+    height: 24,
     marginRight: 16,
   },
   documentTitle: {
     flex: 1,
     fontSize: 16,
+    fontFamily: "PoppinsSemiBold",
   },
-  downloadButton: {
-    padding: 8,
+  downloadIcon: {
+    marginRight: 10,
   },
 });
 
