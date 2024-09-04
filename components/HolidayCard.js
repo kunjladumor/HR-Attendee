@@ -29,6 +29,7 @@ const HolidayCard = ({ date, occasion }) => {
             name="calendar-outline"
             size={24}
             color={colors.neutral80}
+            style={{ marginTop: -5 }}
           />
           <Text style={styles.dateText}>{formattedDate}</Text>
           <Text style={styles.dayText}>{day}</Text>
@@ -43,11 +44,15 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     marginVertical: 5,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 10,
-    backgroundColor: "#fff",
+    borderRadius: 15,
     overflow: "hidden",
+    backgroundColor: colors.white,
+
+    shadowColor: "rgba(0, 0, 0, 0.2)", // Light black shadow color with reduced opacity
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2, // Increase opacity slightly to make the shadow more visible
+    shadowRadius: 6, // Increase the radius to make the shadow softer
+    elevation: 3, // Increase elevation for a more pronounced shadow on Android
   },
   colorStrip: {
     width: 10,
@@ -55,15 +60,17 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 10,
+    padding: 15,
+    gap: 5,
   },
   header: {
     flexDirection: "row",
-    alignItems: "first-baseline",
+    alignItems: "center",
+    marginTop: 5,
   },
   dateText: {
     marginLeft: 5,
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: "PoppinsMedium",
   },
   dayText: {
@@ -74,7 +81,7 @@ const styles = StyleSheet.create({
   },
   occasionText: {
     fontFamily: "PoppinsSemiBold",
-    fontSize: 16,
+    fontSize: 18,
     marginTop: 5,
   },
 });
