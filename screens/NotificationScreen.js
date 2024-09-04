@@ -1,5 +1,5 @@
 import React from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 import NotificationCard from "../components/NotificationCard"; // Adjust the import based on your project structure
 import CustomText from "../components/CustomText"; // Adjust the import based on your project structure
 import { CommonStyles, statusBarHeight } from "../styles/style"; // Adjust the import based on your project structure
@@ -35,35 +35,73 @@ const notifications = [
     content: "Your system requires an update.",
     time: "Yesterday",
   },
+  {
+    id: "5",
+    icon: "notifications-outline",
+    title: "New Message",
+    content: "You have received a new message.",
+    time: "Yesterday",
+  },
+  {
+    id: "6",
+    icon: "alert-circle-outline",
+    title: "System Alert",
+    content: "Your system requires an update.",
+    time: "Yesterday",
+  },
+  {
+    id: "7",
+    icon: "notifications-outline",
+    title: "New Message",
+    content: "You have received a new message.",
+    time: "Yesterday",
+  },
+  {
+    id: "8",
+    icon: "alert-circle-outline",
+    title: "System Alert",
+    content: "Your system requires an update.",
+    time: "Yesterday",
+  },
+  {
+    id: "9",
+    icon: "notifications-outline",
+    title: "New Message",
+    content: "You have received a new message.",
+    time: "Yesterday",
+  },
+  {
+    id: "10",
+    icon: "alert-circle-outline",
+    title: "System Alert",
+    content: "Your system requires an update.",
+    time: "Yesterday",
+  },
 ];
 
 const NotificationScreen = ({ navigation }) => {
-  const renderItem = ({ item }) => (
-    <NotificationCard
-      icon={item.icon}
-      title={item.title}
-      content={item.content}
-      time={item.time}
-    />
-  );
-
   return (
-    <View style={styles.container}>
-      <View style={CommonStyles.header}>
-        <Ionicons
-          name="chevron-back-outline"
-          size={24}
-          onPress={() => navigation.goBack()}
-        />
-        <CustomText style={{ fontSize: 24 }}>Notifications</CustomText>
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <View style={styles.container}>
+        <View style={CommonStyles.header}>
+          <Ionicons
+            name="chevron-back-outline"
+            size={24}
+            onPress={() => navigation.goBack()}
+          />
+          <CustomText style={{ fontSize: 24 }}>Notifications</CustomText>
+        </View>
+        {notifications.map((notification) => (
+          <NotificationCard
+            key={notification.id}
+            icon={notification.icon}
+            title={notification.title}
+            content={notification.content}
+            time={notification.time}
+          />
+        ))}
       </View>
-      <FlatList
-        data={notifications}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.listContent}
-      />
-    </View>
+    </ScrollView>
   );
 };
 
@@ -74,7 +112,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: statusBarHeight + 20,
   },
-  listContent: {
+  scrollViewContent: {
     paddingBottom: 20,
   },
 });

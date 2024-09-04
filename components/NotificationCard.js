@@ -6,7 +6,7 @@ import colors from "../styles/ColorStyles"; // Adjust the import based on your p
 const NotificationCard = ({ icon, title, content, time }) => {
   return (
     <View style={styles.card}>
-      <View style={styles.iconContainer}>
+      <View style={icon ? styles.iconContainer : { width: 60 }}>
         <Ionicons
           name={icon}
           size={24}
@@ -34,6 +34,8 @@ const styles = StyleSheet.create({
     marginRight: 16,
     backgroundColor: `${colors.neutral30}1A`,
     padding: 10,
+    width: 44,
+    height: 44,
     borderRadius: 25,
     alignSelf: "flex-start",
   },

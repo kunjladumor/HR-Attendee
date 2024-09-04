@@ -39,14 +39,12 @@ export const CommonStyles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-
   content: {
     gap: 10,
     padding: 20,
     paddingTop: statusBarHeight + 20,
     paddingBottom: 90,
   },
-
   shadow: {
     shadowColor: "#7F5DF0",
     shadowOffset: {
