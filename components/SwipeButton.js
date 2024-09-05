@@ -12,7 +12,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import colors from "../styles/ColorStyles";
 import * as Location from "expo-location";
-
 const SwipeButton = () => {
   const [isCheckedIn, setIsCheckedIn] = useState(false);
   const translateX = useRef(new Animated.Value(0)).current;
@@ -73,12 +72,18 @@ const SwipeButton = () => {
         let location = await Location.getCurrentPositionAsync({});
         const { latitude, longitude } = location.coords;
 
-        // Reverse geocode to get address
-        let address = await Location.reverseGeocodeAsync({
-          latitude,
-          longitude,
-        });
-        const addressString = `${address[0].street}, ${address[0].city}, ${address[0].region}, ${address[0].country}`;
+        // // Reverse geocode to get address
+        // let address = await Location.reverseGeocodeAsync({
+        //   latitude,
+        //   longitude,
+        // });
+        // const addressString = `${address[0].street}, ${address[0].city}, ${address[0].region}, ${address[0].country}`;
+
+        // // Get connected Wi-Fi SSID
+        // const ssid = await NetworkInfo.getSSID();
+
+        // console.log("SSID", ssid);
+        // Alert.alert("SSID", ssid);
 
         // Handle check-in or check-out logic here
         setIsCheckedIn(!isCheckedIn);
@@ -88,11 +93,11 @@ const SwipeButton = () => {
         );
         console.log(
           "Location",
-          `Latitude: ${latitude}, Longitude: ${longitude}\nAddress: ${addressString}`
+          `Latitude: ${latitude}, Longitude: ${longitude}`
         );
         Alert.alert(
           "Location",
-          `Latitude: ${latitude}, Longitude: ${longitude}\nAddress: ${addressString}`
+          `Latitude: ${latitude}, Longitude: ${longitude}`
         );
       } catch (error) {
         console.error("Failed to fetch location", error);
