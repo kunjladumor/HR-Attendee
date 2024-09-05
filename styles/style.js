@@ -1,9 +1,14 @@
 import { StyleSheet } from "react-native";
-import { StatusBar } from "react-native";
 import colors from "./ColorStyles";
+import { StatusBar, Platform } from "react-native";
 
 // Get the status bar height
-export const statusBarHeight = StatusBar.currentHeight;
+export const statusBarHeight =
+  Platform.OS === "android" ? StatusBar.currentHeight : 30;
+
+// import { StatusBar } from "react-native";
+// // Get the status bar height
+// export const statusBarHeight = StatusBar.currentHeight;
 
 export const CommonStyles = StyleSheet.create({
   container: {
