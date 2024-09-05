@@ -60,10 +60,9 @@ const CalendarStyles = StyleSheet.create({
   container: {
     paddingBottom: 10,
   },
-
   listContainer: {
     flexDirection: "row-reverse",
-    paddingBottom: 10,
+    paddingVertical: 10,
   },
   item: {
     justifyContent: "center", // Center content vertically
@@ -77,21 +76,22 @@ const CalendarStyles = StyleSheet.create({
     backgroundColor: colors.neutral10,
   },
   activeItem: {
-    backgroundColor: "#007bff", // Active background color
+    backgroundColor: colors.primary, // Active background color
   },
   date: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: "PoppinsSemiBold",
   },
   activeDate: {
-    color: "white", // Active date color
+    color: colors.white, // Active date color
   },
   day: {
-    fontSize: 16,
-    color: "gray",
+    fontSize: 14,
+    color: colors.neutral60,
+    fontFamily: "Poppins",
   },
   activeDay: {
-    color: "white", // Active day color
+    color: colors.white, // Active day color
   },
 });
 

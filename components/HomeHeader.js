@@ -47,6 +47,7 @@ const HomeScreens = StyleSheet.create({
 
   headerContainer: {
     flexDirection: "row",
+    alignItems: "center",
     gap: 10,
   },
   headerContent: {
@@ -56,8 +57,7 @@ const HomeScreens = StyleSheet.create({
   userName: {
     fontSize: 20,
     color: colors.neutral90,
-    fontWeight: "bold",
-    fontFamily: "Poppins",
+    fontFamily: "PoppinsSemiBold",
   },
   userDesignation: {
     fontSize: 16,

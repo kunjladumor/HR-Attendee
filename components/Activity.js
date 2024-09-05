@@ -104,11 +104,9 @@ const ActivityStyles = StyleSheet.create({
     flexDirection: "row",
     padding: 10,
     backgroundColor: colors.white,
-    marginBottom: 10,
     alignItems: "center",
     borderRadius: 5,
   },
-  icon: {},
   iconContainer: {
     backgroundColor: "#3185ff1A",
     padding: 5,
@@ -124,21 +122,22 @@ const ActivityStyles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: "PoppinsSemiBold",
   },
   time: {
     fontSize: 14,
     fontWeight: "500",
     fontFamily: "Poppins",
-    lineHeight: 20,
   },
   date: {
     fontSize: 14,
-    color: "#888",
+    fontFamily: "Poppins",
+    color: colors.neutral50,
+    fontFamily: "Poppins",
   },
   stat: {
     fontSize: 14,
-    color: "#888",
+    color: colors.neutral50,
   },
 });
 
