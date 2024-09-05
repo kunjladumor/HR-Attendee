@@ -1,6 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import LoginScreen from "../screens/LoginScreen";
-import MainTabs from "../components/MainTabs";
 import ApplyLeaveScreen from "../screens/ApplyLeaveScreen";
 import LeaveDetailsScreen from "../screens/LeaveDetailScreen";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -8,6 +7,7 @@ import MyProfileScreen from "../screens/MyProfileScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import TermsConditionsScreen from "../screens/TermsConditionsScreen";
 import PrivacyPolicyScreen from "../screens/PrivacyPolicyScreen";
+import BottomTabs from "../components/BottomTabs";
 const Stack = createStackNavigator();
 
 const Navigation = () => {
@@ -15,9 +15,10 @@ const Navigation = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} />
+
         <Stack.Screen
-          name="Main"
-          component={MainTabs}
+          name="BottomTabs"
+          component={BottomTabs}
           options={{ headerShown: false }}
         />
         <Stack.Screen
