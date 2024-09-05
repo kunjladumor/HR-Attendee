@@ -147,7 +147,8 @@ const LoginScreen = () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       // Here you can add your authentication logic
       if (username === "user" && password === "pass") {
-        navigation.replace("Main"); // Navigate
+        // navigation.replace("Main"); // Navigate
+        navigation.replace("BottomTabs"); // Navigate
       } else {
         Alert.alert("Invalid credentials");
       }
