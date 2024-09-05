@@ -8,6 +8,7 @@ import NotificationScreen from "../screens/NotificationScreen";
 import TermsConditionsScreen from "../screens/TermsConditionsScreen";
 import PrivacyPolicyScreen from "../screens/PrivacyPolicyScreen";
 import BottomTabs from "../components/BottomTabs";
+import EditProfileScreen from "../screens/EditProfileScreen";
 const Stack = createStackNavigator();
 
 const Navigation = () => {
@@ -50,6 +51,11 @@ const Navigation = () => {
         <Stack.Screen
           name="PrivacyPolicy"
           component={PrivacyPolicyScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfileScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
