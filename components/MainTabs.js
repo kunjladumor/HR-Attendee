@@ -1,13 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { View, Text, TouchableOpacity, Platform } from "react-native";
-import Animated, {
-  Easing,
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-} from "react-native-reanimated";
+import { View, TouchableOpacity, Platform, Text } from "react-native";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import TrackCheckInsScreen from "../screens/TrackCheckInsScreen";
@@ -56,13 +50,13 @@ export default function MainTabs() {
             label = "Home";
           } else if (route.name === "CheckIn") {
             iconName = "leaf-outline";
-            label = "Check In";
+            label = "CheckIn";
           } else if (route.name === "Profile") {
             iconName = "person-outline";
             label = "Profile";
           } else if (route.name === "LeavesList") {
             iconName = "list-outline";
-            label = "Leaves List";
+            label = "Holiday List";
           } else if (route.name === "Leaves") {
             iconName = "calendar-outline";
             label = "Leaves";
@@ -72,33 +66,10 @@ export default function MainTabs() {
           }
 
           return (
-            <View style={[{ alignItems: "center" }]}>
-              <View
-                style={{
-                  width: 30,
-                  height: 30,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Ionicons
-                  name={iconName}
-                  // size={focused ? size + 2 : size}
-                  size={size}
-                  color={focused ? colors.primary : color}
-                  style={{
-                    transform: [{ scale: focused ? 1.2 : 1 }],
-                  }}
-                />
-              </View>
+            <View style={{ alignItems: "center" }}>
+              <Ionicons name={iconName} size={size} color={color} />
               {focused && (
-                <Text
-                  style={{
-                    color: colors.primary,
-                    fontFamily: "PoppinsMedium",
-                    fontSize: 12,
-                  }}
-                >
+                <Text style={{ color: colors.primary, fontSize: 12 }}>
                   {label}
                 </Text>
               )}
@@ -116,8 +87,8 @@ export default function MainTabs() {
           right: 0,
           elevation: 0,
           backgroundColor: colors.white,
-          height: Platform.OS === "android" ? 70 : 80,
-          paddingBottom: Platform.OS === "android" ? 10 : 15,
+          height: Platform.OS === "android" ? 60 : 70,
+          paddingBottom: Platform.OS === "android" ? 5 : 15,
           ...CommonStyles.shadow,
         },
       })}
