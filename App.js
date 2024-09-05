@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import Navigation from "./utils/Navigation";
-import { statusBarHeight } from "./styles/style";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -16,8 +15,6 @@ const fetchFonts = () => {
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  console.log("Statusbar height: ", statusBarHeight);
 
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
