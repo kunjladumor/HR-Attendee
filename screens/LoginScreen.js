@@ -184,23 +184,7 @@ const LoginScreen = () => {
           <CustomText style={login.subtitle}>
             Hello there, Login to continue
           </CustomText>
-          {/* <AnimatedTextInput
-            placeholder="Username"
-            value={username}
-            onChangeText={setUsername}
-            onSubmitEditing={() => passwordInputRef.current.focus()}
-            error={usernameError}
-          />
 
-          <AnimatedTextInput
-            ref={passwordInputRef}
-            placeholder="Password"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            onSubmitEditing={handleLogin}
-            error={passwordError}
-          /> */}
           <Inputs
             type="text"
             placeholder="Username"

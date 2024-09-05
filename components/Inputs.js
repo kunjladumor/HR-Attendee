@@ -22,27 +22,32 @@ const Inputs = forwardRef(
       options = [],
       error,
       id, // Unique identifier for each input
+      defaultValue = "", // Default value prop
       ...rest
     },
     ref
   ) => {
     const [isFocused, setIsFocused] = useState(type === "picker");
     const [showDatePicker, setShowDatePicker] = useState(false);
-    const animatedIsFocused = useRef(new Animated.Value(value ? 1 : 0)).current;
+    const [inputValue, setInputValue] = useState(value || defaultValue); // Initialize with value or defaultValue
+    const animatedIsFocused = useRef(
+      new Animated.Value(inputValue ? 1 : 0)
+    ).current;
 
     useEffect(() => {
       Animated.timing(animatedIsFocused, {
-        toValue: isFocused || value ? 1 : 0,
+        toValue: isFocused || inputValue ? 1 : 0,
         duration: 200,
         useNativeDriver: false,
       }).start();
-    }, [isFocused, value]);
+    }, [isFocused, inputValue]);
 
     useEffect(() => {
-      if (type === "picker" && value === "" && options.length > 0) {
+      if (type === "picker" && inputValue === "" && options.length > 0) {
+        setInputValue(options[0].value);
         onChangeText(options[0].value);
       }
-    }, [type, value, options, onChangeText]);
+    }, [type, inputValue, options, onChangeText]);
 
     const handleDatePickerPress = () => {
       setShowDatePicker(true);
@@ -51,7 +56,9 @@ const Inputs = forwardRef(
     const onDateChange = (event, selectedDate) => {
       setShowDatePicker(false);
       if (selectedDate) {
-        onChangeText(selectedDate.toISOString().split("T")[0]); // Format date as YYYY-MM-DD
+        const formattedDate = selectedDate.toISOString().split("T")[0];
+        setInputValue(formattedDate);
+        onChangeText(formattedDate);
       }
     };
 
@@ -68,8 +75,11 @@ const Inputs = forwardRef(
                 InputStyles.textarea,
                 error && InputStyles.inputError,
               ]}
-              value={value}
-              onChangeText={onChangeText}
+              value={inputValue}
+              onChangeText={(text) => {
+                setInputValue(text);
+                onChangeText(text);
+              }}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
             />
@@ -91,12 +101,12 @@ const Inputs = forwardRef(
                     },
                   ]}
                 >
-                  {value}
+                  {inputValue}
                 </Text>
               </TouchableOpacity>
               {showDatePicker && (
                 <DateTimePicker
-                  value={value ? new Date(value) : new Date()}
+                  value={inputValue ? new Date(inputValue) : new Date()}
                   mode="date"
                   display="default"
                   onChange={onDateChange}
@@ -110,8 +120,11 @@ const Inputs = forwardRef(
               {...rest}
               style={[InputStyles.input, error && InputStyles.inputError]}
               keyboardType="numeric"
-              value={value}
-              onChangeText={onChangeText}
+              value={inputValue}
+              onChangeText={(text) => {
+                setInputValue(text);
+                onChangeText(text);
+              }}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
             />
@@ -119,8 +132,11 @@ const Inputs = forwardRef(
         case "picker":
           return (
             <Picker
-              selectedValue={value}
-              onValueChange={onChangeText}
+              selectedValue={inputValue}
+              onValueChange={(itemValue) => {
+                setInputValue(itemValue);
+                onChangeText(itemValue);
+              }}
               style={[InputStyles.input, error && InputStyles.inputError]}
               {...rest}
             >
@@ -139,8 +155,11 @@ const Inputs = forwardRef(
               {...rest}
               ref={ref} // Forward the ref here
               style={[InputStyles.input, error && InputStyles.inputError]}
-              value={value}
-              onChangeText={onChangeText}
+              value={inputValue}
+              onChangeText={(text) => {
+                setInputValue(text);
+                onChangeText(text);
+              }}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
             />
