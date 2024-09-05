@@ -67,7 +67,7 @@ const AnimatedTabButton = ({ children, onPress, focused }) => {
   const scale = useSharedValue(1);
 
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: withSpring(focused ? 1.2 : 1) }],
+    transform: [{ scale: withSpring(focused ? 1.15 : 1) }],
   }));
 
   const borderStyle = focused
