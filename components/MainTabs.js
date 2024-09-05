@@ -1,7 +1,13 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { View, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Platform } from "react-native";
+import Animated, {
+  Easing,
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import TrackCheckInsScreen from "../screens/TrackCheckInsScreen";
@@ -41,27 +47,66 @@ export default function MainTabs() {
     <Tab.Navigator
       initialRouteName="Home" // Set the default tab here
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
+        tabBarIcon: ({ color, size, focused }) => {
           let iconName;
+          let label;
 
           if (route.name === "Home") {
             iconName = "home-outline";
+            label = "Home";
           } else if (route.name === "CheckIn") {
             iconName = "leaf-outline";
+            label = "Check In";
           } else if (route.name === "Profile") {
             iconName = "person-outline";
+            label = "Profile";
           } else if (route.name === "LeavesList") {
             iconName = "list-outline";
+            label = "Leaves List";
           } else if (route.name === "Leaves") {
             iconName = "calendar-outline";
+            label = "Leaves";
           } else if (route.name === "TrackCheckIns") {
             iconName = "people-outline";
+            label = "Team";
           }
 
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return (
+            <View style={[{ alignItems: "center" }]}>
+              <View
+                style={{
+                  width: 30,
+                  height: 30,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Ionicons
+                  name={iconName}
+                  // size={focused ? size + 2 : size}
+                  size={size}
+                  color={focused ? colors.primary : color}
+                  style={{
+                    transform: [{ scale: focused ? 1.2 : 1 }],
+                  }}
+                />
+              </View>
+              {focused && (
+                <Text
+                  style={{
+                    color: colors.primary,
+                    fontFamily: "PoppinsMedium",
+                    fontSize: 12,
+                  }}
+                >
+                  {label}
+                </Text>
+              )}
+            </View>
+          );
         },
-        tabBarActiveTintColor: "#3185ff",
-        tabBarInactiveTintColor: "gray",
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.neutral50,
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
@@ -71,26 +116,15 @@ export default function MainTabs() {
           right: 0,
           elevation: 0,
           backgroundColor: colors.white,
-          height: 60,
-          paddingBottom: 5,
+          height: Platform.OS === "android" ? 70 : 80,
+          paddingBottom: Platform.OS === "android" ? 10 : 15,
           ...CommonStyles.shadow,
         },
       })}
     >
       <Tab.Screen name="TrackCheckIns" component={TrackCheckInsScreen} />
       <Tab.Screen name="Leaves" component={LeavesScreen} />
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View style={CommonStyles.centerIcon}>
-              <Ionicons name="home-outline" size={24} color={"white"} />
-            </View>
-          ),
-          tabBarButton: (props) => <CustomTabBarButton {...props} />,
-        }}
-      />
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="LeavesList" component={HolidayListScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>

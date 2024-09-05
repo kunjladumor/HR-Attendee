@@ -1,13 +1,16 @@
-import React from "react";
-import { View, FlatList } from "react-native";
+import React, { useState } from "react";
+import { View, FlatList, ActivityIndicator, StyleSheet } from "react-native";
 import HomeHeader from "../components/HomeHeader";
 import Calendar from "../components/Calendar";
 import Attendance from "../components/Attendance";
 import SwipeButton from "../components/SwipeButton";
 import Activity from "../components/Activity";
 import { CommonStyles } from "../styles/style";
+import { colors } from "react-native-elements";
 
 const HomeScreen = ({ navigation }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const attendanceData = {
     checkInTime: "09:00 AM",
     checkOutTime: "05:00 PM",
@@ -54,7 +57,6 @@ const HomeScreen = ({ navigation }) => {
         return <Calendar />;
       case "attendance":
         return <Attendance attendanceData={attendanceData} />;
-
       case "activity":
         return <Activity activities={activities} />;
       default:
@@ -71,15 +73,30 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={CommonStyles.container}>
+      {isLoading && (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator size="large" color={colors.primary} />
+        </View>
+      )}
       <FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={[CommonStyles.content, { paddingBottom: 150 }]}
       />
-      <SwipeButton />
+      <SwipeButton setIsLoading={setIsLoading} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  loaderContainer: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 10,
+  },
+});
 
 export default HomeScreen;
