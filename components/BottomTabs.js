@@ -1,7 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
