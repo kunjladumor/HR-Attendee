@@ -87,6 +87,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     padding: 20,
     borderRadius: 10,
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
   modalOption: {
     fontSize: 16,
