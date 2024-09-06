@@ -10,6 +10,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
 import colors from "../styles/ColorStyles";
+import CustomText from "./CustomText";
+import { CommonStyles } from "../styles/style";
 
 // ActivityCard Component
 const ActivityCard = ({ iconName, title, time, date, stat }) => {
@@ -60,7 +62,9 @@ const Activity = ({ activities }) => {
   return (
     <View style={ActivityStyles.container}>
       <View style={ActivityStyles.header}>
-        <Text style={ActivityStyles.headerTitle}>Activity</Text>
+        <CustomText style={[CommonStyles.header, { fontSize: 18 }]}>
+          Activity
+        </CustomText>
         <TouchableOpacity>
           <Text style={ActivityStyles.viewMore}>View More</Text>
         </TouchableOpacity>
