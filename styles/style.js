@@ -30,6 +30,12 @@ export const CommonStyles = StyleSheet.create({
     fontWeight: "500",
     fontFamily: "PoppinsMedium", // Apply custom font
   },
+  subHeader: {
+    fontSize: 16,
+    color: colors.neutral70,
+    fontFamily: "PoppinsMedium", // Apply custom font
+  },
+
   logo: {
     width: 100,
     height: 100,

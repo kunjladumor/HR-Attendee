@@ -14,10 +14,18 @@ const TermsConditionsScreen = ({ navigation }) => {
           size={24}
           onPress={() => navigation.goBack()}
         />
-        <CustomText style={styles.title}>Terms and Conditions</CustomText>
+        <CustomText style={styles.title}>Terms & Conditions</CustomText>
       </View>
       <View style={styles.content}>
+        <CustomText style={styles.lastUpdate}>
+          Last update : 2021-09-01
+        </CustomText>
         <CustomText style={styles.contentText}>
+          Please read these terms and conditions carefully before using our
+          application.
+        </CustomText>
+
+        <CustomText style={styles.blueText}>
           Please read these terms and conditions carefully before using our
           application.
         </CustomText>
@@ -40,7 +48,6 @@ const TermsConditionsScreen = ({ navigation }) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -55,7 +62,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    marginLeft: 16,
+    marginHorizontal: "auto",
   },
   content: {
     flex: 1,
@@ -63,6 +70,17 @@ const styles = StyleSheet.create({
   contentText: {
     fontSize: 16,
     marginBottom: 16,
+  },
+  lastUpdate: {
+    fontSize: 12,
+    marginBottom: 16,
+    color: colors.neutral70,
+  },
+  blueText: {
+    fontSize: 16,
+    marginBottom: 16,
+    color: colors.primary,
+    fontFamily: "PoppinsSemiBold",
   },
 });
 
