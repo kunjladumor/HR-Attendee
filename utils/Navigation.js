@@ -9,6 +9,8 @@ import TermsConditionsScreen from "../screens/TermsConditionsScreen";
 import PrivacyPolicyScreen from "../screens/PrivacyPolicyScreen";
 import BottomTabs from "../components/BottomTabs";
 import EditProfileScreen from "../screens/EditProfileScreen";
+import IDCardScreen from "../screens/IDCardScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 const Stack = createStackNavigator();
 
 const Navigation = () => {
@@ -34,6 +36,11 @@ const Navigation = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="LeaveDetails"
           component={LeaveDetailsScreen}
           options={{ headerShown: false }}
@@ -56,6 +63,11 @@ const Navigation = () => {
         <Stack.Screen
           name="EditProfile"
           component={EditProfileScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="IDCard"
+          component={IDCardScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

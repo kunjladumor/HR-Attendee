@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, ScrollView, TextInput } from "react-native";
 import CustomText from "../components/CustomText"; // Import the CustomText component
 import TeamMemberCard from "../components/TeamMemberCard"; // Import the TeamMemberCard component
 import { statusBarHeight } from "../styles/style";
