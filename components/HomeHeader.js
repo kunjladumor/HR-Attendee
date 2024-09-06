@@ -3,11 +3,15 @@ import { CommonStyles } from "../styles/style";
 import CustomText from "../components/CustomText";
 import CustomButton from "./ButtonComponent";
 import colors from "../styles/ColorStyles";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export const HomeHeader = ({ navigation }) => {
   return (
     <View style={[CommonStyles.header, HomeScreens.header]}>
-      <View style={HomeScreens.headerContainer}>
+      <TouchableOpacity
+        style={HomeScreens.headerContainer}
+        onPress={() => navigation.navigate("ProfileScreen")} // Navigate to ProfileScreen
+      >
         <Image
           style={HomeScreens.userImage}
           source={require("../assets/images/user.png")} // Adjust the path as necessary
@@ -18,7 +22,7 @@ export const HomeHeader = ({ navigation }) => {
             Lead UI/UX Designer
           </CustomText>
         </View>
-      </View>
+      </TouchableOpacity>
       <View style={HomeScreens.headerIcon}>
         <CustomButton
           color="neutral50"
