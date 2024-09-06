@@ -4,6 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
 import colors from "../styles/ColorStyles";
 import CustomText from "./CustomText";
+import { CommonStyles } from "../styles/style";
 
 const Attendance = ({
   attendanceData: {
@@ -28,7 +29,9 @@ const Attendance = ({
 
   return (
     <View style={AttendanceStyles.container}>
-      <CustomText style={AttendanceStyles.title}>Today's Attendance</CustomText>
+      <CustomText style={[CommonStyles.header, { fontSize: 18 }]}>
+        Today's Attendance
+      </CustomText>
       <View style={AttendanceStyles.grid}>
         {renderCard("log-in-outline", "Check-In Time", checkInTime, "On-Time")}
         {renderCard(
