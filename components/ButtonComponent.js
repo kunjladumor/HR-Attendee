@@ -20,6 +20,7 @@ const CustomButton = ({
   iconColor,
   children,
   fontweight,
+  fontsize,
   style,
   fontfamily,
 }) => {
@@ -33,6 +34,7 @@ const CustomButton = ({
     padding,
     margin,
     borderRadius,
+    textSize: fontsize,
     fontweight,
     fontfamily: fontfamily || "PoppinsRegular",
   });
