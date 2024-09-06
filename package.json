@@ -41,7 +41,6 @@
   },
   "private": true,
   "devDependencies": {
-    "babel-plugin-module-resolver": "^5.0.2",
     "expo-module-scripts": "^3.5.2"
   }
 }
