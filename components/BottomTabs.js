@@ -8,7 +8,7 @@ import Animated, {
 } from "react-native-reanimated";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import TrackCheckInsScreen from "../screens/TrackCheckInsScreen";
+import TeamScreen from "../screens/TeamScreen";
 import LeavesScreen from "../screens/LeavesScreen";
 import HolidayListScreen from "../screens/HolidayListScreen";
 import { Ionicons } from "@expo/vector-icons"; // or any other icon library
@@ -21,7 +21,7 @@ const ROUTES = {
   PROFILE: "Profile",
   LEAVES_LIST: "LeavesList",
   LEAVES: "Leaves",
-  TRACK_CHECK_INS: "TrackCheckIns",
+  TEAM: "Team",
 };
 
 const getTabIconAndLabel = (routeName, focused) => {
@@ -49,7 +49,7 @@ const getTabIconAndLabel = (routeName, focused) => {
       iconName = focused ? "calendar" : "calendar-outline";
       label = "Leaves";
       break;
-    case ROUTES.TRACK_CHECK_INS:
+    case ROUTES.TEAM:
       iconName = focused ? "people" : "people-outline";
       label = "Team";
       break;
@@ -124,10 +124,7 @@ const BottomTabs = () => {
         headerShown: false, // Hide the header
       })}
     >
-      <Tab.Screen
-        name={ROUTES.TRACK_CHECK_INS}
-        component={TrackCheckInsScreen}
-      />
+      <Tab.Screen name={ROUTES.TEAM} component={TeamScreen} />
       <Tab.Screen name={ROUTES.LEAVES} component={LeavesScreen} />
       <Tab.Screen name={ROUTES.HOME} component={HomeScreen} />
       <Tab.Screen name={ROUTES.LEAVES_LIST} component={HolidayListScreen} />
