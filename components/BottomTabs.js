@@ -43,7 +43,7 @@ const getTabIconAndLabel = (routeName, focused) => {
       break;
     case ROUTES.LEAVES_LIST:
       iconName = focused ? "list" : "list-outline";
-      label = "Holiday List";
+      label = "Holiday";
       break;
     case ROUTES.LEAVES:
       iconName = focused ? "calendar" : "calendar-outline";
