@@ -18,9 +18,9 @@ import CustomButton from "@components/ButtonComponent";
 import logo from "@assets/images/logo.png";
 
 // Import the useFonts hook
-import { useFonts } from "expo-font";
 import colors from "@styles/ColorStyles";
 import Inputs from "@components/Inputs";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
@@ -31,13 +31,6 @@ const LoginScreen = () => {
   const navigation = useNavigation();
   const usernameInputRef = useRef(null);
   const passwordInputRef = useRef(null);
-
-  const [fontsLoaded] = useFonts({
-    Poppins: require("@assets/fonts/Poppins/Poppins-Regular.ttf"),
-    PoppinsRegular: require("@assets/fonts/Poppins/Poppins-Regular.ttf"),
-    PoppinsSemibold: require("@assets/fonts/Poppins/Poppins-SemiBold.ttf"),
-    PoppinsBold: require("@assets/fonts/Poppins/Poppins-Bold.ttf"),
-  });
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -75,6 +68,7 @@ const LoginScreen = () => {
       // Here you can add your authentication logic
       if (username === "user" && password === "pass") {
         // navigation.replace("Main"); // Navigate
+        await AsyncStorage.setItem("isLoggedIn", "true"); // Store login status
         navigation.replace("BottomTabs"); // Navigate
       } else {
         Alert.alert("Invalid credentials");
@@ -100,10 +94,6 @@ const LoginScreen = () => {
       }
     }
   };
-
-  if (!fontsLoaded) {
-    return <ActivityIndicator size="large" />;
-  }
 
   return (
     <KeyboardAvoidingView
@@ -160,6 +150,7 @@ const LoginScreen = () => {
             loading={loading}
             padding={12}
             borderRadius={10}
+            fontfamily="PoppinsSemiBold" // Apply custom font
           >
             {loading && <ActivityIndicator color="#fff" />}
           </CustomButton>
@@ -169,7 +160,7 @@ const LoginScreen = () => {
             onPress={handleGoogleLogin}
             color="neutral70"
             outlined={true}
-            fontweight="bold"
+            fontfamily="PoppinsSemiBold" // Apply custom font
             borderRadius={10}
             textColor="neutral70" // Set custom text color
             gap={0}

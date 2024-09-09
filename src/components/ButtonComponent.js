@@ -22,7 +22,7 @@ const CustomButton = ({
   fontweight,
   fontsize,
   style,
-  fontfamily,
+  fontfamily = "Poppins", // Set default font family
 }) => {
   const defaultTextColor = outlined ? color : "white";
   const finalTextColor = textColor || defaultTextColor;
@@ -36,7 +36,7 @@ const CustomButton = ({
     borderRadius,
     textSize: fontsize,
     fontweight,
-    fontfamily: fontfamily || "Poppins",
+    fontfamily: fontfamily,
   });
 
   return (
