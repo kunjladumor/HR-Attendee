@@ -7,7 +7,7 @@ import CustomText from "@components/CustomText";
 import { CommonStyles, statusBarHeight } from "@styles/style";
 
 const IDCardScreen = ({ navigation }) => {
-  const profileImage = require("../assets/images/user.png"); // Replace with actual image URL
+  const profileImage = require("@assets/images/user.png"); // Replace with actual image URL
   const name = "John Doe";
   const designation = "Software Engineer";
   const companyName = "Cyberax";

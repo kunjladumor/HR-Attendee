@@ -42,7 +42,7 @@ const LeavesScreen = () => {
 
   const leaveRequests = [
     {
-      profileImage: require("../assets/images/user.png"), // Ensure the path is correct
+      profileImage: require("@assets/images/user.png"), // Ensure the path is correct
       name: "John Doe",
       leaveDates: "2023-10-01 to 2023-10-05",
       startDate: "2023-10-01",
@@ -57,7 +57,7 @@ const LeavesScreen = () => {
         "I need to attend to a family emergency and will be unavailable during this period.",
     },
     {
-      profileImage: require("../assets/images/user.png"), // Ensure the path is correct
+      profileImage: require("@assets/images/user.png"), // Ensure the path is correct
       name: "Jane Smith",
       leaveDates: "2023-09-15 to 2023-09-20",
       startDate: "2023-09-15",

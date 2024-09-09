@@ -38,7 +38,7 @@ const ApplyLeaveScreen = ({ navigation }) => {
     }
 
     const newLeaveRequest = {
-      profileImage: require("../assets/images/user.png"),
+      profileImage: require("@assets/images/user.png"),
       name: "John Doe", // Replace with actual user name
       startDate: startDate,
       endDate: endDate,

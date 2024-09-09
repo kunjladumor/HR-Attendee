@@ -16,7 +16,7 @@ import ProfileButtonTab from "@components/ProfileButton";
 
 const ProfileScreen = ({ navigation }) => {
   const [profileImage, setProfileImage] = useState(
-    require("../assets/images/user.png")
+    require("@assets/images/user.png")
   ); // Default image
 
   const handleLogout = () => {

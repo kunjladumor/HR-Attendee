@@ -1,5 +1,5 @@
 import React from "react";
-import { generateDynamicStyles } from "../@utils/styleUtils";
+import { generateDynamicStyles } from "@utils/styleUtils";
 import Ionicons from "react-native-vector-icons/Ionicons"; // Import Ionicons from the library
 import { TouchableOpacity, Text, ActivityIndicator } from "react-native";
 

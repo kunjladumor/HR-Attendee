@@ -14,7 +14,7 @@ export const HomeHeader = ({ navigation }) => {
       >
         <Image
           style={HomeScreens.userImage}
-          source={require("../assets/images/user.png")} // Adjust the path as necessary
+          source={require("@assets/images/user.png")} // Adjust the path as necessary
         />
         <View style={HomeScreens.headerContent}>
           <CustomText style={HomeScreens.userName}>Michael Mitc</CustomText>

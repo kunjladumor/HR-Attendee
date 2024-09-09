@@ -15,7 +15,7 @@ import CustomText from "@components/CustomText";
 import CustomButton from "@components/ButtonComponent";
 
 // Import the logo image
-import logo from "../assets/images/logo.png";
+import logo from "@assets/images/logo.png";
 
 // Import the useFonts hook
 import { useFonts } from "expo-font";
@@ -32,10 +32,10 @@ const LoginScreen = () => {
   const passwordInputRef = useRef(null); // Reference to the password input field
 
   const [fontsLoaded] = useFonts({
-    Poppins: require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
-    PoppinsRegular: require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
-    PoppinsSemibold: require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
-    PoppinsBold: require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
+    Poppins: require("@assets/fonts/Poppins/Poppins-Regular.ttf"),
+    PoppinsRegular: require("@assets/fonts/Poppins/Poppins-Regular.ttf"),
+    PoppinsSemibold: require("@assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+    PoppinsBold: require("@assets/fonts/Poppins/Poppins-Bold.ttf"),
   });
 
   React.useLayoutEffect(() => {
@@ -161,7 +161,7 @@ const LoginScreen = () => {
             gap={0}
           >
             <Image
-              source={require("../assets/images/google_logo.png")}
+              source={require("@assets/images/google_logo.png")}
               style={login.googleIcon}
             />
           </CustomButton>
