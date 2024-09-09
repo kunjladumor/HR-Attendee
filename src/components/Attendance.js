@@ -1,10 +1,22 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Dimensions,
+  Alert,
+  Platform,
+} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
 import colors from "@styles/ColorStyles";
 import CustomText from "./CustomText";
 import { CommonStyles } from "@styles/style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const { width: deviceWidth } = Dimensions.get("window");
+const cardWidth = (deviceWidth - 40 - 20) / 2; // 40 padding (20 on each side) and 20 gap
 
 const Attendance = ({
   attendanceData: {
@@ -14,8 +26,109 @@ const Attendance = ({
     totalDays = "N/A",
   },
 }) => {
-  const renderCard = (iconName, title, value, stat) => (
-    <View style={AttendanceStyles.card}>
+  const [breakCounter, setBreakCounter] = useState(0);
+  const [isBreakActive, setIsBreakActive] = useState(false);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    const loadBreakCounter = async () => {
+      try {
+        const storedCounter = await AsyncStorage.getItem("breakCounter");
+        if (storedCounter !== null) {
+          setBreakCounter(parseInt(storedCounter, 10));
+        }
+      } catch (error) {
+        console.error("Failed to load break counter", error);
+      }
+    };
+
+    loadBreakCounter();
+
+    const resetCounterAtMidnight = () => {
+      const now = new Date();
+      const millisTillMidnight =
+        new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate() + 1,
+          0,
+          0,
+          0
+        ) - now;
+      setTimeout(() => {
+        setBreakCounter(0);
+        AsyncStorage.setItem("breakCounter", "0");
+        resetCounterAtMidnight();
+      }, millisTillMidnight);
+    };
+
+    resetCounterAtMidnight();
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isBreakActive) {
+      intervalRef.current = setInterval(() => {
+        setBreakCounter((prevCounter) => {
+          const newCounter = prevCounter + 1;
+          AsyncStorage.setItem("breakCounter", newCounter.toString());
+          if (newCounter >= 45 * 60) {
+            clearInterval(intervalRef.current);
+            setIsBreakActive(false);
+          }
+          return newCounter;
+        });
+      }, 1000);
+    } else if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isBreakActive]);
+
+  const handleBreakCardPress = () => {
+    Alert.alert(
+      "Toggle Break",
+      `Are you sure you want to ${isBreakActive ? "end" : "start"} the break?`,
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => setIsBreakActive((prev) => !prev),
+        },
+      ]
+    );
+  };
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}m ${secs}s`;
+  };
+
+  const renderCard = (iconName, title, value, stat, onPress) => (
+    <Pressable
+      onPress={onPress}
+      disabled={title !== "Break Time"}
+      android_ripple={{ color: colors.primary + "1A" }}
+      style={({ pressed }) => [
+        AttendanceStyles.card,
+        { width: cardWidth },
+        pressed && Platform.OS === "ios" && AttendanceStyles.cardPressed,
+      ]}
+    >
       <View style={AttendanceStyles.cardHeader}>
         <View style={AttendanceStyles.iconContainer}>
           <Ionicons name={iconName} size={20} color={colors.primary} />
@@ -24,7 +137,7 @@ const Attendance = ({
       </View>
       <CustomText style={AttendanceStyles.cardValue}>{value}</CustomText>
       <CustomText style={AttendanceStyles.stat}>{stat}</CustomText>
-    </View>
+    </Pressable>
   );
 
   return (
@@ -40,7 +153,13 @@ const Attendance = ({
           checkOutTime,
           "Go Home"
         )}
-        {renderCard("time-outline", "Break Time", breakTime, "Avg 30 min")}
+        {renderCard(
+          "time-outline",
+          "Break Time",
+          formatTime(breakCounter),
+          "Avg 30 min",
+          handleBreakCardPress
+        )}
         {renderCard(
           "calendar-outline",
           "Total Days",
@@ -62,19 +181,20 @@ const AttendanceStyles = StyleSheet.create({
   grid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    gap: 15,
   },
   card: {
-    width: "48%", // Adjust width to fit 2 cards per row
     backgroundColor: "#fff",
     borderRadius: 8,
     padding: 16,
-    marginBottom: 16,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  cardPressed: {
+    backgroundColor: "#e0e0e0", // Change this color to your desired pressed color
   },
   iconContainer: {
     width: 36,
