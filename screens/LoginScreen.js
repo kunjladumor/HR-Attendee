@@ -192,6 +192,7 @@ const LoginScreen = () => {
             onChangeText={setUsername}
             error={usernameError}
             onSubmitEditing={() => passwordInputRef.current.focus()}
+            autoCapitalize="none"
           />
           <Inputs
             type="password"
@@ -202,6 +203,7 @@ const LoginScreen = () => {
             error={passwordError}
             ref={passwordInputRef}
             onSubmitEditing={handleLogin}
+            autoCapitalize="none"
           />
 
           <TouchableOpacity>
