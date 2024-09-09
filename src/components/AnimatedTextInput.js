@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import CustomText from "@components/CustomText";
+import colors from "../styles/ColorStyles";
 const { height } = Dimensions.get("window");
 
 const AnimatedTextInput = React.forwardRef(
@@ -50,7 +51,7 @@ const AnimatedTextInput = React.forwardRef(
       }),
       color: animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: ["#aaa", "#3185ff"],
+        outputRange: ["#aaa", colors.primary],
       }),
       backgroundColor: "#fff", // Background color to break the border
       paddingHorizontal: 5, // Padding to make the background color visible
@@ -90,7 +91,7 @@ const animatedInput = StyleSheet.create({
   },
   inputContainer: {
     borderWidth: 1,
-    borderColor: "#3185ff",
+    borderColor: colors.primary,
     padding: 8,
     borderRadius: 5,
     position: "relative",

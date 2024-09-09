@@ -181,7 +181,7 @@ const Inputs = forwardRef(
       }),
       color: animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: ["#aaa", "#3185ff"],
+        outputRange: [colors.neutral40, colors.primary],
       }),
       backgroundColor: "#fff",
       paddingHorizontal: 5,

@@ -80,7 +80,7 @@ const AttendanceStyles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 36,
-    backgroundColor: "#007bff1A",
+    backgroundColor: `${colors.primary}1A`,
     justifyContent: "center",
     alignItems: "center",
   },
