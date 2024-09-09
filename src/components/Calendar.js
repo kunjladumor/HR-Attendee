@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import colors from "@styles/ColorStyles";
+
 const generateDates = () => {
   const dates = [];
   const today = new Date();
-  for (let i = 0; i < 7; i++) {
-    const date = new Date();
+  for (let i = 6; i >= 0; i--) {
+    const date = new Date(today);
     date.setDate(today.getDate() - i);
     dates.push({
       date: date.getDate(),
@@ -13,11 +14,11 @@ const generateDates = () => {
       isToday: i === 0, // Mark the current date
     });
   }
-  return dates.reverse(); // Reverse the array to have the current day at the end
+  return dates;
 };
 
 const Calendar = () => {
-  const dates = generateDates();
+  const dates = useMemo(generateDates, []);
 
   return (
     <View style={CalendarStyles.container}>
@@ -56,6 +57,7 @@ const Calendar = () => {
     </View>
   );
 };
+
 const CalendarStyles = StyleSheet.create({
   container: {
     paddingBottom: 10,
@@ -70,7 +72,7 @@ const CalendarStyles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 10,
     borderWidth: 1,
-    paddingHorizontal: 20,
+    width: 70,
     paddingVertical: 10,
     borderColor: colors.neutral20,
     backgroundColor: colors.neutral10,
