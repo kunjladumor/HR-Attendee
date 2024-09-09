@@ -12,6 +12,7 @@ import TeamScreen from "@screens/TeamScreen";
 import LeavesScreen from "@screens/LeavesScreen";
 import HolidayListScreen from "@screens/HolidayListScreen";
 import { Ionicons } from "@expo/vector-icons"; // or any other icon library
+import colors from "@styles/ColorStyles";
 
 const Tab = createBottomTabNavigator();
 
@@ -72,7 +73,7 @@ const AnimatedTabButton = ({ children, onPress, focused }) => {
   const borderStyle = focused
     ? {
         borderTopWidth: 2,
-        borderTopColor: "#2196F3",
+        borderTopColor: colors.primary,
       }
     : {};
 
@@ -110,7 +111,7 @@ const BottomTabs = () => {
             <Ionicons
               name={iconName}
               size={24}
-              color={focused ? "#2196F3" : "black"}
+              color={focused ? colors.primary : colors.neutral50}
             />
           );
         },
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "#ffffff",
+    backgroundColor: colors.white,
     height: Platform.OS === "android" ? 60 : 80,
     paddingHorizontal: 10,
   },
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
   },
   tabLabel: {
     fontSize: 10,
-    color: "#2196F3",
+    color: colors.primary,
     marginTop: Platform.OS === "android" ? -5 : -10,
     marginBottom: Platform.OS === "android" ? 5 : 0,
     textAlign: "center",
