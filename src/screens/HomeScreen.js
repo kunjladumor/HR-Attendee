@@ -27,7 +27,7 @@ const HomeScreen = ({ navigation }) => {
     setModalVisible(true);
     setTimeout(() => {
       setModalVisible(false);
-    }, 5000);
+    }, 1500);
   };
 
   const attendanceData = {
