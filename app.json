@@ -19,7 +19,7 @@
       }
     },
     "android": {
-      "package": "com.yourcompany.hrattendanceapp",
+      "package": "com.cyberax.hrattendee",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

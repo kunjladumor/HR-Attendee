@@ -3,6 +3,14 @@ import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import Navigation from "./utils/Navigation";
 
+import { Client, Account, ID } from "react-native-appwrite";
+
+const client = new Client();
+client
+  .setEndpoint("https://cloud.appwrite.io/v1")
+  .setProject("66de9688000ac9677f37")
+  .setPlatform("com.cyberax.hrattendee");
+
 const fetchFonts = () => {
   return Font.loadAsync({
     PoppinsBold: require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
