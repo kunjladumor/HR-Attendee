@@ -8,10 +8,17 @@ import { CommonStyles, statusBarHeight } from "@styles/style";
 
 const IDCardScreen = ({ navigation }) => {
   const profileImage = require("@assets/images/user.png"); // Replace with actual image URL
-  const name = "John Doe";
+  const name = "Paresh Savekar";
   const designation = "Software Engineer";
   const companyName = "Cyberax";
-  const employeeId = "EMP123456";
+  const employeeId = "107";
+
+  const URLname = name.replace(/\s/g, "-").toLowerCase();
+
+  // Define the base URL
+  const baseURL = "https://www.indiaforums.com/icard/";
+  // Concatenate the employeeId with the base URL
+  const qrCodeURL = `${baseURL}${employeeId}/${URLname}`;
 
   return (
     <View style={styles.container}>
@@ -29,9 +36,9 @@ const IDCardScreen = ({ navigation }) => {
         <Image source={profileImage} style={styles.profileImage} />
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.designation}>{designation}</Text>
-        <QRCode value={employeeId} size={150} />
+        <QRCode value={qrCodeURL} size={150} />
         <Text style={styles.companyName}>{companyName}</Text>
-        <Text style={styles.employeeId}>ID: {employeeId}</Text>
+        <Text style={styles.employeeId}>EMP ID: {employeeId}</Text>
       </View>
     </View>
   );
