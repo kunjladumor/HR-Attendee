@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.neutral50,
     marginLeft: "auto",
-    fontFamily: "PoppinsRegular",
+    fontFamily: "Poppins",
   },
   occasionText: {
     fontFamily: "PoppinsSemiBold",

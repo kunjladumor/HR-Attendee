@@ -192,7 +192,7 @@ const MyProfileStyles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 14,
-    fontFamily: "PoppinsRegular",
+    fontFamily: "Poppins",
     color: colors.neutral50,
     paddingTop: 10,
     marginBottom: 4,

@@ -170,7 +170,7 @@ const Inputs = forwardRef(
     const labelStyle = {
       position: "absolute",
       left: 10,
-      fontFamily: "PoppinsRegular",
+      fontFamily: "Poppins",
       top: animatedIsFocused.interpolate({
         inputRange: [0, 1],
         outputRange: [18, -10],
@@ -223,7 +223,7 @@ const InputStyles = StyleSheet.create({
     fontSize: 16,
     paddingHorizontal: 10,
     color: colors.black,
-    fontFamily: "PoppinsRegular", // Change this to your desired font
+    fontFamily: "Poppins", // Change this to your desired font
   },
   inputError: {
     borderColor: colors.secondary,
@@ -236,7 +236,7 @@ const InputStyles = StyleSheet.create({
   },
   placeholderText: {
     color: colors.primary, // Placeholder text color
-    fontFamily: "PoppinsRegular", // Change this to your desired font
+    fontFamily: "Poppins", // Change this to your desired font
   },
 });
 

@@ -36,7 +36,7 @@ const CustomButton = ({
     borderRadius,
     textSize: fontsize,
     fontweight,
-    fontfamily: fontfamily || "PoppinsRegular",
+    fontfamily: fontfamily || "Poppins",
   });
 
   return (
