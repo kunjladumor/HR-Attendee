@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, FlatList, ActivityIndicator, StyleSheet } from "react-native";
+import {
+  View,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+  Modal,
+  Text,
+  TouchableWithoutFeedback,
+} from "react-native";
 import HomeHeader from "@components/HomeHeader";
 import Calendar from "@components/Calendar";
 import Attendance from "@components/Attendance";
@@ -7,8 +15,20 @@ import SwipeButton from "@components/SwipeButton";
 import Activity from "@components/Activity";
 import { CommonStyles } from "@styles/style";
 import colors from "@styles/ColorStyles";
+import Ionicons from "react-native-vector-icons/Ionicons";
+
 const HomeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  const showModal = (message) => {
+    setModalMessage(message);
+    setModalVisible(true);
+    setTimeout(() => {
+      setModalVisible(false);
+    }, 5000);
+  };
 
   const attendanceData = {
     checkInTime: "09:00 AM",
@@ -83,7 +103,26 @@ const HomeScreen = ({ navigation }) => {
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={[CommonStyles.content, { paddingBottom: 150 }]}
       />
-      <SwipeButton setIsLoading={setIsLoading} />
+      <SwipeButton setIsLoading={setIsLoading} showModal={showModal} />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Ionicons
+                name="checkmark-circle"
+                size={50}
+                color={colors.primary}
+              />
+              <Text style={styles.modalText}>{modalMessage}</Text>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
     </View>
   );
 };
@@ -95,6 +134,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     zIndex: 10,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    width: 250,
+    padding: 20,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalText: {
+    marginTop: 10,
+    fontSize: 18,
+    textAlign: "center",
+    fontFamily: "Poppins",
   },
 });
 

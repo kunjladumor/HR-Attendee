@@ -1,19 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Animated,
-  Alert,
-  Dimensions,
-} from "react-native";
+import { View, Text, StyleSheet, Animated, Dimensions } from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import colors from "@styles/ColorStyles";
 import * as Location from "expo-location";
 
-const SwipeButton = ({ setIsLoading }) => {
+const SwipeButton = ({ setIsLoading, showModal }) => {
   const [isCheckedIn, setIsCheckedIn] = useState(false);
   const translateX = useRef(new Animated.Value(0)).current;
   const containerWidth = Dimensions.get("window").width * 0.9; // 90% of screen width
@@ -83,13 +76,10 @@ const SwipeButton = ({ setIsLoading }) => {
           "checkInStatus",
           JSON.stringify(!isCheckedIn)
         );
-        console.log(
-          "Location",
-          `Latitude: ${latitude}, Longitude: ${longitude}`
-        );
-        Alert.alert(
-          "Location",
-          `Latitude: ${latitude}, Longitude: ${longitude}`
+
+        // Show success modal
+        showModal(
+          isCheckedIn ? "Check Out Successful!" : "Check In Successful!"
         );
       } catch (error) {
         console.error("Failed to fetch location", error);
