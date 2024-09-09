@@ -1,10 +1,23 @@
 // colors.js
+
+// Always use the primary color as the main color
+// Always use Hex values for colors
+
 const colors = {
+  // Primary and secondary colors
+
   primary: "#3185ff", // Blue
   secondary: "#F44336", // Red
-  primary2: "#A3D139", // Green
+  primary2: "#A3D139", // Leaf Green
   secondary2: "#30BEB6", // Teal Green
 
+  // Additional shades
+  lightPrimary: "#B3D4FF", // Light Blue
+  darkPrimary: "#005BBB", // Dark Blue
+  lightSecondary: "#FFCDD2", // Light Red
+  darkSecondary: "#D32F2F", // Dark Red
+
+  // Neutral colors
   white: "#FFFFFF",
   black: "#242124",
   neutral10: "#F7F7F7",
@@ -17,17 +30,16 @@ const colors = {
   neutral80: "#515151",
   neutral90: "#3B3B3B",
 
-  outlineNeutral10: "#F7F7F7",
-  outlineNeutral20: "#E1E1E1",
-  outlineNeutral30: "#CFCFCF",
-  outlineNeutral40: "#B1B1B1",
-  outlineNeutral50: "#9E9E9E",
-  outlineNeutral60: "#7E7E7E",
-  outlineNeutral70: "#626262",
-  outlineNeutral80: "#515151",
-  outlineNeutral90: "#3B3B3B",
+  // Status colors
+  success: "#4CAF50", // Green
+  danger: "#F44336", // Red
+  warning: "#FF9800", // Orange
+  info: "#2196F3", // Light Blue
 
-  // Add more colors if needed
+  // Background and surface colors
+  background: "#F2F4F5", // Light Gray Background
+  surface: "#FFFFFF", // Surface (cards, modals, etc.)
+  overlay: "rgba(0, 0, 0, 0.5)", // Overlay for modals or loaders
 };
 
 export default colors;
