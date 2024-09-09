@@ -29,7 +29,8 @@ const LoginScreen = () => {
   const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  const passwordInputRef = useRef(null); // Reference to the password input field
+  const usernameInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
 
   const [fontsLoaded] = useFonts({
     Poppins: require("@assets/fonts/Poppins/Poppins-Regular.ttf"),
@@ -90,6 +91,16 @@ const LoginScreen = () => {
     Alert.alert("Google login not implemented yet");
   };
 
+  const handleKeyPress = (e, nextInputRef) => {
+    if (e.nativeEvent.key === "Enter") {
+      if (nextInputRef && nextInputRef.current) {
+        nextInputRef.current.focus();
+      } else {
+        handleLogin();
+      }
+    }
+  };
+
   if (!fontsLoaded) {
     return <ActivityIndicator size="large" />;
   }
@@ -112,23 +123,26 @@ const LoginScreen = () => {
           </CustomText>
 
           <Inputs
+            ref={usernameInputRef}
             type="text"
             placeholder="Username"
             value={username}
             onChangeText={setUsername}
             error={usernameError}
             onSubmitEditing={() => passwordInputRef.current.focus()}
+            onKeyPress={(e) => handleKeyPress(e, passwordInputRef)}
             autoCapitalize="none"
           />
           <Inputs
+            ref={passwordInputRef}
             type="password"
             placeholder="Password"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
             error={passwordError}
-            ref={passwordInputRef}
             onSubmitEditing={handleLogin}
+            onKeyPress={(e) => handleKeyPress(e, null)}
             autoCapitalize="none"
           />
 
