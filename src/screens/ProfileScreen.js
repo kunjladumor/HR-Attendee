@@ -13,13 +13,15 @@ import { CommonStyles } from "@styles/style";
 import CustomButton from "@components/ButtonComponent";
 import colors from "@styles/ColorStyles";
 import ProfileButtonTab from "@components/ProfileButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ProfileScreen = ({ navigation }) => {
   const [profileImage, setProfileImage] = useState(
     require("@assets/images/user.png")
   ); // Default image
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await AsyncStorage.setItem("isLoggedIn", "false"); // Update login status
     navigation.replace("Login");
   };
 
