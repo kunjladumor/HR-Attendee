@@ -42,8 +42,12 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
+    paddingHorizontal: 15,
     paddingVertical: 10,
-    borderRadius: 5,
+    marginVertical: 5,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: colors.neutral20,
   },
   iconContainer: {
     backgroundColor: "#3185ff1A",
