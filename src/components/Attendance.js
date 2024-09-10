@@ -43,64 +43,52 @@ const Attendance = ({
     };
 
     loadBreakCounter();
+    resetCounterAtMidnight();
 
+    return () => {
+      clearInterval(intervalRef.current);
+      clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isCheckedIn && isBreakActive) {
+      startBreakCounter();
+    } else {
+      clearInterval(intervalRef.current);
+    }
+
+    return () => clearInterval(intervalRef.current);
+  }, [isCheckedIn, isBreakActive]);
+
+  const resetCounterAtMidnight = () => {
     const now = new Date();
     const millisTillMidnight =
       new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) -
       now;
 
-    const resetCounterAtMidnight = () => {
-      timeoutRef.current = setTimeout(() => {
-        resetBreakCounter();
-        resetCounterAtMidnight();
-      }, millisTillMidnight);
-    };
+    timeoutRef.current = setTimeout(() => {
+      resetBreakCounter();
+      resetCounterAtMidnight();
+    }, millisTillMidnight);
+  };
 
-    resetCounterAtMidnight();
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isCheckedIn) {
-      if (isBreakActive) {
-        intervalRef.current = setInterval(() => {
-          setBreakCounter((prevCounter) => {
-            const newCounter = prevCounter + 1;
-            AsyncStorage.setItem("breakCounter", newCounter.toString());
-            if (newCounter >= breakLimit * 60) {
-              // Convert breakLimit to seconds
-              clearInterval(intervalRef.current);
-              setIsBreakActive(false);
-              alert(
-                `You have exceeded the break time limit of ${breakLimit} minutes.`
-              );
-            }
-            return newCounter;
-          });
-        }, 1000);
-      } else if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    }
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [isCheckedIn, isBreakActive]);
+  const startBreakCounter = () => {
+    intervalRef.current = setInterval(() => {
+      setBreakCounter((prevCounter) => {
+        const newCounter = prevCounter + 1;
+        AsyncStorage.setItem("breakCounter", newCounter.toString());
+        if (newCounter >= breakLimit * 60) {
+          clearInterval(intervalRef.current);
+          setIsBreakActive(false);
+          alert(
+            `You have exceeded the break time limit of ${breakLimit} minutes.`
+          );
+        }
+        return newCounter;
+      });
+    }, 1000);
+  };
 
   const resetBreakCounter = async () => {
     setBreakCounter(0);
@@ -118,14 +106,8 @@ const Attendance = ({
       "Toggle Break",
       `Are you sure you want to ${isBreakActive ? "end" : "start"} the break?`,
       [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "OK",
-          onPress: () => setIsBreakActive((prev) => !prev),
-        },
+        { text: "Cancel", style: "cancel" },
+        { text: "OK", onPress: () => setIsBreakActive((prev) => !prev) },
       ]
     );
   };
@@ -149,7 +131,7 @@ const Attendance = ({
           isBreakActive &&
           AttendanceStyles.breakCardActive,
         title === "Break Time" &&
-          breakCounter > breakLimit * 60 && // Convert breakLimit to seconds
+          breakCounter > breakLimit * 60 &&
           AttendanceStyles.breakCardExceeded,
       ]}
     >
@@ -196,11 +178,9 @@ const Attendance = ({
 };
 
 const AttendanceStyles = StyleSheet.create({
-  title: {
-    fontSize: 16,
-    fontFamily: "Poppins",
-    marginBottom: 10,
-    fontWeight: "500",
+  container: {
+    flex: 1,
+    padding: 20,
   },
   grid: {
     flexDirection: "row",
@@ -218,10 +198,10 @@ const AttendanceStyles = StyleSheet.create({
     elevation: 3,
   },
   cardPressed: {
-    backgroundColor: "#e0e0e0", // Change this color to your desired pressed color
+    backgroundColor: "#e0e0e0",
   },
   breakCardActive: {
-    backgroundColor: `${colors.primary}33`, // Change this color to your desired active color
+    backgroundColor: `${colors.primary}33`,
     shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -230,7 +210,7 @@ const AttendanceStyles = StyleSheet.create({
     borderColor: colors.primary,
   },
   breakCardExceeded: {
-    backgroundColor: `${colors.secondary}33`, // Change this color to your desired exceeded color
+    backgroundColor: `${colors.secondary}33`,
     shadowColor: colors.secondary,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
