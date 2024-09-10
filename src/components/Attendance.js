@@ -178,9 +178,11 @@ const Attendance = ({
 };
 
 const AttendanceStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
+  title: {
+    fontSize: 16,
+    fontFamily: "Poppins",
+    marginBottom: 10,
+    fontWeight: "500",
   },
   grid: {
     flexDirection: "row",
@@ -198,10 +200,10 @@ const AttendanceStyles = StyleSheet.create({
     elevation: 3,
   },
   cardPressed: {
-    backgroundColor: "#e0e0e0",
+    backgroundColor: "#e0e0e0", // Change this color to your desired pressed color
   },
   breakCardActive: {
-    backgroundColor: `${colors.primary}33`,
+    backgroundColor: `${colors.primary}33`, // Change this color to your desired active color
     shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -210,7 +212,7 @@ const AttendanceStyles = StyleSheet.create({
     borderColor: colors.primary,
   },
   breakCardExceeded: {
-    backgroundColor: `${colors.secondary}33`,
+    backgroundColor: `${colors.secondary}33`, // Change this color to your desired exceeded color
     shadowColor: colors.secondary,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
