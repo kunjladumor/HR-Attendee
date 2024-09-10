@@ -26,41 +26,19 @@ const Attendance = ({
     totalDays = "N/A",
   },
   isCheckedIn,
+  isBreakActive,
+  setIsBreakActive,
 }) => {
   const [breakCounter, setBreakCounter] = useState(0);
-  const [isBreakActive, setIsBreakActive] = useState(false);
   const intervalRef = useRef(null);
 
   useEffect(() => {
-    const loadBreakCounter = async () => {
-      try {
-        const storedCounter = await AsyncStorage.getItem("breakCounter");
-        const lastResetDate = await AsyncStorage.getItem("lastResetDate");
-        const today = new Date().toISOString().split("T")[0];
-
-        if (storedCounter !== null && lastResetDate === today) {
-          setBreakCounter(parseInt(storedCounter, 10));
-        } else {
-          resetBreakCounter();
-        }
-      } catch (error) {
-        console.error("Failed to load break counter", error);
-      }
-    };
-
-    loadBreakCounter();
+    const now = new Date();
+    const millisTillMidnight =
+      new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) -
+      now;
 
     const resetCounterAtMidnight = () => {
-      const now = new Date();
-      const millisTillMidnight =
-        new Date(
-          now.getFullYear(),
-          now.getMonth(),
-          now.getDate() + 1,
-          0,
-          0,
-          0
-        ) - now;
       setTimeout(() => {
         resetBreakCounter();
         resetCounterAtMidnight();
@@ -77,22 +55,28 @@ const Attendance = ({
   }, []);
 
   useEffect(() => {
-    if (isBreakActive) {
-      intervalRef.current = setInterval(() => {
-        setBreakCounter((prevCounter) => {
-          const newCounter = prevCounter + 1;
-          AsyncStorage.setItem("breakCounter", newCounter.toString());
-          if (newCounter >= 45 * 60) {
-            clearInterval(intervalRef.current);
-            setIsBreakActive(false);
-
-            alert("You have exceeded the break time limit of 45 minutes.");
-          }
-          return newCounter;
-        });
-      }, 1000);
-    } else if (intervalRef.current) {
-      clearInterval(intervalRef.current);
+    if (isCheckedIn) {
+      if (isBreakActive) {
+        intervalRef.current = setInterval(() => {
+          setBreakCounter((prevCounter) => {
+            const newCounter = prevCounter + 1;
+            AsyncStorage.setItem("breakCounter", newCounter.toString());
+            if (newCounter >= 45 * 60) {
+              clearInterval(intervalRef.current);
+              setIsBreakActive(false);
+              alert("You have exceeded the break time limit of 45 minutes.");
+            }
+            return newCounter;
+          });
+        }, 1000);
+      } else if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+      resetBreakCounter();
     }
 
     return () => {
@@ -100,13 +84,7 @@ const Attendance = ({
         clearInterval(intervalRef.current);
       }
     };
-  }, [isBreakActive]);
-
-  useEffect(() => {
-    if (checkOutTime !== "N/A") {
-      resetBreakCounter();
-    }
-  }, [checkOutTime]);
+  }, [isCheckedIn, isBreakActive]);
 
   const resetBreakCounter = async () => {
     setBreakCounter(0);
@@ -120,7 +98,6 @@ const Attendance = ({
       Alert.alert("Check-In Required", "Please check-in to start the break.");
       return;
     }
-
     Alert.alert(
       "Toggle Break",
       `Are you sure you want to ${isBreakActive ? "end" : "start"} the break?`,
@@ -275,6 +252,8 @@ Attendance.propTypes = {
     totalDays: PropTypes.string,
   }).isRequired,
   isCheckedIn: PropTypes.bool.isRequired,
+  isBreakActive: PropTypes.bool.isRequired,
+  setIsBreakActive: PropTypes.func.isRequired,
 };
 
 export default Attendance;

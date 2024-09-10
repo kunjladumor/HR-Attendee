@@ -23,6 +23,7 @@ const HomeScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [isCheckedIn, setIsCheckedIn] = useState(false);
+  const [isBreakActive, setIsBreakActive] = useState(false);
 
   useEffect(() => {
     const getCheckInStatus = async () => {
@@ -50,6 +51,9 @@ const HomeScreen = ({ navigation }) => {
 
   const handleCheckInStatusChange = (status) => {
     setIsCheckedIn(status);
+    if (!status) {
+      setIsBreakActive(false);
+    }
   };
 
   const attendanceData = {
@@ -101,6 +105,8 @@ const HomeScreen = ({ navigation }) => {
           <Attendance
             attendanceData={attendanceData}
             isCheckedIn={isCheckedIn}
+            isBreakActive={isBreakActive}
+            setIsBreakActive={setIsBreakActive}
           />
         );
       case "activity":
