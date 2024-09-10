@@ -31,15 +31,26 @@ const Attendance = ({
 }) => {
   const [breakCounter, setBreakCounter] = useState(0);
   const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const breakLimit = 45; // 45 minutes
 
   useEffect(() => {
+    const loadBreakCounter = async () => {
+      const storedBreakCounter = await AsyncStorage.getItem("breakCounter");
+      if (storedBreakCounter !== null) {
+        setBreakCounter(parseInt(storedBreakCounter, 10));
+      }
+    };
+
+    loadBreakCounter();
+
     const now = new Date();
     const millisTillMidnight =
       new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) -
       now;
 
     const resetCounterAtMidnight = () => {
-      setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         resetBreakCounter();
         resetCounterAtMidnight();
       }, millisTillMidnight);
@@ -51,6 +62,9 @@ const Attendance = ({
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     };
   }, []);
 
@@ -61,10 +75,13 @@ const Attendance = ({
           setBreakCounter((prevCounter) => {
             const newCounter = prevCounter + 1;
             AsyncStorage.setItem("breakCounter", newCounter.toString());
-            if (newCounter >= 45 * 60) {
+            if (newCounter >= breakLimit * 60) {
+              // Convert breakLimit to seconds
               clearInterval(intervalRef.current);
               setIsBreakActive(false);
-              alert("You have exceeded the break time limit of 45 minutes.");
+              alert(
+                `You have exceeded the break time limit of ${breakLimit} minutes.`
+              );
             }
             return newCounter;
           });
@@ -76,7 +93,6 @@ const Attendance = ({
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
-      resetBreakCounter();
     }
 
     return () => {
@@ -133,7 +149,7 @@ const Attendance = ({
           isBreakActive &&
           AttendanceStyles.breakCardActive,
         title === "Break Time" &&
-          breakCounter > 45 * 60 &&
+          breakCounter > breakLimit * 60 && // Convert breakLimit to seconds
           AttendanceStyles.breakCardExceeded,
       ]}
     >
@@ -210,9 +226,17 @@ const AttendanceStyles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     elevation: 0,
+    borderWidth: 1,
+    borderColor: colors.primary,
   },
   breakCardExceeded: {
     backgroundColor: `${colors.secondary}33`, // Change this color to your desired exceeded color
+    shadowColor: colors.secondary,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    elevation: 0,
+    borderWidth: 1,
+    borderColor: colors.secondary,
   },
   iconContainer: {
     width: 36,
