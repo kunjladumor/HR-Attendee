@@ -9,9 +9,149 @@ import { CommonStyles, statusBarHeight } from "@styles/style";
 
 import ActivityCard from "@components/ActivityCard"; // Import the ActivityCard component
 
-const ActivityScreen = ({ navigation, route }) => {
-  const { activities } = route.params;
-
+const ActivityScreen = ({ navigation }) => {
+  const activities = [
+    {
+      iconName: "log-in-outline",
+      title: "Check-In",
+      time: "09:00 AM",
+      date: "2023-10-02",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-out-outline",
+      title: "Check-Out",
+      time: "05:00 PM",
+      date: "2023-10-02",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-in-outline",
+      title: "Check-In",
+      time: "09:00 AM",
+      date: "2023-10-03",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-out-outline",
+      title: "Check-Out",
+      time: "05:00 PM",
+      date: "2023-10-03",
+      stat: "On-Time",
+    },
+    {
+      iconName: "time-outline",
+      title: "Break",
+      time: "12:00 PM",
+      date: "2023-10-01",
+      stat: "30 min",
+    },
+    {
+      iconName: "calendar-outline",
+      title: "Leave",
+      time: "All Day",
+      date: "2023-10-02",
+      stat: "Approved",
+    },
+    {
+      iconName: "log-in-outline",
+      title: "Check-In",
+      time: "09:00 AM",
+      date: "2023-10-02",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-out-outline",
+      title: "Check-Out",
+      time: "05:00 PM",
+      date: "2023-10-02",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-in-outline",
+      title: "Check-In",
+      time: "09:00 AM",
+      date: "2023-10-03",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-out-outline",
+      title: "Check-Out",
+      time: "05:00 PM",
+      date: "2023-10-03",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-in-outline",
+      title: "Check-In",
+      time: "09:00 AM",
+      date: "2023-10-02",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-out-outline",
+      title: "Check-Out",
+      time: "05:00 PM",
+      date: "2023-10-02",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-in-outline",
+      title: "Check-In",
+      time: "09:00 AM",
+      date: "2023-10-03",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-out-outline",
+      title: "Check-Out",
+      time: "05:00 PM",
+      date: "2023-10-03",
+      stat: "On-Time",
+    },
+    {
+      iconName: "time-outline",
+      title: "Break",
+      time: "12:00 PM",
+      date: "2023-10-01",
+      stat: "30 min",
+    },
+    {
+      iconName: "calendar-outline",
+      title: "Leave",
+      time: "All Day",
+      date: "2023-10-02",
+      stat: "Approved",
+    },
+    {
+      iconName: "log-in-outline",
+      title: "Check-In",
+      time: "09:00 AM",
+      date: "2023-10-02",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-out-outline",
+      title: "Check-Out",
+      time: "05:00 PM",
+      date: "2023-10-02",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-in-outline",
+      title: "Check-In",
+      time: "09:00 AM",
+      date: "2023-10-03",
+      stat: "On-Time",
+    },
+    {
+      iconName: "log-out-outline",
+      title: "Check-Out",
+      time: "05:00 PM",
+      date: "2023-10-03",
+      stat: "On-Time",
+    },
+  ];
   const renderItem = ({ item }) => (
     <ActivityCard
       iconName={item.iconName}
