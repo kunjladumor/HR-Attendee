@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   FlatList,
@@ -16,11 +16,29 @@ import Activity from "@components/Activity";
 import { CommonStyles } from "@styles/style";
 import colors from "@styles/ColorStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [isCheckedIn, setIsCheckedIn] = useState(false);
+
+  useEffect(() => {
+    const getCheckInStatus = async () => {
+      try {
+        const status = await AsyncStorage.getItem("checkInStatus");
+        if (status !== null) {
+          const parsedStatus = JSON.parse(status);
+          setIsCheckedIn(parsedStatus);
+        }
+      } catch (error) {
+        console.error("Failed to load check-in status", error);
+      }
+    };
+
+    getCheckInStatus();
+  }, []);
 
   const showModal = (message) => {
     setModalMessage(message);
@@ -28,6 +46,10 @@ const HomeScreen = ({ navigation }) => {
     setTimeout(() => {
       setModalVisible(false);
     }, 1500);
+  };
+
+  const handleCheckInStatusChange = (status) => {
+    setIsCheckedIn(status);
   };
 
   const attendanceData = {
@@ -75,7 +97,12 @@ const HomeScreen = ({ navigation }) => {
       case "calendar":
         return <Calendar />;
       case "attendance":
-        return <Attendance attendanceData={attendanceData} />;
+        return (
+          <Attendance
+            attendanceData={attendanceData}
+            isCheckedIn={isCheckedIn}
+          />
+        );
       case "activity":
         return <Activity activities={activities} />;
       default:
@@ -103,7 +130,11 @@ const HomeScreen = ({ navigation }) => {
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={[CommonStyles.content, { paddingBottom: 150 }]}
       />
-      <SwipeButton setIsLoading={setIsLoading} showModal={showModal} />
+      <SwipeButton
+        setIsLoading={setIsLoading}
+        showModal={showModal}
+        onCheckInStatusChange={handleCheckInStatusChange}
+      />
       <Modal
         animationType="slide"
         transparent={true}

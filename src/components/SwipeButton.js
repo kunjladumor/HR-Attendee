@@ -1,12 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, Animated, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Animated,
+  Dimensions,
+  Alert,
+} from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import colors from "@styles/ColorStyles";
 import * as Location from "expo-location";
 
-const SwipeButton = ({ setIsLoading, showModal }) => {
+const SwipeButton = ({ setIsLoading, showModal, onCheckInStatusChange }) => {
   const [isCheckedIn, setIsCheckedIn] = useState(false);
   const translateX = useRef(new Animated.Value(0)).current;
   const containerWidth = Dimensions.get("window").width * 0.9; // 90% of screen width
@@ -18,7 +25,9 @@ const SwipeButton = ({ setIsLoading, showModal }) => {
       try {
         const status = await AsyncStorage.getItem("checkInStatus");
         if (status !== null) {
-          setIsCheckedIn(JSON.parse(status));
+          const parsedStatus = JSON.parse(status);
+          setIsCheckedIn(parsedStatus);
+          onCheckInStatusChange(parsedStatus);
         }
       } catch (error) {
         console.error("Failed to load check-in status", error);
@@ -71,15 +80,17 @@ const SwipeButton = ({ setIsLoading, showModal }) => {
         const { latitude, longitude } = location.coords;
 
         // Handle check-in or check-out logic here
-        setIsCheckedIn(!isCheckedIn);
+        const newCheckInStatus = !isCheckedIn;
+        setIsCheckedIn(newCheckInStatus);
         await AsyncStorage.setItem(
           "checkInStatus",
-          JSON.stringify(!isCheckedIn)
+          JSON.stringify(newCheckInStatus)
         );
+        onCheckInStatusChange(newCheckInStatus);
 
         // Show success modal
         showModal(
-          isCheckedIn ? "Check Out Successful!" : "Check In Successful!"
+          newCheckInStatus ? "Check In Successful!" : "Check Out Successful!"
         );
       } catch (error) {
         console.error("Failed to fetch location", error);

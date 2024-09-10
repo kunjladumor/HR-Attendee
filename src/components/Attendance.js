@@ -25,6 +25,7 @@ const Attendance = ({
     breakTime = "N/A",
     totalDays = "N/A",
   },
+  isCheckedIn,
 }) => {
   const [breakCounter, setBreakCounter] = useState(0);
   const [isBreakActive, setIsBreakActive] = useState(false);
@@ -34,8 +35,13 @@ const Attendance = ({
     const loadBreakCounter = async () => {
       try {
         const storedCounter = await AsyncStorage.getItem("breakCounter");
-        if (storedCounter !== null) {
+        const lastResetDate = await AsyncStorage.getItem("lastResetDate");
+        const today = new Date().toISOString().split("T")[0];
+
+        if (storedCounter !== null && lastResetDate === today) {
           setBreakCounter(parseInt(storedCounter, 10));
+        } else {
+          resetBreakCounter();
         }
       } catch (error) {
         console.error("Failed to load break counter", error);
@@ -56,8 +62,7 @@ const Attendance = ({
           0
         ) - now;
       setTimeout(() => {
-        setBreakCounter(0);
-        AsyncStorage.setItem("breakCounter", "0");
+        resetBreakCounter();
         resetCounterAtMidnight();
       }, millisTillMidnight);
     };
@@ -80,6 +85,8 @@ const Attendance = ({
           if (newCounter >= 45 * 60) {
             clearInterval(intervalRef.current);
             setIsBreakActive(false);
+
+            alert("You have exceeded the break time limit of 45 minutes.");
           }
           return newCounter;
         });
@@ -95,7 +102,25 @@ const Attendance = ({
     };
   }, [isBreakActive]);
 
+  useEffect(() => {
+    if (checkOutTime !== "N/A") {
+      resetBreakCounter();
+    }
+  }, [checkOutTime]);
+
+  const resetBreakCounter = async () => {
+    setBreakCounter(0);
+    await AsyncStorage.setItem("breakCounter", "0");
+    const today = new Date().toISOString().split("T")[0];
+    await AsyncStorage.setItem("lastResetDate", today);
+  };
+
   const handleBreakCardPress = () => {
+    if (!isCheckedIn) {
+      Alert.alert("Check-In Required", "Please check-in to start the break.");
+      return;
+    }
+
     Alert.alert(
       "Toggle Break",
       `Are you sure you want to ${isBreakActive ? "end" : "start"} the break?`,
@@ -127,6 +152,12 @@ const Attendance = ({
         AttendanceStyles.card,
         { width: cardWidth },
         pressed && Platform.OS === "ios" && AttendanceStyles.cardPressed,
+        title === "Break Time" &&
+          isBreakActive &&
+          AttendanceStyles.breakCardActive,
+        title === "Break Time" &&
+          breakCounter > 45 * 60 &&
+          AttendanceStyles.breakCardExceeded,
       ]}
     >
       <View style={AttendanceStyles.cardHeader}>
@@ -196,6 +227,16 @@ const AttendanceStyles = StyleSheet.create({
   cardPressed: {
     backgroundColor: "#e0e0e0", // Change this color to your desired pressed color
   },
+  breakCardActive: {
+    backgroundColor: `${colors.primary}33`, // Change this color to your desired active color
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    elevation: 0,
+  },
+  breakCardExceeded: {
+    backgroundColor: `${colors.secondary}33`, // Change this color to your desired exceeded color
+  },
   iconContainer: {
     width: 36,
     height: 36,
@@ -233,6 +274,7 @@ Attendance.propTypes = {
     breakTime: PropTypes.string,
     totalDays: PropTypes.string,
   }).isRequired,
+  isCheckedIn: PropTypes.bool.isRequired,
 };
 
 export default Attendance;
