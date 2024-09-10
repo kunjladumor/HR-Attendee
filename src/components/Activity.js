@@ -7,48 +7,17 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
 import colors from "@styles/ColorStyles";
-import CustomText from "./CustomText";
+import CustomText from "@components/CustomText";
 import { CommonStyles } from "@styles/style";
-
-// ActivityCard Component
-const ActivityCard = ({ iconName, title, time, date, stat }) => {
-  return (
-    <View style={ActivityStyles.card}>
-      <View style={ActivityStyles.iconContainer}>
-        <Ionicons
-          name={iconName}
-          size={24}
-          color={colors.primary}
-          style={ActivityStyles.icon}
-        />
-      </View>
-      <View style={ActivityStyles.infoContainer}>
-        <View style={ActivityStyles.titleRow}>
-          <Text style={ActivityStyles.title}>{title}</Text>
-          <Text style={ActivityStyles.time}>{time}</Text>
-        </View>
-        <View style={ActivityStyles.titleRow}>
-          <Text style={ActivityStyles.date}>{date}</Text>
-          <Text style={ActivityStyles.stat}>{stat}</Text>
-        </View>
-      </View>
-    </View>
-  );
-};
-
-ActivityCard.propTypes = {
-  iconName: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  time: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  stat: PropTypes.string.isRequired,
-};
+import { useNavigation } from "@react-navigation/native"; // Import useNavigation
+import ActivityCard from "@components/ActivityCard"; // Import ActivityCard
 
 // Activity Component
 const Activity = ({ activities }) => {
+  const navigation = useNavigation(); // Use useNavigation hook
+
   const renderItem = ({ item }) => (
     <ActivityCard
       iconName={item.iconName}
@@ -65,7 +34,9 @@ const Activity = ({ activities }) => {
         <CustomText style={[CommonStyles.header, { fontSize: 18 }]}>
           Activity
         </CustomText>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("ActivityScreen", { activities })}
+        >
           <Text style={ActivityStyles.viewMore}>View More</Text>
         </TouchableOpacity>
       </View>
@@ -89,59 +60,21 @@ Activity.propTypes = {
     })
   ).isRequired,
 };
+
 const ActivityStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 20,
+  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 10,
   },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
   viewMore: {
     fontSize: 16,
     color: colors.primary,
-  },
-  card: {
-    flexDirection: "row",
-    padding: 10,
-    backgroundColor: colors.white,
-    alignItems: "center",
-    borderRadius: 5,
-  },
-  iconContainer: {
-    backgroundColor: "#3185ff1A",
-    padding: 5,
-    marginRight: 10,
-    borderRadius: 10,
-  },
-  infoContainer: {
-    flex: 1,
-  },
-  titleRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  title: {
-    fontSize: 16,
-    fontFamily: "PoppinsSemiBold",
-  },
-  time: {
-    fontSize: 14,
-    fontWeight: "500",
-    fontFamily: "Poppins",
-  },
-  date: {
-    fontSize: 14,
-    fontFamily: "Poppins",
-    color: colors.neutral50,
-    fontFamily: "Poppins",
-  },
-  stat: {
-    fontSize: 14,
-    color: colors.neutral50,
   },
 });
 
