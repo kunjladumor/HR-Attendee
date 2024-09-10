@@ -24,7 +24,7 @@ const IDCardScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={[CommonStyles.row, { gap: 10 }]}>
         <Icon
-          name="arrow-back"
+          name="chevron-back-outline"
           type="ionicon"
           color={colors.neutral90}
           size={24}

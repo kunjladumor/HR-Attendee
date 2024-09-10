@@ -23,7 +23,7 @@ const EditProfileScreen = ({ navigation }) => {
       <View style={CommonStyles.content}>
         <View style={CommonStyles.row} styles={{ alignItems: "center" }}>
           <Ionicons
-            name="arrow-back"
+            name="chevron-back-outline"
             size={24}
             style={{ marginRight: 10 }}
             onPress={() => navigation.goBack()}
