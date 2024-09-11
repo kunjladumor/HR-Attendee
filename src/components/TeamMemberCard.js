@@ -1,14 +1,45 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  Linking,
+} from "react-native";
 import colors from "@styles/ColorStyles";
 import Modal from "react-native-modal";
 import CustomButton from "@components/ButtonComponent";
 
-const TeamMemberCard = ({ profilePicture, name, designation }) => {
+const TeamMemberCard = ({ profilePicture, name, designation, phoneNumber }) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+  };
+
+  const handleCallPress = () => {
+    const url = `tel:${phoneNumber}`;
+    Linking.openURL(url).catch((err) =>
+      console.error("Error opening URL", err)
+    );
+    toggleModal();
+  };
+
+  const handleSmsPress = () => {
+    const url = `sms:${phoneNumber}`;
+    Linking.openURL(url).catch((err) =>
+      console.error("Error opening URL", err)
+    );
+    toggleModal();
+  };
+
+  const handleWhatsAppPress = () => {
+    const url = `https://wa.me/${phoneNumber}`;
+    Linking.openURL(url).catch((err) =>
+      console.error("Error opening URL", err)
+    );
+    toggleModal();
   };
 
   return (
@@ -18,9 +49,6 @@ const TeamMemberCard = ({ profilePicture, name, designation }) => {
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.designation}>{designation}</Text>
       </View>
-      {/* <TouchableOpacity onPress={toggleModal} style={styles.menuButton}>
-        <Text style={styles.menuText}>⋮</Text>
-      </TouchableOpacity> */}
       <CustomButton
         iconName={"ellipsis-vertical-outline"}
         iconSize={20}
@@ -30,6 +58,15 @@ const TeamMemberCard = ({ profilePicture, name, designation }) => {
 
       <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
         <View style={styles.modalContent}>
+          <TouchableOpacity onPress={handleCallPress}>
+            <Text style={styles.modalOption}>Call</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleSmsPress}>
+            <Text style={styles.modalOption}>SMS</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleWhatsAppPress}>
+            <Text style={styles.modalOption}>WhatsApp</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               /* Edit logic */ toggleModal();

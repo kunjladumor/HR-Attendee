@@ -21,6 +21,7 @@ const TeamScreen = function () {
       },
       name: "John Doe",
       designation: "Software Engineer",
+      phoneNumber: "+1234567890", // Add phone number
     },
     {
       id: 2,
@@ -29,6 +30,7 @@ const TeamScreen = function () {
       },
       name: "Jane Smith",
       designation: "Product Manager",
+      phoneNumber: "+1234567890", // Add phone number
     },
     {
       id: 3,
@@ -37,6 +39,7 @@ const TeamScreen = function () {
       },
       name: "Alice Johnson",
       designation: "UI/UX Designer",
+      phoneNumber: "+1234567890", // Add phone number
     },
     {
       id: 4,
@@ -45,6 +48,7 @@ const TeamScreen = function () {
       },
       name: "Bob Brown",
       designation: "QA Engineer",
+      phoneNumber: "+1234567890", // Add phone number
     },
     {
       id: 5,
@@ -53,6 +57,7 @@ const TeamScreen = function () {
       },
       name: "Eve White",
       designation: "Software Engineer",
+      phoneNumber: "+1234567890", // Add phone number
     },
 
     {
@@ -62,6 +67,7 @@ const TeamScreen = function () {
       },
       name: "Tom Black",
       designation: "Software Engineer",
+      phoneNumber: "+1234567890", // Add phone number
     },
     {
       id: 7,
@@ -70,6 +76,7 @@ const TeamScreen = function () {
       },
       name: "Alice Johnson",
       designation: "UI/UX Designer",
+      phoneNumber: "+1234567890", // Add phone number
     },
     {
       id: 9,
@@ -78,6 +85,7 @@ const TeamScreen = function () {
       },
       name: "Mike Yellow",
       designation: "Software Engineer",
+      phoneNumber: "+1234567890", // Add phone number
     },
   ];
 
@@ -133,6 +141,7 @@ const TeamScreen = function () {
             profilePicture={member.profilePicture}
             name={member.name}
             designation={member.designation}
+            phoneNumber={member.phoneNumber}
           />
         ))}
       </ScrollView>
