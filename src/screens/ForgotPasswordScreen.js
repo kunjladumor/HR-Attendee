@@ -1,125 +1,141 @@
 import React, { useState } from "react";
 import {
   View,
-  TextInput,
+  Alert,
   TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
+  ActivityIndicator,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Image,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import CustomText from "@components/CustomText";
+import CustomButton from "@components/ButtonComponent";
+import Inputs from "@components/Inputs";
+import colors from "@styles/ColorStyles";
+import logo from "@assets/images/logo.png";
+import { login } from "@screens/LoginScreen";
 
-export default function ForgotPasswordScreen({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
+const ForgotPasswordScreen = () => {
+  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigation = useNavigation();
 
-  const handleResetPassword = () => {
-    if (email.trim() === "") {
-      setEmailError("Email is required");
-      return;
-    } else {
-      setEmailError("");
+  const handleInputChange = (value) => {
+    setEmailOrPhone(value);
+  };
+
+  const handleValidation = () => {
+    if (emailOrPhone.trim() === "") {
+      setError("Email or Phone number is required");
+      return false;
     }
+    if (!validateEmailOrPhone(emailOrPhone)) {
+      setError("Invalid email or phone number");
+      return false;
+    }
+    setError("");
+    return true;
+  };
 
-    // Simulate an API call
-    setTimeout(() => {
-      alert("Password reset link sent to your email");
+  const validateEmailOrPhone = (input) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\d{10}$/;
+    return emailRegex.test(input) || phoneRegex.test(input);
+  };
+
+  const handleResetPassword = async () => {
+    if (!handleValidation()) return;
+
+    setLoading(true);
+    try {
+      // Simulate an API call
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      Alert.alert("Password reset link sent to your email or phone number");
       navigation.goBack();
-    }, 2000);
+    } catch (error) {
+      Alert.alert("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <ImageBackground
-      source={{ uri: "https://example.com/background.jpg" }}
-      style={styles.background}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ScrollView style={styles.container}>
-        <CustomText style={styles.title}>Forgot Password</CustomText>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your email"
-            value={email}
-            onChangeText={setEmail}
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.innerContainer}>
+          <Image source={logo} style={login.logo} />
+
+          <CustomText style={styles.title}>Forgot Password</CustomText>
+          <CustomText style={styles.subtitle}>
+            Enter your email or phone number to reset your password
+          </CustomText>
+
+          <Inputs
+            type="text"
+            placeholder="Email or Phone Number"
+            value={emailOrPhone}
+            onChangeText={handleInputChange}
+            error={error}
             autoCapitalize="none"
-            placeholderTextColor="#666"
           />
+
+          <CustomButton
+            title="Reset Password"
+            onPress={handleResetPassword}
+            disabled={loading}
+            color="primary"
+            loading={loading}
+            padding={10}
+            borderRadius={10}
+            fontfamily="PoppinsSemiBold"
+          >
+            {loading && <ActivityIndicator color="#fff" />}
+          </CustomButton>
+
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <CustomText style={styles.backToLogin}>Back to Login</CustomText>
+          </TouchableOpacity>
         </View>
-        {emailError ? (
-          <CustomText style={styles.errorText}>{emailError}</CustomText>
-        ) : null}
-        <TouchableOpacity style={styles.button} onPress={handleResetPassword}>
-          <CustomText style={styles.buttonText}>Reset Password</CustomText>
-        </TouchableOpacity>
       </ScrollView>
-    </ImageBackground>
+    </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  background: {
+  container: {
+    flexGrow: 1,
+    padding: 20,
+    justifyContent: "center",
+    backgroundColor: "#fff",
+  },
+  innerContainer: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-  },
-  container: {
-    width: "80%",
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
-    padding: 20,
-    borderRadius: 10,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    gap: 0,
   },
   title: {
     fontSize: 28,
-    marginBottom: 20,
-    color: "#333",
-    fontWeight: "bold",
+    fontFamily: "PoppinsSemiBold",
   },
-  inputContainer: {
-    width: "100%",
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderRadius: 25,
-    marginBottom: 15,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    shadowColor: "#e6e6e6",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
-  },
-  input: {
-    flex: 1,
-    marginLeft: 10,
-    color: "#333",
-  },
-  button: {
-    width: "100%",
-    padding: 15,
-    backgroundColor: "#007bff",
-    borderRadius: 25,
-    alignItems: "center",
-    marginTop: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  buttonText: {
-    color: "#fff",
+  subtitle: {
     fontSize: 16,
+    color: colors.neutral50,
+    marginBottom: 20,
+    fontFamily: "PoppinsMedium",
   },
-  errorText: {
-    color: "red",
-    alignSelf: "flex-start",
-    marginLeft: 10,
-    marginBottom: 10,
+  backToLogin: {
+    color: colors.primary,
+    textAlign: "center",
+    marginTop: 20,
+    fontFamily: "Poppins",
   },
 });
+
+export default ForgotPasswordScreen;
