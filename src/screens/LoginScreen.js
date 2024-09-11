@@ -13,23 +13,25 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import CustomText from "@components/CustomText";
 import CustomButton from "@components/ButtonComponent";
-
-// Import the logo image
 import logo from "@assets/images/logo.png";
-
-// Import the useFonts hook
 import colors from "@styles/ColorStyles";
 import Inputs from "@components/Inputs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [usernameError, setUsernameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [form, setForm] = useState({
+    emailOrPhone: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({
+    emailOrPhone: "",
+    password: "",
+  });
+
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  const usernameInputRef = useRef(null);
+  const emailOrPhoneInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
   React.useLayoutEffect(() => {
@@ -38,36 +40,51 @@ const LoginScreen = () => {
     });
   }, [navigation]);
 
-  const validateInputs = () => {
+  const handleInputChange = (name, value) => {
+    setForm((prevForm) => ({ ...prevForm, [name]: value }));
+  };
+
+  const handleValidation = () => {
     let valid = true;
+    let newErrors = {};
 
-    if (username.trim() === "") {
-      setUsernameError("Username is required");
+    if (form.emailOrPhone.trim() === "") {
+      newErrors.emailOrPhone = "Email or phone number is required";
       valid = false;
-    } else {
-      setUsernameError("");
+    } else if (!validateEmailOrPhone(form.emailOrPhone)) {
+      newErrors.emailOrPhone = "Invalid email or phone number";
+      valid = false;
     }
 
-    if (password.trim() === "") {
-      setPasswordError("Password is required");
+    if (form.password.trim() === "") {
+      newErrors.password = "Password is required";
       valid = false;
-    } else {
-      setPasswordError("");
     }
 
+    setErrors(newErrors);
     return valid;
   };
 
+  const validateEmailOrPhone = (input) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\d{10}$/;
+    return emailRegex.test(input) || phoneRegex.test(input);
+  };
+
   const handleLogin = useCallback(async () => {
-    if (!validateInputs()) return;
+    if (!handleValidation()) return;
 
     setLoading(true);
     try {
       // Simulate an API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
       // Here you can add your authentication logic
-      if (username === "user" && password === "pass") {
-        // navigation.replace("Main"); // Navigate
+      if (
+        (form.emailOrPhone === "kunj@cyberax.com" ||
+          form.emailOrPhone === "1234567890" ||
+          form.emailOrPhone === "user") &&
+        form.password === "pass"
+      ) {
         await AsyncStorage.setItem("isLoggedIn", "true"); // Store login status
         navigation.replace("BottomTabs"); // Navigate
       } else {
@@ -78,12 +95,7 @@ const LoginScreen = () => {
     } finally {
       setLoading(false);
     }
-  }, [username, password]);
-
-  const handleGoogleLogin = () => {
-    // Add your Google login logic here
-    Alert.alert("Google login not implemented yet");
-  };
+  }, [form]);
 
   const handleKeyPress = (e, nextInputRef) => {
     if (e.nativeEvent.key === "Enter") {
@@ -113,12 +125,12 @@ const LoginScreen = () => {
           </CustomText>
 
           <Inputs
-            ref={usernameInputRef}
+            ref={emailOrPhoneInputRef}
             type="text"
-            placeholder="Username"
-            value={username}
-            onChangeText={setUsername}
-            error={usernameError}
+            placeholder="Email or Phone Number"
+            value={form.emailOrPhone}
+            onChangeText={(value) => handleInputChange("emailOrPhone", value)}
+            error={errors.emailOrPhone}
             onSubmitEditing={() => passwordInputRef.current.focus()}
             onKeyPress={(e) => handleKeyPress(e, passwordInputRef)}
             autoCapitalize="none"
@@ -127,10 +139,10 @@ const LoginScreen = () => {
             ref={passwordInputRef}
             type="password"
             placeholder="Password"
-            value={password}
-            onChangeText={setPassword}
+            value={form.password}
+            onChangeText={(value) => handleInputChange("password", value)}
             secureTextEntry
-            error={passwordError}
+            error={errors.password}
             onSubmitEditing={handleLogin}
             onKeyPress={(e) => handleKeyPress(e, null)}
             autoCapitalize="none"
@@ -148,27 +160,13 @@ const LoginScreen = () => {
             disabled={loading}
             color="primary"
             loading={loading}
-            padding={12}
+            padding={10}
             borderRadius={10}
-            fontfamily="PoppinsSemiBold" // Apply custom font
+            fontfamily="PoppinsSemiBold"
           >
-            {loading && <ActivityIndicator color="#fff" />}
-          </CustomButton>
-
-          <CustomButton
-            title="Google"
-            onPress={handleGoogleLogin}
-            color="neutral70"
-            outlined={true}
-            fontfamily="PoppinsSemiBold" // Apply custom font
-            borderRadius={10}
-            textColor="neutral70" // Set custom text color
-            gap={0}
-          >
-            <Image
-              source={require("@assets/images/google_logo.png")}
-              style={login.googleIcon}
-            />
+            {loading && (
+              <ActivityIndicator color="#fff" style={{ padding: 8 }} />
+            )}
           </CustomButton>
 
           <View style={login.registerContainer}>
@@ -185,7 +183,7 @@ const LoginScreen = () => {
   );
 };
 
-const login = StyleSheet.create({
+export const login = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
@@ -195,7 +193,7 @@ const login = StyleSheet.create({
   innerContainer: {
     flex: 1,
     justifyContent: "center",
-    gap: 15,
+    gap: 0,
   },
   logo: {
     width: 100,
@@ -207,20 +205,14 @@ const login = StyleSheet.create({
     fontSize: 36,
     fontWeight: "bold",
     marginBottom: 10,
-    fontFamily: "Poppins", // Apply custom font
+    fontFamily: "Poppins",
   },
   subtitle: {
     fontSize: 17,
     color: "gray",
     marginBottom: 20,
-    fontFamily: "Poppins", // Apply custom font
+    fontFamily: "Poppins",
   },
-
-  // errorText: {
-  //   color: "red",
-  //   fontSize: 12,
-  //   marginTop: 5,
-  // },
   blueText: {
     color: colors.primary,
     fontWeight: "bold",
@@ -230,40 +222,6 @@ const login = StyleSheet.create({
     textAlign: "right",
     marginBottom: 20,
   },
-  loginButton: {
-    backgroundColor: colors.primary,
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  loginButtonText: {
-    color: colors.white,
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  googleButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.white,
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 20,
-    borderWidth: 1,
-    borderColor: colors.neutral50,
-  },
-  googleIcon: {
-    width: 32,
-    height: 32,
-    marginRight: 10,
-  },
-  googleButtonText: {
-    color: colors.neutral70,
-    fontSize: 16,
-    fontWeight: "bold",
-    lineHeight: 32,
-  },
   registerContainer: {
     flexDirection: "row",
     justifyContent: "center",
@@ -272,32 +230,13 @@ const login = StyleSheet.create({
   },
   registerText: {
     fontSize: 16,
-    fontFamily: "Poppins", // Apply custom font
+    fontFamily: "Poppins",
   },
   registerLink: {
     fontSize: 16,
     color: colors.primary,
     marginLeft: 5,
-    fontFamily: "Poppins", // Apply custom font
-  },
-
-  inputWrapper: {
-    marginBottom: 20,
-  },
-  inputContainer: {
-    borderWidth: 1,
-    borderColor: colors.primary,
-    padding: 8,
-    borderRadius: 5,
-    position: "relative",
-  },
-  input: {
-    height: 40,
-    fontSize: 16,
-    color: colors.black,
-  },
-  inputError: {
-    borderColor: "red",
+    fontFamily: "Poppins",
   },
 });
 
