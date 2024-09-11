@@ -127,7 +127,11 @@ const HomeScreen = ({ navigation }) => {
     <View style={CommonStyles.container}>
       {isLoading && (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator size="large" color={colors.primary} />
+          <ActivityIndicator
+            size="large"
+            color={colors.primary}
+            style={styles.indicator}
+          />
         </View>
       )}
       <FlatList
@@ -171,6 +175,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     zIndex: 10,
+  },
+  indicator: {
+    transform: [{ scale: 2 }],
   },
   modalContainer: {
     flex: 1,
