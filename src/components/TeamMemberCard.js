@@ -10,6 +10,8 @@ import {
 import colors from "@styles/ColorStyles";
 import Modal from "react-native-modal";
 import CustomButton from "@components/ButtonComponent";
+import CustomText from "./CustomText";
+import { Ionicons } from "@expo/vector-icons";
 
 const TeamMemberCard = ({ profilePicture, name, designation, phoneNumber }) => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -56,30 +58,53 @@ const TeamMemberCard = ({ profilePicture, name, designation, phoneNumber }) => {
         onPress={toggleModal}
       />
 
-      <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={toggleModal}
+        style={styles.modal}
+      >
         <View style={styles.modalContent}>
-          <TouchableOpacity onPress={handleCallPress}>
-            <Text style={styles.modalOption}>Call</Text>
+          <TouchableOpacity
+            onPress={handleCallPress}
+            style={styles.modalOption}
+          >
+            <Ionicons name="call-outline" size={28} color={colors.primary} />
+            <Text style={{ fontSize: 20, fontFamily: "Poppins" }}>Call</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleSmsPress}>
-            <Text style={styles.modalOption}>SMS</Text>
+          <TouchableOpacity onPress={handleSmsPress} style={styles.modalOption}>
+            <Ionicons
+              name="chatbox-ellipses-outline"
+              size={24}
+              color={colors.neutral50}
+            />
+            <Text style={{ fontSize: 20, fontFamily: "Poppins" }}>SMS</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleWhatsAppPress}>
-            <Text style={styles.modalOption}>WhatsApp</Text>
+          <TouchableOpacity
+            onPress={handleWhatsAppPress}
+            style={styles.modalOption}
+          >
+            <Ionicons name="logo-whatsapp" size={28} color={colors.success} />
+            <Text style={{ fontSize: 20, fontFamily: "Poppins" }}>
+              WhatsApp
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               /* Edit logic */ toggleModal();
             }}
+            style={styles.modalOption}
           >
-            <Text style={styles.modalOption}>Edit</Text>
+            <Ionicons name="create-outline" size={28} color={colors.primary} />
+            <Text style={{ fontSize: 20, fontFamily: "Poppins" }}>Edit</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               /* Delete logic */ toggleModal();
             }}
+            style={styles.modalOption}
           >
-            <Text style={styles.modalOption}>Delete</Text>
+            <Ionicons name="trash-outline" size={28} color={colors.danger} />
+            <Text style={{ fontSize: 20, fontFamily: "Poppins" }}>Delete</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -120,19 +145,23 @@ const styles = StyleSheet.create({
   menuText: {
     fontSize: 20,
   },
+  modal: {
+    margin: 0, // Remove default margin
+    justifyContent: "flex-end", // Align modal to the bottom
+  },
   modalContent: {
     backgroundColor: colors.white,
-    padding: 20,
-    borderRadius: 10,
-    position: "absolute",
-    right: 0,
-    bottom: 0,
-    left: 0,
+    paddingVertical: 30,
+    gap: 15,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    width: "100%", // Make the modal take up the full width
+    flexDirection: "column",
   },
   modalOption: {
-    fontSize: 16,
-    padding: 5,
-    fontFamily: "Poppins",
+    flexDirection: "row",
+    paddingHorizontal: 30,
+    gap: 20,
   },
 });
 
