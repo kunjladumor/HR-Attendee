@@ -26,21 +26,10 @@ const RegisterScreen = () => {
     confirmPassword: "",
   });
 
-  const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
-    emailOrPhone: "",
-    password: "",
-    confirmPassword: "",
-  });
-
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  const firstNameInputRef = useRef(null);
-  const lastNameInputRef = useRef(null);
-  const emailOrPhoneInputRef = useRef(null);
-  const passwordInputRef = useRef(null);
-  const confirmPasswordInputRef = useRef(null);
+  const inputRefs = useRef({});
 
   const handleInputChange = (name, value) => {
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
@@ -50,33 +39,33 @@ const RegisterScreen = () => {
     let valid = true;
     let newErrors = {};
 
-    if (form.firstName.trim() === "") {
-      newErrors.firstName = "First name is required";
-      valid = false;
-    }
+    const requiredFields = [
+      "firstName",
+      "lastName",
+      "emailOrPhone",
+      "password",
+      "confirmPassword",
+    ];
 
-    if (form.lastName.trim() === "") {
-      newErrors.lastName = "Last name is required";
-      valid = false;
-    }
+    requiredFields.forEach((field) => {
+      if (form[field].trim() === "") {
+        const fieldName = field
+          .replace(/([A-Z])/g, " $1")
+          .replace(/^./, (str) => str.toUpperCase());
+        newErrors[field] = `${fieldName} is required`;
+        valid = false;
+      }
+    });
 
-    if (form.emailOrPhone.trim() === "") {
-      newErrors.emailOrPhone = "Email or phone number is required";
-      valid = false;
-    } else if (!validateEmailOrPhone(form.emailOrPhone)) {
+    if (
+      form.emailOrPhone.trim() !== "" &&
+      !validateEmailOrPhone(form.emailOrPhone)
+    ) {
       newErrors.emailOrPhone = "Invalid email or phone number";
       valid = false;
     }
 
-    if (form.password.trim() === "") {
-      newErrors.password = "Password is required";
-      valid = false;
-    }
-
-    if (form.confirmPassword.trim() === "") {
-      newErrors.confirmPassword = "Confirm password is required";
-      valid = false;
-    } else if (form.password !== form.confirmPassword) {
+    if (form.password !== form.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
       valid = false;
     }
@@ -108,6 +97,28 @@ const RegisterScreen = () => {
     }
   }, [form]);
 
+  const handleKeyPress = (e, nextInputName) => {
+    if (e.nativeEvent.key === "Enter" && nextInputName) {
+      inputRefs.current[nextInputName].focus();
+    }
+  };
+
+  const inputFields = [
+    { name: "firstName", placeholder: "First Name", type: "text" },
+    { name: "lastName", placeholder: "Last Name", type: "text" },
+    {
+      name: "emailOrPhone",
+      placeholder: "Email or Phone Number",
+      type: "text",
+    },
+    { name: "password", placeholder: "Set Password", type: "password" },
+    {
+      name: "confirmPassword",
+      placeholder: "Confirm Password",
+      type: "password",
+    },
+  ];
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -125,71 +136,29 @@ const RegisterScreen = () => {
             Hello there, Register to continue
           </CustomText>
 
-          <Inputs
-            ref={firstNameInputRef}
-            type="text"
-            placeholder="First Name"
-            value={form.firstName}
-            onChangeText={(value) => handleInputChange("firstName", value)}
-            error={errors.firstName}
-            onSubmitEditing={() => lastNameInputRef.current.focus()}
-            onKeyPress={(e) => handleKeyPress(e, lastNameInputRef)}
-            autoCapitalize="none"
-          />
-          <Inputs
-            ref={lastNameInputRef}
-            type="text"
-            placeholder="Last Name"
-            value={form.lastName}
-            onChangeText={(value) => handleInputChange("lastName", value)}
-            error={errors.lastName}
-            onSubmitEditing={() => emailOrPhoneInputRef.current.focus()}
-            onKeyPress={(e) => handleKeyPress(e, emailOrPhoneInputRef)}
-            autoCapitalize="none"
-          />
-          <Inputs
-            ref={emailOrPhoneInputRef}
-            type="text"
-            placeholder="Email or Phone Number"
-            value={form.emailOrPhone}
-            onChangeText={(value) => handleInputChange("emailOrPhone", value)}
-            error={errors.emailOrPhone}
-            onSubmitEditing={() => passwordInputRef.current.focus()}
-            onKeyPress={(e) => handleKeyPress(e, passwordInputRef)}
-            autoCapitalize="none"
-          />
-          <Inputs
-            ref={passwordInputRef}
-            type="password"
-            placeholder="Set Password"
-            value={form.password}
-            onChangeText={(value) => handleInputChange("password", value)}
-            secureTextEntry
-            error={errors.password}
-            onSubmitEditing={() => confirmPasswordInputRef.current.focus()}
-            onKeyPress={(e) => handleKeyPress(e, confirmPasswordInputRef)}
-            autoCapitalize="none"
-          />
-          <Inputs
-            ref={confirmPasswordInputRef}
-            type="password"
-            placeholder="Confirm Password"
-            value={form.confirmPassword}
-            onChangeText={(value) =>
-              handleInputChange("confirmPassword", value)
-            }
-            secureTextEntry
-            error={errors.confirmPassword}
-            onSubmitEditing={handleRegister}
-            onKeyPress={(e) => handleKeyPress(e, null)}
-            autoCapitalize="none"
-          />
-
-          <TouchableOpacity>
-            <CustomText style={login.forgotPassword}>
-              Forgot Password?
-            </CustomText>
-          </TouchableOpacity>
+          {inputFields.map((field, index) => (
+            <Inputs
+              key={field.name}
+              ref={(ref) => (inputRefs.current[field.name] = ref)}
+              type={field.type}
+              placeholder={field.placeholder}
+              value={form[field.name]}
+              onChangeText={(value) => handleInputChange(field.name, value)}
+              error={errors[field.name]}
+              onSubmitEditing={() => {
+                const nextField = inputFields[index + 1];
+                if (nextField) {
+                  inputRefs.current[nextField.name].focus();
+                } else {
+                  handleRegister();
+                }
+              }}
+              onKeyPress={(e) =>
+                handleKeyPress(e, inputFields[index + 1]?.name)
+              }
+              autoCapitalize="none"
+            />
+          ))}
 
           <CustomButton
             title="Register"
@@ -217,4 +186,5 @@ const RegisterScreen = () => {
     </KeyboardAvoidingView>
   );
 };
+
 export default RegisterScreen;

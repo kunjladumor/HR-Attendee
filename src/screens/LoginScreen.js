@@ -24,15 +24,10 @@ const LoginScreen = () => {
     password: "",
   });
 
-  const [errors, setErrors] = useState({
-    emailOrPhone: "",
-    password: "",
-  });
-
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  const emailOrPhoneInputRef = useRef(null);
-  const passwordInputRef = useRef(null);
+  const inputRefs = useRef({});
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -48,16 +43,22 @@ const LoginScreen = () => {
     let valid = true;
     let newErrors = {};
 
-    if (form.emailOrPhone.trim() === "") {
-      newErrors.emailOrPhone = "Email or phone number is required";
-      valid = false;
-    } else if (!validateEmailOrPhone(form.emailOrPhone)) {
-      newErrors.emailOrPhone = "Invalid email or phone number";
-      valid = false;
-    }
+    const requiredFields = ["emailOrPhone", "password"];
+    requiredFields.forEach((field) => {
+      if (form[field].trim() === "") {
+        const fieldName = field
+          .replace(/([A-Z])/g, " $1")
+          .replace(/^./, (str) => str.toUpperCase());
+        newErrors[field] = `${fieldName} is required`;
+        valid = false;
+      }
+    });
 
-    if (form.password.trim() === "") {
-      newErrors.password = "Password is required";
+    if (
+      form.emailOrPhone.trim() !== "" &&
+      !validateEmailOrPhone(form.emailOrPhone)
+    ) {
+      newErrors.emailOrPhone = "Invalid email or phone number";
       valid = false;
     }
 
@@ -97,15 +98,20 @@ const LoginScreen = () => {
     }
   }, [form]);
 
-  const handleKeyPress = (e, nextInputRef) => {
-    if (e.nativeEvent.key === "Enter") {
-      if (nextInputRef && nextInputRef.current) {
-        nextInputRef.current.focus();
-      } else {
-        handleLogin();
-      }
+  const handleKeyPress = (e, nextInputName) => {
+    if (e.nativeEvent.key === "Enter" && nextInputName) {
+      inputRefs.current[nextInputName].focus();
     }
   };
+
+  const inputFields = [
+    {
+      name: "emailOrPhone",
+      placeholder: "Email or Phone Number",
+      type: "text",
+    },
+    { name: "password", placeholder: "Password", type: "password" },
+  ];
 
   return (
     <KeyboardAvoidingView
@@ -124,31 +130,33 @@ const LoginScreen = () => {
             Hello there, Login to continue
           </CustomText>
 
-          <Inputs
-            ref={emailOrPhoneInputRef}
-            type="text"
-            placeholder="Email or Phone Number"
-            value={form.emailOrPhone}
-            onChangeText={(value) => handleInputChange("emailOrPhone", value)}
-            error={errors.emailOrPhone}
-            onSubmitEditing={() => passwordInputRef.current.focus()}
-            onKeyPress={(e) => handleKeyPress(e, passwordInputRef)}
-            autoCapitalize="none"
-          />
-          <Inputs
-            ref={passwordInputRef}
-            type="password"
-            placeholder="Password"
-            value={form.password}
-            onChangeText={(value) => handleInputChange("password", value)}
-            secureTextEntry
-            error={errors.password}
-            onSubmitEditing={handleLogin}
-            onKeyPress={(e) => handleKeyPress(e, null)}
-            autoCapitalize="none"
-          />
+          {inputFields.map((field, index) => (
+            <Inputs
+              key={field.name}
+              ref={(ref) => (inputRefs.current[field.name] = ref)}
+              type={field.type}
+              placeholder={field.placeholder}
+              value={form[field.name]}
+              onChangeText={(value) => handleInputChange(field.name, value)}
+              error={errors[field.name]}
+              onSubmitEditing={() => {
+                const nextField = inputFields[index + 1];
+                if (nextField) {
+                  inputRefs.current[nextField.name].focus();
+                } else {
+                  handleLogin();
+                }
+              }}
+              onKeyPress={(e) =>
+                handleKeyPress(e, inputFields[index + 1]?.name)
+              }
+              autoCapitalize="none"
+            />
+          ))}
 
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ForgotPassword")}
+          >
             <CustomText style={login.forgotPassword}>
               Forgot Password?
             </CustomText>
