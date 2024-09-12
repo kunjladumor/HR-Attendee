@@ -23,18 +23,16 @@ export const HomeHeader = ({ navigation }) => {
           </CustomText>
         </View>
       </TouchableOpacity>
-      <View style={HomeScreens.headerIcon}>
-        <CustomButton
-          color="neutral50"
-          outlined={true}
-          padding={0}
-          onPress={() => navigation.navigate("Notifications")}
-          iconName="notifications-outline"
-          iconSize={24}
-          iconColor="#000"
-          style={HomeScreens.notificationButton}
-        />
-      </View>
+      <CustomButton
+        color="neutral80"
+        outlined={true}
+        padding={0}
+        onPress={() => navigation.navigate("Notifications")}
+        iconName="notifications-outline"
+        iconSize={24}
+        iconColor={colors.neutral80}
+        style={HomeScreens.notificationButton}
+      />
     </View>
   );
 };
@@ -75,6 +73,7 @@ const HomeScreens = StyleSheet.create({
     height: 50,
     borderRadius: 50,
   },
+
   notificationButton: {
     width: 44,
     height: 44,
