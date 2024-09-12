@@ -4,6 +4,7 @@ import * as Font from "expo-font";
 import Navigation from "@utils/Navigation";
 
 import { Client, Account, ID } from "react-native-appwrite";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const client = new Client();
 client
@@ -44,5 +45,9 @@ export default function App() {
     return null; // Render nothing while waiting for fonts to load
   }
 
-  return <Navigation />;
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Navigation />
+    </SafeAreaView>
+  );
 }
