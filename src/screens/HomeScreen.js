@@ -96,7 +96,58 @@ const HomeScreen = ({ navigation }) => {
       stat: "On-Time",
       url: "https://www.google.com/maps?q=19.1742727,72.8441164",
     },
+    {
+      iconName: "time-outline",
+      title: "Break",
+      time: "12:00 PM",
+      date: "2023-10-01",
+      stat: "30 min",
+      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+    },
+    {
+      iconName: "calendar-outline",
+      title: "Leave",
+      time: "All Day",
+      date: "2023-10-02",
+      stat: "Approved",
+      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+    },
+    {
+      iconName: "log-in-outline",
+      title: "Check-In",
+      time: "09:00 AM",
+      date: "2023-10-04",
+      stat: "On-Time",
+      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+    },
+    {
+      iconName: "log-out-outline",
+      title: "Check-Out",
+      time: "05:00 PM",
+      date: "2023-10-04",
+      stat: "On-Time",
+      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+    },
+    {
+      iconName: "log-in-outline",
+      title: "Check-In",
+      time: "09:00 AM",
+      date: "2023-10-05",
+      stat: "On-Time",
+      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+    },
+    {
+      iconName: "log-out-outline",
+      title: "Check-Out",
+      time: "05:00 PM",
+      date: "2023-10-05",
+      stat: "On-Time",
+      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+    },
   ];
+
+  // Get the first 4 activities
+  const displayedActivities = activities.slice(0, 4);
 
   const renderItem = ({ item }) => {
     switch (item.type) {
@@ -114,7 +165,12 @@ const HomeScreen = ({ navigation }) => {
           />
         );
       case "activity":
-        return <Activity activities={activities} />;
+        return (
+          <Activity
+            activities={activities}
+            displayedActivities={displayedActivities}
+          />
+        );
       default:
         return null;
     }

@@ -8,6 +8,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ActivityCard = ({ iconName, title, time, date, stat, url }) => {
   const handlePress = () => {
+    console.log("Opening URL", url);
     if (url) {
       Linking.openURL(url).catch((err) =>
         console.error("Failed to open URL", err)

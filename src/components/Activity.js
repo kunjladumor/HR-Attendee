@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native"; // Import useNavigatio
 import ActivityCard from "@components/ActivityCard"; // Import ActivityCard
 
 // Activity Component
-const Activity = ({ activities }) => {
+const Activity = ({ activities, displayedActivities }) => {
   const navigation = useNavigation(); // Use useNavigation hook
 
   const renderItem = ({ item }) => (
@@ -42,7 +42,7 @@ const Activity = ({ activities }) => {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={activities}
+        data={displayedActivities} // Display only the first 4 activities
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
@@ -58,6 +58,7 @@ Activity.propTypes = {
       time: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
       stat: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
     })
   ).isRequired,
 };

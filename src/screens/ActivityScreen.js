@@ -6,152 +6,11 @@ import PropTypes from "prop-types";
 import colors from "@styles/ColorStyles";
 import CustomText from "@components/CustomText";
 import { CommonStyles, statusBarHeight } from "@styles/style";
-
 import ActivityCard from "@components/ActivityCard"; // Import the ActivityCard component
 
-const ActivityScreen = ({ navigation }) => {
-  const activities = [
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-02",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-02",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-03",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-03",
-      stat: "On-Time",
-    },
-    {
-      iconName: "time-outline",
-      title: "Break",
-      time: "12:00 PM",
-      date: "2023-10-01",
-      stat: "30 min",
-    },
-    {
-      iconName: "calendar-outline",
-      title: "Leave",
-      time: "All Day",
-      date: "2023-10-02",
-      stat: "Approved",
-    },
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-02",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-02",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-03",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-03",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-02",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-02",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-03",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-03",
-      stat: "On-Time",
-    },
-    {
-      iconName: "time-outline",
-      title: "Break",
-      time: "12:00 PM",
-      date: "2023-10-01",
-      stat: "30 min",
-    },
-    {
-      iconName: "calendar-outline",
-      title: "Leave",
-      time: "All Day",
-      date: "2023-10-02",
-      stat: "Approved",
-    },
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-02",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-02",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-03",
-      stat: "On-Time",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-03",
-      stat: "On-Time",
-    },
-  ];
+const ActivityScreen = ({ navigation, route }) => {
+  const { activities } = route.params;
+
   const renderItem = ({ item }) => (
     <ActivityCard
       iconName={item.iconName}
@@ -159,6 +18,7 @@ const ActivityScreen = ({ navigation }) => {
       time={item.time}
       date={item.date}
       stat={item.stat}
+      url={item.url} // Pass url prop
     />
   );
 
@@ -203,6 +63,7 @@ const ActivityScreenStyles = StyleSheet.create({
     padding: 20,
     paddingTop: statusBarHeight + 20,
     backgroundColor: colors.white,
+    flexGrow: 1,
   },
 });
 
@@ -217,6 +78,7 @@ ActivityScreen.propTypes = {
           time: PropTypes.string.isRequired,
           date: PropTypes.string.isRequired,
           stat: PropTypes.string.isRequired,
+          url: PropTypes.string.isRequired,
         })
       ).isRequired,
     }).isRequired,
