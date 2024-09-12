@@ -70,6 +70,7 @@ const HomeScreen = ({ navigation }) => {
       time: "09:00 AM",
       date: "2023-10-02",
       stat: "On-Time",
+      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
     },
     {
       iconName: "log-out-outline",
@@ -77,6 +78,7 @@ const HomeScreen = ({ navigation }) => {
       time: "05:00 PM",
       date: "2023-10-02",
       stat: "On-Time",
+      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
     },
     {
       iconName: "log-in-outline",
@@ -84,6 +86,7 @@ const HomeScreen = ({ navigation }) => {
       time: "09:00 AM",
       date: "2023-10-03",
       stat: "On-Time",
+      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
     },
     {
       iconName: "log-out-outline",
@@ -91,6 +94,7 @@ const HomeScreen = ({ navigation }) => {
       time: "05:00 PM",
       date: "2023-10-03",
       stat: "On-Time",
+      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
     },
   ];
 
