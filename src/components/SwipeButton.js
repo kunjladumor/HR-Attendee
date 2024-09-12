@@ -73,11 +73,17 @@ const SwipeButton = ({ setIsLoading, showModal, onCheckInStatusChange }) => {
         resetSwipeButton();
         return;
       }
+      const getGoogleMapUrl = (latitude, longitude) => {
+        return `https://www.google.com/maps?q=${latitude},${longitude}`;
+      };
 
       try {
         // Fetch user's location
         let location = await Location.getCurrentPositionAsync({});
         const { latitude, longitude } = location.coords;
+
+        console.log(getGoogleMapUrl(latitude, longitude));
+        console.log(`Longitude: ${longitude}, Latitude:  ${latitude}`);
 
         // Handle check-in or check-out logic here
         const newCheckInStatus = !isCheckedIn;
