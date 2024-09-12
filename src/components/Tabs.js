@@ -43,7 +43,7 @@ const TabsStyle = StyleSheet.create({
     flexDirection: "row",
     borderWidth: 1,
     borderColor: colors.neutral10,
-    borderRadius: 5,
+    borderRadius: 10,
     marginTop: 10,
     backgroundColor: colors.neutral10,
   },
