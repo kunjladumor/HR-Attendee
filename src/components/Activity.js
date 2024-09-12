@@ -30,7 +30,7 @@ const Activity = ({ activities }) => {
   );
 
   return (
-    <TouchableOpacity style={ActivityStyles.container}>
+    <View style={ActivityStyles.container}>
       <View style={ActivityStyles.header}>
         <CustomText style={[CommonStyles.header, { fontSize: 18 }]}>
           Activity
@@ -46,7 +46,7 @@ const Activity = ({ activities }) => {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
-    </TouchableOpacity>
+    </View>
   );
 };
 
