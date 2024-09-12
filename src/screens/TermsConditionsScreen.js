@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingTop: /* statusBarHeight + 20 */ "20",
+    paddingTop: /* statusBarHeight + 20 */ 0,
     padding: 16,
   },
   header: {
