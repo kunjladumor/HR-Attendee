@@ -61,7 +61,7 @@ const ActivityScreen = ({ navigation, route }) => {
 const ActivityScreenStyles = StyleSheet.create({
   listContent: {
     padding: 20,
-    paddingTop: statusBarHeight + 20,
+    paddingTop: /* statusBarHeight + 20 */ "20",
     backgroundColor: colors.white,
     flexGrow: 1,
   },
