@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     padding: 20,
-    paddingTop: statusBarHeight + 20,
+    paddingTop: /* statusBarHeight + 20 */ "20",
     flexGrow: 1,
     paddingBottom: 150,
   },

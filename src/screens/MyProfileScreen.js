@@ -175,7 +175,7 @@ const MyProfileStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 16,
-    paddingTop: statusBarHeight + 20,
+    paddingTop: /* statusBarHeight + 20 */ "20",
     backgroundColor: colors.white,
   },
   header: {

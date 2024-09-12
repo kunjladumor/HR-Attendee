@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "#fff",
     padding: 20,
-    paddingTop: statusBarHeight + 20,
+    paddingTop: /* statusBarHeight + 20 */ "20",
   },
   header: {
     flexDirection: "row",

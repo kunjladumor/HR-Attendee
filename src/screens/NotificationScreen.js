@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     padding: 20,
-    paddingTop: statusBarHeight + 20,
+    paddingTop: /* statusBarHeight + 20 */ "20",
   },
   scrollViewContent: {
     paddingBottom: 20,
