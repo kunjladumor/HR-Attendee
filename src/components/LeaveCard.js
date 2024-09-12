@@ -50,6 +50,8 @@ const LeavesCard = StyleSheet.create({
     borderRadius: 10,
     padding: 16,
     marginVertical: 8,
+    borderWidth: 1,
+    borderColor: colors.neutral10,
     shadowColor: "rgba(0, 0, 0, 0.2)", // Light black shadow color with reduced opacity
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2, // Increase opacity slightly to make the shadow more visible

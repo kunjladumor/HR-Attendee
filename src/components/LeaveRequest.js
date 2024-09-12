@@ -70,6 +70,8 @@ const LeaveRequestStyles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 10,
     marginVertical: 8,
+    borderWidth: 1,
+    borderColor: colors.neutral10,
     shadowColor: "rgba(0, 0, 0, 0.2)",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
