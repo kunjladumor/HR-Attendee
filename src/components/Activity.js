@@ -25,11 +25,12 @@ const Activity = ({ activities }) => {
       time={item.time}
       date={item.date}
       stat={item.stat}
+      url={item.url} // Pass url prop
     />
   );
 
   return (
-    <View style={ActivityStyles.container}>
+    <TouchableOpacity style={ActivityStyles.container}>
       <View style={ActivityStyles.header}>
         <CustomText style={[CommonStyles.header, { fontSize: 18 }]}>
           Activity
@@ -45,7 +46,7 @@ const Activity = ({ activities }) => {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -1,13 +1,22 @@
 // ActivityCard.js
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Linking } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
 import colors from "@styles/ColorStyles";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const ActivityCard = ({ iconName, title, time, date, stat }) => {
+const ActivityCard = ({ iconName, title, time, date, stat, url }) => {
+  const handlePress = () => {
+    if (url) {
+      Linking.openURL(url).catch((err) =>
+        console.error("Failed to open URL", err)
+      );
+    }
+  };
+
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={handlePress}>
       <View style={styles.iconContainer}>
         <Ionicons
           name={iconName}
@@ -26,7 +35,7 @@ const ActivityCard = ({ iconName, title, time, date, stat }) => {
           <Text style={styles.stat}>{stat}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -36,6 +45,7 @@ ActivityCard.propTypes = {
   time: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   stat: PropTypes.string.isRequired,
+  url: PropTypes.string, // Add url prop type
 };
 
 const styles = StyleSheet.create({
