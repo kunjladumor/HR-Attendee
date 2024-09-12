@@ -149,6 +149,23 @@ const Inputs = forwardRef(
               ))}
             </Picker>
           );
+
+        case "password":
+          return (
+            <TextInput
+              {...rest}
+              ref={ref} // Forward the ref here
+              style={[InputStyles.input, error && InputStyles.inputError]}
+              value={inputValue}
+              onChangeText={(text) => {
+                setInputValue(text);
+                onChangeText(text);
+              }}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              secureTextEntry={true}
+            />
+          );
         default:
           return (
             <TextInput
