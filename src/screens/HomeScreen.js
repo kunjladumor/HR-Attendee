@@ -17,6 +17,7 @@ import { CommonStyles } from "@styles/style";
 import colors from "@styles/ColorStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AnnouncementCard from "@components/AnnouncementCard";
 
 const HomeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -171,6 +172,16 @@ const HomeScreen = ({ navigation }) => {
             displayedActivities={displayedActivities}
           />
         );
+
+      case "announcement":
+        return (
+          <AnnouncementCard
+            icon="megaphone-outline"
+            title="New Announcement"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            time="2 hours ago"
+          />
+        );
       default:
         return null;
     }
@@ -179,6 +190,7 @@ const HomeScreen = ({ navigation }) => {
   const data = [
     { type: "header" },
     { type: "calendar" },
+    { type: "announcement" },
     { type: "attendance" },
     { type: "activity" },
   ];
