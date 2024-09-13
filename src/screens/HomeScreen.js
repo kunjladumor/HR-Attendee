@@ -7,6 +7,7 @@ import {
   Modal,
   Text,
   TouchableWithoutFeedback,
+  RefreshControl,
 } from "react-native";
 import HomeHeader from "@components/HomeHeader";
 import Calendar from "@components/Calendar";
@@ -25,6 +26,7 @@ const HomeScreen = ({ navigation }) => {
   const [modalMessage, setModalMessage] = useState("");
   const [isCheckedIn, setIsCheckedIn] = useState(false);
   const [isBreakActive, setIsBreakActive] = useState(false);
+  const [refreshing, setRefreshing] = useState(false); // State for refreshing
 
   useEffect(() => {
     const getCheckInStatus = async () => {
@@ -55,6 +57,15 @@ const HomeScreen = ({ navigation }) => {
     if (!status) {
       setIsBreakActive(false);
     }
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    // Simulate a network request
+    setTimeout(() => {
+      // Reset the announcements and page
+      setRefreshing(false);
+    }, 2000);
   };
 
   const attendanceData = {
@@ -247,6 +258,9 @@ const HomeScreen = ({ navigation }) => {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={[CommonStyles.content, { paddingBottom: 150 }]}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
       <SwipeButton
         setIsLoading={setIsLoading}
