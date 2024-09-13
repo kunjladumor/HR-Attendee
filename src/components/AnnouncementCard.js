@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     padding: 16,
-    width: "auto",
     borderColor: `${colors.primary}4D`,
     backgroundColor: `${colors.primary}0D`,
     borderWidth: 1,
