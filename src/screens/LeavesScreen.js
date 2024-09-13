@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CustomText from "@components/CustomText";
 import LeavesGrid from "@components/LeavesGrid"; // Import the LeavesGrid component
@@ -20,6 +20,7 @@ const LeavesScreen = () => {
     type: "",
     teamMember: "",
   });
+  const [refreshing, setRefreshing] = useState(false); // State for refreshing
 
   const leaves = [
     {
@@ -39,6 +40,15 @@ const LeavesScreen = () => {
       approvedBy: "Manager B",
     },
   ];
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    // Simulate a network request
+    setTimeout(() => {
+      // Reset the announcements and page
+      setRefreshing(false);
+    }, 2000);
+  };
 
   const leaveRequests = [
     {
@@ -142,6 +152,9 @@ const LeavesScreen = () => {
         data={[]} // Empty data to render the header component
         renderItem={null} // No need to render any items
         keyExtractor={(item, index) => index.toString()}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
       <FiltersModal
         isVisible={isModalVisible}
