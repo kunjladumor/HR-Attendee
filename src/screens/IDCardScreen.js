@@ -8,10 +8,12 @@ import { CommonStyles, statusBarHeight } from "@styles/style";
 
 const IDCardScreen = ({ navigation }) => {
   const profileImage = require("@assets/images/user.png"); // Replace with actual image URL
-  const name = "Paresh Savekar";
+  // const name = "Paresh Savekar";
+  const name = "Kunj Ladumor";
   const designation = "Software Engineer";
   const companyName = "Cyberax";
-  const employeeId = "107";
+  // const employeeId = "EMP107";
+  const employeeId = "EMP137";
 
   const URLname = name.replace(/\s/g, "-").toLowerCase();
 
