@@ -149,25 +149,25 @@ const HomeScreen = ({ navigation }) => {
 
   const announcements = [
     {
-      icon: "megaphone-outline",
+      iconName: "megaphone-outline", // Correct icon name
       title: "New Announcement",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       time: "2 hours ago",
     },
     {
-      icon: "megaphone-outline",
+      iconName: "megaphone-outline", // Correct icon name
       title: "New Announcement",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       time: "2 hours ago",
     },
     {
-      icon: "megaphone-outline",
+      iconName: "megaphone-outline", // Correct icon name
       title: "New Announcement",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       time: "2 hours ago",
     },
     {
-      icon: "megaphone-outline",
+      iconName: "megaphone-outline", // Correct icon name
       title: "New Announcement",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       time: "2 hours ago",
@@ -208,7 +208,7 @@ const HomeScreen = ({ navigation }) => {
               <AnnouncementCard
                 icon={item.iconName}
                 title={item.title}
-                content={item.stat}
+                content={item.content}
                 time={item.time}
               />
             )}
