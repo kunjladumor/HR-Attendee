@@ -9,7 +9,7 @@ const cardWidth = deviceWidth / 1.25; // Subtract padding of 20
 const AnnouncementCard = ({ icon, title, content, time }) => {
   return (
     <View style={[styles.card, { width: cardWidth }]}>
-      <View style={icon ? styles.iconContainer : { width: 60 }}>
+      <View style={styles.iconContainer}>
         <Ionicons
           name={icon}
           size={24}
@@ -18,9 +18,9 @@ const AnnouncementCard = ({ icon, title, content, time }) => {
         />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.content}>{content}</Text>
-        <Text style={styles.time}>{time}</Text>
+        {title ? <Text style={styles.title}>{title}</Text> : null}
+        {content ? <Text style={styles.content}>{content}</Text> : null}
+        {time ? <Text style={styles.time}>{time}</Text> : null}
       </View>
     </View>
   );
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
   time: {
     fontSize: 12,
     color: colors.neutral60,
+    fontFamily: "Poppins",
   },
 });
 
