@@ -147,6 +147,33 @@ const HomeScreen = ({ navigation }) => {
     },
   ];
 
+  const announcements = [
+    {
+      icon: "megaphone-outline",
+      title: "New Announcement",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      time: "2 hours ago",
+    },
+    {
+      icon: "megaphone-outline",
+      title: "New Announcement",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      time: "2 hours ago",
+    },
+    {
+      icon: "megaphone-outline",
+      title: "New Announcement",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      time: "2 hours ago",
+    },
+    {
+      icon: "megaphone-outline",
+      title: "New Announcement",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      time: "2 hours ago",
+    },
+  ];
+
   // Get the first 4 activities
   const displayedActivities = activities.slice(0, 4);
 
@@ -175,11 +202,20 @@ const HomeScreen = ({ navigation }) => {
 
       case "announcement":
         return (
-          <AnnouncementCard
-            icon="megaphone-outline"
-            title="New Announcement"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            time="2 hours ago"
+          <FlatList
+            data={announcements}
+            renderItem={({ item }) => (
+              <AnnouncementCard
+                icon={item.iconName}
+                title={item.title}
+                content={item.stat}
+                time={item.time}
+              />
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            contentContainerStyle={{ paddingBottom: 20, gap: 20 }}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
           />
         );
       default:

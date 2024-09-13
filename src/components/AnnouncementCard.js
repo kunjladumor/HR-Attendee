@@ -1,11 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import colors from "@styles/ColorStyles"; // Adjust the import based on your project structure
 
-const NotificationCard = ({ icon, title, content, time }) => {
+const deviceWidth = Dimensions.get("window").width;
+const cardWidth = deviceWidth / 1.25; // Subtract padding of 20
+
+const AnnouncementCard = ({ icon, title, content, time }) => {
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, { width: cardWidth }]}>
       <View style={icon ? styles.iconContainer : { width: 60 }}>
         <Ionicons
           name={icon}
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     padding: 16,
-    marginBottom: 8,
+    width: "auto",
     borderColor: `${colors.primary}4D`,
     backgroundColor: `${colors.primary}0D`,
     borderWidth: 1,
@@ -67,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NotificationCard;
+export default AnnouncementCard;
