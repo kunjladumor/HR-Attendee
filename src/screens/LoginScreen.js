@@ -177,12 +177,16 @@ const LoginScreen = () => {
             )}
           </CustomButton>
 
-          <View style={login.registerContainer}>
-            <CustomText style={login.registerText}>
+          <View style={login.SetupContainer}>
+            <CustomText style={login.SetupText}>
               Don't have an account?
             </CustomText>
-            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-              <CustomText style={login.registerLink}>Register</CustomText>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Setup", { userName: "John Doe" })
+              }
+            >
+              <CustomText style={login.SetupLink}>Setup</CustomText>
             </TouchableOpacity>
           </View>
         </View>
@@ -230,17 +234,17 @@ export const login = StyleSheet.create({
     textAlign: "right",
     marginBottom: 20,
   },
-  registerContainer: {
+  SetupContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
   },
-  registerText: {
+  SetupText: {
     fontSize: 16,
     fontFamily: "Poppins",
   },
-  registerLink: {
+  SetupLink: {
     fontSize: 16,
     color: colors.primary,
     marginLeft: 5,
