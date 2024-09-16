@@ -16,6 +16,7 @@ import ProfileScreen from "@screens/ProfileScreen";
 import ActivityScreen from "@screens/ActivityScreen";
 import SetupScreen from "@screens/SetupScreen";
 import ForgotPasswordScreen from "@screens/ForgotPasswordScreen";
+import ApplicationIDScreen from "@screens/ApplicationIDScreen"; // Import the new screen
 
 const Stack = createStackNavigator();
 
@@ -23,12 +24,20 @@ const Navigation = () => {
   const [initialRoute, setInitialRoute] = useState(null);
 
   useEffect(() => {
-    const checkLoginStatus = async () => {
+    const checkInitialRoute = async () => {
+      const isApplicationIDEntered = await AsyncStorage.getItem(
+        "isApplicationIDEntered"
+      );
       const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
-      setInitialRoute(isLoggedIn === "true" ? "BottomTabs" : "Login");
+
+      if (isApplicationIDEntered !== "true") {
+        setInitialRoute("ApplicationID");
+      } else {
+        setInitialRoute(isLoggedIn === "true" ? "BottomTabs" : "Login");
+      }
     };
 
-    checkLoginStatus();
+    checkInitialRoute();
   }, []);
 
   if (initialRoute === null) {
@@ -38,7 +47,16 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={initialRoute}>
-        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen
+          name="ApplicationID"
+          component={ApplicationIDScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="BottomTabs"
           component={BottomTabs}
