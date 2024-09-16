@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import CustomText from "@components/CustomText";
 import CustomButton from "@components/ButtonComponent";
 import logo from "@assets/images/logo.png";
@@ -17,7 +17,7 @@ import { login } from "@screens/LoginScreen";
 import Inputs from "@components/Inputs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const RegisterScreen = () => {
+const SetupScreen = () => {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -29,6 +29,8 @@ const RegisterScreen = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
+  const route = useRoute();
+  const { userName } = route.params; // Retrieve the user's name from the route parameters
   const inputRefs = useRef({});
 
   const handleInputChange = (name, value) => {
@@ -104,13 +106,6 @@ const RegisterScreen = () => {
   };
 
   const inputFields = [
-    { name: "firstName", placeholder: "First Name", type: "text" },
-    { name: "lastName", placeholder: "Last Name", type: "text" },
-    {
-      name: "emailOrPhone",
-      placeholder: "Email or Phone Number",
-      type: "text",
-    },
     { name: "password", placeholder: "Set Password", type: "password" },
     {
       name: "confirmPassword",
@@ -128,12 +123,11 @@ const RegisterScreen = () => {
         <View style={login.innerContainer}>
           <Image source={logo} style={login.logo} />
           <CustomText style={login.title}>
-            Welcome 👋{"\n"}
-            to
-            <CustomText style={login.blueText}> HR Attendee</CustomText>
+            Welcome
+            <CustomText style={login.blueText}> {userName} 👋</CustomText>
           </CustomText>
           <CustomText style={login.subtitle}>
-            Hello there, Register to continue
+            Set password to continue
           </CustomText>
 
           {inputFields.map((field, index) => (
@@ -161,7 +155,7 @@ const RegisterScreen = () => {
           ))}
 
           <CustomButton
-            title="Register"
+            title="Set Password"
             onPress={handleRegister}
             disabled={loading}
             color="primary"
@@ -173,12 +167,12 @@ const RegisterScreen = () => {
             {loading && <ActivityIndicator color="#fff" size={"large"} />}
           </CustomButton>
 
-          <View style={login.registerContainer}>
-            <CustomText style={login.registerText}>
+          <View style={login.SetupContainer}>
+            <CustomText style={login.SetupText}>
               Already have an account?
             </CustomText>
             <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-              <CustomText style={login.registerLink}>Login</CustomText>
+              <CustomText style={login.SetupLink}>Login</CustomText>
             </TouchableOpacity>
           </View>
         </View>
@@ -187,4 +181,4 @@ const RegisterScreen = () => {
   );
 };
 
-export default RegisterScreen;
+export default SetupScreen;
