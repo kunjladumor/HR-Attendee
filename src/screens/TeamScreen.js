@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  RefreshControl,
+} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons"; // Import the Icon component
 import CustomText from "@components/CustomText"; // Import the CustomText component
 import TeamMemberCard from "@components/TeamMemberCard"; // Import the TeamMemberCard component
@@ -11,7 +17,16 @@ import { CommonStyles } from "@styles/style"; // Import common styles
 const TeamScreen = function () {
   const [searchQuery, setSearchQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [refreshing, setRefreshing] = useState(false); // State for refreshing
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    // Simulate a network request
+    setTimeout(() => {
+      // Reset the announcements and page
+      setRefreshing(false);
+    }, 2000);
+  };
   // Sample data for team members
   const teamMembers = [
     {
@@ -96,7 +111,12 @@ const TeamScreen = function () {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <View
           style={[
             CommonStyles.rowSpaceBetween,
