@@ -19,9 +19,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SetupScreen = () => {
   const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    emailOrPhone: "",
     password: "",
     confirmPassword: "",
   });
@@ -41,13 +38,7 @@ const SetupScreen = () => {
     let valid = true;
     let newErrors = {};
 
-    const requiredFields = [
-      "firstName",
-      "lastName",
-      "emailOrPhone",
-      "password",
-      "confirmPassword",
-    ];
+    const requiredFields = ["password", "confirmPassword"];
 
     requiredFields.forEach((field) => {
       if (form[field].trim() === "") {
@@ -59,14 +50,6 @@ const SetupScreen = () => {
       }
     });
 
-    if (
-      form.emailOrPhone.trim() !== "" &&
-      !validateEmailOrPhone(form.emailOrPhone)
-    ) {
-      newErrors.emailOrPhone = "Invalid email or phone number";
-      valid = false;
-    }
-
     if (form.password !== form.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
       valid = false;
@@ -74,12 +57,6 @@ const SetupScreen = () => {
 
     setErrors(newErrors);
     return valid;
-  };
-
-  const validateEmailOrPhone = (input) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^\d{10}$/;
-    return emailRegex.test(input) || phoneRegex.test(input);
   };
 
   const handleRegister = useCallback(async () => {
@@ -90,8 +67,11 @@ const SetupScreen = () => {
       // Simulate an API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
       // Here you can add your registration logic
-      await AsyncStorage.setItem("isLoggedIn", "true"); // Store login status
-      navigation.replace("BottomTabs"); // Navigate
+      Alert.alert("Password set successfully. Please login to continue.");
+      navigation.navigate("Login");
+
+      // await AsyncStorage.setItem("isLoggedIn", "true"); // Store login status
+      // navigation.replace("BottomTabs"); // Navigate
     } catch (error) {
       Alert.alert("An error occurred. Please try again.");
     } finally {
