@@ -166,6 +166,22 @@ const Inputs = forwardRef(
               secureTextEntry={true}
             />
           );
+        case "numeric":
+          return (
+            <TextInput
+              {...rest}
+              ref={ref} // Forward the ref here
+              style={[InputStyles.input, error && InputStyles.inputError]}
+              value={inputValue}
+              onChangeText={(text) => {
+                setInputValue(text);
+                onChangeText(text);
+              }}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              keyboardType="numeric"
+            />
+          );
         default:
           return (
             <TextInput
