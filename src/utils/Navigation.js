@@ -14,7 +14,7 @@ import EditProfileScreen from "@screens/EditProfileScreen";
 import IDCardScreen from "@screens/IDCardScreen";
 import ProfileScreen from "@screens/ProfileScreen";
 import ActivityScreen from "@screens/ActivityScreen";
-import RegisterScreen from "@screens/RegisterScreen";
+import SetupScreen from "@screens/SetupScreen";
 import ForgotPasswordScreen from "@screens/ForgotPasswordScreen";
 
 const Stack = createStackNavigator();
@@ -95,8 +95,8 @@ const Navigation = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
+          name="Setup"
+          component={SetupScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
