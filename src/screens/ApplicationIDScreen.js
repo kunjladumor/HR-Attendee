@@ -2,7 +2,6 @@ import React, { useState, useRef, useCallback } from "react";
 import {
   View,
   Alert,
-  TouchableOpacity,
   ActivityIndicator,
   Image,
   ScrollView,
