@@ -12,7 +12,7 @@ export const statusBarHeight =
 
 export const CommonStyles = StyleSheet.create({
   container: {
-    backgroundColor: "#ffffff",
+    backgroundColor: colors.background,
     minHeight: "100%",
   },
   poppinsFont: {
@@ -21,6 +21,7 @@ export const CommonStyles = StyleSheet.create({
   },
   CustomText: {
     lineHeight: 1.5,
+    color: colors.black,
   },
   header: {
     flexDirection: "row",

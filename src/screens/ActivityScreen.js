@@ -62,7 +62,7 @@ const ActivityScreenStyles = StyleSheet.create({
   listContent: {
     padding: 20,
     paddingTop: /* statusBarHeight + 20 */ 0,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
     flexGrow: 1,
   },
 });

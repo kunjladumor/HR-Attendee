@@ -67,7 +67,7 @@ const LeaveRequestStyles = StyleSheet.create({
   leaveRequestContainer: {
     flexDirection: "column",
     padding: 16,
-    backgroundColor: "#fff",
+    backgroundColor: colors.surface,
     borderRadius: 10,
     marginVertical: 8,
     borderWidth: 1,

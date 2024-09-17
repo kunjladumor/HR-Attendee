@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 16,
-    backgroundColor: "#fff",
+    backgroundColor: colors.background,
     padding: 20,
     paddingTop: /* statusBarHeight + 20 */ 0,
   },

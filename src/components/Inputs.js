@@ -216,7 +216,7 @@ const Inputs = forwardRef(
         inputRange: [0, 1],
         outputRange: [colors.neutral40, colors.primary],
       }),
-      backgroundColor: "#fff",
+      backgroundColor: colors.background,
       paddingHorizontal: 5,
     };
 

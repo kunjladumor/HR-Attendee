@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 15,
     borderWidth: 1,
+    backgroundColor: colors.neutral10,
     borderColor: colors.neutral20,
   },
   iconContainer: {

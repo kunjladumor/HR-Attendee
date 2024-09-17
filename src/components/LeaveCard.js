@@ -46,7 +46,7 @@ const LeaveCard = ({
 
 const LeavesCard = StyleSheet.create({
   card: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.surface,
     borderRadius: 10,
     padding: 16,
     marginVertical: 8,

@@ -39,6 +39,7 @@ const ProfileButtonStyles = StyleSheet.create({
     padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: "#f0f0f0",
+    backgroundColor: colors.surface,
   },
   iconContainer: {
     marginRight: 15,

@@ -119,7 +119,7 @@ const LeavesScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
       <FlatList
         ListHeaderComponent={
           <View style={CommonStyles.content}>

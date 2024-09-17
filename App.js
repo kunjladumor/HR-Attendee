@@ -5,6 +5,7 @@ import Navigation from "@utils/Navigation";
 
 import { Client, Account, ID } from "react-native-appwrite";
 import { SafeAreaView } from "react-native-safe-area-context";
+import colors from "./src/styles/ColorStyles";
 
 const client = new Client();
 client
@@ -46,7 +47,7 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
       <Navigation />
     </SafeAreaView>
   );

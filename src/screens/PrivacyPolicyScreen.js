@@ -52,7 +52,7 @@ const PrivacyPolicy = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
     paddingTop: /* statusBarHeight + 20 */ 0,
     padding: 16,
   },

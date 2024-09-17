@@ -108,7 +108,7 @@ const NotificationScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
     padding: 20,
     paddingTop: /* statusBarHeight + 20 */ 0,
   },

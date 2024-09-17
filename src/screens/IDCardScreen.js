@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: /* statusBarHeight + 20 */ 0,
     gap: 20,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: colors.background,
   },
   card: {
     width: 300,

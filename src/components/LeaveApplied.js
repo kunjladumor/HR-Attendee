@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import Modal from "react-native-modal";
 import { MaterialIcons } from "@expo/vector-icons"; // Ensure you have this package installed or replace it with another icon
 import CustomButton from "./ButtonComponent";
+import colors from "../styles/ColorStyles";
 
 const LeaveApplied = ({ isVisible, onClose }) => {
   const navigation = useNavigation();
@@ -49,9 +50,10 @@ const styles = StyleSheet.create({
   modal: {
     justifyContent: "flex-end",
     margin: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
   },
   container: {
-    backgroundColor: "white",
+    backgroundColor: colors.surface,
     padding: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,

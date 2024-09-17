@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: colors.white,
+    backgroundColor: colors.surface,
     height: Platform.OS === "android" ? 60 : 80,
     paddingHorizontal: 10,
   },

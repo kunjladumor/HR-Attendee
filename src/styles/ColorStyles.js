@@ -11,6 +11,11 @@ const colors = {
   primary2: "#A3D139", // Leaf Green
   secondary2: "#30BEB6", // Teal Green
 
+  // Text Color
+  text: "#333333", // Dark Gray
+  text2: "#4F4F4F", // Gray
+  text3: "#828282", // Light Gray
+
   // Additional shades
   lightPrimary: "#B3D4FF", // Light Blue
   darkPrimary: "#005BBB", // Dark Blue

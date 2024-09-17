@@ -176,7 +176,7 @@ const MyProfileStyles = StyleSheet.create({
     flexGrow: 1,
     padding: 16,
     paddingTop: /* statusBarHeight + 20 */ 0,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
   },
   header: {
     flexDirection: "row",

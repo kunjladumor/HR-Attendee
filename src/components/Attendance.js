@@ -204,7 +204,7 @@ const AttendanceStyles = StyleSheet.create({
     gap: 15,
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.neutral10,
     borderRadius: 8,
     padding: 16,
     shadowColor: "#000",

@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 15,
     overflow: "hidden",
-    backgroundColor: colors.white,
+    backgroundColor: colors.surface,
 
     shadowColor: "rgba(0, 0, 0, 0.2)", // Light black shadow color with reduced opacity
     shadowOffset: { width: 0, height: 2 },
