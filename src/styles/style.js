@@ -21,7 +21,6 @@ export const CommonStyles = StyleSheet.create({
   },
   CustomText: {
     lineHeight: 1.5,
-    color: colors.black,
   },
   header: {
     flexDirection: "row",
@@ -30,6 +29,7 @@ export const CommonStyles = StyleSheet.create({
     gap: 10,
     fontWeight: "500",
     fontFamily: "PoppinsMedium", // Apply custom font
+    color: colors.text,
   },
   subHeader: {
     fontSize: 16,

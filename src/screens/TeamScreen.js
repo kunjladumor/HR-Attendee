@@ -123,7 +123,7 @@ const TeamScreen = function () {
             { marginBottom: 10, alignItems: "center" },
           ]}
         >
-          <CustomText style={styles.text}>Team Members</CustomText>
+          <CustomText style={CommonStyles.header}>Team Members</CustomText>
           <CustomButton
             iconName={"ellipsis-vertical-outline"}
             iconSize={20}
@@ -185,10 +185,7 @@ const styles = StyleSheet.create({
 
     backgroundColor: colors.background,
   },
-  text: {
-    fontSize: 24,
-    marginBottom: 10,
-  },
+
   searchBarContainer: {
     flexDirection: "row",
     alignItems: "center",

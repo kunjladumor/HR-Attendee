@@ -100,6 +100,7 @@ const LeavesCard = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Poppins",
     fontWeight: "500",
+    color: colors.neutral50,
   },
 });
 
