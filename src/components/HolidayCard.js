@@ -69,9 +69,10 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   dateText: {
-    marginLeft: 5,
+    marginLeft: 10,
     fontSize: 14,
     fontFamily: "PoppinsMedium",
+    color: colors.neutral90,
   },
   dayText: {
     fontSize: 14,
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsSemiBold",
     fontSize: 18,
     marginTop: 5,
+    color: colors.text,
   },
 });
 

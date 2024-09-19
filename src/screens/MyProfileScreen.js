@@ -5,6 +5,7 @@ import CustomText from "@components/CustomText";
 import { statusBarHeight } from "@styles/style";
 import colors from "@styles/ColorStyles";
 import { Ionicons } from "@expo/vector-icons";
+import { CommonStyles } from "../styles/style";
 
 const Profile = {
   fullName: "John Doe",
@@ -162,9 +163,10 @@ const MyProfileScreen = ({ navigation }) => {
         <Ionicons
           name="chevron-back-outline"
           size={24}
+          color={colors.text}
           onPress={() => navigation.goBack()}
         />
-        <CustomText style={MyProfileStyles.headerTitle}>My Profile</CustomText>
+        <CustomText style={CommonStyles.header}>My Profile</CustomText>
       </View>
       <Tabs tabs={tabs} />
     </ScrollView>
@@ -193,7 +195,7 @@ const MyProfileStyles = StyleSheet.create({
   detailLabel: {
     fontSize: 14,
     fontFamily: "Poppins",
-    color: colors.neutral50,
+    color: colors.neutral70,
     paddingTop: 10,
     marginBottom: 4,
   },
@@ -201,8 +203,9 @@ const MyProfileStyles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "PoppinsMedium",
     paddingBottom: 10,
+    color: colors.text,
     borderBottomWidth: 1,
-    borderBottomColor: colors.neutral20,
+    borderBottomColor: colors.neutral50,
   },
 });
 

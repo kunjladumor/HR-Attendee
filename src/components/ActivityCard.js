@@ -77,11 +77,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontFamily: "PoppinsSemiBold",
+    color: colors.text,
   },
   time: {
     fontSize: 14,
     fontWeight: "500",
     fontFamily: "Poppins",
+    color: colors.text,
   },
   date: {
     fontSize: 14,

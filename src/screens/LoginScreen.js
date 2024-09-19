@@ -218,6 +218,7 @@ export const login = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     fontFamily: "Poppins",
+    color: colors.neutral90,
   },
   subtitle: {
     fontSize: 17,
@@ -243,6 +244,7 @@ export const login = StyleSheet.create({
   SetupText: {
     fontSize: 16,
     fontFamily: "Poppins",
+    color: colors.neutral70,
   },
   SetupLink: {
     fontSize: 16,

@@ -3,7 +3,6 @@ import { View, Image, StyleSheet, Text, ScrollView } from "react-native";
 import CustomButton from "@components/ButtonComponent";
 import colors from "@styles/ColorStyles";
 import CustomText from "@components/CustomText";
-import { statusBarHeight } from "@styles/style";
 import { Ionicons } from "@expo/vector-icons";
 
 const LeaveDetailsScreen = ({ route, navigation }) => {

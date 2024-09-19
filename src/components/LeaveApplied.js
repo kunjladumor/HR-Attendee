@@ -64,13 +64,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: "PoppinsSemiBold",
     marginBottom: 10,
     textAlign: "center",
+    color: colors.text,
   },
   message: {
     fontSize: 14,
-    color: "#6c6c6c",
+    color: colors.neutral60,
     marginBottom: 20,
     textAlign: "center",
   },

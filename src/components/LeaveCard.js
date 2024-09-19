@@ -28,15 +28,15 @@ const LeaveCard = ({
       </View>
       <View style={LeavesCard.content}>
         <View style={LeavesCard.row}>
-          <Text style={LeavesCard.label}>Apply Days:</Text>
+          <Text style={LeavesCard.label}>Apply Days</Text>
           <Text style={LeavesCard.value}>{applyDays}</Text>
         </View>
         <View style={LeavesCard.row}>
-          <Text style={LeavesCard.label}>Leave Balance:</Text>
+          <Text style={LeavesCard.label}>Leave Balance</Text>
           <Text style={LeavesCard.value}>{leaveBalance}</Text>
         </View>
         <View style={LeavesCard.row}>
-          <Text style={LeavesCard.label}>Approved By:</Text>
+          <Text style={LeavesCard.label}>Approved By</Text>
           <Text style={LeavesCard.value}>{approvedBy}</Text>
         </View>
       </View>
@@ -51,7 +51,7 @@ const LeavesCard = StyleSheet.create({
     padding: 16,
     marginVertical: 8,
     borderWidth: 1,
-    borderColor: colors.neutral10,
+    borderColor: colors.neutral20,
     shadowColor: "rgba(0, 0, 0, 0.2)", // Light black shadow color with reduced opacity
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2, // Increase opacity slightly to make the shadow more visible
@@ -76,31 +76,30 @@ const LeavesCard = StyleSheet.create({
   },
   approved: {
     color: colors.secondary2,
-    backgroundColor: "#e6f4ea",
+    backgroundColor: colors.secondary2 + "1A",
   },
   rejected: {
     color: colors.secondary,
-    backgroundColor: "#fde8e8",
+    backgroundColor: colors.secondary + "1A",
   },
   content: {
     flexDirection: "row",
     justifyContent: "space-between",
     borderTopWidth: 1,
-    borderTopColor: "#eee",
+    borderTopColor: colors.neutral30,
     paddingTop: 16,
   },
-  row: {
-    flex: 1,
-  },
+
   label: {
-    fontSize: 16,
+    fontSize: 14,
+    fontFamily: "Poppins",
     color: colors.neutral70,
   },
   value: {
     fontSize: 16,
-    fontFamily: "Poppins",
-    fontWeight: "500",
-    color: colors.neutral50,
+    fontFamily: "PoppinsMedium",
+    color: colors.neutral80,
+    textAlign: "center",
   },
 });
 

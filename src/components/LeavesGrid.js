@@ -59,10 +59,11 @@ const LeavesGridStyles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 18,
-    fontFamily: "Poppins",
+    fontFamily: "PoppinsMedium",
     fontWeight: "500",
     marginBottom: 5,
     textAlign: "left",
+    color: colors.text,
   },
   cardCount: {
     fontSize: 20,

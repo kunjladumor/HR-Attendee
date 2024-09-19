@@ -98,6 +98,7 @@ const CalendarStyles = StyleSheet.create({
   date: {
     fontSize: 24,
     fontFamily: "PoppinsSemiBold",
+    color: colors.text,
   },
   activeDate: {
     color: colors.white, // Active date color

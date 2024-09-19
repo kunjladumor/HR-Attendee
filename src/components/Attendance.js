@@ -250,17 +250,19 @@ const AttendanceStyles = StyleSheet.create({
   cardTitle: {
     paddingHorizontal: 8,
     fontSize: 14,
-    color: colors.neutral60,
+    color: colors.text,
     flexWrap: "wrap",
     fontFamily: "Poppins",
   },
   cardValue: {
     fontSize: 20,
     fontFamily: "PoppinsSemiBold",
+    color: colors.text,
   },
   stat: {
     fontSize: 14,
     fontFamily: "Poppins",
+    color: colors.text,
   },
 });
 

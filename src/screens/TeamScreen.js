@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingLeft: 10,
     marginBottom: 20,
-    backgroundColor: "#f0f0f0", // Changed background color
+    backgroundColor: colors.neutral10, // Changed background color
     // Shadow properties for iOS
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     fontSize: 16, // Adjusted font size
-    color: colors.neutral80, // Changed text color
+    color: colors.neutral90, // Changed text color
   },
   scrollView: {
     padding: 20,

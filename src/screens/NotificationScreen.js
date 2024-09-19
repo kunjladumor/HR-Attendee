@@ -87,9 +87,10 @@ const NotificationScreen = ({ navigation }) => {
           <Ionicons
             name="chevron-back-outline"
             size={24}
+            color={colors.text}
             onPress={() => navigation.goBack()}
           />
-          <CustomText style={{ fontSize: 24 }}>Notifications</CustomText>
+          <CustomText style={CommonStyles.header}>Notifications</CustomText>
         </View>
         {notifications.map((notification) => (
           <NotificationCard

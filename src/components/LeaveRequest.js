@@ -94,7 +94,8 @@ const LeaveRequestStyles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: "500",
-    fontFamily: "Poppins",
+    fontFamily: "PoppinsMedium",
+    color: colors.text,
   },
   leaveDates: {
     fontSize: 14,

@@ -132,7 +132,7 @@ const LeavesScreen = () => {
                   style={{ marginRight: 10, fontWeight: "bold" }}
                   iconName={"create-outline"}
                   iconSize={24}
-                  iconColor={colors.black}
+                  iconColor={colors.text}
                   onPress={() => navigation.navigate("ApplyLeave")}
                 />
                 <CustomButton
@@ -140,7 +140,7 @@ const LeavesScreen = () => {
                   borderRadius={10}
                   iconName={"options-outline"}
                   iconSize={24}
-                  iconColor={colors.black}
+                  iconColor={colors.text}
                   onPress={() => setModalVisible(true)}
                 />
               </View>

@@ -69,7 +69,7 @@ const TeamMemberCard = ({ profilePicture, name, designation, phoneNumber }) => {
             style={styles.modalOption}
           >
             <Ionicons name="call-outline" size={28} color={colors.primary} />
-            <Text style={{ fontSize: 20, fontFamily: "Poppins" }}>Call</Text>
+            <Text style={styles.modalText}>Call</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleSmsPress} style={styles.modalOption}>
             <Ionicons
@@ -77,16 +77,14 @@ const TeamMemberCard = ({ profilePicture, name, designation, phoneNumber }) => {
               size={24}
               color={colors.neutral50}
             />
-            <Text style={{ fontSize: 20, fontFamily: "Poppins" }}>SMS</Text>
+            <Text style={styles.modalText}>SMS</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={handleWhatsAppPress}
             style={styles.modalOption}
           >
             <Ionicons name="logo-whatsapp" size={28} color={colors.success} />
-            <Text style={{ fontSize: 20, fontFamily: "Poppins" }}>
-              WhatsApp
-            </Text>
+            <Text style={styles.modalText}>WhatsApp</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -95,7 +93,7 @@ const TeamMemberCard = ({ profilePicture, name, designation, phoneNumber }) => {
             style={styles.modalOption}
           >
             <Ionicons name="create-outline" size={28} color={colors.primary} />
-            <Text style={{ fontSize: 20, fontFamily: "Poppins" }}>Edit</Text>
+            <Text style={styles.modalText}>Edit</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -104,7 +102,7 @@ const TeamMemberCard = ({ profilePicture, name, designation, phoneNumber }) => {
             style={styles.modalOption}
           >
             <Ionicons name="trash-outline" size={28} color={colors.danger} />
-            <Text style={{ fontSize: 20, fontFamily: "Poppins" }}>Delete</Text>
+            <Text style={styles.modalText}>Delete</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -133,6 +131,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontFamily: "PoppinsSemiBold",
+    color: colors.text,
   },
   designation: {
     fontSize: 14,
@@ -150,13 +149,18 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end", // Align modal to the bottom
   },
   modalContent: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.neutral10,
     paddingVertical: 30,
     gap: 15,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     width: "100%", // Make the modal take up the full width
     flexDirection: "column",
+  },
+  modalText: {
+    fontSize: 18,
+    fontFamily: "PoppinsMedium",
+    color: colors.text,
   },
   modalOption: {
     flexDirection: "row",

@@ -42,10 +42,10 @@ const TabsStyle = StyleSheet.create({
   tabContainer: {
     flexDirection: "row",
     borderWidth: 1,
-    borderColor: colors.neutral10,
+    borderColor: `${colors.neutral10}1A`,
     borderRadius: 10,
     marginTop: 10,
-    backgroundColor: colors.neutral10,
+    backgroundColor: `${colors.neutral10}1A`,
   },
   tab: {
     flex: 1,

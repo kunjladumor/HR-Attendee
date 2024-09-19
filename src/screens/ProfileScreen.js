@@ -165,12 +165,13 @@ const ProfileStyles = StyleSheet.create({
   },
   name: {
     fontSize: 20,
-    fontWeight: "500",
+    fontFamily: "PoppinsSemiBold",
     textAlign: "center",
+    color: colors.text,
   },
   username: {
     fontSize: 16,
-    color: "#666",
+    color: colors.neutral60,
     textAlign: "center",
   },
   options: {
@@ -179,17 +180,9 @@ const ProfileStyles = StyleSheet.create({
   section: {
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: colors.neutral10,
-    shadowColor: "#000000CC",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.125,
-    shadowRadius: 3.84,
-    elevation: 2,
-    backgroundColor: colors.white,
-    borderRadius: 5,
+    borderColor: colors.neutral20,
+    borderRadius: 10,
+    overflow: "hidden",
   },
   option: {
     marginVertical: 10,
