@@ -12,8 +12,8 @@ const IDCardScreen = ({ navigation }) => {
   const name = "Kunj Ladumor";
   const designation = "Software Engineer";
   const companyName = "Cyberax";
-  // const employeeId = "EMP107";
-  const employeeId = "EMP137";
+  // const employeeId = "107";
+  const employeeId = "137";
 
   const URLname = name.replace(/\s/g, "-").toLowerCase();
 
@@ -38,9 +38,19 @@ const IDCardScreen = ({ navigation }) => {
         <Image source={profileImage} style={styles.profileImage} />
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.designation}>{designation}</Text>
-        <QRCode value={qrCodeURL} size={150} />
+        <View
+          style={{
+            padding: 20,
+            backgroundColor: colors.white,
+            borderWidth: 1,
+            borderColor: colors.neutral50,
+            borderRadius: 20,
+          }}
+        >
+          <QRCode value={qrCodeURL} size={150} />
+        </View>
         <Text style={styles.companyName}>{companyName}</Text>
-        <Text style={styles.employeeId}>EMP ID: {employeeId}</Text>
+        <Text style={styles.employeeId}>EMP ID: EMP{employeeId}</Text>
       </View>
     </View>
   );
@@ -58,7 +68,7 @@ const styles = StyleSheet.create({
     width: 300,
     padding: 20,
     borderRadius: 10,
-    backgroundColor: "#fff",
+    backgroundColor: colors.neutral10,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -77,6 +87,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 24,
     fontFamily: "PoppinsSemiBold",
+    color: colors.text,
   },
   designation: {
     fontSize: 16,
@@ -89,6 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "PoppinsSemiBold",
     marginTop: 20,
+    color: colors.text,
   },
   employeeId: {
     fontSize: 16,
