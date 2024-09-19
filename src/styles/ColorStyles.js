@@ -64,7 +64,7 @@ const colorsDark = {
   text2: "#E0E0E0", // Light Gray
   text3: "#BDBDBD", // Lighter Gray
 
-  white: "#E0E0E0", // Light Gray for backgrounds
+  white: "#FFFFFF", // White
   black: "#121212", // Dark Black
 
   neutral10: "#3B3B3B",
