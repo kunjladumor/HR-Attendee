@@ -105,8 +105,8 @@ const styles = StyleSheet.create({
   employeeId: {
     fontSize: 16,
     fontFamily: "Poppins",
-    fontWeight: "500",
     color: colors.neutral60,
+    lineHeight: 24,
   },
 });
 
