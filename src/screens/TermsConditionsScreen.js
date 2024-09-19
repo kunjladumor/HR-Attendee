@@ -3,7 +3,6 @@ import { View, Text, StyleSheet } from "react-native";
 import CustomText from "@components/CustomText";
 import colors from "@styles/ColorStyles";
 import { Ionicons } from "@expo/vector-icons";
-import { statusBarHeight } from "@styles/style";
 
 const TermsConditionsScreen = ({ navigation }) => {
   return (
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingTop: /* statusBarHeight + 20 */ 0,
+    paddingTop: 0,
     padding: 16,
   },
   header: {

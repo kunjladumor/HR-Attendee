@@ -9,7 +9,7 @@ import {
 import Icon from "react-native-vector-icons/Ionicons"; // Import the Icon component
 import CustomText from "@components/CustomText"; // Import the CustomText component
 import TeamMemberCard from "@components/TeamMemberCard"; // Import the TeamMemberCard component
-import { statusBarHeight } from "@styles/style";
+
 import colors from "@styles/ColorStyles"; // Import the colors object
 import CustomButton from "@components/ButtonComponent";
 import { CommonStyles } from "@styles/style"; // Import common styles
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     padding: 20,
-    paddingTop: /* statusBarHeight + 20 */ 0,
+    paddingTop: 0,
     flexGrow: 1,
     paddingBottom: 150,
   },

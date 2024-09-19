@@ -2,7 +2,7 @@ import React from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import NotificationCard from "@components/NotificationCard"; // Adjust the import based on your project structure
 import CustomText from "@components/CustomText"; // Adjust the import based on your project structure
-import { CommonStyles, statusBarHeight } from "@styles/style"; // Adjust the import based on your project structure
+import { CommonStyles } from "@styles/style"; // Adjust the import based on your project structure
 import { Ionicons } from "@expo/vector-icons"; // Adjust the import based on your project structure
 import colors from "@styles/ColorStyles";
 
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
     padding: 20,
-    paddingTop: /* statusBarHeight + 20 */ 0,
+    paddingTop: 0,
   },
   scrollViewContent: {
     paddingBottom: 20,

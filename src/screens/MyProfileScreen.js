@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import Tabs from "@components/Tabs";
 import CustomText from "@components/CustomText";
-import { statusBarHeight } from "@styles/style";
+
 import colors from "@styles/ColorStyles";
 import { Ionicons } from "@expo/vector-icons";
 import { CommonStyles } from "../styles/style";
@@ -177,7 +177,7 @@ const MyProfileStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 16,
-    paddingTop: /* statusBarHeight + 20 */ 0,
+    paddingTop: 0,
     backgroundColor: colors.background,
   },
   header: {

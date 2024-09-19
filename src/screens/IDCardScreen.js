@@ -4,7 +4,7 @@ import { Icon } from "react-native-elements";
 import QRCode from "react-native-qrcode-svg";
 import colors from "@styles/ColorStyles";
 import CustomText from "@components/CustomText";
-import { CommonStyles, statusBarHeight } from "@styles/style";
+import { CommonStyles } from "@styles/style";
 
 const IDCardScreen = ({ navigation }) => {
   const profileImage = require("@assets/images/user.png"); // Replace with actual image URL
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    paddingTop: /* statusBarHeight + 20 */ 0,
+    paddingTop: 0,
     gap: 20,
     backgroundColor: colors.background,
   },

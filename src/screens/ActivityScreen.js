@@ -5,7 +5,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
 import colors from "@styles/ColorStyles";
 import CustomText from "@components/CustomText";
-import { CommonStyles, statusBarHeight } from "@styles/style";
 import ActivityCard from "@components/ActivityCard"; // Import the ActivityCard component
 
 const ActivityScreen = ({ navigation, route }) => {
@@ -61,7 +60,7 @@ const ActivityScreen = ({ navigation, route }) => {
 const ActivityScreenStyles = StyleSheet.create({
   listContent: {
     padding: 20,
-    paddingTop: /* statusBarHeight + 20 */ 0,
+    paddingTop: 0,
     backgroundColor: colors.background,
     flexGrow: 1,
   },

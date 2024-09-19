@@ -54,7 +54,7 @@ export const CommonStyles = StyleSheet.create({
   content: {
     gap: 10,
     padding: 20,
-    paddingTop: /* statusBarHeight + 20 */ 0,
+    paddingTop: 0,
     paddingBottom: 90,
   },
 

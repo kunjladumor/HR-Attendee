@@ -96,7 +96,7 @@ const ForgotPasswordScreen = () => {
             borderRadius={10}
             fontfamily="PoppinsSemiBold"
           >
-            {loading && <ActivityIndicator color="#fff" />}
+            {loading && <ActivityIndicator color={colors.whites} />}
           </CustomButton>
 
           <TouchableOpacity onPress={() => navigation.goBack()}>
