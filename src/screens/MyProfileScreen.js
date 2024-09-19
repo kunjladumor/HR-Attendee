@@ -213,7 +213,7 @@ const DocumentStyles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#fff",
+    backgroundColor: colors.white,
   },
   card: {
     flexDirection: "row",

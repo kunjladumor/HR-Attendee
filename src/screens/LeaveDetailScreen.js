@@ -4,6 +4,7 @@ import CustomButton from "@components/ButtonComponent";
 import colors from "@styles/ColorStyles";
 import CustomText from "@components/CustomText";
 import { Ionicons } from "@expo/vector-icons";
+import { CommonStyles } from "@styles/style";
 
 const LeaveDetailsScreen = ({ route, navigation }) => {
   const { leaveRequest } = route.params;
@@ -14,15 +15,10 @@ const LeaveDetailsScreen = ({ route, navigation }) => {
         <Ionicons
           name="chevron-back-outline"
           size={24}
+          color={colors.text}
           onPress={() => navigation.goBack()}
         />
-        <Text
-          style={{
-            fontSize: 24,
-          }}
-        >
-          Leave Details
-        </Text>
+        <Text style={CommonStyles.header}>Leave Details</Text>
       </View>
       <View style={styles.profile}>
         <Image source={leaveRequest.profileImage} style={styles.profileImage} />
@@ -132,7 +128,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    fontWeight: "500",
+    color: colors.text,
     fontFamily: "PoppinsMedium",
   },
   leaveDates: {
@@ -150,11 +146,13 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     borderTopWidth: 1,
     borderTopColor: colors.neutral20,
+    color: colors.neutral70,
   },
   detailValue: {
     fontSize: 16,
     fontFamily: "Poppins",
     paddingBottom: 10,
+    color: colors.text,
   },
   actionsContainer: {
     flexDirection: "row",

@@ -16,6 +16,7 @@ import logo from "@assets/images/logo.png";
 import Inputs from "@components/Inputs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { login } from "@screens/LoginScreen";
+import { colors } from "react-native-elements";
 
 const ApplicationIDScreen = () => {
   const [applicationID, setApplicationID] = useState("");
@@ -85,7 +86,7 @@ const ApplicationIDScreen = () => {
             fontfamily="PoppinsSemiBold"
           >
             {loading && (
-              <ActivityIndicator color="#fff" style={{ padding: 8 }} />
+              <ActivityIndicator color={colors.white} style={{ padding: 8 }} />
             )}
           </CustomButton>
         </View>

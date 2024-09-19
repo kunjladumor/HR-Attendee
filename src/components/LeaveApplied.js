@@ -23,7 +23,7 @@ const LeaveApplied = ({ isVisible, onClose }) => {
     >
       <View style={styles.container}>
         <View style={styles.iconWrapper}>
-          <MaterialIcons name="check-circle" size={64} color="#3D82FF" />
+          <MaterialIcons name="check-circle" size={64} color={colors.primary} />
         </View>
         <Text style={styles.title}>Leave Applied Successfully</Text>
         <Text style={styles.message}>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   button: {
-    backgroundColor: "#3D82FF",
+    backgroundColor: colors.primary,
     borderRadius: 10,
     paddingVertical: 12,
     paddingHorizontal: 50,

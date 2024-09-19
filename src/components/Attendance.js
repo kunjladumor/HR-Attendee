@@ -207,14 +207,14 @@ const AttendanceStyles = StyleSheet.create({
     backgroundColor: colors.neutral10,
     borderRadius: 8,
     padding: 16,
-    shadowColor: "#000",
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 3,
   },
   cardPressed: {
-    backgroundColor: "#e0e0e0", // Change this color to your desired pressed color
+    backgroundColor: colors.neutral20, // Change this color to your desired pressed color
   },
   breakCardActive: {
     backgroundColor: `${colors.primary}33`, // Change this color to your desired active color

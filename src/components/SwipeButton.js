@@ -169,9 +169,9 @@ const SwipeStyles = StyleSheet.create({
     position: "relative",
   },
   text: {
-    color: "#fff",
+    color: colors.white,
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: "PoppinsSemiBold",
     position: "absolute",
     alignSelf: "center",
   },
@@ -183,7 +183,7 @@ const SwipeStyles = StyleSheet.create({
     borderRadius: 5,
     position: "absolute",
     left: 5,
-    backgroundColor: "#fff", // White background for the icon
+    backgroundColor: colors.white, // White background for the icon
   },
   checkedIn: {
     backgroundColor: colors.secondary, // Red color for checked-in status

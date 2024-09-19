@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     borderColor: colors.neutral20,
   },
   iconContainer: {
-    backgroundColor: "#3185ff1A",
+    backgroundColor: colors.primary + "1A",
     padding: 5,
     marginRight: 10,
     borderRadius: 10,

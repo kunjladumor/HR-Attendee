@@ -173,7 +173,7 @@ const LoginScreen = () => {
             fontfamily="PoppinsSemiBold"
           >
             {loading && (
-              <ActivityIndicator color="#fff" style={{ padding: 8 }} />
+              <ActivityIndicator color={colors.white} style={{ padding: 8 }} />
             )}
           </CustomButton>
 

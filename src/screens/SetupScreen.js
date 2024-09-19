@@ -16,6 +16,7 @@ import logo from "@assets/images/logo.png";
 import { login } from "@screens/LoginScreen";
 import Inputs from "@components/Inputs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { colors } from "react-native-elements";
 
 const SetupScreen = () => {
   const [form, setForm] = useState({
@@ -144,7 +145,9 @@ const SetupScreen = () => {
             borderRadius={10}
             fontfamily="PoppinsSemiBold"
           >
-            {loading && <ActivityIndicator color="#fff" size={"large"} />}
+            {loading && (
+              <ActivityIndicator color={colors.white} size={"large"} />
+            )}
           </CustomButton>
 
           <View style={login.SetupContainer}>
