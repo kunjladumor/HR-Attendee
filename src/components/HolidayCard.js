@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     gap: 5,
   },
   header: {
