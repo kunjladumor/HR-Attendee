@@ -158,33 +158,6 @@ const HomeScreen = ({ navigation }) => {
     },
   ];
 
-  const announcements = [
-    {
-      iconName: "megaphone-outline", // Correct icon name
-      title: "New Announcement",
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      time: "2 hours ago",
-    },
-    {
-      iconName: "megaphone-outline", // Correct icon name
-      title: "New Announcement",
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      time: "2 hours ago",
-    },
-    {
-      iconName: "megaphone-outline", // Correct icon name
-      title: "New Announcement",
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      time: "2 hours ago",
-    },
-    {
-      iconName: "megaphone-outline", // Correct icon name
-      title: "New Announcement",
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      time: "2 hours ago",
-    },
-  ];
-
   // Get the first 4 activities
   const displayedActivities = activities.slice(0, 4);
 
@@ -211,24 +184,6 @@ const HomeScreen = ({ navigation }) => {
           />
         );
 
-      case "announcement":
-        return (
-          <FlatList
-            data={announcements}
-            renderItem={({ item }) => (
-              <AnnouncementCard
-                icon={item.iconName}
-                title={item.title}
-                content={item.content}
-                time={item.time}
-              />
-            )}
-            keyExtractor={(item, index) => index.toString()}
-            contentContainerStyle={{ paddingBottom: 20, gap: 20 }}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          />
-        );
       default:
         return null;
     }
@@ -237,7 +192,7 @@ const HomeScreen = ({ navigation }) => {
   const data = [
     { type: "header" },
     { type: "calendar" },
-    { type: "announcement" },
+
     { type: "attendance" },
     { type: "activity" },
   ];
