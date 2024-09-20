@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+
+import { StyleSheet, StatusBar, useColorScheme } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import Navigation from "@utils/Navigation";
 
 import { Client, Account, ID } from "react-native-appwrite";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import colors from "./src/styles/ColorStyles";
 
 const client = new Client();
@@ -25,6 +27,7 @@ const fetchFonts = () => {
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  const colorScheme = useColorScheme();
 
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
@@ -47,8 +50,25 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
-      <Navigation />
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <StatusBar
+        barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
+        backgroundColor={styles.StatusBar.backgroundColor}
+      />
+      <SafeAreaView
+        style={{
+          flex: 1,
+          backgroundColor: colors.background,
+        }}
+        edges={["top", "bottom"]}
+      >
+        <Navigation />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
+const styles = StyleSheet.create({
+  StatusBar: {
+    backgroundColor: colors.background, // Light background color
+  },
+});
