@@ -95,7 +95,7 @@ const ProfileScreen = ({ navigation }) => {
             <ProfileButtonTab
               iconName="settings-outline"
               text="Settings"
-              onPress={() => console.log("Settings Pressed")}
+              onPress={() => navigation.navigate("ChangePassword")}
             />
           </View>
 
