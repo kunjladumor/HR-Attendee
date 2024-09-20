@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, Modal, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Modal,
+  FlatList,
+  TouchableWithoutFeedback,
+} from "react-native";
 import colors from "@styles/ColorStyles";
 import CustomText from "./CustomText";
 import CustomButton from "./ButtonComponent";
@@ -26,26 +33,30 @@ const LeaveDetailsModal = ({ visible, onClose }) => {
       visible={visible}
       onRequestClose={onClose}
     >
-      <View style={styles.modalOverlay}>
-        <View style={styles.modalContent}>
-          <CustomText style={styles.modalTitle}>Leaves Balance</CustomText>
-          <FlatList
-            data={leaveData}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />
-          <CustomButton
-            title="Close"
-            color="primary"
-            padding={8}
-            iconName="close-outline"
-            iconSize={20}
-            iconColor={colors.white}
-            borderRadius={10}
-            onPress={onClose}
-          />
+      <TouchableWithoutFeedback onPress={onClose}>
+        <View style={styles.modalOverlay}>
+          <TouchableWithoutFeedback>
+            <View style={styles.modalContent}>
+              <CustomText style={styles.modalTitle}>Leaves Balance</CustomText>
+              <FlatList
+                data={leaveData}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
+              />
+              <CustomButton
+                title="Close"
+                color="primary"
+                padding={8}
+                iconName="close-outline"
+                iconSize={20}
+                iconColor={colors.white}
+                borderRadius={10}
+                onPress={onClose}
+              />
+            </View>
+          </TouchableWithoutFeedback>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };
@@ -57,11 +68,11 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: "100%",
-    marginTop: "auto",
     padding: 20,
     backgroundColor: colors.surface,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    marginTop: "auto",
   },
   modalTitle: {
     fontSize: 24,
