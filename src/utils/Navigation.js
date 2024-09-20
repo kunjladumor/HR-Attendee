@@ -18,6 +18,7 @@ import SetupScreen from "@screens/SetupScreen";
 import ForgotPasswordScreen from "@screens/ForgotPasswordScreen";
 import ApplicationIDScreen from "@screens/ApplicationIDScreen";
 import ChangePasswordScreen from "@screens/ChangePasswordScreen";
+import AnnouncementScreen from "@screens/AnnouncementScreen";
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,7 @@ const screens = [
   { name: "Setup", component: SetupScreen },
   { name: "ForgotPassword", component: ForgotPasswordScreen },
   { name: "ChangePassword", component: ChangePasswordScreen },
+  { name: "AnnouncementScreen", component: AnnouncementScreen },
 ];
 
 const checkInitialRoute = async (setInitialRoute) => {
