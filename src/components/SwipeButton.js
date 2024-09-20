@@ -6,6 +6,7 @@ import {
   Animated,
   Dimensions,
   Alert,
+  Platform,
 } from "react-native";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -155,10 +156,21 @@ const SwipeButton = ({ setIsLoading, showModal, onCheckInStatusChange }) => {
 const SwipeStyles = StyleSheet.create({
   absoluteContainer: {
     position: "absolute",
-    bottom: 90, // Adjust this value based on the height of your main tabs
+    bottom: Platform.OS === "android" ? 60 : 80,
     left: 0,
     right: 0,
     alignItems: "center",
+    width: "100%",
+    paddingVertical: 15,
+    backgroundColor: colors.neutral10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+    elevation: 24,
   },
   container: {
     width: "90%",
