@@ -162,7 +162,7 @@ const SwipeStyles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     paddingVertical: 15,
-    backgroundColor: colors.neutral10 + "CC",
+    backgroundColor: colors.background,
   },
   container: {
     width: "90%",
