@@ -16,28 +16,48 @@ import ProfileScreen from "@screens/ProfileScreen";
 import ActivityScreen from "@screens/ActivityScreen";
 import SetupScreen from "@screens/SetupScreen";
 import ForgotPasswordScreen from "@screens/ForgotPasswordScreen";
-import ApplicationIDScreen from "@screens/ApplicationIDScreen"; // Import the new screen
+import ApplicationIDScreen from "@screens/ApplicationIDScreen";
 
 const Stack = createStackNavigator();
+
+const screenOptions = { headerShown: false };
+
+const screens = [
+  { name: "ApplicationID", component: ApplicationIDScreen },
+  { name: "Login", component: LoginScreen },
+  { name: "BottomTabs", component: BottomTabs },
+  { name: "ApplyLeave", component: ApplyLeaveScreen },
+  { name: "MyProfile", component: MyProfileScreen },
+  { name: "ProfileScreen", component: ProfileScreen },
+  { name: "LeaveDetails", component: LeaveDetailsScreen },
+  { name: "Notifications", component: NotificationScreen },
+  { name: "TermsConditions", component: TermsConditionsScreen },
+  { name: "PrivacyPolicy", component: PrivacyPolicyScreen },
+  { name: "EditProfile", component: EditProfileScreen },
+  { name: "IDCard", component: IDCardScreen },
+  { name: "ActivityScreen", component: ActivityScreen },
+  { name: "Setup", component: SetupScreen },
+  { name: "ForgotPassword", component: ForgotPasswordScreen },
+];
+
+const checkInitialRoute = async (setInitialRoute) => {
+  const isApplicationIDEntered = await AsyncStorage.getItem(
+    "isApplicationIDEntered"
+  );
+  const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
+
+  if (isApplicationIDEntered !== "true") {
+    setInitialRoute("ApplicationID");
+  } else {
+    setInitialRoute(isLoggedIn === "true" ? "BottomTabs" : "Login");
+  }
+};
 
 const Navigation = () => {
   const [initialRoute, setInitialRoute] = useState(null);
 
   useEffect(() => {
-    const checkInitialRoute = async () => {
-      const isApplicationIDEntered = await AsyncStorage.getItem(
-        "isApplicationIDEntered"
-      );
-      const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
-
-      if (isApplicationIDEntered !== "true") {
-        setInitialRoute("ApplicationID");
-      } else {
-        setInitialRoute(isLoggedIn === "true" ? "BottomTabs" : "Login");
-      }
-    };
-
-    checkInitialRoute();
+    checkInitialRoute(setInitialRoute);
   }, []);
 
   if (initialRoute === null) {
@@ -47,81 +67,14 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={initialRoute}>
-        <Stack.Screen
-          name="ApplicationID"
-          component={ApplicationIDScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="BottomTabs"
-          component={BottomTabs}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ApplyLeave"
-          component={ApplyLeaveScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="MyProfile"
-          component={MyProfileScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ProfileScreen"
-          component={ProfileScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="LeaveDetails"
-          component={LeaveDetailsScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Notifications"
-          component={NotificationScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="TermsConditions"
-          component={TermsConditionsScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="PrivacyPolicy"
-          component={PrivacyPolicyScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="EditProfile"
-          component={EditProfileScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="IDCard"
-          component={IDCardScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ActivityScreen"
-          component={ActivityScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Setup"
-          component={SetupScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPasswordScreen}
-          options={{ headerShown: false }}
-        />
+        {screens.map(({ name, component }) => (
+          <Stack.Screen
+            key={name}
+            name={name}
+            component={component}
+            options={screenOptions}
+          />
+        ))}
       </Stack.Navigator>
     </NavigationContainer>
   );
