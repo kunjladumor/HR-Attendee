@@ -52,10 +52,10 @@ const ChangePasswordScreen = ({ navigation }) => {
     }
 
     setModalVisible(true);
-    setTimeout(() => {
-      setModalVisible(false);
-      navigation.goBack();
-    }, 1000);
+    // setTimeout(() => {
+    //   setModalVisible(false);
+    //   navigation.goBack();
+    // }, 1000);
   };
 
   return (
@@ -99,6 +99,7 @@ const ChangePasswordScreen = ({ navigation }) => {
                   else handleSave();
                 }}
                 returnKeyType={field === "confirmPassword" ? "done" : "next"}
+                autoCapitalize="none"
               />
               {errors[field] && (
                 <Text style={styles.errorText}>{errors[field]}</Text>
@@ -132,7 +133,7 @@ const ChangePasswordScreen = ({ navigation }) => {
                 color="primary"
                 padding={10}
                 iconName="checkmark-outline"
-                iconSize={40}
+                iconSize={50}
                 borderRadius={50}
                 iconColor={colors.white}
                 style={{ alignSelf: "center" }}
@@ -151,16 +152,18 @@ const ChangePasswordScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "end",
+    alignItems: "stretch",
     backgroundColor: "rgba(0,0,0,0.5)",
   },
   modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 15,
-    paddingHorizontal: 30,
+    backgroundColor: colors.surface,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    padding: 35,
+    paddingBottom: 50,
+
+    marginTop: "auto",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
