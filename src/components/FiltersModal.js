@@ -5,6 +5,7 @@ import { CheckBox } from "react-native-elements";
 import Inputs from "./Inputs"; // Import the Inputs component
 import colors from "@styles/ColorStyles"; // Adjust the import based on your project structure
 import CustomButton from "./ButtonComponent";
+import CustomText from "@components/CustomText";
 
 const FiltersModal = ({
   isVisible = false,
@@ -55,9 +56,9 @@ const FiltersModal = ({
   return (
     <Modal isVisible={isVisible} onBackdropPress={onClose} style={styles.modal}>
       <View style={styles.modalContent}>
-        <Text style={styles.title}>Filters</Text>
+        <CustomText style={styles.title}>Filters</CustomText>
 
-        <Text style={styles.label}>Leave Status</Text>
+        <CustomText style={styles.label}>Leave Status</CustomText>
         {leaveStatusOptions.map((option) => (
           <CheckBox
             key={option.id}
@@ -70,18 +71,18 @@ const FiltersModal = ({
             iconType="material"
             checkedIcon={
               <View style={styles.customCheckedIcon}>
-                <Text style={styles.customCheckmark}>✓</Text>
+                <CustomText style={styles.customCheckmark}>✓</CustomText>
               </View>
             }
             uncheckedIcon={
               <View style={styles.customUncheckedIcon}>
-                <Text style={styles.customCheckmark}>✗</Text>
+                <CustomText style={styles.customCheckmark}>✗</CustomText>
               </View>
             }
           />
         ))}
 
-        <Text style={styles.label}>Leave Type</Text>
+        <CustomText style={styles.label}>Leave Type</CustomText>
         {leaveTypeOptions.map((option) => (
           <CheckBox
             key={option.id}
@@ -94,18 +95,18 @@ const FiltersModal = ({
             iconType="material"
             checkedIcon={
               <View style={styles.customCheckedIcon}>
-                <Text style={styles.customCheckmark}>✓</Text>
+                <CustomText style={styles.customCheckmark}>✓</CustomText>
               </View>
             }
             uncheckedIcon={
               <View style={styles.customUncheckedIcon}>
-                <Text style={styles.customCheckmark}>✗</Text>
+                <CustomText style={styles.customCheckmark}>✗</CustomText>
               </View>
             }
           />
         ))}
 
-        <Text style={styles.label}>Team Member</Text>
+        <CustomText style={styles.label}>Team Member</CustomText>
         <Inputs
           type="picker"
           placeholder="Select Team Member"
@@ -157,11 +158,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "PoppinsSemiBold",
     marginBottom: 10,
+    color: colors.text,
   },
   label: {
     fontSize: 16,
     marginVertical: 10,
     fontFamily: "PoppinsMedium",
+    color: colors.neutral90,
   },
   footer: {
     flexDirection: "row",
@@ -205,7 +208,7 @@ const styles = StyleSheet.create({
   customUncheckedIcon: {
     width: 24,
     height: 24,
-    backgroundColor: "white",
+    backgroundColor: colors.surface,
     borderColor: colors.primary,
     borderWidth: 2,
     justifyContent: "center",
@@ -213,7 +216,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   customCheckmark: {
-    color: "white",
+    color: colors.surface,
     fontSize: 16,
   },
 });
