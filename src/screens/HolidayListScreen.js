@@ -2,7 +2,9 @@ import React from "react";
 import { View, ScrollView } from "react-native";
 import { CommonStyles } from "@styles/style";
 import CustomText from "@components/CustomText";
+import { FlatList } from "react-native-gesture-handler";
 import HolidayCard from "@components/HolidayCard"; // Adjust the import path as needed
+import AnnouncementCard from "@components/AnnouncementCard"; // Adjust the import path as needed
 
 const holidays = [
   { date: "2024-01-26", occasion: "Republic Day" },
@@ -23,11 +25,94 @@ const holidays = [
 const sortedHolidays = holidays.sort(
   (a, b) => new Date(a.date) - new Date(b.date)
 );
+const announcements = [
+  {
+    iconName: "megaphone-outline", // Correct icon name
+    title: "New Announcement",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    subcontent:
+      "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
+    time: "2 hours ago",
+  },
+  {
+    iconName: "megaphone-outline", // Correct icon name
+    title: "New Announcement",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    subcontent:
+      "Supposedly there are over one million words in the English Language. We trimmed some fat to take away really odd words and determiners. Then we grabbed the most popular \n\nwords and built this word randomizer. Just keep clicking generate—chances are you won't find a repeat!",
+    time: "2 hours ago",
+  },
+  {
+    iconName: "megaphone-outline", // Correct icon name
+    title: "New Announcement",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    subcontent:
+      "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
+    time: "2 hours ago",
+  },
+  {
+    iconName: "megaphone-outline", // Correct icon name
+    title: "New Announcement",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    subcontent:
+      "Supposedly there are over one million words in the English Language. We trimmed some fat to take away really odd words and determiners. Then we grabbed the most popular \n\nwords and built this word randomizer. Just keep clicking generate—chances are you won't find a repeat!",
+    time: "2 hours ago",
+  },
+  {
+    iconName: "megaphone-outline", // Correct icon name
+    title: "New Announcement",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    subcontent:
+      "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
+    time: "2 hours ago",
+  },
+  {
+    iconName: "megaphone-outline", // Correct icon name
+    title: "New Announcement",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    subcontent:
+      "Supposedly there are over one million words in the English Language. We trimmed some fat to take away really odd words and determiners. Then we grabbed the most popular \n\nwords and built this word randomizer. Just keep clicking generate—chances are you won't find a repeat!",
+    time: "2 hours ago",
+  },
+  {
+    iconName: "megaphone-outline", // Correct icon name
+    title: "New Announcement",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    subcontent:
+      "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
+    time: "2 hours ago",
+  },
+  {
+    iconName: "megaphone-outline", // Correct icon name
+    title: "New Announcement",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    subcontent:
+      "Supposedly there are over one million words in the English Language. We trimmed some fat to take away really odd words and determiners. Then we grabbed the most popular \n\nwords and built this word randomizer. Just keep clicking generate—chances are you won't find a repeat!",
+    time: "2 hours ago",
+  },
+];
 
-export default function HolidayListScreen() {
+function HolidayListScreen() {
   return (
     <ScrollView contentContainerStyle={CommonStyles.container}>
       <View style={CommonStyles.content}>
+        <CustomText style={CommonStyles.header}>Announcements</CustomText>
+        <FlatList
+          data={announcements}
+          renderItem={({ item }) => (
+            <AnnouncementCard
+              icon={item.iconName}
+              title={item.title}
+              content={item.content}
+              time={item.time}
+              subcontent={item.subcontent}
+            />
+          )}
+          keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={{ gap: 20 }}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        />
         <CustomText style={CommonStyles.header}>Holiday List</CustomText>
         {sortedHolidays.map((holiday, index) => (
           <HolidayCard
@@ -40,3 +125,4 @@ export default function HolidayListScreen() {
     </ScrollView>
   );
 }
+export default HolidayListScreen;
