@@ -2,13 +2,30 @@ import React from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import colors from "@styles/ColorStyles"; // Adjust the import based on your project structure
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 const deviceWidth = Dimensions.get("window").width;
 const cardWidth = deviceWidth / 1.25; // Subtract padding of 20
 
-const AnnouncementCard = ({ icon, title, content, time }) => {
+const AnnouncementCard = ({ icon, title, content, subcontent, time }) => {
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate("AnnouncementScreen", {
+      iconName: icon,
+      title,
+      content,
+      subcontent,
+      time,
+    });
+  };
+
   return (
-    <View style={[styles.card, { width: cardWidth }]}>
+    <TouchableOpacity
+      style={[styles.card, { width: cardWidth }]}
+      onPress={handlePress}
+    >
       <View style={styles.iconContainer}>
         <Ionicons
           name={icon}
@@ -22,7 +39,7 @@ const AnnouncementCard = ({ icon, title, content, time }) => {
         {content ? <Text style={styles.content}>{content}</Text> : null}
         {time ? <Text style={styles.time}>{time}</Text> : null}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
