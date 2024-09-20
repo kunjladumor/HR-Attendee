@@ -12,7 +12,7 @@ const LeavesList = ({ leaves }) => {
           dateRange={leave.dateRange}
           status={leave.status}
           applyDays={leave.applyDays}
-          leaveBalance={leave.leaveBalance}
+          leaveType={leave.leaveType}
           approvedBy={leave.approvedBy}
         />
       ))}

@@ -7,7 +7,7 @@ const LeaveCard = ({
   dateRange,
   status,
   applyDays,
-  leaveBalance,
+  leaveType,
   approvedBy,
 }) => {
   return (
@@ -32,8 +32,8 @@ const LeaveCard = ({
           <Text style={LeavesCard.value}>{applyDays}</Text>
         </View>
         <View style={LeavesCard.row}>
-          <Text style={LeavesCard.label}>Leave Balance</Text>
-          <Text style={LeavesCard.value}>{leaveBalance}</Text>
+          <Text style={LeavesCard.label}>Leave Type</Text>
+          <Text style={LeavesCard.value}>{leaveType}</Text>
         </View>
         <View style={LeavesCard.row}>
           <Text style={LeavesCard.label}>Approved By</Text>
@@ -74,6 +74,7 @@ const LeavesCard = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
   },
+
   approved: {
     color: colors.secondary2,
     backgroundColor: colors.secondary2 + "1A",

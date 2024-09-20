@@ -28,7 +28,7 @@ const LeavesScreen = () => {
       dateRange: "Apr 15, 2023 - Apr 18, 2023",
       status: "Approved",
       applyDays: 5,
-      leaveBalance: 10,
+      leaveType: "Casual",
       approvedBy: "Manager A",
     },
     {
@@ -36,7 +36,7 @@ const LeavesScreen = () => {
       dateRange: "Apr 15, 2023 - Apr 18, 2023",
       status: "Rejected",
       applyDays: 6,
-      leaveBalance: 8,
+      leaveType: "Sick",
       approvedBy: "Manager B",
     },
   ];
