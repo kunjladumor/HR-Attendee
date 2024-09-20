@@ -6,7 +6,6 @@ import { CommonStyles } from "@styles/style";
 import CustomText from "@components/CustomText";
 const AnnouncementScreen = ({ route, navigation }) => {
   const { iconName, title, content, time, subcontent } = route.params;
-  console.log(route.params);
   return (
     <View style={CommonStyles.container}>
       <View style={CommonStyles.content}>
