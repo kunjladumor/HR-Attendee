@@ -2,25 +2,24 @@ import React, { useState } from "react";
 import { View, FlatList, RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CustomText from "@components/CustomText";
-import LeavesGrid from "@components/LeavesGrid"; // Import the LeavesGrid component
+import LeavesGrid from "@components/LeavesGrid";
 import Tabs from "@components/Tabs";
-import LeavesList from "@components/LeavesList"; // Import the LeavesList component
+import LeavesList from "@components/LeavesList";
 import { CommonStyles } from "@styles/style";
-import LeaveRequest from "@components/LeaveRequest"; // Import the LeaveRequest component
+import LeaveRequest from "@components/LeaveRequest";
 import CustomButton from "@components/ButtonComponent";
 import colors from "@styles/ColorStyles";
-import FiltersModal from "@components/FiltersModal"; // Import the FiltersModal component
+import FiltersModal from "@components/FiltersModal";
 
 const LeavesScreen = () => {
   const navigation = useNavigation();
-
   const [isModalVisible, setModalVisible] = useState(false);
   const [filters, setFilters] = useState({
     status: "",
     type: "",
     teamMember: "",
   });
-  const [refreshing, setRefreshing] = useState(false); // State for refreshing
+  const [refreshing, setRefreshing] = useState(false);
 
   const leaves = [
     {
@@ -41,18 +40,9 @@ const LeavesScreen = () => {
     },
   ];
 
-  const onRefresh = () => {
-    setRefreshing(true);
-    // Simulate a network request
-    setTimeout(() => {
-      // Reset the announcements and page
-      setRefreshing(false);
-    }, 2000);
-  };
-
   const leaveRequests = [
     {
-      profileImage: require("@assets/images/user.png"), // Ensure the path is correct
+      profileImage: require("@assets/images/user.png"),
       name: "John Doe",
       leaveDates: "2023-10-01 to 2023-10-05",
       startDate: "2023-10-01",
@@ -67,7 +57,7 @@ const LeavesScreen = () => {
         "I need to attend to a family emergency and will be unavailable during this period.",
     },
     {
-      profileImage: require("@assets/images/user.png"), // Ensure the path is correct
+      profileImage: require("@assets/images/user.png"),
       name: "Jane Smith",
       leaveDates: "2023-09-15 to 2023-09-20",
       startDate: "2023-09-15",
@@ -81,6 +71,14 @@ const LeavesScreen = () => {
       reason: "I am unwell and need to take some time off to recover.",
     },
   ];
+
+  const handleApprove = (index) => {
+    console.log(`Approved leave request ${index}`);
+  };
+
+  const handleReject = (index) => {
+    console.log(`Rejected leave request ${index}`);
+  };
 
   const tabs = [
     { title: "Upcoming", content: <LeavesList leaves={leaves} /> },
@@ -97,25 +95,13 @@ const LeavesScreen = () => {
     },
   ];
 
-  const handleApprove = (index) => {
-    console.log(`Approved leave request ${index}`);
-  };
+  const handleApplyFilters = () => setModalVisible(false);
+  const handleResetFilters = () =>
+    setFilters({ status: "", type: "", teamMember: "" });
 
-  const handleReject = (index) => {
-    console.log(`Rejected leave request ${index}`);
-  };
-
-  const handleApplyFilters = () => {
-    // Apply the filters logic here
-    setModalVisible(false);
-  };
-
-  const handleResetFilters = () => {
-    setFilters({
-      status: "",
-      type: "",
-      teamMember: "",
-    });
+  const onRefresh = () => {
+    setRefreshing(true);
+    setTimeout(() => setRefreshing(false), 2000);
   };
 
   return (
