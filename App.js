@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-
 import { StyleSheet, StatusBar, useColorScheme } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import Navigation from "@utils/Navigation";
-
 import { Client, Account, ID } from "react-native-appwrite";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import colors from "./src/styles/ColorStyles";
