@@ -53,7 +53,7 @@ export default function App() {
     <SafeAreaProvider>
       <StatusBar
         barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
-        backgroundColor={styles.StatusBar.backgroundColor}
+        backgroundColor={colors.background}
       />
       <SafeAreaView
         style={{
@@ -67,8 +67,3 @@ export default function App() {
     </SafeAreaProvider>
   );
 }
-const styles = StyleSheet.create({
-  StatusBar: {
-    backgroundColor: colors.background, // Light background color
-  },
-});
