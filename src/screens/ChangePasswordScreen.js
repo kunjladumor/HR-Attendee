@@ -52,10 +52,10 @@ const ChangePasswordScreen = ({ navigation }) => {
     }
 
     setModalVisible(true);
-    // setTimeout(() => {
-    //   setModalVisible(false);
-    //   navigation.goBack();
-    // }, 1000);
+    setTimeout(() => {
+      setModalVisible(false);
+      navigation.goBack();
+    }, 1250);
   };
 
   return (
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontFamily: "PoppinsMedium",
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 18,
     color: colors.text,
   },
 });
