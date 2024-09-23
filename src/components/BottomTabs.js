@@ -108,6 +108,7 @@ const BottomTabs = () => (
       tabBarIcon: ({ focused }) => {
         const { iconName } = getTabIconAndLabel(route.name, focused);
         const tab = tabs.find((tab) => tab.name === route.name);
+
         return (
           <View>
             <Ionicons
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: -6,
     top: -3,
-    backgroundColor: "red",
+    backgroundColor: colors.secondary,
     borderRadius: 8,
     width: 16,
     height: 16,
