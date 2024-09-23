@@ -38,8 +38,11 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     marginRight: 16,
-    backgroundColor: `${colors.neutral90}1A`,
-    padding: 10,
+    backgroundColor: `${colors.neutral30}1A`,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: colors.neutral30,
     width: 44,
     height: 44,
     borderRadius: 25,
