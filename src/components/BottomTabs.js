@@ -61,8 +61,15 @@ const getTabIconAndLabel = (routeName, focused) => {
   return { iconName: icons[routeName], label: labels[routeName] };
 };
 
-const Badge = ({ count }) => (
-  <View style={styles.badgeContainer}>
+const Badge = ({ count, focused }) => (
+  <View
+    style={[
+      styles.badgeContainer,
+      {
+        top: focused ? 0 : -3,
+      },
+    ]}
+  >
     <Text style={styles.badgeText}>{count}</Text>
   </View>
 );
@@ -71,7 +78,14 @@ const AnimatedTabButton = ({ children, onPress, focused }) => {
   const scale = useSharedValue(1);
 
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: withSpring(focused ? 1.025 : 1) }],
+    transform: [
+      {
+        scale: withSpring(focused ? 1.1 : 1, {
+          damping: 20, // Increase damping to slow down the animation
+          stiffness: 90, // Decrease stiffness to make the animation smoother
+        }),
+      },
+    ],
   }));
 
   const borderStyle = focused
@@ -116,7 +130,9 @@ const BottomTabs = () => (
               size={focused ? 28 : 24} // Increase icon size when focused
               color={focused ? colors.primary : colors.neutral50}
             />
-            {tab.badgeCount && <Badge count={tab.badgeCount} />}
+            {tab.badgeCount && (
+              <Badge count={tab.badgeCount} focused={focused} />
+            )}
           </View>
         );
       },
