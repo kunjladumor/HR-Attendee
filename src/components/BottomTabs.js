@@ -1,6 +1,13 @@
 import React from "react";
-import { Text, StyleSheet, TouchableOpacity, Platform } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+  View,
+} from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -11,7 +18,6 @@ import ProfileScreen from "@screens/ProfileScreen";
 import TeamScreen from "@screens/TeamScreen";
 import LeavesScreen from "@screens/LeavesScreen";
 import HolidayListScreen from "@screens/HolidayListScreen";
-import { Ionicons } from "@expo/vector-icons"; // or any other icon library
 import colors from "@styles/ColorStyles";
 
 const Tab = createBottomTabNavigator();
@@ -25,56 +31,51 @@ const ROUTES = {
   TEAM: "Team",
 };
 
+const tabs = [
+  { name: ROUTES.TEAM, component: TeamScreen, badgeCount: 1 },
+  { name: ROUTES.LEAVES, component: LeavesScreen, badgeCount: 0 },
+  { name: ROUTES.HOME, component: HomeScreen, badgeCount: 0 },
+  { name: ROUTES.LEAVES_LIST, component: HolidayListScreen, badgeCount: 0 },
+  { name: ROUTES.PROFILE, component: ProfileScreen, badgeCount: 3 },
+];
+
 const getTabIconAndLabel = (routeName, focused) => {
-  let iconName;
-  let label;
+  const icons = {
+    [ROUTES.HOME]: focused ? "home" : "home-outline",
+    [ROUTES.CHECK_IN]: focused ? "leaf" : "leaf-outline",
+    [ROUTES.PROFILE]: focused ? "person" : "person-outline",
+    [ROUTES.LEAVES_LIST]: focused ? "list" : "list-outline",
+    [ROUTES.LEAVES]: focused ? "calendar" : "calendar-outline",
+    [ROUTES.TEAM]: focused ? "people" : "people-outline",
+  };
 
-  switch (routeName) {
-    case ROUTES.HOME:
-      iconName = focused ? "home" : "home-outline";
-      label = "Home";
-      break;
-    case ROUTES.CHECK_IN:
-      iconName = focused ? "leaf" : "leaf-outline";
-      label = "CheckIn";
-      break;
-    case ROUTES.PROFILE:
-      iconName = focused ? "person" : "person-outline";
-      label = "Profile";
-      break;
-    case ROUTES.LEAVES_LIST:
-      iconName = focused ? "list" : "list-outline";
-      label = "Holiday";
-      break;
-    case ROUTES.LEAVES:
-      iconName = focused ? "calendar" : "calendar-outline";
-      label = "Leaves";
-      break;
-    case ROUTES.TEAM:
-      iconName = focused ? "people" : "people-outline";
-      label = "Team";
-      break;
-    default:
-      iconName = focused ? "default" : "default-icon"; // Optional: handle default case
-      label = "Default";
-      break;
-  }
+  const labels = {
+    [ROUTES.HOME]: "Home",
+    [ROUTES.CHECK_IN]: "CheckIn",
+    [ROUTES.PROFILE]: "Profile",
+    [ROUTES.LEAVES_LIST]: "Holiday",
+    [ROUTES.LEAVES]: "Leaves",
+    [ROUTES.TEAM]: "Team",
+  };
 
-  return { iconName, label };
+  return { iconName: icons[routeName], label: labels[routeName] };
 };
+
+const Badge = ({ count }) => (
+  <View style={styles.badgeContainer}>
+    <Text style={styles.badgeText}>{count}</Text>
+  </View>
+);
 
 const AnimatedTabButton = ({ children, onPress, focused }) => {
   const scale = useSharedValue(1);
 
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: withSpring(focused ? 1.15 : 1) }],
+    transform: [{ scale: withSpring(focused ? 1.025 : 1) }],
   }));
 
   const borderStyle = focused
-    ? {
-        borderTopWidth: 2,
-        borderTopColor: colors.primary,
-      }
+    ? { borderTopWidth: 2, borderTopColor: colors.primary }
     : {};
 
   return (
@@ -92,47 +93,44 @@ const AnimatedTabButton = ({ children, onPress, focused }) => {
   );
 };
 
-const BottomTabs = () => {
-  return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      screenOptions={({ route }) => ({
-        tabBarShowLabel: true,
-        tabBarStyle: styles.tabBar,
-        tabBarButton: (props) => (
-          <AnimatedTabButton
-            {...props}
-            focused={props.accessibilityState.selected}
-          />
-        ),
-        tabBarIcon: ({ focused, color, size }) => {
-          const { iconName } = getTabIconAndLabel(route.name, focused);
-          return (
+const BottomTabs = () => (
+  <Tab.Navigator
+    initialRouteName={ROUTES.HOME}
+    screenOptions={({ route }) => ({
+      tabBarShowLabel: true,
+      tabBarStyle: styles.tabBar,
+      tabBarButton: (props) => (
+        <AnimatedTabButton
+          {...props}
+          focused={props.accessibilityState.selected}
+        />
+      ),
+      tabBarIcon: ({ focused }) => {
+        const { iconName } = getTabIconAndLabel(route.name, focused);
+        const tab = tabs.find((tab) => tab.name === route.name);
+        return (
+          <View>
             <Ionicons
               name={iconName}
-              size={24}
+              size={focused ? 28 : 24} // Increase icon size when focused
               color={focused ? colors.primary : colors.neutral50}
             />
-          );
-        },
-        tabBarLabel: ({ focused }) => {
-          const { label } = getTabIconAndLabel(route.name, focused);
-          if (focused) {
-            return <Text style={styles.tabLabel}>{label}</Text>;
-          }
-          return null;
-        },
-        headerShown: false, // Hide the header
-      })}
-    >
-      <Tab.Screen name={ROUTES.TEAM} component={TeamScreen} />
-      <Tab.Screen name={ROUTES.LEAVES} component={LeavesScreen} />
-      <Tab.Screen name={ROUTES.HOME} component={HomeScreen} />
-      <Tab.Screen name={ROUTES.LEAVES_LIST} component={HolidayListScreen} />
-      <Tab.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-};
+            {tab.badgeCount > 0 && <Badge count={tab.badgeCount} />}
+          </View>
+        );
+      },
+      tabBarLabel: ({ focused }) => {
+        const { label } = getTabIconAndLabel(route.name, focused);
+        return focused ? <Text style={styles.tabLabel}>{label}</Text> : null;
+      },
+      headerShown: false,
+    })}
+  >
+    {tabs.map((tab) => (
+      <Tab.Screen key={tab.name} name={tab.name} component={tab.component} />
+    ))}
+  </Tab.Navigator>
+);
 
 const styles = StyleSheet.create({
   tabBar: {
@@ -148,6 +146,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: -1,
   },
   tabIcon: {
     alignItems: "center",
@@ -161,10 +160,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Poppins",
   },
-  screen: {
-    flex: 1,
+  badgeContainer: {
+    position: "absolute",
+    right: -6,
+    top: -3,
+    backgroundColor: "red",
+    borderRadius: 8,
+    width: 16,
+    height: 16,
     justifyContent: "center",
     alignItems: "center",
+  },
+  badgeText: {
+    color: colors.white,
+    fontSize: 10,
+    lineHeight: 16,
+    fontFamily: "PoppinsSemiBold",
   },
 });
 
