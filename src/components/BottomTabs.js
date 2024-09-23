@@ -90,6 +90,37 @@ const AnimatedTabButton = ({ children, onPress, focused }) => {
   );
 };
 
+const AnimatedTabLabel = ({ label, focused }) => {
+  const opacity = useSharedValue(focused ? 1 : 0);
+  const translateY = useSharedValue(focused ? 0 : -10);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: withSpring(opacity.value, {
+      damping: 20,
+      stiffness: 90,
+    }),
+    transform: [
+      {
+        translateY: withSpring(translateY.value, {
+          damping: 20,
+          stiffness: 90,
+        }),
+      },
+    ],
+  }));
+
+  React.useEffect(() => {
+    opacity.value = focused ? 1 : 0;
+    translateY.value = focused ? -8 : 0;
+  }, [focused]);
+
+  return (
+    <Animated.Text style={[styles.tabLabel, animatedStyle]}>
+      {label}
+    </Animated.Text>
+  );
+};
+
 const BottomTabs = () => (
   <Tab.Navigator
     initialRouteName={ROUTES.HOME}
@@ -118,15 +149,7 @@ const BottomTabs = () => (
       },
       tabBarLabel: ({ focused }) => {
         const { label } = getTabIconAndLabel(route.name, focused);
-        return (
-          <Text
-            style={
-              focused ? styles.tabLabel : { opacity: 0, marginBottom: -10 }
-            }
-          >
-            {label}
-          </Text>
-        );
+        return <AnimatedTabLabel label={label} focused={focused} />;
       },
       headerShown: false,
     })}
@@ -160,11 +183,8 @@ const styles = StyleSheet.create({
   tabLabel: {
     fontSize: 10,
     color: colors.primary,
-    // marginTop: Platform.OS === "android" ? -5 : -10,
-    // marginBottom: Platform.OS === "android" ? 5 : 0,
     textAlign: "center",
     fontFamily: "Poppins",
-    transform: [{ translateY: -8 }],
   },
   badgeContainer: {
     position: "absolute",
