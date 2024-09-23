@@ -5,6 +5,8 @@ import {
   ScrollView,
   TextInput,
   RefreshControl,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons"; // Import the Icon component
 import CustomText from "@components/CustomText"; // Import the CustomText component
@@ -110,82 +112,82 @@ const TeamScreen = function () {
   );
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollView}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <View
-          style={[
-            CommonStyles.rowSpaceBetween,
-            { marginBottom: 10, alignItems: "center" },
-          ]}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <ScrollView
+          contentContainerStyle={styles.scrollView}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         >
-          <CustomText style={CommonStyles.header}>Team Members</CustomText>
-          <CustomButton
-            iconName={"ellipsis-vertical-outline"}
-            iconSize={20}
-            iconColor={colors.neutral80}
-            onPress={() => {
-              /* View check-ins logic */
-            }}
-          />
-        </View>
-        <View
-          style={[
-            styles.searchBarContainer,
-            isFocused && { borderColor: colors.primary },
-          ]}
-        >
-          <Icon
-            name="search"
-            size={24}
-            color={isFocused ? colors.primary : colors.neutral50}
-            style={styles.searchIcon}
-          />
-          <TextInput
-            style={styles.searchBar}
-            placeholder="Search team members..."
-            placeholderTextColor={colors.neutral50} // Set the placeholder text color
-            value={searchQuery}
-            onChangeText={(text) => setSearchQuery(text)}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-          />
-        </View>
-        {filteredTeamMembers.map((member) => (
-          <TeamMemberCard
-            key={member.id}
-            profilePicture={member.profilePicture}
-            name={member.name}
-            designation={member.designation}
-            phoneNumber={member.phoneNumber}
-          />
-        ))}
-      </ScrollView>
-      <CustomButton
-        title="Add Members"
-        onPress={() => {
-          /* Add member logic */
-        }}
-        iconName={"add-circle-outline"}
-        iconSize={24}
-        iconColor={colors.white}
-        style={styles.addButton}
-      />
-    </View>
+          <View
+            style={[
+              CommonStyles.rowSpaceBetween,
+              { marginBottom: 10, alignItems: "center" },
+            ]}
+          >
+            <CustomText style={CommonStyles.header}>Team Members</CustomText>
+            <CustomButton
+              iconName={"ellipsis-vertical-outline"}
+              iconSize={20}
+              iconColor={colors.neutral80}
+              onPress={() => {
+                /* View check-ins logic */
+              }}
+            />
+          </View>
+          <View
+            style={[
+              styles.searchBarContainer,
+              isFocused && { borderColor: colors.primary },
+            ]}
+          >
+            <Icon
+              name="search"
+              size={24}
+              color={isFocused ? colors.primary : colors.neutral50}
+              style={styles.searchIcon}
+            />
+            <TextInput
+              style={styles.searchBar}
+              placeholder="Search team members..."
+              placeholderTextColor={colors.neutral50} // Set the placeholder text color
+              value={searchQuery}
+              onChangeText={(text) => setSearchQuery(text)}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+            />
+          </View>
+          {filteredTeamMembers.map((member) => (
+            <TeamMemberCard
+              key={member.id}
+              profilePicture={member.profilePicture}
+              name={member.name}
+              designation={member.designation}
+              phoneNumber={member.phoneNumber}
+            />
+          ))}
+        </ScrollView>
+        <CustomButton
+          title="Add Members"
+          onPress={() => {
+            /* Add member logic */
+          }}
+          iconName={"add-circle-outline"}
+          iconSize={24}
+          iconColor={colors.white}
+          style={styles.addButton}
+        />
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     backgroundColor: colors.background,
   },
-
   searchBarContainer: {
     flexDirection: "row",
     alignItems: "center",
