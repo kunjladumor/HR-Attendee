@@ -33,10 +33,10 @@ const ROUTES = {
 
 const tabs = [
   { name: ROUTES.TEAM, component: TeamScreen },
-  { name: ROUTES.LEAVES, component: LeavesScreen, badgeCount: 2 },
+  { name: ROUTES.LEAVES, component: LeavesScreen },
   { name: ROUTES.HOME, component: HomeScreen },
   { name: ROUTES.LEAVES_LIST, component: HolidayListScreen },
-  { name: ROUTES.PROFILE, component: ProfileScreen, badgeCount: 3 },
+  { name: ROUTES.PROFILE, component: ProfileScreen },
 ];
 
 const getTabIconAndLabel = (routeName, focused) => {
@@ -61,19 +61,6 @@ const getTabIconAndLabel = (routeName, focused) => {
   return { iconName: icons[routeName], label: labels[routeName] };
 };
 
-const Badge = ({ count, focused }) => (
-  <View
-    style={[
-      styles.badgeContainer,
-      {
-        top: focused ? 0 : -3,
-      },
-    ]}
-  >
-    <Text style={styles.badgeText}>{count}</Text>
-  </View>
-);
-
 const AnimatedTabButton = ({ children, onPress, focused }) => {
   const scale = useSharedValue(1);
 
@@ -88,15 +75,11 @@ const AnimatedTabButton = ({ children, onPress, focused }) => {
     ],
   }));
 
-  const borderStyle = focused
-    ? { borderTopWidth: 2, borderTopColor: colors.primary }
-    : {};
-
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={1}
-      style={[styles.tabButton, borderStyle]}
+      style={styles.tabButton}
       accessibilityRole="button"
       accessibilityState={focused ? { selected: true } : {}}
     >
@@ -130,15 +113,20 @@ const BottomTabs = () => (
               size={focused ? 28 : 24} // Increase icon size when focused
               color={focused ? colors.primary : colors.neutral50}
             />
-            {tab.badgeCount && (
-              <Badge count={tab.badgeCount} focused={focused} />
-            )}
           </View>
         );
       },
       tabBarLabel: ({ focused }) => {
         const { label } = getTabIconAndLabel(route.name, focused);
-        return focused ? <Text style={styles.tabLabel}>{label}</Text> : null;
+        return (
+          <Text
+            style={
+              focused ? styles.tabLabel : { opacity: 0, marginBottom: -10 }
+            }
+          >
+            {label}
+          </Text>
+        );
       },
       headerShown: false,
     })}
@@ -172,10 +160,11 @@ const styles = StyleSheet.create({
   tabLabel: {
     fontSize: 10,
     color: colors.primary,
-    marginTop: Platform.OS === "android" ? -5 : -10,
-    marginBottom: Platform.OS === "android" ? 5 : 0,
+    // marginTop: Platform.OS === "android" ? -5 : -10,
+    // marginBottom: Platform.OS === "android" ? 5 : 0,
     textAlign: "center",
     fontFamily: "Poppins",
+    transform: [{ translateY: -8 }],
   },
   badgeContainer: {
     position: "absolute",
