@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Keyboard } from "react-native";
 import Modal from "react-native-modal";
 import { CheckBox } from "react-native-elements";
-import Inputs from "./Inputs"; // Import the Inputs component
-import colors from "@styles/ColorStyles"; // Adjust the import based on your project structure
+import Inputs from "./Inputs";
+import colors from "@styles/ColorStyles";
 import CustomButton from "./ButtonComponent";
 import CustomText from "@components/CustomText";
 
@@ -35,23 +35,37 @@ const FiltersModal = ({
     // Add more team members as needed
   ];
 
-  const handleStatusChange = (value) => {
+  const handleCheckboxChange = (type, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
-      status: prevFilters.status.includes(value)
-        ? prevFilters.status.filter((item) => item !== value)
-        : [...prevFilters.status, value],
+      [type]: prevFilters[type].includes(value)
+        ? prevFilters[type].filter((item) => item !== value)
+        : [...prevFilters[type], value],
     }));
   };
 
-  const handleTypeChange = (value) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      type: prevFilters.type.includes(value)
-        ? prevFilters.type.filter((item) => item !== value)
-        : [...prevFilters.type, value],
-    }));
-  };
+  const renderCheckbox = (option, type) => (
+    <CheckBox
+      key={option.id}
+      title={option.label}
+      checked={filters[type].includes(option.value)}
+      onPress={() => handleCheckboxChange(type, option.value)}
+      containerStyle={styles.checkboxContainer}
+      textStyle={styles.checkboxText}
+      checkedColor={colors.primary}
+      iconType="material"
+      checkedIcon={
+        <View style={styles.customCheckedIcon}>
+          <CustomText style={styles.customCheckmark}>✓</CustomText>
+        </View>
+      }
+      uncheckedIcon={
+        <View style={styles.customUncheckedIcon}>
+          <CustomText style={styles.customCheckmark}>✗</CustomText>
+        </View>
+      }
+    />
+  );
 
   return (
     <Modal isVisible={isVisible} onBackdropPress={onClose} style={styles.modal}>
@@ -59,52 +73,10 @@ const FiltersModal = ({
         <CustomText style={styles.title}>Filters</CustomText>
 
         <CustomText style={styles.label}>Leave Status</CustomText>
-        {leaveStatusOptions.map((option) => (
-          <CheckBox
-            key={option.id}
-            title={option.label}
-            checked={filters.status.includes(option.value)}
-            onPress={() => handleStatusChange(option.value)}
-            containerStyle={styles.checkboxContainer}
-            textStyle={styles.checkboxText}
-            checkedColor={colors.primary}
-            iconType="material"
-            checkedIcon={
-              <View style={styles.customCheckedIcon}>
-                <CustomText style={styles.customCheckmark}>✓</CustomText>
-              </View>
-            }
-            uncheckedIcon={
-              <View style={styles.customUncheckedIcon}>
-                <CustomText style={styles.customCheckmark}>✗</CustomText>
-              </View>
-            }
-          />
-        ))}
+        {leaveStatusOptions.map((option) => renderCheckbox(option, "status"))}
 
         <CustomText style={styles.label}>Leave Type</CustomText>
-        {leaveTypeOptions.map((option) => (
-          <CheckBox
-            key={option.id}
-            title={option.label}
-            checked={filters.type.includes(option.value)}
-            onPress={() => handleTypeChange(option.value)}
-            containerStyle={styles.checkboxContainer}
-            textStyle={styles.checkboxText}
-            checkedColor={colors.primary}
-            iconType="material"
-            checkedIcon={
-              <View style={styles.customCheckedIcon}>
-                <CustomText style={styles.customCheckmark}>✓</CustomText>
-              </View>
-            }
-            uncheckedIcon={
-              <View style={styles.customUncheckedIcon}>
-                <CustomText style={styles.customCheckmark}>✗</CustomText>
-              </View>
-            }
-          />
-        ))}
+        {leaveTypeOptions.map((option) => renderCheckbox(option, "type"))}
 
         <CustomText style={styles.label}>Team Member</CustomText>
         <Inputs
