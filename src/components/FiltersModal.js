@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   modalContent: {
-    backgroundColor: colors.surface,
+    backgroundColor: colors.background,
     padding: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
-    color: "white",
+    color: colors.white,
     fontSize: 16,
     fontFamily: "Poppins",
     fontWeight: "500",
@@ -194,7 +194,6 @@ const styles = StyleSheet.create({
   checkboxText: {
     fontSize: 16,
     fontFamily: "Poppins",
-    fontWeight: "500",
     color: colors.neutral90,
   },
   customCheckedIcon: {
@@ -208,7 +207,7 @@ const styles = StyleSheet.create({
   customUncheckedIcon: {
     width: 24,
     height: 24,
-    backgroundColor: colors.surface,
+    backgroundColor: colors.background,
     borderColor: colors.primary,
     borderWidth: 2,
     justifyContent: "center",
@@ -216,7 +215,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   customCheckmark: {
-    color: colors.surface,
+    color: colors.background,
     fontSize: 16,
   },
 });
