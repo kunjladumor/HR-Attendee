@@ -142,13 +142,13 @@ const TeamScreen = function () {
           <Icon
             name="search"
             size={24}
-            color={isFocused ? colors.primary : colors.neutral30}
+            color={isFocused ? colors.primary : colors.neutral50}
             style={styles.searchIcon}
           />
           <TextInput
             style={styles.searchBar}
             placeholder="Search team members..."
-            placeholderTextColor={colors.neutral30} // Set the placeholder text color
+            placeholderTextColor={colors.neutral50} // Set the placeholder text color
             value={searchQuery}
             onChangeText={(text) => setSearchQuery(text)}
             onFocus={() => setIsFocused(true)}
@@ -189,13 +189,13 @@ const styles = StyleSheet.create({
   searchBarContainer: {
     flexDirection: "row",
     alignItems: "center",
-    borderColor: "transparent",
+    borderColor: colors.neutral30, // Changed border color
     borderWidth: 1,
     borderRadius: 10, // Adjusted border radius for rounded corners
     padding: 5,
     paddingLeft: 10,
     marginBottom: 20,
-    backgroundColor: colors.neutral10, // Changed background color
+    backgroundColor: colors.background, // Changed background color
     // Shadow properties for iOS
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
