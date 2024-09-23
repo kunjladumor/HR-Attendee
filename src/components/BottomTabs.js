@@ -32,10 +32,10 @@ const ROUTES = {
 };
 
 const tabs = [
-  { name: ROUTES.TEAM, component: TeamScreen, badgeCount: 1 },
-  { name: ROUTES.LEAVES, component: LeavesScreen, badgeCount: 0 },
-  { name: ROUTES.HOME, component: HomeScreen, badgeCount: 0 },
-  { name: ROUTES.LEAVES_LIST, component: HolidayListScreen, badgeCount: 0 },
+  { name: ROUTES.TEAM, component: TeamScreen },
+  { name: ROUTES.LEAVES, component: LeavesScreen, badgeCount: 2 },
+  { name: ROUTES.HOME, component: HomeScreen },
+  { name: ROUTES.LEAVES_LIST, component: HolidayListScreen },
   { name: ROUTES.PROFILE, component: ProfileScreen, badgeCount: 3 },
 ];
 
@@ -116,7 +116,7 @@ const BottomTabs = () => (
               size={focused ? 28 : 24} // Increase icon size when focused
               color={focused ? colors.primary : colors.neutral50}
             />
-            {tab.badgeCount > 0 && <Badge count={tab.badgeCount} />}
+            {tab.badgeCount && <Badge count={tab.badgeCount} />}
           </View>
         );
       },
