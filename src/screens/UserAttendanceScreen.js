@@ -60,7 +60,7 @@ const UserAttendanceScreen = ({ navigation, route }) => {
             </CustomText>
           </View>
         </View>
-        <View style={styles.filterContainer}>
+        {/* <View style={styles.filterContainer}>
           <TouchableOpacity
             style={[
               styles.filterButton,
@@ -109,7 +109,7 @@ const UserAttendanceScreen = ({ navigation, route }) => {
               Year
             </CustomText>
           </TouchableOpacity>
-        </View>
+        </View> */}
         <CalendarComponent />
         <View style={styles.attendanceStatsContainer}>
           {attendanceData.map((entry, index) => (
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 18,
     fontFamily: "PoppinsSemiBold",
+    color: colors.text,
   },
   userDesignation: {
     fontSize: 16,
@@ -173,9 +174,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontFamily: "PoppinsMedium",
   },
-  attendanceStatsContainer: {
-    marginTop: 20,
-  },
+
   attendanceEntry: {
     flexDirection: "row",
     justifyContent: "space-between",
