@@ -234,7 +234,7 @@ const Inputs = forwardRef(
   }
 );
 
-const InputStyles = StyleSheet.create({
+export const InputStyles = StyleSheet.create({
   errorText: {
     color: colors.secondary,
     fontSize: 12,
@@ -257,6 +257,10 @@ const InputStyles = StyleSheet.create({
     paddingHorizontal: 10,
     color: colors.text,
     fontFamily: "Poppins", // Change this to your desired font
+  },
+  textarea: {
+    height: 100,
+    textAlignVertical: "top",
   },
   inputError: {
     borderColor: colors.secondary,
