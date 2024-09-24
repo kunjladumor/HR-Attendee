@@ -77,6 +77,13 @@ const notifications = [
     content: "Your system requires an update.",
     time: "Yesterday",
   },
+  {
+    id: "11",
+    icon: "notifications-outline",
+    title: "New Message",
+    content: "You have received a new message.",
+    time: "Yesterday",
+  },
 ];
 
 const NotificationScreen = ({ navigation }) => {
@@ -99,6 +106,7 @@ const NotificationScreen = ({ navigation }) => {
             title={notification.title}
             content={notification.content}
             time={notification.time}
+            navigation={navigation}
           />
         ))}
       </View>
