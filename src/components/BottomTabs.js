@@ -35,24 +35,18 @@ const tabs = [
 
 const getTabIconAndLabel = (routeName, focused) => {
   const icons = {
-    [ROUTES.HOME]: focused ? "home" : "home-outline",
-    [ROUTES.CHECK_IN]: focused ? "leaf" : "leaf-outline",
-    [ROUTES.PROFILE]: focused ? "person" : "person-outline",
-    [ROUTES.LEAVES_LIST]: focused ? "list" : "list-outline",
-    [ROUTES.LEAVES]: focused ? "calendar" : "calendar-outline",
-    [ROUTES.TEAM]: focused ? "people" : "people-outline",
+    [ROUTES.HOME]: "home",
+    [ROUTES.CHECK_IN]: "leaf",
+    [ROUTES.PROFILE]: "person",
+    [ROUTES.LEAVES_LIST]: "list",
+    [ROUTES.LEAVES]: "calendar",
+    [ROUTES.TEAM]: "people",
   };
 
-  const labels = {
-    [ROUTES.HOME]: "Home",
-    [ROUTES.CHECK_IN]: "CheckIn",
-    [ROUTES.PROFILE]: "Profile",
-    [ROUTES.LEAVES_LIST]: "Holiday",
-    [ROUTES.LEAVES]: "Leaves",
-    [ROUTES.TEAM]: "Team",
+  return {
+    iconName: focused ? icons[routeName] : `${icons[routeName]}-outline`,
+    label: routeName,
   };
-
-  return { iconName: icons[routeName], label: labels[routeName] };
 };
 
 const AnimatedTabButton = ({ children, onPress, focused }) => {
@@ -60,12 +54,7 @@ const AnimatedTabButton = ({ children, onPress, focused }) => {
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
-      {
-        scale: withSpring(focused ? 1.1 : 1, {
-          damping: 20, // Increase damping to slow down the animation
-          stiffness: 90, // Decrease stiffness to make the animation smoother
-        }),
-      },
+      { scale: withSpring(focused ? 1.1 : 1, { damping: 20, stiffness: 90 }) },
     ],
   }));
 
@@ -89,10 +78,7 @@ const AnimatedTabLabel = ({ label, focused }) => {
   const translateY = useSharedValue(focused ? 0 : -10);
 
   const animatedStyle = useAnimatedStyle(() => ({
-    opacity: withSpring(opacity.value, {
-      damping: 20,
-      stiffness: 90,
-    }),
+    opacity: withSpring(opacity.value, { damping: 20, stiffness: 90 }),
     transform: [
       {
         translateY: withSpring(translateY.value, {
@@ -129,16 +115,13 @@ const BottomTabs = () => (
       ),
       tabBarIcon: ({ focused }) => {
         const { iconName } = getTabIconAndLabel(route.name, focused);
-        const tab = tabs.find((tab) => tab.name === route.name);
-
         return (
-          <View>
-            <Ionicons
-              name={iconName}
-              size={focused ? 28 : 24} // Increase icon size when focused
-              color={focused ? colors.primary : colors.neutral50}
-            />
-          </View>
+          <Ionicons
+            name={iconName}
+            size={focused ? 28 : 24}
+            color={focused ? colors.primary : colors.neutral50}
+            style={{ marginBottom: focused ? 0 : -10 }}
+          />
         );
       },
       tabBarLabel: ({ focused }) => {
@@ -179,23 +162,6 @@ const styles = StyleSheet.create({
     color: colors.primary,
     textAlign: "center",
     fontFamily: "Poppins",
-  },
-  badgeContainer: {
-    position: "absolute",
-    right: -6,
-    top: -3,
-    backgroundColor: colors.secondary,
-    borderRadius: 8,
-    width: 16,
-    height: 16,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  badgeText: {
-    color: colors.white,
-    fontSize: 10,
-    lineHeight: 16,
-    fontFamily: "PoppinsSemiBold",
   },
 });
 
