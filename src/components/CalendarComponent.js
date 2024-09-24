@@ -74,22 +74,22 @@ const CalendarComponent = () => {
     // Fetch and set attendance data for the month
     // This is just a placeholder, replace with actual data fetching logic
     const data = {
-      "2024-01-01": {
+      "2024-09-09": {
         checkInTime: "09:00 AM",
         breakTime: "01:00 PM - 02:00 PM",
         checkOutTime: "06:00 PM",
       },
-      "2024-01-02": {
+      "2024-09-02": {
         checkInTime: "09:15 AM",
         breakTime: "01:00 PM - 02:00 PM",
         checkOutTime: "06:15 PM",
       },
-      "2024-01-03": {
+      "2024-09-03": {
         checkInTime: "09:00 AM",
         breakTime: "01:00 PM - 02:00 PM",
         checkOutTime: "06:00 PM",
       },
-      "2024-01-04": {
+      "2024-09-04": {
         checkInTime: "09:00 AM",
         breakTime: "01:00 PM - 02:00 PM",
         checkOutTime: "06:00 PM",
@@ -101,8 +101,8 @@ const CalendarComponent = () => {
 
   // Example leave data
   const leaveData = {
-    "2024-01-05": true,
-    "2024-01-06": true,
+    "2024-09-05": true,
+    "2024-09-06": true,
   };
 
   // Merge holidays, attendance data, and leave data into markedDates
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
     borderRadius: 10,
     marginVertical: 10,
-    shadowColor: colors.black,
+    shadowColor: colors.neutral90,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
