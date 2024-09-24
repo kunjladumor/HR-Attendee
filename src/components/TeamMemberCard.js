@@ -10,7 +10,6 @@ import {
 import colors from "@styles/ColorStyles";
 import Modal from "react-native-modal";
 import CustomButton from "@components/ButtonComponent";
-
 import { Ionicons } from "@expo/vector-icons";
 
 const TeamMemberCard = ({
@@ -55,80 +54,97 @@ const TeamMemberCard = ({
     toggleModal();
   };
 
-  return (
-    <View style={styles.card}>
-      <Image source={profilePicture} style={styles.profilePicture} />
-      <View style={styles.info}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.designation}>{designation}</Text>
-      </View>
-      <CustomButton
-        iconName={"ellipsis-vertical-outline"}
-        iconSize={20}
-        iconColor={colors.neutral80}
-        onPress={toggleModal}
-      />
+  const handleCardPress = () => {
+    navigation.navigate("UserAttendance", {
+      profilePicture,
+      name,
+      designation,
+    });
+  };
 
-      <Modal
-        isVisible={isModalVisible}
-        onBackdropPress={toggleModal}
-        style={styles.modal}
-      >
-        <View style={styles.modalContent}>
-          <TouchableOpacity
-            onPress={handleCallPress}
-            style={styles.modalOption}
-          >
-            <Ionicons name="call-outline" size={28} color={colors.primary} />
-            <Text style={styles.modalText}>Call</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleSmsPress} style={styles.modalOption}>
-            <Ionicons
-              name="chatbox-ellipses-outline"
-              size={24}
-              color={colors.neutral50}
-            />
-            <Text style={styles.modalText}>SMS</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleWhatsAppPress}
-            style={styles.modalOption}
-          >
-            <Ionicons name="logo-whatsapp" size={28} color={colors.success} />
-            <Text style={styles.modalText}>WhatsApp</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              /* Edit logic */ toggleModal();
-            }}
-            style={styles.modalOption}
-          >
-            <Ionicons name="create-outline" size={28} color={colors.primary} />
-            <Text style={styles.modalText}>Edit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              /* Delete logic */ toggleModal();
-            }}
-            style={styles.modalOption}
-          >
-            <Ionicons name="trash-outline" size={28} color={colors.danger} />
-            <Text style={styles.modalText}>Delete</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleSendNotificationPress}
-            style={styles.modalOption}
-          >
-            <Ionicons
-              name="notifications-outline"
-              size={28}
-              color={colors.neutral60}
-            />
-            <Text style={styles.modalText}>Send Notification</Text>
-          </TouchableOpacity>
+  return (
+    <TouchableOpacity onPress={handleCardPress}>
+      <View style={styles.card}>
+        <Image source={profilePicture} style={styles.profilePicture} />
+        <View style={styles.info}>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.designation}>{designation}</Text>
         </View>
-      </Modal>
-    </View>
+        <CustomButton
+          iconName={"ellipsis-vertical-outline"}
+          iconSize={20}
+          iconColor={colors.neutral80}
+          onPress={toggleModal}
+        />
+
+        <Modal
+          isVisible={isModalVisible}
+          onBackdropPress={toggleModal}
+          style={styles.modal}
+        >
+          <View style={styles.modalContent}>
+            <TouchableOpacity
+              onPress={handleCallPress}
+              style={styles.modalOption}
+            >
+              <Ionicons name="call-outline" size={28} color={colors.primary} />
+              <Text style={styles.modalText}>Call</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handleSmsPress}
+              style={styles.modalOption}
+            >
+              <Ionicons
+                name="chatbox-ellipses-outline"
+                size={24}
+                color={colors.neutral50}
+              />
+              <Text style={styles.modalText}>SMS</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handleWhatsAppPress}
+              style={styles.modalOption}
+            >
+              <Ionicons name="logo-whatsapp" size={28} color={colors.success} />
+              <Text style={styles.modalText}>WhatsApp</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                /* Edit logic */ toggleModal();
+              }}
+              style={styles.modalOption}
+            >
+              <Ionicons
+                name="create-outline"
+                size={28}
+                color={colors.primary}
+              />
+              <Text style={styles.modalText}>Edit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                /* Delete logic */ toggleModal();
+              }}
+              style={styles.modalOption}
+            >
+              <Ionicons name="trash-outline" size={28} color={colors.danger} />
+              <Text style={styles.modalText}>Delete</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handleSendNotificationPress}
+              style={styles.modalOption}
+            >
+              <Ionicons
+                name="notifications-outline"
+                size={28}
+                color={colors.neutral60}
+              />
+              <Text style={styles.modalText}>Send Notification</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      </View>
+    </TouchableOpacity>
   );
 };
 
