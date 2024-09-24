@@ -134,10 +134,16 @@ const SelectMembersScreen = function ({ navigation }) {
         >
           <View
             style={[
-              CommonStyles.rowSpaceBetween,
-              { marginBottom: 10, alignItems: "center" },
+              CommonStyles.row,
+              { marginBottom: 10, alignItems: "center", gap: 10 },
             ]}
           >
+            <Icon
+              name="chevron-back-outline"
+              size={24}
+              color={colors.text}
+              onPress={() => navigation.goBack()}
+            />
             <CustomText style={CommonStyles.header}>Select Members</CustomText>
           </View>
           <View
