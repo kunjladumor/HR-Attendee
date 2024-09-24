@@ -65,7 +65,6 @@ const ProfileScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <CustomText style={ProfileStyles.name}>John Doe</CustomText>
-          <CustomText style={ProfileStyles.username}>@johndoe</CustomText>
           <CustomButton
             title="Edit Profile"
             onPress={() => navigation.navigate("EditProfile")}
@@ -169,11 +168,7 @@ const ProfileStyles = StyleSheet.create({
     textAlign: "center",
     color: colors.text,
   },
-  username: {
-    fontSize: 16,
-    color: colors.neutral60,
-    textAlign: "center",
-  },
+
   options: {
     flex: 1,
   },
