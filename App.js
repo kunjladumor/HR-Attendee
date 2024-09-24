@@ -57,6 +57,7 @@ export default function App() {
         style={{
           flex: 1,
           backgroundColor: colors.background,
+          paddingTop: 10,
         }}
         edges={["top", "bottom"]}
       >
