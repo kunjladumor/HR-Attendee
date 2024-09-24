@@ -24,6 +24,23 @@ const AnnouncementScreen = ({ route, navigation }) => {
             <Ionicons name={iconName} size={20} color={colors.primary} />
           </View>
           <Text style={styles.title}>{title}</Text>
+          <View
+            style={[
+              CommonStyles.row,
+              {
+                marginLeft: "auto",
+                gap: 10,
+              },
+            ]}
+          >
+            <Ionicons
+              name="create-outline"
+              size={24}
+              color={colors.neutral70}
+              style={{ marginRight: 10 }}
+            />
+            <Ionicons name="star-outline" size={24} color={colors.neutral70} />
+          </View>
         </View>
         <Text style={styles.time}>{time}</Text>
         <Text style={styles.message}>{content}</Text>
@@ -62,15 +79,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "PoppinsMedium",
     color: colors.text,
+    flexWrap: "wrap",
     marginLeft: 10,
   },
   message: {
     fontSize: 16,
     color: colors.neutral70,
+    fontFamily: "PoppinsMedium",
   },
   time: {
     fontSize: 12,
     color: colors.neutral80,
+    fontFamily: "Poppins",
   },
 });
 
