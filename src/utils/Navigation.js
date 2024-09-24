@@ -21,6 +21,8 @@ import ChangePasswordScreen from "@screens/ChangePasswordScreen";
 import AnnouncementScreen from "@screens/AnnouncementScreen";
 import SelectMembersScreen from "@screens/SelectMembersScreen";
 import CreateNotificationScreen from "@screens/CreateNotificationScreen";
+import EditNotificationScreen from "@screens/EditNotificationScreen";
+import UserAttendanceScreen from "@screens/UserAttendanceScreen";
 
 const Stack = createStackNavigator();
 
@@ -46,6 +48,8 @@ const screens = [
   { name: "AnnouncementScreen", component: AnnouncementScreen },
   { name: "SelectMembers", component: SelectMembersScreen },
   { name: "CreateNotification", component: CreateNotificationScreen },
+  { name: "EditNotification", component: EditNotificationScreen },
+  { name: "UserAttendance", component: UserAttendanceScreen },
 ];
 
 const checkInitialRoute = async (setInitialRoute) => {
