@@ -9,22 +9,20 @@ import {
   Keyboard,
   TouchableOpacity,
   Text,
+  Image,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 import Icon from "react-native-vector-icons/Ionicons"; // Import the Icon component
 import CustomText from "@components/CustomText"; // Import the CustomText component
-import TeamMemberCard from "@components/TeamMemberCard"; // Import the TeamMemberCard component
-import Modal from "react-native-modal"; // Import the Modal component
-
 import colors from "@styles/ColorStyles"; // Import the colors object
 import CustomButton from "@components/ButtonComponent";
 import { CommonStyles } from "@styles/style"; // Import common styles
+import CustomCheckbox from "@components/CustomCheckbox"; // Import the custom checkbox component
 
-const TeamScreen = function ({ navigation }) {
+const SelectMembersScreen = function ({ navigation }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [refreshing, setRefreshing] = useState(false); // State for refreshing
-  const [isModalVisible, setModalVisible] = useState(false); // State for modal visibility
+  const [selectedMembers, setSelectedMembers] = useState([]); // State for selected members
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -82,7 +80,6 @@ const TeamScreen = function ({ navigation }) {
       designation: "Software Engineer",
       phoneNumber: "+1234567890", // Add phone number
     },
-
     {
       id: 6,
       profilePicture: {
@@ -117,11 +114,13 @@ const TeamScreen = function ({ navigation }) {
     member.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Handle modal option selection
-  const handleOptionSelect = (option) => {
-    console.log(`Selected option: ${option}`);
-    setModalVisible(false);
-    // Add your logic here based on the selected option
+  // Handle member selection
+  const handleMemberSelect = (memberId) => {
+    setSelectedMembers((prevSelectedMembers) =>
+      prevSelectedMembers.includes(memberId)
+        ? prevSelectedMembers.filter((id) => id !== memberId)
+        : [...prevSelectedMembers, memberId]
+    );
   };
 
   return (
@@ -139,15 +138,7 @@ const TeamScreen = function ({ navigation }) {
               { marginBottom: 10, alignItems: "center" },
             ]}
           >
-            <CustomText style={CommonStyles.header}>Team Members</CustomText>
-
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
-              <Ionicons
-                name="ellipsis-vertical-outline"
-                size={20}
-                color={colors.neutral80}
-              />
-            </TouchableOpacity>
+            <CustomText style={CommonStyles.header}>Select Members</CustomText>
           </View>
           <View
             style={[
@@ -172,60 +163,43 @@ const TeamScreen = function ({ navigation }) {
             />
           </View>
           {filteredTeamMembers.map((member) => (
-            <TeamMemberCard
+            <TouchableOpacity
               key={member.id}
-              profilePicture={member.profilePicture}
-              name={member.name}
-              designation={member.designation}
-              phoneNumber={member.phoneNumber}
-              navigation={navigation}
-            />
+              onPress={() => handleMemberSelect(member.id)}
+              style={[
+                styles.card,
+                selectedMembers.includes(member.id) && styles.selectedCard,
+              ]}
+            >
+              <View style={styles.cardContent}>
+                <Image
+                  source={member.profilePicture}
+                  style={styles.profilePicture}
+                />
+                <View style={styles.info}>
+                  <Text style={styles.name}>{member.name}</Text>
+                  <Text style={styles.designation}>{member.designation}</Text>
+                </View>
+                <CustomCheckbox
+                  checked={selectedMembers.includes(member.id)}
+                  onPress={() => handleMemberSelect(member.id)}
+                />
+              </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
         <CustomButton
-          title="Add Members"
+          title="Confirm Selection"
           onPress={() => {
-            /* Add member logic */
+            /* Confirm selection logic */
+            console.log("Selected Members:", selectedMembers);
+            navigation.navigate("CreateNotification");
           }}
-          iconName={"add-circle-outline"}
+          iconName={"checkmark-circle-outline"}
           iconSize={24}
           iconColor={colors.white}
-          style={styles.addButton}
+          style={styles.confirmButton}
         />
-
-        <Modal
-          isVisible={isModalVisible}
-          onBackdropPress={() => setModalVisible(false)}
-          style={styles.modal}
-        >
-          <View style={styles.modalContent}>
-            <TouchableOpacity
-              style={styles.modalOption}
-              onPress={() => navigation.navigate("SelectMembers")}
-            >
-              <Icon name="checkbox-outline" size={24} color={colors.text} />
-              <Text style={styles.modalOptionText}>Select Members</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.modalOption}
-              onPress={() => handleOptionSelect("Notify Members")}
-            >
-              <Icon
-                name="notifications-outline"
-                size={24}
-                color={colors.text}
-              />
-              <Text style={styles.modalOptionText}>Notify Members</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.modalOption}
-              onPress={() => handleOptionSelect("Others")}
-            >
-              <Icon name="ellipsis-horizontal" size={24} color={colors.text} />
-              <Text style={styles.modalOptionText}>Others</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -267,11 +241,45 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 0,
     flexGrow: 1,
-    paddingBottom: 150,
   },
-  addButton: {
+  card: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    borderBottomWidth: 1,
+    borderColor: colors.neutral20,
+    marginBottom: 5,
+  },
+  selectedCard: {
+    backgroundColor: colors.primaryLight, // Example selected background color
+  },
+  cardContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+  },
+  profilePicture: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  info: {
+    flex: 1,
+  },
+  name: {
+    fontSize: 16,
+    fontFamily: "PoppinsSemiBold",
+    color: colors.text,
+  },
+  designation: {
+    fontSize: 14,
+    fontFamily: "PoppinsMedium",
+    color: colors.neutral60,
+  },
+  confirmButton: {
     position: "absolute",
-    bottom: 80,
+    bottom: 0,
     right: 0,
     left: 0,
     zIndex: 1,
@@ -279,28 +287,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     marginHorizontal: 20,
-  },
-  modal: {
-    justifyContent: "flex-end",
-    margin: 0,
-  },
-  modalContent: {
-    backgroundColor: colors.surface, // Changed background color
-    padding: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-  modalOption: {
-    flexDirection: "row",
-    gap: 10,
-    alignItems: "center",
-  },
-  modalOptionText: {
-    color: colors.text, // Changed text color
-    fontSize: 18,
-    fontFamily: "PoppinsMedium",
-    padding: 10,
+    marginBottom: 20,
   },
 });
 
-export default TeamScreen;
+export default SelectMembersScreen;

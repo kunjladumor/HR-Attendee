@@ -10,10 +10,16 @@ import {
 import colors from "@styles/ColorStyles";
 import Modal from "react-native-modal";
 import CustomButton from "@components/ButtonComponent";
-import CustomText from "./CustomText";
+
 import { Ionicons } from "@expo/vector-icons";
 
-const TeamMemberCard = ({ profilePicture, name, designation, phoneNumber }) => {
+const TeamMemberCard = ({
+  profilePicture,
+  name,
+  designation,
+  phoneNumber,
+  navigation,
+}) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
@@ -41,6 +47,11 @@ const TeamMemberCard = ({ profilePicture, name, designation, phoneNumber }) => {
     Linking.openURL(url).catch((err) =>
       console.error("Error opening URL", err)
     );
+    toggleModal();
+  };
+
+  const handleSendNotificationPress = () => {
+    navigation.navigate("CreateNotification");
     toggleModal();
   };
 
@@ -103,6 +114,17 @@ const TeamMemberCard = ({ profilePicture, name, designation, phoneNumber }) => {
           >
             <Ionicons name="trash-outline" size={28} color={colors.danger} />
             <Text style={styles.modalText}>Delete</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleSendNotificationPress}
+            style={styles.modalOption}
+          >
+            <Ionicons
+              name="notifications-outline"
+              size={28}
+              color={colors.neutral60}
+            />
+            <Text style={styles.modalText}>Send Notification</Text>
           </TouchableOpacity>
         </View>
       </Modal>
