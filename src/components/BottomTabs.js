@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
-  View,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, Platform, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import Animated, {
