@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Ensure you have installed @expo/vector-icons
 import colors from "@styles/ColorStyles";
 import { CommonStyles } from "@styles/style";
@@ -33,12 +33,15 @@ const AnnouncementScreen = ({ route, navigation }) => {
               },
             ]}
           >
-            <Ionicons
-              name="create-outline"
-              size={24}
-              color={colors.neutral70}
-              style={{ marginRight: 10 }}
-            />
+            <TouchableOpacity>
+              <Ionicons
+                name="create-outline"
+                size={24}
+                color={colors.neutral70}
+                style={{ marginRight: 10 }}
+                onPress={() => navigation.navigate("EditNotification")}
+              />
+            </TouchableOpacity>
             <Ionicons name="star-outline" size={24} color={colors.neutral70} />
           </View>
         </View>
