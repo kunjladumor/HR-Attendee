@@ -2,10 +2,21 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import colors from "@styles/ColorStyles"; // Adjust the import based on your project structure
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const NotificationCard = ({ icon, title, content, time }) => {
+const NotificationCard = ({ icon, title, content, time, navigation }) => {
+  const handleNotificationCardPress = () => {
+    navigation.navigate("AnnouncementScreen", {
+      iconName: icon,
+      title: title,
+      content: content,
+      time: time,
+      subcontent: "Additional subcontent here", // Add any additional data you want to pass
+    });
+  };
+
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={handleNotificationCardPress}>
       <View style={icon ? styles.iconContainer : { width: 60 }}>
         <Ionicons
           name={icon}
@@ -19,7 +30,7 @@ const NotificationCard = ({ icon, title, content, time }) => {
         <Text style={styles.content}>{content}</Text>
         <Text style={styles.time}>{time}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
