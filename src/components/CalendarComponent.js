@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, useColorScheme } from "react-native";
 import { Calendar } from "react-native-calendars";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import CustomText from "@components/CustomText"; // Adjust the import path as needed
 import moment from "moment"; // Import moment for date formatting
-import { colors } from "react-native-elements"; // Import colors
+import colors from "@styles/ColorStyles"; // Import custom colors
 
 const holidays = [
   { date: "2024-01-26", occasion: "Republic Day" },
@@ -21,127 +20,206 @@ const holidays = [
   { date: "2024-12-25", occasion: "Christmas" },
 ];
 
-// Create marked dates object for the calendar with custom styles
-const markedDates = holidays.reduce((acc, holiday) => {
-  acc[holiday.date] = {
-    marked: true,
-    dotColor: "red",
-    customStyles: {
-      container: {
-        backgroundColor: "lightblue",
-      },
-      text: {
-        color: "blue",
-        fontWeight: "bold",
-      },
-    },
-  };
-  return acc;
-}, {});
+const lightTheme = {
+  backgroundColor: colors.background,
+  calendarBackground: colors.surface,
+  textSectionTitleColor: colors.neutral60,
+  textSectionTitleDisabledColor: colors.neutral40,
+  selectedDayBackgroundColor: colors.primary,
+  selectedDayTextColor: colors.white,
+  todayTextColor: colors.primary,
+  dayTextColor: colors.text,
+  textDisabledColor: colors.neutral40,
+  dotColor: colors.primary,
+  selectedDotColor: colors.white,
+  arrowColor: colors.primary,
+  monthTextColor: colors.primary,
+  indicatorColor: colors.primary,
+  textDayFontFamily: "Poppins",
+  textMonthFontFamily: "PoppinsSemiBold",
+  textDayHeaderFontFamily: "PoppinsMedium",
+  textDayFontSize: 16,
+  textMonthFontSize: 18,
+  textDayHeaderFontSize: 16,
+};
+
+const darkTheme = {
+  backgroundColor: colors.background,
+  calendarBackground: colors.surface,
+  textSectionTitleColor: colors.neutral60,
+  textSectionTitleDisabledColor: colors.neutral40,
+  selectedDayBackgroundColor: colors.primary,
+  selectedDayTextColor: colors.white,
+  todayTextColor: colors.primary,
+  dayTextColor: colors.text,
+  textDisabledColor: colors.neutral40,
+  dotColor: colors.primary,
+  selectedDotColor: colors.white,
+  arrowColor: colors.primary,
+  monthTextColor: colors.primary,
+  indicatorColor: colors.primary,
+  textDayFontFamily: "Poppins",
+  textMonthFontFamily: "PoppinsSemiBold",
+  textDayHeaderFontFamily: "PoppinsMedium",
+  textDayFontSize: 16,
+  textMonthFontSize: 16,
+  textDayHeaderFontSize: 16,
+};
 
 const CalendarComponent = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedOccasion, setSelectedOccasion] = useState(null);
-  const [checkInTime, setCheckInTime] = useState(null);
-  const [breakTime, setBreakTime] = useState(null);
-  const [checkOutTime, setCheckOutTime] = useState(null);
+  const [attendanceData, setAttendanceData] = useState({}); // State to hold attendance data for the month
+  const colorScheme = useColorScheme(); // Get the current color scheme (light or dark)
 
-  const handleDayPress = (day) => {
-    const holiday = holidays.find((h) => h.date === day.dateString);
-    if (holiday) {
-      setSelectedDate(day.dateString);
-      setSelectedOccasion(holiday.occasion);
-      setCheckInTime(null);
-      setBreakTime(null);
-      setCheckOutTime(null);
+  useEffect(() => {
+    // Fetch and set attendance data for the month
+    // This is just a placeholder, replace with actual data fetching logic
+    const data = {
+      "2024-01-01": {
+        checkInTime: "09:00 AM",
+        breakTime: "01:00 PM - 02:00 PM",
+        checkOutTime: "06:00 PM",
+      },
+      "2024-01-02": {
+        checkInTime: "09:15 AM",
+        breakTime: "01:00 PM - 02:00 PM",
+        checkOutTime: "06:15 PM",
+      },
+      "2024-01-03": {
+        checkInTime: "09:00 AM",
+        breakTime: "01:00 PM - 02:00 PM",
+        checkOutTime: "06:00 PM",
+      },
+      "2024-01-04": {
+        checkInTime: "09:00 AM",
+        breakTime: "01:00 PM - 02:00 PM",
+        checkOutTime: "06:00 PM",
+      },
+      // Add more data as needed
+    };
+    setAttendanceData(data);
+  }, []);
+
+  // Example leave data
+  const leaveData = {
+    "2024-01-05": true,
+    "2024-01-06": true,
+  };
+
+  // Merge holidays, attendance data, and leave data into markedDates
+  const markedDates = holidays.reduce((acc, holiday) => {
+    acc[holiday.date] = {
+      dots: [{ key: "holiday", color: colors.secondary }],
+      customStyles: {
+        container: {
+          backgroundColor: colors.lightPrimary,
+        },
+        text: {
+          color: colors.primary,
+          fontFamily: "PoppinsSemiBold",
+        },
+      },
+    };
+    return acc;
+  }, {});
+
+  Object.keys(attendanceData).forEach((date) => {
+    if (markedDates[date]) {
+      // If the date is already marked as a holiday, add attendance info
+      markedDates[date].dots.push({ key: "present", color: colors.primary });
     } else {
-      setSelectedDate(day.dateString);
-      setSelectedOccasion(null);
-      // Example times, replace with actual data if available
-      setCheckInTime("09:00 AM");
-      setBreakTime("01:00 PM - 02:00 PM");
-      setCheckOutTime("06:00 PM");
+      // Otherwise, mark it as a regular attendance day
+      markedDates[date] = {
+        dots: [{ key: "present", color: colors.primary }],
+        customStyles: {
+          container: {
+            backgroundColor: colors.lightPrimary,
+          },
+          text: {
+            color: colors.primary,
+            fontFamily: "PoppinsSemiBold",
+          },
+        },
+      };
     }
-  };
+  });
 
-  const handleClose = () => {
-    setSelectedDate(null);
-    setSelectedOccasion(null);
-    setCheckInTime(null);
-    setBreakTime(null);
-    setCheckOutTime(null);
-  };
+  Object.keys(leaveData).forEach((date) => {
+    if (markedDates[date]) {
+      // If the date is already marked, add leave info
+      markedDates[date].dots.push({ key: "leave", color: colors.secondary2 });
+    } else {
+      // Otherwise, mark it as a leave day
+      markedDates[date] = {
+        dots: [{ key: "leave", color: colors.secondary2 }],
+        customStyles: {
+          container: {
+            backgroundColor: colors.lightPrimary,
+          },
+          text: {
+            color: colors.primary,
+            fontFamily: "PoppinsSemiBold",
+          },
+        },
+      };
+    }
+  });
 
   return (
-    <View>
+    <View style={styles.container}>
       <Calendar
         markedDates={markedDates}
-        markingType={"custom"}
-        onDayPress={handleDayPress}
-        theme={{
-          selectedDayBackgroundColor: "blue",
-          todayTextColor: "blue",
-          arrowColor: "blue",
-        }}
+        markingType={"multi-dot"}
+        theme={colorScheme === "dark" ? darkTheme : lightTheme} // Apply the theme based on the color scheme
         style={styles.calendar}
+        enableSwipeMonths={true}
       />
-      {selectedDate && (
-        <View style={styles.selectedDateContainer}>
+      {Object.keys(attendanceData).map((date) => (
+        <View key={date} style={styles.selectedDateContainer}>
           <View style={styles.selectedDateHeader}>
             <View style={styles.dateInfo}>
               <CustomText style={styles.dateText}>
-                {moment(selectedDate).format("DD")}
+                {moment(date).format("DD")}
               </CustomText>
               <CustomText style={styles.monthText}>
-                {moment(selectedDate).format("MMM")}
+                {moment(date).format("MMM")}
               </CustomText>
             </View>
             <View style={styles.details}>
-              {selectedOccasion ? (
-                <CustomText style={styles.detailText}>
-                  Holiday: {selectedOccasion}
-                </CustomText>
-              ) : (
-                <>
-                  <CustomText style={styles.detailText}>
-                    Check-in: {checkInTime}
-                  </CustomText>
-                  <CustomText style={styles.detailText}>
-                    Break: {breakTime}
-                  </CustomText>
-                  <CustomText style={styles.detailText}>
-                    Check-out: {checkOutTime}
-                  </CustomText>
-                </>
-              )}
+              <CustomText style={styles.detailText}>
+                Check-in: {attendanceData[date].checkInTime}
+              </CustomText>
+              <CustomText style={styles.detailText}>
+                Break: {attendanceData[date].breakTime}
+              </CustomText>
+              <CustomText style={styles.detailText}>
+                Check-out: {attendanceData[date].checkOutTime}
+              </CustomText>
             </View>
-            <TouchableOpacity
-              onPress={handleClose}
-              style={{ alignSelf: "flex-start" }}
-            >
-              <Ionicons
-                name="close-circle-outline"
-                size={24}
-                color={colors.secondary}
-              />
-            </TouchableOpacity>
           </View>
         </View>
-      )}
+      ))}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.background,
+    flex: 1,
+  },
   calendar: {
-    marginBottom: 20,
+    marginVertical: 10,
+    borderRadius: 10,
+    padding: 10,
+    overflow: "hidden",
+    elevation: 4,
   },
   selectedDateContainer: {
-    padding: 10,
-    backgroundColor: "white",
-    borderRadius: 5,
-    marginBottom: 20,
-    shadowColor: "#000",
+    padding: 15,
+    backgroundColor: colors.surface,
+    borderRadius: 10,
+    marginVertical: 10,
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
@@ -149,7 +227,7 @@ const styles = StyleSheet.create({
   },
   selectedDateHeader: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    gap: 10,
     alignItems: "center",
   },
   dateInfo: {
@@ -157,12 +235,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   dateText: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 32,
+    fontFamily: "PoppinsSemiBold",
+    width: 50,
+    color: colors.text,
+    textAlign: "center",
   },
   monthText: {
     fontSize: 16,
-    color: "gray",
+    color: colors.neutral60,
+    width: 50,
+    textAlign: "center",
   },
   details: {
     flex: 1,
@@ -170,6 +253,7 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 16,
+    color: colors.text,
   },
 });
 
