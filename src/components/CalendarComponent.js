@@ -298,12 +298,14 @@ const CalendarComponent = ({ navigation }) => {
       </View>
       <View style={styles.statContainer}>
         <View style={styles.statColumn}>
-          <StatCard title="Early Leaves" value="20" color={colors.secondary} />
-          <StatCard title="Late Mark" value="20" color={colors.primary} />
+          <StatCard title="Working Days" value="20" color={colors.secondary2} />
+          <StatCard title="Late" value="20" color={colors.primary} />
+          <StatCard title="Work From Home" value="20" color={colors.success} />
         </View>
         <View style={styles.statColumn}>
-          <StatCard title="Leaves" value="20" color={colors.primary2} />
-          <StatCard title="Working Days" value="20" color={colors.secondary2} />
+          <StatCard title="Leaves" value="20" color={colors.secondary} />
+          <StatCard title="Early Leaves" value="20" color={colors.primary2} />
+          <StatCard title="Unapproved Leave" value="20" color={colors.info} />
         </View>
       </View>
       {Object.keys(attendanceData).map((date) => (
@@ -354,7 +356,7 @@ const styles = StyleSheet.create({
   },
   statTitle: {
     fontFamily: "PoppinsSemiBold",
-    fontSize: 18,
+    fontSize: 16,
   },
   statValue: {
     fontFamily: "PoppinsSemiBold",
