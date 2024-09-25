@@ -49,17 +49,19 @@ const UserAttendanceScreen = ({ navigation, route }) => {
             style={{ marginRight: 10 }}
             onPress={() => navigation.goBack()}
           />
-          <CustomText style={CommonStyles.header}>User Attendance</CustomText>
+          <CustomText style={CommonStyles.header}>Attendance</CustomText>
         </View>
-        <View style={styles.userInfoContainer}>
-          <Image source={profilePicture} style={styles.profilePicture} />
-          <View style={styles.userInfo}>
-            <CustomText style={styles.userName}>{name}</CustomText>
-            <CustomText style={styles.userDesignation}>
-              {designation}
-            </CustomText>
+        {profilePicture && name && designation && (
+          <View style={styles.userInfoContainer}>
+            <Image source={profilePicture} style={styles.profilePicture} />
+            <View style={styles.userInfo}>
+              <CustomText style={styles.userName}>{name}</CustomText>
+              <CustomText style={styles.userDesignation}>
+                {designation}
+              </CustomText>
+            </View>
           </View>
-        </View>
+        )}
         {/* <View style={styles.filterContainer}>
           <TouchableOpacity
             style={[
@@ -110,7 +112,7 @@ const UserAttendanceScreen = ({ navigation, route }) => {
             </CustomText>
           </TouchableOpacity>
         </View> */}
-        <CalendarComponent />
+        <CalendarComponent navigation={navigation} />
         <View style={styles.attendanceStatsContainer}>
           {attendanceData.map((entry, index) => (
             <View key={index} style={styles.attendanceEntry}>
@@ -132,6 +134,7 @@ const styles = StyleSheet.create({
   userInfoContainer: {
     flexDirection: "row",
     alignItems: "center",
+    backgroundColor: colors.neutral10,
   },
   profilePicture: {
     width: 50,

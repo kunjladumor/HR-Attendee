@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import colors from "@styles/ColorStyles";
 import CustomText from "@components/CustomText";
 import ActivityCard from "@components/ActivityCard"; // Import the ActivityCard component
+import { CommonStyles } from "@styles/style";
 
 const ActivityScreen = ({ navigation, route }) => {
   const { activities } = route.params;

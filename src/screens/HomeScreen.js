@@ -20,6 +20,88 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AnnouncementCard from "@components/AnnouncementCard";
 
+export const activities = [
+  {
+    iconName: "log-in-outline",
+    title: "Check-In",
+    time: "09:00 AM",
+    date: "2023-10-02",
+    stat: "On-Time",
+    url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+  },
+  {
+    iconName: "log-out-outline",
+    title: "Check-Out",
+    time: "05:00 PM",
+    date: "2023-10-02",
+    stat: "On-Time",
+    url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+  },
+  {
+    iconName: "log-in-outline",
+    title: "Check-In",
+    time: "09:00 AM",
+    date: "2023-10-03",
+    stat: "On-Time",
+    url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+  },
+  {
+    iconName: "log-out-outline",
+    title: "Check-Out",
+    time: "05:00 PM",
+    date: "2023-10-03",
+    stat: "On-Time",
+    url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+  },
+  {
+    iconName: "time-outline",
+    title: "Break",
+    time: "12:00 PM",
+    date: "2023-10-01",
+    stat: "30 min",
+    url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+  },
+  {
+    iconName: "calendar-outline",
+    title: "Leave",
+    time: "All Day",
+    date: "2023-10-02",
+    stat: "Approved",
+    url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+  },
+  {
+    iconName: "log-in-outline",
+    title: "Check-In",
+    time: "09:00 AM",
+    date: "2023-10-04",
+    stat: "On-Time",
+    url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+  },
+  {
+    iconName: "log-out-outline",
+    title: "Check-Out",
+    time: "05:00 PM",
+    date: "2023-10-04",
+    stat: "On-Time",
+    url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+  },
+  {
+    iconName: "log-in-outline",
+    title: "Check-In",
+    time: "09:00 AM",
+    date: "2023-10-05",
+    stat: "On-Time",
+    url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+  },
+  {
+    iconName: "log-out-outline",
+    title: "Check-Out",
+    time: "05:00 PM",
+    date: "2023-10-05",
+    stat: "On-Time",
+    url: "https://www.google.com/maps?q=19.1742727,72.8441164",
+  },
+];
 const HomeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -75,89 +157,6 @@ const HomeScreen = ({ navigation }) => {
     totalDays: "20",
   };
 
-  const activities = [
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-02",
-      stat: "On-Time",
-      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-02",
-      stat: "On-Time",
-      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
-    },
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-03",
-      stat: "On-Time",
-      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-03",
-      stat: "On-Time",
-      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
-    },
-    {
-      iconName: "time-outline",
-      title: "Break",
-      time: "12:00 PM",
-      date: "2023-10-01",
-      stat: "30 min",
-      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
-    },
-    {
-      iconName: "calendar-outline",
-      title: "Leave",
-      time: "All Day",
-      date: "2023-10-02",
-      stat: "Approved",
-      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
-    },
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-04",
-      stat: "On-Time",
-      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-04",
-      stat: "On-Time",
-      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
-    },
-    {
-      iconName: "log-in-outline",
-      title: "Check-In",
-      time: "09:00 AM",
-      date: "2023-10-05",
-      stat: "On-Time",
-      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
-    },
-    {
-      iconName: "log-out-outline",
-      title: "Check-Out",
-      time: "05:00 PM",
-      date: "2023-10-05",
-      stat: "On-Time",
-      url: "https://www.google.com/maps?q=19.1742727,72.8441164",
-    },
-  ];
-
   // Get the first 4 activities
   const displayedActivities = activities.slice(0, 4);
 
@@ -174,6 +173,7 @@ const HomeScreen = ({ navigation }) => {
             isCheckedIn={isCheckedIn}
             isBreakActive={isBreakActive}
             setIsBreakActive={setIsBreakActive}
+            navigation={navigation}
           />
         );
       case "activity":

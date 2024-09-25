@@ -14,6 +14,7 @@ import colors from "@styles/ColorStyles";
 import CustomText from "./CustomText";
 import { CommonStyles } from "@styles/style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const { width: deviceWidth } = Dimensions.get("window");
 const cardWidth = (deviceWidth - 40 - 20) / 2; // 40 padding (20 on each side) and 20 gap
@@ -28,6 +29,7 @@ const Attendance = ({
   isCheckedIn,
   isBreakActive,
   setIsBreakActive,
+  navigation,
 }) => {
   const [breakCounter, setBreakCounter] = useState(0);
   const intervalRef = useRef(null);
@@ -162,9 +164,26 @@ const Attendance = ({
 
   return (
     <View style={AttendanceStyles.container}>
-      <CustomText style={[CommonStyles.header, { fontSize: 18 }]}>
-        Today's Attendance
-      </CustomText>
+      <View style={[CommonStyles.row, { justifyContent: "space-between" }]}>
+        <CustomText style={[CommonStyles.header, { fontSize: 18 }]}>
+          Stats
+        </CustomText>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("UserAttendance", {
+              checkInTime: checkInTime,
+              checkOutTime: checkOutTime,
+              breakTime: breakTime,
+              totalDays: totalDays,
+            })
+          }
+        >
+          <CustomText style={{ color: colors.primary, fontSize: 16 }}>
+            View More
+          </CustomText>
+        </TouchableOpacity>
+      </View>
+
       <View style={AttendanceStyles.grid}>
         {renderCard("log-in-outline", "Check-In Time", checkInTime, "On-Time")}
         {renderCard(

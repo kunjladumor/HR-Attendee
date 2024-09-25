@@ -10,7 +10,7 @@ import {
 import PropTypes from "prop-types";
 import colors from "@styles/ColorStyles";
 import CustomText from "@components/CustomText";
-import { CommonStyles } from "@styles/style";
+import { CommonStyles } from "../styles/style";
 import { useNavigation } from "@react-navigation/native"; // Import useNavigation
 import ActivityCard from "@components/ActivityCard"; // Import ActivityCard
 
@@ -77,6 +77,7 @@ const ActivityStyles = StyleSheet.create({
   viewMore: {
     fontSize: 16,
     color: colors.primary,
+    fontFamily: "Poppins",
   },
 });
 

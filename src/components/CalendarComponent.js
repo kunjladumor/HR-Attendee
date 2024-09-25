@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, useColorScheme } from "react-native";
+import { View, StyleSheet, useColorScheme } from "react-native";
 import { Calendar } from "react-native-calendars";
 import CustomText from "@components/CustomText"; // Adjust the import path as needed
 import moment from "moment"; // Import moment for date formatting
 import colors from "@styles/ColorStyles"; // Import custom colors
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { activities } from "../screens/HomeScreen";
 
 const holidays = [
   { date: "2024-01-26", occasion: "Republic Day" },
@@ -245,7 +247,21 @@ const AttendanceDetails = ({ attendance }) => (
   </View>
 );
 
-const CalendarComponent = () => {
+const StatCard = ({ title, value, color }) => (
+  <View
+    style={[
+      styles.statCard,
+      { backgroundColor: color + "33", borderColor: color },
+    ]}
+  >
+    <CustomText style={[styles.statTitle, { color }]}>{title}</CustomText>
+    <CustomText style={[styles.statValue, { color: color + "CC" }]}>
+      {value}
+    </CustomText>
+  </View>
+);
+
+const CalendarComponent = ({ navigation }) => {
   const [attendanceData, setAttendanceData] = useState({});
   const colorScheme = useColorScheme();
 
@@ -262,23 +278,6 @@ const CalendarComponent = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
-        <CustomText
-          style={[{ color: colors.secondary2, fontFamily: "PoppinsMedium" }]}
-        >
-          ● Indicates Present
-        </CustomText>
-        <CustomText
-          style={[{ color: colors.secondary, fontFamily: "PoppinsMedium" }]}
-        >
-          ● Indicates a Leave
-        </CustomText>
-        <CustomText
-          style={[{ color: colors.warning, fontFamily: "PoppinsMedium" }]}
-        >
-          ● Indicates a Holiday
-        </CustomText>
-      </View>
       <Calendar
         markedDates={markedDates}
         markingType={"multi-dot"}
@@ -286,13 +285,38 @@ const CalendarComponent = () => {
         style={styles.calendar}
         enableSwipeMonths={true}
       />
+      <View style={styles.row}>
+        <CustomText style={[styles.legendText, { color: colors.secondary2 }]}>
+          ● Present
+        </CustomText>
+        <CustomText style={[styles.legendText, { color: colors.secondary }]}>
+          ● Leave
+        </CustomText>
+        <CustomText style={[styles.legendText, { color: colors.warning }]}>
+          ● Holiday
+        </CustomText>
+      </View>
+      <View style={styles.statContainer}>
+        <View style={styles.statColumn}>
+          <StatCard title="Early Leaves" value="20" color={colors.secondary} />
+          <StatCard title="Late Mark" value="20" color={colors.primary} />
+        </View>
+        <View style={styles.statColumn}>
+          <StatCard title="Leaves" value="20" color={colors.primary2} />
+          <StatCard title="Working Days" value="20" color={colors.secondary2} />
+        </View>
+      </View>
       {Object.keys(attendanceData).map((date) => (
-        <View key={date} style={styles.selectedDateContainer}>
+        <TouchableOpacity
+          key={date}
+          style={styles.selectedDateContainer}
+          onPress={() => navigation.navigate("ActivityScreen", { activities })}
+        >
           <View style={styles.selectedDateHeader}>
             <DateInfo date={date} />
             <AttendanceDetails attendance={attendanceData[date]} />
           </View>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );
@@ -308,6 +332,33 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexWrap: "wrap",
     padding: 10,
+  },
+  legendText: {
+    fontFamily: "PoppinsMedium",
+  },
+  statContainer: {
+    flexDirection: "row",
+    width: "100%",
+    gap: 15,
+    marginVertical: 10,
+  },
+  statColumn: {
+    flexDirection: "column",
+    flex: 1,
+    gap: 15,
+  },
+  statCard: {
+    padding: 10,
+    borderRadius: 15,
+    borderWidth: 1,
+  },
+  statTitle: {
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 18,
+  },
+  statValue: {
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 20,
   },
   calendar: {
     marginVertical: 10,
