@@ -26,10 +26,10 @@ const ROUTES = {
 };
 
 const tabs = [
-  { name: ROUTES.TEAM, component: TeamScreen },
-  { name: ROUTES.LEAVES, component: LeavesScreen },
   { name: ROUTES.HOME, component: HomeScreen },
+  { name: ROUTES.LEAVES, component: LeavesScreen },
   { name: ROUTES.LEAVES_LIST, component: HolidayListScreen },
+  { name: ROUTES.TEAM, component: TeamScreen },
   { name: ROUTES.PROFILE, component: ProfileScreen },
 ];
 
