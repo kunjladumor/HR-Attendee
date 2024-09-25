@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, useColorScheme } from "react-native";
+import { View, Text, StyleSheet, useColorScheme } from "react-native";
 import { Calendar } from "react-native-calendars";
 import CustomText from "@components/CustomText"; // Adjust the import path as needed
 import moment from "moment"; // Import moment for date formatting
@@ -155,6 +155,11 @@ const fetchAttendanceData = () => {
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
+    "2024-10-02": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
     // Add more data as needed
   };
 };
@@ -257,6 +262,23 @@ const CalendarComponent = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.row}>
+        <CustomText
+          style={[{ color: colors.secondary2, fontFamily: "PoppinsMedium" }]}
+        >
+          ● Indicates Present
+        </CustomText>
+        <CustomText
+          style={[{ color: colors.secondary, fontFamily: "PoppinsMedium" }]}
+        >
+          ● Indicates a Leave
+        </CustomText>
+        <CustomText
+          style={[{ color: colors.warning, fontFamily: "PoppinsMedium" }]}
+        >
+          ● Indicates a Holiday
+        </CustomText>
+      </View>
       <Calendar
         markedDates={markedDates}
         markingType={"multi-dot"}
@@ -280,6 +302,12 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     flex: 1,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    padding: 10,
   },
   calendar: {
     marginVertical: 10,
