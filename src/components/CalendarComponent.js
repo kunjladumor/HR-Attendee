@@ -66,49 +66,103 @@ const darkTheme = {
   textDayHeaderFontSize: 16,
 };
 
-const CalendarComponent = () => {
-  const [attendanceData, setAttendanceData] = useState({}); // State to hold attendance data for the month
-  const colorScheme = useColorScheme(); // Get the current color scheme (light or dark)
-
-  useEffect(() => {
-    // Fetch and set attendance data for the month
-    // This is just a placeholder, replace with actual data fetching logic
-    const data = {
-      "2024-09-09": {
-        checkInTime: "09:00 AM",
-        breakTime: "01:00 PM - 02:00 PM",
-        checkOutTime: "06:00 PM",
-      },
-      "2024-09-02": {
-        checkInTime: "09:15 AM",
-        breakTime: "01:00 PM - 02:00 PM",
-        checkOutTime: "06:15 PM",
-      },
-      "2024-09-03": {
-        checkInTime: "09:00 AM",
-        breakTime: "01:00 PM - 02:00 PM",
-        checkOutTime: "06:00 PM",
-      },
-      "2024-09-04": {
-        checkInTime: "09:00 AM",
-        breakTime: "01:00 PM - 02:00 PM",
-        checkOutTime: "06:00 PM",
-      },
-      // Add more data as needed
-    };
-    setAttendanceData(data);
-  }, []);
-
-  // Example leave data
-  const leaveData = {
-    "2024-09-05": true,
-    "2024-09-06": true,
+const fetchAttendanceData = () => {
+  // Fetch and set attendance data for the month
+  // This is just a placeholder, replace with actual data fetching logic
+  return {
+    "2024-09-02": {
+      checkInTime: "09:15 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:15 PM",
+    },
+    "2024-09-03": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-04": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-07": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-09": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-10": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-11": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-12": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-13": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-16": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-17": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-18": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-19": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-20": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-21": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-23": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    "2024-09-24": {
+      checkInTime: "09:00 AM",
+      breakTime: "01:00 PM - 02:00 PM",
+      checkOutTime: "06:00 PM",
+    },
+    // Add more data as needed
   };
+};
 
-  // Merge holidays, attendance data, and leave data into markedDates
+const mergeData = (holidays, attendanceData, leaveData) => {
   const markedDates = holidays.reduce((acc, holiday) => {
     acc[holiday.date] = {
-      dots: [{ key: "holiday", color: colors.secondary }],
+      dots: [{ key: "holiday", color: colors.warning }],
       customStyles: {
         container: {
           backgroundColor: colors.lightPrimary,
@@ -124,12 +178,10 @@ const CalendarComponent = () => {
 
   Object.keys(attendanceData).forEach((date) => {
     if (markedDates[date]) {
-      // If the date is already marked as a holiday, add attendance info
-      markedDates[date].dots.push({ key: "present", color: colors.primary });
+      markedDates[date].dots.push({ key: "present", color: colors.secondary2 });
     } else {
-      // Otherwise, mark it as a regular attendance day
       markedDates[date] = {
-        dots: [{ key: "present", color: colors.primary }],
+        dots: [{ key: "present", color: colors.secondary2 }],
         customStyles: {
           container: {
             backgroundColor: colors.lightPrimary,
@@ -145,12 +197,10 @@ const CalendarComponent = () => {
 
   Object.keys(leaveData).forEach((date) => {
     if (markedDates[date]) {
-      // If the date is already marked, add leave info
-      markedDates[date].dots.push({ key: "leave", color: colors.secondary2 });
+      markedDates[date].dots.push({ key: "leave", color: colors.secondary });
     } else {
-      // Otherwise, mark it as a leave day
       markedDates[date] = {
-        dots: [{ key: "leave", color: colors.secondary2 }],
+        dots: [{ key: "leave", color: colors.secondary }],
         customStyles: {
           container: {
             backgroundColor: colors.lightPrimary,
@@ -164,37 +214,61 @@ const CalendarComponent = () => {
     }
   });
 
+  return markedDates;
+};
+
+const DateInfo = ({ date }) => (
+  <View style={styles.dateInfo}>
+    <CustomText style={styles.dateText}>{moment(date).format("DD")}</CustomText>
+    <CustomText style={styles.monthText}>
+      {moment(date).format("MMM")}
+    </CustomText>
+  </View>
+);
+
+const AttendanceDetails = ({ attendance }) => (
+  <View style={styles.details}>
+    <CustomText style={styles.detailText}>
+      Check-in: {attendance.checkInTime}
+    </CustomText>
+    <CustomText style={styles.detailText}>
+      Break: {attendance.breakTime}
+    </CustomText>
+    <CustomText style={styles.detailText}>
+      Check-out: {attendance.checkOutTime}
+    </CustomText>
+  </View>
+);
+
+const CalendarComponent = () => {
+  const [attendanceData, setAttendanceData] = useState({});
+  const colorScheme = useColorScheme();
+
+  useEffect(() => {
+    setAttendanceData(fetchAttendanceData());
+  }, []);
+
+  const leaveData = {
+    "2024-09-05": true,
+    "2024-09-06": true,
+  };
+
+  const markedDates = mergeData(holidays, attendanceData, leaveData);
+
   return (
     <View style={styles.container}>
       <Calendar
         markedDates={markedDates}
         markingType={"multi-dot"}
-        theme={colorScheme === "dark" ? darkTheme : lightTheme} // Apply the theme based on the color scheme
+        theme={colorScheme === "dark" ? darkTheme : lightTheme}
         style={styles.calendar}
         enableSwipeMonths={true}
       />
       {Object.keys(attendanceData).map((date) => (
         <View key={date} style={styles.selectedDateContainer}>
           <View style={styles.selectedDateHeader}>
-            <View style={styles.dateInfo}>
-              <CustomText style={styles.dateText}>
-                {moment(date).format("DD")}
-              </CustomText>
-              <CustomText style={styles.monthText}>
-                {moment(date).format("MMM")}
-              </CustomText>
-            </View>
-            <View style={styles.details}>
-              <CustomText style={styles.detailText}>
-                Check-in: {attendanceData[date].checkInTime}
-              </CustomText>
-              <CustomText style={styles.detailText}>
-                Break: {attendanceData[date].breakTime}
-              </CustomText>
-              <CustomText style={styles.detailText}>
-                Check-out: {attendanceData[date].checkOutTime}
-              </CustomText>
-            </View>
+            <DateInfo date={date} />
+            <AttendanceDetails attendance={attendanceData[date]} />
           </View>
         </View>
       ))}
