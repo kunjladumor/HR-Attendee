@@ -134,7 +134,6 @@ const styles = StyleSheet.create({
   userInfoContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: colors.neutral10,
   },
   profilePicture: {
     width: 50,

@@ -139,7 +139,7 @@ const TeamScreen = function ({ navigation }) {
               { marginBottom: 10, alignItems: "center" },
             ]}
           >
-            <CustomText style={CommonStyles.header}>Team Members</CustomText>
+            <CustomText style={CommonStyles.header}>Employees</CustomText>
 
             <TouchableOpacity onPress={() => setModalVisible(true)}>
               <Ionicons

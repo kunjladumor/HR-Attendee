@@ -125,6 +125,24 @@ const ProfileScreen = ({ navigation }) => {
               onPress={() => navigation.navigate("PrivacyPolicy")}
             />
           </View>
+
+          <CustomText style={[CommonStyles.subHeader, { marginBottom: 5 }]}>
+            Organization
+          </CustomText>
+
+          <View style={ProfileStyles.section}>
+            <ProfileButtonTab
+              iconName="briefcase-outline"
+              text="Organization Stats"
+              onPress={() => navigation.navigate("OrganizationStats")}
+            />
+            <ProfileButtonTab
+              iconName="people-outline"
+              text="Employees"
+              onPress={() => navigation.navigate("Team")}
+            />
+          </View>
+
           <View style={ProfileStyles.section}>
             <ProfileButtonTab
               iconName="log-out-outline"
