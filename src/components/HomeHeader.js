@@ -55,6 +55,7 @@ const HomeScreens = StyleSheet.create({
     backgroundColor: "transparent",
     paddingHorizontal: 0,
     fontFamily: "Poppins",
+    marginHorizontal: 20,
   },
   headerContainer: {
     flexDirection: "row",

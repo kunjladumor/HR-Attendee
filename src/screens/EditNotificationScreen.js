@@ -7,13 +7,12 @@ import {
   View,
   Modal,
 } from "react-native";
-import Inputs, { InputStyles } from "@components/Inputs"; // Import the custom Inputs component
-import CustomButton from "@components/ButtonComponent"; // Import the CustomButton component
-import CustomText from "@components/CustomText"; // Import the CustomText component
-import colors from "@styles/ColorStyles"; // Import the colors object
+import Inputs, { InputStyles } from "@components/Inputs";
+import CustomButton from "@components/ButtonComponent";
+import CustomText from "@components/CustomText";
+import colors from "@styles/ColorStyles";
 import { Ionicons } from "@expo/vector-icons";
-
-import { CommonStyles } from "../styles/style"; // Import common styles
+import { CommonStyles } from "@styles/style";
 import { Icon } from "react-native-elements";
 
 const EditNotificationScreen = ({ navigation }) => {

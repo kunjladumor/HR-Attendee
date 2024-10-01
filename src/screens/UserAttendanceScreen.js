@@ -39,18 +39,25 @@ const UserAttendanceScreen = ({ navigation, route }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={CommonStyles.container}>
-      <View style={CommonStyles.content}>
-        <View style={CommonStyles.row}>
-          <Ionicons
-            name="chevron-back-outline"
-            size={24}
-            color={colors.neutral90}
-            style={{ marginRight: 10 }}
-            onPress={() => navigation.goBack()}
-          />
-          <CustomText style={CommonStyles.header}>Attendance</CustomText>
-        </View>
+    <View style={CommonStyles.container}>
+      <View
+        style={[
+          CommonStyles.row,
+          {
+            paddingHorizontal: 20,
+          },
+        ]}
+      >
+        <Ionicons
+          name="chevron-back-outline"
+          size={24}
+          color={colors.neutral90}
+          style={{ marginRight: 10 }}
+          onPress={() => navigation.goBack()}
+        />
+        <CustomText style={CommonStyles.header}>Attendance</CustomText>
+      </View>
+      <ScrollView contentContainerStyle={CommonStyles.content}>
         {profilePicture && name && designation && (
           <View style={styles.userInfoContainer}>
             <Image source={profilePicture} style={styles.profilePicture} />
@@ -125,8 +132,8 @@ const UserAttendanceScreen = ({ navigation, route }) => {
             </View>
           ))}
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 

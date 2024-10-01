@@ -4,51 +4,58 @@ import { Ionicons } from "@expo/vector-icons"; // Ensure you have installed @exp
 import colors from "@styles/ColorStyles";
 import { CommonStyles } from "@styles/style";
 import CustomText from "@components/CustomText";
+import { ScrollView } from "react-native-gesture-handler";
 const AnnouncementScreen = ({ route, navigation }) => {
   const { iconName, title, content, time, subcontent } = route.params;
   return (
     <View style={CommonStyles.container}>
-      <View style={CommonStyles.content}>
-        <View style={CommonStyles.row}>
-          <Ionicons
-            name="chevron-back-outline"
-            size={24}
-            color={colors.text}
-            style={{ marginRight: 10 }}
-            onPress={() => navigation.goBack()}
-          />
-          <CustomText style={CommonStyles.header}>Announcement</CustomText>
-        </View>
-        <View style={styles.AnnouncementTitle}>
-          <View style={styles.iconContainer}>
-            <Ionicons name={iconName} size={20} color={colors.primary} />
-          </View>
-          <Text style={styles.title}>{title}</Text>
-          <View
-            style={[
-              CommonStyles.row,
-              {
-                marginLeft: "auto",
-                gap: 10,
-              },
-            ]}
-          >
-            <TouchableOpacity>
+      <View style={CommonStyles.row}>
+        <Ionicons
+          name="chevron-back-outline"
+          size={24}
+          color={colors.text}
+          style={{ marginRight: 10 }}
+          onPress={() => navigation.goBack()}
+        />
+        <CustomText style={CommonStyles.header}>Announcement</CustomText>
+      </View>
+      <ScrollView contentContainerStyle={styles.content}>
+        <View style={CommonStyles.content}>
+          <View style={styles.AnnouncementTitle}>
+            <View style={styles.iconContainer}>
+              <Ionicons name={iconName} size={20} color={colors.primary} />
+            </View>
+            <Text style={styles.title}>{title}</Text>
+            <View
+              style={[
+                CommonStyles.row,
+                {
+                  marginLeft: "auto",
+                  gap: 10,
+                },
+              ]}
+            >
+              <TouchableOpacity>
+                <Ionicons
+                  name="create-outline"
+                  size={24}
+                  color={colors.neutral70}
+                  style={{ marginRight: 10 }}
+                  onPress={() => navigation.navigate("EditNotification")}
+                />
+              </TouchableOpacity>
               <Ionicons
-                name="create-outline"
+                name="star-outline"
                 size={24}
                 color={colors.neutral70}
-                style={{ marginRight: 10 }}
-                onPress={() => navigation.navigate("EditNotification")}
               />
-            </TouchableOpacity>
-            <Ionicons name="star-outline" size={24} color={colors.neutral70} />
+            </View>
           </View>
+          <Text style={styles.time}>{time}</Text>
+          <Text style={styles.message}>{content}</Text>
+          <Text style={styles.message}>{subcontent}</Text>
         </View>
-        <Text style={styles.time}>{time}</Text>
-        <Text style={styles.message}>{content}</Text>
-        <Text style={styles.message}>{subcontent}</Text>
-      </View>
+      </ScrollView>
     </View>
   );
 };

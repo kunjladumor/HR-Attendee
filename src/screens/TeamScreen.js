@@ -127,50 +127,50 @@ const TeamScreen = function ({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
+        <View
+          style={[
+            CommonStyles.rowSpaceBetween,
+            { marginBottom: 10, alignItems: "center", paddingHorizontal: 20 },
+          ]}
+        >
+          <CustomText style={CommonStyles.header}>Employees</CustomText>
+
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <Ionicons
+              name="ellipsis-vertical-outline"
+              size={20}
+              color={colors.neutral80}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={[
+            styles.searchBarContainer,
+            isFocused && { borderColor: colors.primary },
+          ]}
+        >
+          <Icon
+            name="search"
+            size={24}
+            color={isFocused ? colors.primary : colors.neutral50}
+            style={styles.searchIcon}
+          />
+          <TextInput
+            style={styles.searchBar}
+            placeholder="Search team members..."
+            placeholderTextColor={colors.neutral50} // Set the placeholder text color
+            value={searchQuery}
+            onChangeText={(text) => setSearchQuery(text)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+          />
+        </View>
         <ScrollView
           contentContainerStyle={styles.scrollView}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
         >
-          <View
-            style={[
-              CommonStyles.rowSpaceBetween,
-              { marginBottom: 10, alignItems: "center" },
-            ]}
-          >
-            <CustomText style={CommonStyles.header}>Employees</CustomText>
-
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
-              <Ionicons
-                name="ellipsis-vertical-outline"
-                size={20}
-                color={colors.neutral80}
-              />
-            </TouchableOpacity>
-          </View>
-          <View
-            style={[
-              styles.searchBarContainer,
-              isFocused && { borderColor: colors.primary },
-            ]}
-          >
-            <Icon
-              name="search"
-              size={24}
-              color={isFocused ? colors.primary : colors.neutral50}
-              style={styles.searchIcon}
-            />
-            <TextInput
-              style={styles.searchBar}
-              placeholder="Search team members..."
-              placeholderTextColor={colors.neutral50} // Set the placeholder text color
-              value={searchQuery}
-              onChangeText={(text) => setSearchQuery(text)}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-            />
-          </View>
           {filteredTeamMembers.map((member) => (
             <TeamMemberCard
               key={member.id}
@@ -244,6 +244,7 @@ const styles = StyleSheet.create({
     borderRadius: 10, // Adjusted border radius for rounded corners
     padding: 5,
     paddingLeft: 10,
+    marginHorizontal: 20,
     marginBottom: 20,
     backgroundColor: colors.background, // Changed background color
     // Shadow properties for iOS

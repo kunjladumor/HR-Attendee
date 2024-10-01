@@ -156,7 +156,7 @@ const SwipeButton = ({ setIsLoading, showModal, onCheckInStatusChange }) => {
 const SwipeStyles = StyleSheet.create({
   absoluteContainer: {
     position: "absolute",
-    bottom: Platform.OS === "android" ? 60 : 80,
+    bottom: Platform.OS === "android" ? 120 : 140,
     left: 0,
     right: 0,
     alignItems: "center",

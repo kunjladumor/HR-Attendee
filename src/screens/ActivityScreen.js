@@ -22,39 +22,38 @@ const ActivityScreen = ({ navigation, route }) => {
     />
   );
 
-  const renderHeader = () => (
-    <View
-      style={[
-        CommonStyles.row,
-        {
-          marginBottom: 10,
-        },
-      ]}
-    >
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Ionicons
-          name="chevron-back-outline"
-          size={24}
-          color={colors.neutral90}
-        />
-      </TouchableOpacity>
-      <CustomText
-        style={[CommonStyles.header, { fontSize: 24, marginLeft: 10 }]}
-      >
-        Activity
-      </CustomText>
-      <View style={{ width: 24 }} />
-    </View>
-  );
-
   return (
-    <FlatList
-      data={activities}
-      renderItem={renderItem}
-      keyExtractor={(item, index) => index.toString()}
-      contentContainerStyle={ActivityScreenStyles.listContent}
-      ListHeaderComponent={renderHeader}
-    />
+    <View>
+      <View
+        style={[
+          CommonStyles.row,
+          {
+            marginBottom: 10,
+            paddingHorizontal: 20,
+          },
+        ]}
+      >
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons
+            name="chevron-back-outline"
+            size={24}
+            color={colors.neutral90}
+          />
+        </TouchableOpacity>
+        <CustomText
+          style={[CommonStyles.header, { fontSize: 24, marginLeft: 10 }]}
+        >
+          Activity
+        </CustomText>
+        <View style={{ width: 24 }} />
+      </View>
+      <FlatList
+        data={activities}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        contentContainerStyle={ActivityScreenStyles.listContent}
+      />
+    </View>
   );
 };
 

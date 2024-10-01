@@ -88,17 +88,24 @@ const notifications = [
 
 const NotificationScreen = ({ navigation }) => {
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <View style={styles.container}>
-        <View style={CommonStyles.header}>
-          <Ionicons
-            name="chevron-back-outline"
-            size={24}
-            color={colors.text}
-            onPress={() => navigation.goBack()}
-          />
-          <CustomText style={CommonStyles.header}>Notifications</CustomText>
-        </View>
+    <View style={styles.container}>
+      <View
+        style={[
+          CommonStyles.header,
+          {
+            paddingHorizontal: 20,
+          },
+        ]}
+      >
+        <Ionicons
+          name="chevron-back-outline"
+          size={24}
+          color={colors.text}
+          onPress={() => navigation.goBack()}
+        />
+        <CustomText style={CommonStyles.header}>Notifications</CustomText>
+      </View>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
         {notifications.map((notification) => (
           <NotificationCard
             key={notification.id}
@@ -109,8 +116,8 @@ const NotificationScreen = ({ navigation }) => {
             navigation={navigation}
           />
         ))}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -118,10 +125,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    padding: 20,
     paddingTop: 0,
   },
   scrollViewContent: {
+    paddingHorizontal: 20,
     paddingBottom: 20,
   },
 });

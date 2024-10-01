@@ -162,8 +162,6 @@ const HomeScreen = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     switch (item.type) {
-      case "header":
-        return <HomeHeader navigation={navigation} />;
       case "calendar":
         return <Calendar />;
       case "attendance":
@@ -208,6 +206,7 @@ const HomeScreen = ({ navigation }) => {
           />
         </View>
       )}
+      <HomeHeader navigation={navigation} />
       <FlatList
         data={data}
         renderItem={renderItem}

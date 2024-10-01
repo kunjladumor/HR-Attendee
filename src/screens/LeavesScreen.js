@@ -106,31 +106,38 @@ const LeavesScreen = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
+      <View
+        style={[
+          CommonStyles.rowSpaceBetween,
+          {
+            paddingHorizontal: 20,
+          },
+        ]}
+      >
+        <CustomText style={CommonStyles.header}>All Leaves</CustomText>
+        <View style={CommonStyles.row}>
+          <CustomButton
+            color={"transparent"}
+            borderRadius={10}
+            style={{ marginRight: 10, fontWeight: "bold" }}
+            iconName={"create-outline"}
+            iconSize={24}
+            iconColor={colors.text}
+            onPress={() => navigation.navigate("ApplyLeave")}
+          />
+          <CustomButton
+            color={"transparent"}
+            borderRadius={10}
+            iconName={"options-outline"}
+            iconSize={24}
+            iconColor={colors.text}
+            onPress={() => setModalVisible(true)}
+          />
+        </View>
+      </View>
       <FlatList
         ListHeaderComponent={
           <View style={CommonStyles.content}>
-            <View style={CommonStyles.rowSpaceBetween}>
-              <CustomText style={CommonStyles.header}>All Leaves</CustomText>
-              <View style={CommonStyles.row}>
-                <CustomButton
-                  color={"transparent"}
-                  borderRadius={10}
-                  style={{ marginRight: 10, fontWeight: "bold" }}
-                  iconName={"create-outline"}
-                  iconSize={24}
-                  iconColor={colors.text}
-                  onPress={() => navigation.navigate("ApplyLeave")}
-                />
-                <CustomButton
-                  color={"transparent"}
-                  borderRadius={10}
-                  iconName={"options-outline"}
-                  iconSize={24}
-                  iconColor={colors.text}
-                  onPress={() => setModalVisible(true)}
-                />
-              </View>
-            </View>
             <LeavesGrid />
             <Tabs tabs={tabs} />
           </View>

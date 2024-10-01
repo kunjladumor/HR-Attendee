@@ -58,16 +58,23 @@ const ApplyLeaveScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={CommonStyles.container}>
-      <View style={CommonStyles.content}>
-        <View style={CommonStyles.header}>
-          <Ionicons
-            name="chevron-back-outline"
-            size={24}
-            onPress={() => navigation.goBack()}
-          />
-          <CustomText style={{ fontSize: 24 }}>Apply Leave</CustomText>
-        </View>
+    <View style={CommonStyles.container}>
+      <View
+        style={[
+          CommonStyles.header,
+          {
+            paddingHorizontal: 20,
+          },
+        ]}
+      >
+        <Ionicons
+          name="chevron-back-outline"
+          size={24}
+          onPress={() => navigation.goBack()}
+        />
+        <CustomText style={{ fontSize: 24 }}>Apply Leave</CustomText>
+      </View>
+      <ScrollView contentContainerStyle={CommonStyles.content}>
         <Inputs
           type="text"
           placeholder="Title"
@@ -118,8 +125,8 @@ const ApplyLeaveScreen = ({ navigation }) => {
           />
           <SuccessModal isVisible={isModalVisible} onClose={handleCloseModal} />
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
