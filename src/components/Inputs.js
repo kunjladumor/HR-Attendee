@@ -10,6 +10,7 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import CustomText from "./CustomText";
+import { textSizes } from "../styles/textStyles";
 import colors from "@styles/ColorStyles"; // Assuming you have a colors file
 
 const Inputs = forwardRef(
@@ -18,7 +19,7 @@ const Inputs = forwardRef(
       type = "text",
       placeholder,
       value,
-      onChangeText,
+      onChangeText = () => {},
       options = [],
       error,
       id, // Unique identifier for each input
@@ -30,6 +31,7 @@ const Inputs = forwardRef(
     const [isFocused, setIsFocused] = useState(type === "picker");
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [inputValue, setInputValue] = useState(value || defaultValue); // Initialize with value or defaultValue
+
     const animatedIsFocused = useRef(
       new Animated.Value(inputValue ? 1 : 0)
     ).current;
@@ -62,6 +64,29 @@ const Inputs = forwardRef(
       }
     };
 
+    const handleFilePicker = async (multiple = false) => {
+      try {
+        const result = await DocumentPicker.getDocumentAsync({
+          type: "*/*",
+          copyToCacheDirectory: true,
+          multiple: multiple,
+        });
+
+        if (result.type === "success") {
+          if (multiple) {
+            const uris = result.output.map((file) => file.uri).join(", ");
+            setInputValue(uris);
+            onChangeText(uris);
+          } else {
+            setInputValue(result.uri);
+            onChangeText(result.uri);
+          }
+        }
+      } catch (error) {
+        console.error("Error picking document: ", error);
+      }
+    };
+
     const renderInput = () => {
       switch (type) {
         case "textarea":
@@ -82,6 +107,9 @@ const Inputs = forwardRef(
               }}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
+              placeholderTextColor={
+                isFocused ? colors.primary : colors.neutral60
+              } // Apply placeholder text color
             />
           );
         case "date":
@@ -114,6 +142,36 @@ const Inputs = forwardRef(
               )}
             </>
           );
+        case "time":
+          return (
+            <>
+              <TouchableOpacity
+                onPress={handleDatePickerPress}
+                style={InputStyles.touchable}
+              >
+                <Text
+                  style={[
+                    InputStyles.input,
+                    error && InputStyles.inputError,
+                    {
+                      marginTop: 10,
+                      marginBottom: -10,
+                    },
+                  ]}
+                >
+                  {inputValue}
+                </Text>
+              </TouchableOpacity>
+              {showDatePicker && (
+                <DateTimePicker
+                  value={inputValue ? new Date(inputValue) : new Date()}
+                  mode="time"
+                  display="default"
+                  onChange={onDateChange}
+                />
+              )}
+            </>
+          );
         case "number":
           return (
             <TextInput
@@ -127,6 +185,9 @@ const Inputs = forwardRef(
               }}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
+              placeholderTextColor={
+                isFocused ? colors.primary : colors.neutral60
+              } // Apply placeholder text color
             />
           );
         case "picker":
@@ -149,7 +210,6 @@ const Inputs = forwardRef(
               ))}
             </Picker>
           );
-
         case "password":
           return (
             <TextInput
@@ -164,6 +224,9 @@ const Inputs = forwardRef(
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               secureTextEntry={true}
+              placeholderTextColor={
+                isFocused ? colors.primary : colors.neutral60
+              } // Apply placeholder text color
             />
           );
         case "numeric":
@@ -180,7 +243,20 @@ const Inputs = forwardRef(
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               keyboardType="numeric"
+              placeholderTextColor={
+                isFocused ? colors.primary : colors.neutral60
+              } // Apply placeholder text color
             />
+          );
+        case "file":
+        case "folder":
+          return (
+            <TouchableOpacity
+              style={InputStyles.fileInput}
+              onPress={() => handleFilePicker(type === "folder")}
+            >
+              <Text style={InputStyles.fileInputText}>{}</Text>
+            </TouchableOpacity>
           );
         default:
           return (
@@ -195,6 +271,9 @@ const Inputs = forwardRef(
               }}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
+              placeholderTextColor={
+                isFocused ? colors.primary : colors.neutral60
+              } // Apply placeholder text color
             />
           );
       }
@@ -212,17 +291,19 @@ const Inputs = forwardRef(
         inputRange: [0, 1],
         outputRange: [16, 12],
       }),
-      color: animatedIsFocused.interpolate({
-        inputRange: [0, 1],
-        outputRange: [colors.neutral40, colors.primary],
-      }),
+      color: isFocused ? colors.primary : colors.neutral60,
       backgroundColor: colors.background,
       paddingHorizontal: 5,
     };
 
     return (
       <View style={InputStyles.inputWrapper}>
-        <View style={InputStyles.inputContainer}>
+        <View
+          style={[
+            InputStyles.inputContainer,
+            isFocused && { borderColor: colors.primary },
+          ]}
+        >
           <Animated.Text style={labelStyle}>{placeholder}</Animated.Text>
           {renderInput()}
         </View>
@@ -237,7 +318,7 @@ const Inputs = forwardRef(
 export const InputStyles = StyleSheet.create({
   errorText: {
     color: colors.secondary,
-    fontSize: 12,
+    fontSize: textSizes.xs,
     marginTop: 5,
   },
   inputWrapper: {
@@ -245,7 +326,7 @@ export const InputStyles = StyleSheet.create({
   },
   inputContainer: {
     borderWidth: 1,
-    borderColor: colors.primary,
+    borderColor: colors.neutral60, // Default border color
     padding: 8,
     borderRadius: 5,
     position: "relative",
@@ -253,7 +334,7 @@ export const InputStyles = StyleSheet.create({
   },
   input: {
     height: 40,
-    fontSize: 16,
+    fontSize: textSizes.body,
     paddingHorizontal: 10,
     color: colors.text,
     fontFamily: "Poppins", // Change this to your desired font
@@ -271,8 +352,17 @@ export const InputStyles = StyleSheet.create({
   pickerContainer: {
     justifyContent: "center",
   },
+  fileInput: {
+    padding: 10,
+    justifyContent: "center",
+  },
+  fileInputText: {
+    fontSize: textSizes.body,
+    color: colors.text,
+    fontFamily: "Poppins", // Change this to your desired font
+  },
   placeholderText: {
-    color: colors.primary, // Placeholder text color
+    color: colors.neutral50, // Placeholder text color
     fontFamily: "Poppins", // Change this to your desired font
   },
 });
