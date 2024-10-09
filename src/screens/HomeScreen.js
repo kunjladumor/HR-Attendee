@@ -18,7 +18,6 @@ import { CommonStyles } from "@styles/style";
 import colors from "@styles/ColorStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import AnnouncementCard from "@components/AnnouncementCard";
 
 export const activities = [
   {
