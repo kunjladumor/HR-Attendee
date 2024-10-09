@@ -6,6 +6,7 @@ import CustomText from "@components/CustomText";
 import CustomButton from "@components/ButtonComponent";
 import SuccessModal from "@components/LeaveApplied";
 import { Ionicons } from "@expo/vector-icons";
+import colors from "../styles/ColorStyles";
 
 const ApplyLeaveScreen = ({ navigation }) => {
   const [textValue, setTextValue] = useState("");
@@ -61,18 +62,22 @@ const ApplyLeaveScreen = ({ navigation }) => {
     <View style={CommonStyles.container}>
       <View
         style={[
-          CommonStyles.header,
+          CommonStyles.row,
           {
             paddingHorizontal: 20,
+            gap: 10,
           },
         ]}
       >
         <Ionicons
           name="chevron-back-outline"
           size={24}
+          color={colors.text}
           onPress={() => navigation.goBack()}
         />
-        <CustomText style={{ fontSize: 24 }}>Apply Leave</CustomText>
+        <CustomText style={[CommonStyles.header, { fontSize: 24 }]}>
+          Apply Leave
+        </CustomText>
       </View>
       <ScrollView contentContainerStyle={CommonStyles.content}>
         <Inputs
