@@ -3,17 +3,27 @@ import { View, Text, StyleSheet } from "react-native";
 import CustomText from "@components/CustomText";
 import colors from "@styles/ColorStyles";
 import { Ionicons } from "@expo/vector-icons";
+import { CommonStyles } from "../styles/style";
 
-const PrivacyPolicy = ({ navigation }) => {
+const TermsConditionsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <View
+        style={[
+          CommonStyles.row,
+          {
+            marginBottom: 10,
+            gap: 10,
+          },
+        ]}
+      >
         <Ionicons
           name="chevron-back-outline"
           size={24}
+          color={colors.text}
           onPress={() => navigation.goBack()}
         />
-        <CustomText style={styles.title}>Privacy and Policy</CustomText>
+        <CustomText style={styles.title}>Privacy & Policy</CustomText>
       </View>
       <View style={styles.content}>
         <CustomText style={styles.lastUpdate}>
@@ -47,7 +57,6 @@ const PrivacyPolicy = ({ navigation }) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -62,7 +71,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    marginHorizontal: "auto",
+    color: colors.text,
   },
   content: {
     flex: 1,
@@ -70,6 +79,7 @@ const styles = StyleSheet.create({
   contentText: {
     fontSize: 16,
     marginBottom: 16,
+    color: colors.text,
   },
   lastUpdate: {
     fontSize: 12,
@@ -84,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PrivacyPolicy;
+export default TermsConditionsScreen;
