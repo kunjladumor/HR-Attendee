@@ -23,7 +23,7 @@ const ActivityScreen = ({ navigation, route }) => {
   );
 
   return (
-    <View>
+    <View style={CommonStyles.container}>
       <View
         style={[
           CommonStyles.row,
