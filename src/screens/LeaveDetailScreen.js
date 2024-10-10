@@ -10,8 +10,17 @@ const LeaveDetailsScreen = ({ route, navigation }) => {
   const { leaveRequest } = route.params;
 
   return (
-    <>
-      <View style={styles.header}>
+    <View style={CommonStyles.container}>
+      <View
+        style={[
+          CommonStyles.row,
+          {
+            paddingHorizontal: 20,
+            paddingBottom: 10,
+            gap: 10,
+          },
+        ]}
+      >
         <Ionicons
           name="chevron-back-outline"
           size={24}
@@ -98,7 +107,7 @@ const LeaveDetailsScreen = ({ route, navigation }) => {
           />
         </View>
       </ScrollView>
-    </>
+    </View>
   );
 };
 

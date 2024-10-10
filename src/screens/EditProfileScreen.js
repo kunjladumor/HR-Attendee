@@ -25,6 +25,7 @@ const EditProfileScreen = ({ navigation }) => {
           <Ionicons
             name="chevron-back-outline"
             size={24}
+            color={colors.text}
             style={{ marginRight: 10 }}
             onPress={() => navigation.goBack()}
           />

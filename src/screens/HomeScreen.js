@@ -189,7 +189,6 @@ const HomeScreen = ({ navigation }) => {
   const data = [
     { type: "header" },
     { type: "calendar" },
-
     { type: "attendance" },
     { type: "activity" },
   ];
@@ -210,7 +209,7 @@ const HomeScreen = ({ navigation }) => {
         data={data}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={[CommonStyles.content, { paddingBottom: 150 }]}
+        contentContainerStyle={[CommonStyles.content, { paddingBottom: 200 }]}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
