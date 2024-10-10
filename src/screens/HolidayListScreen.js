@@ -34,6 +34,7 @@ const announcements = [
     subcontent:
       "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
     time: "2 hours ago",
+    favourite: true,
   },
   {
     iconName: "megaphone-outline", // Correct icon name
@@ -42,6 +43,7 @@ const announcements = [
     subcontent:
       "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
     time: "1 day ago",
+    favourite: true,
   },
   {
     iconName: "megaphone-outline", // Correct icon name
@@ -50,6 +52,7 @@ const announcements = [
     subcontent:
       "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
     time: "2 hours ago",
+    favourite: true,
   },
   {
     iconName: "megaphone-outline", // Correct icon name
@@ -58,6 +61,7 @@ const announcements = [
     subcontent:
       "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
     time: "1 day ago",
+    favourite: true,
   },
   {
     iconName: "megaphone-outline", // Correct icon name
@@ -66,6 +70,7 @@ const announcements = [
     subcontent:
       "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
     time: "2 hours ago",
+    favourite: true,
   },
   {
     iconName: "megaphone-outline", // Correct icon name
@@ -74,6 +79,7 @@ const announcements = [
     subcontent:
       "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
     time: "1 day ago",
+    favourite: true,
   },
   {
     iconName: "megaphone-outline", // Correct icon name
@@ -82,6 +88,7 @@ const announcements = [
     subcontent:
       "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
     time: "2 hours ago",
+    favourite: true,
   },
   {
     iconName: "megaphone-outline", // Correct icon name
@@ -90,6 +97,7 @@ const announcements = [
     subcontent:
       "As an exercise for English students, generate a list of ten random words and have the student write a story that incorporates those words in the order they're generated \n\nYou could also take the hard work out of playing MadLibs but for that youll need to separate out the parts of speech. There's generators for each one, just jump over using the options below.",
     time: "1 day ago",
+    favourite: true,
   },
   // Add more announcements as needed
 ];
@@ -108,6 +116,7 @@ function HolidayListScreen() {
               content={item.content}
               time={item.time}
               subcontent={item.subcontent}
+              favourite={item.favourite}
             />
           )}
           keyExtractor={(item, index) => index.toString()}
