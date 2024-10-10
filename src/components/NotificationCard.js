@@ -4,7 +4,14 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import colors from "@styles/ColorStyles"; // Adjust the import based on your project structure
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const NotificationCard = ({ icon, title, content, time, navigation }) => {
+const NotificationCard = ({
+  icon,
+  title,
+  content,
+  time,
+  navigation,
+  favourite,
+}) => {
   const handleNotificationCardPress = () => {
     navigation.navigate("AnnouncementScreen", {
       iconName: icon,
@@ -12,6 +19,7 @@ const NotificationCard = ({ icon, title, content, time, navigation }) => {
       content: content,
       time: time,
       subcontent: "Additional subcontent here", // Add any additional data you want to pass
+      favourite,
     });
   };
 

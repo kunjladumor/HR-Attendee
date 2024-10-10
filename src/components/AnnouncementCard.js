@@ -8,7 +8,14 @@ import { useNavigation } from "@react-navigation/native";
 const deviceWidth = Dimensions.get("window").width;
 const cardWidth = deviceWidth / 1.25; // Subtract padding of 20
 
-const AnnouncementCard = ({ icon, title, content, subcontent, time }) => {
+const AnnouncementCard = ({
+  icon,
+  title,
+  content,
+  subcontent,
+  time,
+  favourite,
+}) => {
   const navigation = useNavigation();
 
   const handlePress = () => {
@@ -18,6 +25,7 @@ const AnnouncementCard = ({ icon, title, content, subcontent, time }) => {
       content,
       subcontent,
       time,
+      favourite,
     });
   };
 

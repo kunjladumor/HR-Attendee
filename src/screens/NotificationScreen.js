@@ -13,6 +13,7 @@ const notifications = [
     title: "New Message",
     content: "You have received a new message.",
     time: "10:30 AM",
+    favourite: true,
   },
   {
     id: "2",
@@ -20,6 +21,7 @@ const notifications = [
     title: "System Alert",
     content: "Your system requires an update.",
     time: "9:15 AM",
+    favourite: true,
   },
   {
     id: "3",
@@ -27,6 +29,7 @@ const notifications = [
     title: "New Message",
     content: "You have received a new message.",
     time: "Yesterday",
+    favourite: true,
   },
   {
     id: "4",
@@ -34,6 +37,7 @@ const notifications = [
     title: "System Alert",
     content: "Your system requires an update.",
     time: "Yesterday",
+    favourite: true,
   },
   {
     id: "5",
@@ -41,6 +45,7 @@ const notifications = [
     title: "New Message",
     content: "You have received a new message.",
     time: "Yesterday",
+    favourite: true,
   },
   {
     id: "6",
@@ -48,6 +53,7 @@ const notifications = [
     title: "System Alert",
     content: "Your system requires an update.",
     time: "Yesterday",
+    favourite: true,
   },
   {
     id: "7",
@@ -55,6 +61,7 @@ const notifications = [
     title: "New Message",
     content: "You have received a new message.",
     time: "Yesterday",
+    favourite: true,
   },
   {
     id: "8",
@@ -62,6 +69,7 @@ const notifications = [
     title: "System Alert",
     content: "Your system requires an update.",
     time: "Yesterday",
+    favourite: true,
   },
   {
     id: "9",
@@ -69,6 +77,7 @@ const notifications = [
     title: "New Message",
     content: "You have received a new message.",
     time: "Yesterday",
+    favourite: true,
   },
   {
     id: "10",
@@ -76,6 +85,7 @@ const notifications = [
     title: "System Alert",
     content: "Your system requires an update.",
     time: "Yesterday",
+    favourite: true,
   },
   {
     id: "11",
@@ -83,6 +93,7 @@ const notifications = [
     title: "New Message",
     content: "You have received a new message.",
     time: "Yesterday",
+    favourite: true,
   },
 ];
 
@@ -114,6 +125,7 @@ const NotificationScreen = ({ navigation }) => {
             content={notification.content}
             time={notification.time}
             navigation={navigation}
+            favourite={notification.favourite}
           />
         ))}
       </ScrollView>
