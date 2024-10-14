@@ -18,7 +18,7 @@ const CreateNotificationScreen = ({ navigation }) => {
   ];
 
   return (
-    <View style={styles.container}>
+    <View style={CommonStyles.container}>
       <View
         style={[
           CommonStyles.row,
@@ -34,7 +34,7 @@ const CreateNotificationScreen = ({ navigation }) => {
         <CustomText style={CommonStyles.header}>Create Notification</CustomText>
       </View>
       <View style={CommonStyles.content}>
-        <Inputs label="Title" placeholder="Enter title" style={styles.input} />
+        <Inputs label="Title" placeholder="Enter title" />
         <DropdownModal
           data={notificationTypes}
           labelField="label"
@@ -45,16 +45,11 @@ const CreateNotificationScreen = ({ navigation }) => {
           onValueChange={(item) => setType(item.value)}
         />
 
-        <Inputs
-          label="Content"
-          placeholder="Enter content"
-          style={styles.input}
-        />
+        <Inputs label="Content" placeholder="Enter content" />
         <Inputs
           type="textarea"
           label="Subcontent"
           placeholder="Enter subcontent"
-          style={styles.input}
         />
         <CustomButton
           title="Create Notification"
@@ -67,25 +62,5 @@ const CreateNotificationScreen = ({ navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  input: {
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: "#007AFF",
-    padding: 15,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
-});
 
 export default CreateNotificationScreen;
