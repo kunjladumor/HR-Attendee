@@ -9,7 +9,6 @@ const AnnouncementScreen = ({ route, navigation }) => {
   const { iconName, title, content, time, subcontent, favourite } =
     route.params;
 
-  console.log(favourite);
   return (
     <View style={CommonStyles.container}>
       <View style={CommonStyles.content}>
