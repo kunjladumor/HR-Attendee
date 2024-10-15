@@ -5,6 +5,10 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Modal,
+  Pressable,
+  Text,
+  Alert,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -19,32 +23,50 @@ const ProfileScreen = ({ navigation }) => {
   const [profileImage, setProfileImage] = useState(
     require("@assets/images/user.png")
   ); // Default image
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleLogout = async () => {
     await AsyncStorage.setItem("isLoggedIn", "false"); // Update login status
     navigation.replace("Login");
   };
 
-  const handleChangeProfileImage = async () => {
-    // Request permission to access the image library
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      alert("Sorry, we need camera roll permissions to make this work!");
+  const handleChangeProfileImage = async (option) => {
+    let result;
+    if (option === "upload") {
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
+        return;
+      }
+      result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+    } else if (option === "camera") {
+      const { status } = await ImagePicker.requestCameraPermissionsAsync();
+      if (status !== "granted") {
+        alert("Sorry, we need camera permissions to make this work!");
+        return;
+      }
+      result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+    } else if (option === "remove") {
+      setProfileImage(require("@assets/images/user.png"));
+      setModalVisible(false);
       return;
     }
 
-    // Launch the image picker
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    });
-
-    // Check if the user has canceled the image picker
     if (!result.canceled) {
-      setProfileImage({ uri: result.uri });
+      setProfileImage({ uri: result.assets[0].uri });
     }
+    setModalVisible(false);
   };
 
   return (
@@ -59,7 +81,7 @@ const ProfileScreen = ({ navigation }) => {
             />
             <TouchableOpacity
               style={ProfileStyles.cameraIconContainer}
-              onPress={handleChangeProfileImage}
+              onPress={() => setModalVisible(true)}
             >
               <Icon name="camera-outline" size={24} color={colors.white} />
             </TouchableOpacity>
@@ -155,6 +177,56 @@ const ProfileScreen = ({ navigation }) => {
           </View>
         </View>
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <TouchableOpacity
+          style={ProfileStyles.modalOverlay}
+          activeOpacity={1}
+          onPressOut={() => setModalVisible(false)}
+        >
+          <View style={ProfileStyles.modalContainer}>
+            {["camera", "upload", "remove", "cancel"].map((option, index) => (
+              <Pressable
+                key={index}
+                style={ProfileStyles.modalOption}
+                onPress={() =>
+                  option === "cancel"
+                    ? setModalVisible(false)
+                    : handleChangeProfileImage(option)
+                }
+              >
+                <Icon
+                  name={
+                    option === "camera"
+                      ? "camera-outline"
+                      : option === "upload"
+                        ? "image-outline"
+                        : option === "remove"
+                          ? "trash-outline"
+                          : "close-outline"
+                  }
+                  size={24}
+                  color={colors.neutral80}
+                />
+                <CustomText style={ProfileStyles.modalText}>
+                  {option === "camera"
+                    ? "Take a Picture"
+                    : option === "upload"
+                      ? "Upload from Gallery"
+                      : option === "remove"
+                        ? "Remove Profile Picture"
+                        : "Cancel"}
+                </CustomText>
+              </Pressable>
+            ))}
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </ScrollView>
   );
 };
@@ -186,7 +258,6 @@ const ProfileStyles = StyleSheet.create({
     textAlign: "center",
     color: colors.text,
   },
-
   options: {
     flex: 1,
   },
@@ -197,17 +268,28 @@ const ProfileStyles = StyleSheet.create({
     borderRadius: 10,
     overflow: "hidden",
   },
-  option: {
-    marginVertical: 10,
-    padding: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
-  optionText: {
+  modalContainer: {
+    backgroundColor: colors.white,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    padding: 20,
+    width: "100%",
+  },
+  modalOption: {
+    flexDirection: "row",
+    gap: 10,
+    paddingVertical: 8,
+    alignItems: "center",
+  },
+  modalText: {
     fontSize: 16,
-    marginLeft: 10,
-    color: colors.primary,
+    color: colors.neutral80,
+    fontFamily: "PoppinsSemiBold",
   },
 });
 
