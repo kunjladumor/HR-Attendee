@@ -43,7 +43,7 @@ const TabsStyle = StyleSheet.create({
     flexDirection: "row",
     borderRadius: 10,
     marginTop: 10,
-    backgroundColor: colors.surface + "80",
+    backgroundColor: colors.surface,
   },
   tab: {
     flex: 1,
@@ -53,7 +53,7 @@ const TabsStyle = StyleSheet.create({
   },
   activeTab: {
     backgroundColor: colors.primary,
-    borderRadius: 15,
+    borderRadius: 10,
   },
   tabText: {
     fontSize: 14,
