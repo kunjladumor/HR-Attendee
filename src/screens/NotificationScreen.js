@@ -176,7 +176,7 @@ const NotificationScreen = ({ navigation }) => {
   });
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={CommonStyles.container}>
       <View
         style={[
           CommonStyles.row,
