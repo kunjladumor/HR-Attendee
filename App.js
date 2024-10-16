@@ -6,6 +6,7 @@ import Navigation from "@utils/Navigation";
 import { Client, Account, ID } from "react-native-appwrite";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import colors from "./src/styles/ColorStyles";
+import { CommonStyles } from "./src/styles/style";
 
 const client = new Client();
 client
