@@ -1,8 +1,8 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, Keyboard } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Modal from "react-native-modal";
-import { CheckBox } from "react-native-elements";
-import Inputs from "./Inputs";
+import CustomCheckbox from "../components/CustomCheckbox"; // Adjust the import path as necessary
+import DropdownModal from "./DropdownModal";
 import colors from "@styles/ColorStyles";
 import CustomButton from "./ButtonComponent";
 import CustomText from "@components/CustomText";
@@ -45,26 +45,16 @@ const FiltersModal = ({
   };
 
   const renderCheckbox = (option, type) => (
-    <CheckBox
-      key={option.id}
-      title={option.label}
-      checked={filters[type].includes(option.value)}
-      onPress={() => handleCheckboxChange(type, option.value)}
-      containerStyle={styles.checkboxContainer}
-      textStyle={styles.checkboxText}
-      checkedColor={colors.primary}
-      iconType="material"
-      checkedIcon={
-        <View style={styles.customCheckedIcon}>
-          <CustomText style={styles.customCheckmark}>✓</CustomText>
-        </View>
-      }
-      uncheckedIcon={
-        <View style={styles.customUncheckedIcon}>
-          <CustomText style={styles.customCheckmark}>✗</CustomText>
-        </View>
-      }
-    />
+    <View key={option.id} style={{ marginVertical: 2 }}>
+      <CustomCheckbox
+        label={option.label}
+        checked={filters[type].includes(option.value)}
+        onPress={() => handleCheckboxChange(type, option.value)}
+        containerStyle={styles.checkboxContainer}
+        textStyle={styles.checkboxText}
+        checkedColor={colors.primary}
+      />
+    </View>
   );
 
   return (
@@ -79,14 +69,16 @@ const FiltersModal = ({
         {leaveTypeOptions.map((option) => renderCheckbox(option, "type"))}
 
         <CustomText style={styles.label}>Team Member</CustomText>
-        <Inputs
-          type="picker"
+        <DropdownModal
+          data={teamMemberOptions}
+          labelField="label"
+          valueField="value"
           placeholder="Select Team Member"
-          value={filters.teamMember}
-          onChangeText={(value) =>
-            setFilters({ ...filters, teamMember: value })
+          selectedValue={filters.teamMember}
+          onValueChange={(item) =>
+            setFilters({ ...filters, teamMember: item.value })
           }
-          options={teamMemberOptions}
+          style={styles.dropdown}
         />
 
         <View style={styles.footer}>
@@ -136,7 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginVertical: 10,
     fontFamily: "PoppinsMedium",
-    color: colors.neutral90,
+    color: colors.text, // Ensure the label color is set to a visible color
   },
   footer: {
     flexDirection: "row",
@@ -180,7 +172,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     backgroundColor: colors.background,
-    borderColor: colors.primary,
+    borderColor: colors.neutral50,
     borderWidth: 2,
     justifyContent: "center",
     alignItems: "center",

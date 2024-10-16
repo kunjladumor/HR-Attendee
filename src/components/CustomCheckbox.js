@@ -3,9 +3,9 @@ import { TouchableOpacity, StyleSheet, View } from "react-native";
 import CustomText from "@components/CustomText";
 import colors from "@styles/ColorStyles"; // Import the colors object
 
-const CustomCheckbox = ({ checked, onPress }) => {
+const CustomCheckbox = ({ checked, onPress, label }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.checkboxContainer}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <View
         style={checked ? styles.customCheckedIcon : styles.customUncheckedIcon}
       >
@@ -13,13 +13,14 @@ const CustomCheckbox = ({ checked, onPress }) => {
           {checked ? "✓" : "✗"}
         </CustomText>
       </View>
+      {label && <CustomText style={styles.label}>{label}</CustomText>}
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  checkboxContainer: {
-    justifyContent: "center",
+  container: {
+    flexDirection: "row",
     alignItems: "center",
   },
   customCheckedIcon: {
@@ -43,6 +44,11 @@ const styles = StyleSheet.create({
   customCheckmark: {
     color: colors.background,
     fontSize: 16,
+  },
+  label: {
+    marginLeft: 10,
+    fontSize: 16,
+    color: colors.text,
   },
 });
 
