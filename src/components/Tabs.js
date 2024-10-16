@@ -41,22 +41,19 @@ const Tabs = ({ tabs }) => {
 const TabsStyle = StyleSheet.create({
   tabContainer: {
     flexDirection: "row",
-    borderWidth: 1,
-    borderColor: `${colors.neutral10}1A`,
     borderRadius: 10,
     marginTop: 10,
-    backgroundColor: `${colors.neutral10}1A`,
+    backgroundColor: colors.surface + "80",
   },
   tab: {
     flex: 1,
     padding: 10,
-    paddingVertical: 15,
     alignItems: "center",
     justifyContent: "center",
   },
   activeTab: {
     backgroundColor: colors.primary,
-    borderRadius: 20,
+    borderRadius: 15,
   },
   tabText: {
     fontSize: 14,
