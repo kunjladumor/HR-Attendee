@@ -92,36 +92,36 @@ const ApplyLeaveScreen = ({ navigation }) => {
           value={pickerValue}
           onChangeText={setPickerValue}
           options={pickerOptions}
-          error={pickerValue === "" ? "This field is required" : ""}
         />
+
         <Inputs
           type="number"
           placeholder="Contact Number"
           value={numberValue}
           onChangeText={setNumberValue}
-          error={numberValue === "" ? "This field is required" : ""}
         />
+
         <Inputs
           type="date"
           placeholder="Start date"
           value={startDate}
           onChangeText={setStartDate}
-          error={startDate === "" ? "This field is required" : ""}
         />
+
         <Inputs
           type="date"
           placeholder="End date"
           value={endDate}
           onChangeText={setEndDate}
-          error={endDate === "" ? "This field is required" : ""}
         />
+
         <Inputs
           type="textarea"
           placeholder="Reason for Leave"
           value={textareaValue}
           onChangeText={setTextareaValue}
-          error={textareaValue === "" ? "This field is required" : ""}
         />
+
         <View style={CommonStyles.footer}>
           <CustomButton
             title="Apply Leave"
