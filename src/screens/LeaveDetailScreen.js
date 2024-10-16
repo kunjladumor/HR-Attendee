@@ -113,11 +113,11 @@ const LeaveDetailsScreen = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
     padding: 16,
     backgroundColor: colors.background,
     padding: 20,
     paddingTop: 0,
+    paddingBottom: 90,
   },
   header: {
     flexDirection: "row",
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   detailLabel: {
     fontSize: 16,
     fontFamily: "PoppinsMedium",
-    paddingTop: 10,
+    paddingTop: 5,
     borderTopWidth: 1,
     borderTopColor: colors.neutral20,
     color: colors.neutral70,
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   detailValue: {
     fontSize: 16,
     fontFamily: "Poppins",
-    paddingBottom: 10,
+    paddingBottom: 5,
     color: colors.text,
   },
   actionsContainer: {
