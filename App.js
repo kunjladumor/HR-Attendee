@@ -37,7 +37,9 @@ export default function App() {
       } catch (e) {
         console.warn(e);
       } finally {
-        SplashScreen.hideAsync();
+        setTimeout(() => {
+          SplashScreen.hideAsync();
+        }, 2500);
       }
     }
 
