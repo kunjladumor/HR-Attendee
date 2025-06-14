@@ -22,32 +22,25 @@ const UserAttendanceScreen = ({ navigation, route }) => {
     // Fetch and set attendance data based on the selected filter
     // This is just a placeholder, replace with actual data fetching logic
     setAttendanceData([
-      { date: "2024-01-01", status: "Present" },
-      { date: "2024-01-02", status: "Absent" },
-      { date: "2024-01-03", status: "Present" },
-      { date: "2024-01-04", status: "Present" },
-      { date: "2024-01-05", status: "Absent" },
-      { date: "2024-01-06", status: "Present" },
-      { date: "2024-01-07", status: "Present" },
-      { date: "2024-01-08", status: "Absent" },
-      { date: "2024-01-09", status: "Present" },
-      { date: "2024-01-10", status: "Present" },
-      { date: "2024-01-11", status: "Absent" },
-      { date: "2024-01-12", status: "Present" },
+      { date: "2025-01-01", status: "Present" },
+      { date: "2025-01-02", status: "Absent" },
+      { date: "2025-01-03", status: "Present" },
+      { date: "2025-01-04", status: "Present" },
+      { date: "2025-01-05", status: "Absent" },
+      { date: "2025-01-06", status: "Present" },
+      { date: "2025-01-07", status: "Present" },
+      { date: "2025-01-08", status: "Absent" },
+      { date: "2025-01-09", status: "Present" },
+      { date: "2025-01-10", status: "Present" },
+      { date: "2025-01-11", status: "Absent" },
+      { date: "2025-01-12", status: "Present" },
       // Add more data as needed
     ]);
   };
 
   return (
     <View style={CommonStyles.container}>
-      <View
-        style={[
-          CommonStyles.row,
-          {
-            paddingHorizontal: 20,
-          },
-        ]}
-      >
+      <View style={[CommonStyles.row, { paddingHorizontal: 20 }]}>
         <Ionicons
           name="chevron-back-outline"
           size={24}
@@ -138,28 +131,11 @@ const UserAttendanceScreen = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
-  userInfoContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  profilePicture: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 10,
-  },
-  userInfo: {
-    flex: 1,
-  },
-  userName: {
-    fontSize: 18,
-    fontFamily: "PoppinsSemiBold",
-    color: colors.text,
-  },
-  userDesignation: {
-    fontSize: 16,
-    color: colors.neutral60,
-  },
+  userInfoContainer: { flexDirection: "row", alignItems: "center" },
+  profilePicture: { width: 50, height: 50, borderRadius: 25, marginRight: 10 },
+  userInfo: { flex: 1 },
+  userName: { fontSize: 18, fontFamily: "PoppinsSemiBold", color: colors.text },
+  userDesignation: { fontSize: 16, color: colors.neutral60 },
   filterContainer: {
     flexDirection: "row",
     backgroundColor: colors.neutral30 + "33",
@@ -173,16 +149,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     flex: 1,
   },
-  selectedFilterButton: {
-    backgroundColor: colors.primary,
-  },
-  filterText: {
-    color: colors.text,
-  },
-  selectedFilterText: {
-    color: colors.white,
-    fontFamily: "PoppinsMedium",
-  },
+  selectedFilterButton: { backgroundColor: colors.primary },
+  filterText: { color: colors.text },
+  selectedFilterText: { color: colors.white, fontFamily: "PoppinsMedium" },
 
   attendanceEntry: {
     flexDirection: "row",
@@ -191,13 +160,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.neutral20,
   },
-  attendanceDate: {
-    fontSize: 16,
-  },
-  attendanceStatus: {
-    fontSize: 16,
-    fontFamily: "PoppinsSemiBold",
-  },
+  attendanceDate: { fontSize: 16 },
+  attendanceStatus: { fontSize: 16, fontFamily: "PoppinsSemiBold" },
 });
 
 export default UserAttendanceScreen;

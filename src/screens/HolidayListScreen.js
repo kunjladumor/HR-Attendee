@@ -7,18 +7,18 @@ import HolidayCard from "@components/HolidayCard"; // Adjust the import path as 
 import AnnouncementCard from "@components/AnnouncementCard"; // Adjust the import path as needed
 
 const holidays = [
-  { date: "2024-01-26", occasion: "Republic Day" },
-  { date: "2024-03-08", occasion: "Maha Shivaratri" },
-  { date: "2024-03-25", occasion: "Holi" },
-  { date: "2024-04-14", occasion: "Dr. Ambedkar Jayanti" },
-  { date: "2024-04-17", occasion: "Mahavir Jayanti" },
-  { date: "2024-05-23", occasion: "Buddha Purnima" },
-  { date: "2024-08-15", occasion: "Independence Day" },
-  { date: "2024-08-28", occasion: "Janmashtami" },
-  { date: "2024-10-02", occasion: "Gandhi Jayanti" },
-  { date: "2024-10-13", occasion: "Dussehra" },
-  { date: "2024-11-01", occasion: "Diwali" },
-  { date: "2024-12-25", occasion: "Christmas" },
+  { date: "2025-01-26", occasion: "Republic Day" },
+  { date: "2025-03-08", occasion: "Maha Shivaratri" },
+  { date: "2025-03-25", occasion: "Holi" },
+  { date: "2025-04-14", occasion: "Dr. Ambedkar Jayanti" },
+  { date: "2025-04-17", occasion: "Mahavir Jayanti" },
+  { date: "2025-05-23", occasion: "Buddha Purnima" },
+  { date: "2025-08-15", occasion: "Independence Day" },
+  { date: "2025-08-28", occasion: "Janmashtami" },
+  { date: "2025-10-02", occasion: "Gandhi Jayanti" },
+  { date: "2025-10-13", occasion: "Dussehra" },
+  { date: "2025-11-01", occasion: "Diwali" },
+  { date: "2025-12-25", occasion: "Christmas" },
 ];
 
 // Sort holidays by date in ascending order

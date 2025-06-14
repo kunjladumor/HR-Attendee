@@ -8,18 +8,18 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { activities } from "../screens/HomeScreen";
 
 const holidays = [
-  { date: "2024-01-26", occasion: "Republic Day" },
-  { date: "2024-03-08", occasion: "Maha Shivaratri" },
-  { date: "2024-03-25", occasion: "Holi" },
-  { date: "2024-04-14", occasion: "Dr. Ambedkar Jayanti" },
-  { date: "2024-04-17", occasion: "Mahavir Jayanti" },
-  { date: "2024-05-23", occasion: "Buddha Purnima" },
-  { date: "2024-08-15", occasion: "Independence Day" },
-  { date: "2024-08-28", occasion: "Janmashtami" },
-  { date: "2024-10-02", occasion: "Gandhi Jayanti" },
-  { date: "2024-10-13", occasion: "Dussehra" },
-  { date: "2024-11-01", occasion: "Diwali" },
-  { date: "2024-12-25", occasion: "Christmas" },
+  { date: "2025-01-26", occasion: "Republic Day" },
+  { date: "2025-03-08", occasion: "Maha Shivaratri" },
+  { date: "2025-03-25", occasion: "Holi" },
+  { date: "2025-04-14", occasion: "Dr. Ambedkar Jayanti" },
+  { date: "2025-04-17", occasion: "Mahavir Jayanti" },
+  { date: "2025-05-23", occasion: "Buddha Purnima" },
+  { date: "2025-08-15", occasion: "Independence Day" },
+  { date: "2025-08-28", occasion: "Janmashtami" },
+  { date: "2025-10-02", occasion: "Gandhi Jayanti" },
+  { date: "2025-10-13", occasion: "Dussehra" },
+  { date: "2025-11-01", occasion: "Diwali" },
+  { date: "2025-12-25", occasion: "Christmas" },
 ];
 
 const lightTheme = {
@@ -72,92 +72,92 @@ const fetchAttendanceData = () => {
   // Fetch and set attendance data for the month
   // This is just a placeholder, replace with actual data fetching logic
   return {
-    "2024-09-02": {
+    "2025-09-02": {
       checkInTime: "09:15 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:15 PM",
     },
-    "2024-09-03": {
+    "2025-09-03": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-04": {
+    "2025-09-04": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-07": {
+    "2025-09-07": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-09": {
+    "2025-09-09": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-10": {
+    "2025-09-10": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-11": {
+    "2025-09-11": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-12": {
+    "2025-09-12": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-13": {
+    "2025-09-13": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-16": {
+    "2025-09-16": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-17": {
+    "2025-09-17": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-18": {
+    "2025-09-18": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-19": {
+    "2025-09-19": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-20": {
+    "2025-09-20": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-21": {
+    "2025-09-21": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-23": {
+    "2025-09-23": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-09-24": {
+    "2025-09-24": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
     },
-    "2024-10-02": {
+    "2025-10-02": {
       checkInTime: "09:00 AM",
       breakTime: "01:00 PM - 02:00 PM",
       checkOutTime: "06:00 PM",
@@ -171,13 +171,8 @@ const mergeData = (holidays, attendanceData, leaveData) => {
     acc[holiday.date] = {
       dots: [{ key: "holiday", color: colors.warning }],
       customStyles: {
-        container: {
-          backgroundColor: colors.lightPrimary,
-        },
-        text: {
-          color: colors.primary,
-          fontFamily: "PoppinsSemiBold",
-        },
+        container: { backgroundColor: colors.lightPrimary },
+        text: { color: colors.primary, fontFamily: "PoppinsSemiBold" },
       },
     };
     return acc;
@@ -190,13 +185,8 @@ const mergeData = (holidays, attendanceData, leaveData) => {
       markedDates[date] = {
         dots: [{ key: "present", color: colors.secondary2 }],
         customStyles: {
-          container: {
-            backgroundColor: colors.lightPrimary,
-          },
-          text: {
-            color: colors.primary,
-            fontFamily: "PoppinsSemiBold",
-          },
+          container: { backgroundColor: colors.lightPrimary },
+          text: { color: colors.primary, fontFamily: "PoppinsSemiBold" },
         },
       };
     }
@@ -209,13 +199,8 @@ const mergeData = (holidays, attendanceData, leaveData) => {
       markedDates[date] = {
         dots: [{ key: "leave", color: colors.secondary }],
         customStyles: {
-          container: {
-            backgroundColor: colors.lightPrimary,
-          },
-          text: {
-            color: colors.primary,
-            fontFamily: "PoppinsSemiBold",
-          },
+          container: { backgroundColor: colors.lightPrimary },
+          text: { color: colors.primary, fontFamily: "PoppinsSemiBold" },
         },
       };
     }
@@ -269,10 +254,7 @@ const CalendarComponent = ({ navigation }) => {
     setAttendanceData(fetchAttendanceData());
   }, []);
 
-  const leaveData = {
-    "2024-09-05": true,
-    "2024-09-06": true,
-  };
+  const leaveData = { "2025-09-05": true, "2025-09-06": true };
 
   const markedDates = mergeData(holidays, attendanceData, leaveData);
 
@@ -325,43 +307,24 @@ const CalendarComponent = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.background,
-    flex: 1,
-  },
+  container: { backgroundColor: colors.background, flex: 1 },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     flexWrap: "wrap",
     padding: 10,
   },
-  legendText: {
-    fontFamily: "PoppinsMedium",
-  },
+  legendText: { fontFamily: "PoppinsMedium" },
   statContainer: {
     flexDirection: "row",
     width: "100%",
     gap: 15,
     marginVertical: 10,
   },
-  statColumn: {
-    flexDirection: "column",
-    flex: 1,
-    gap: 15,
-  },
-  statCard: {
-    padding: 10,
-    borderRadius: 15,
-    borderWidth: 1,
-  },
-  statTitle: {
-    fontFamily: "PoppinsSemiBold",
-    fontSize: 16,
-  },
-  statValue: {
-    fontFamily: "PoppinsSemiBold",
-    fontSize: 20,
-  },
+  statColumn: { flexDirection: "column", flex: 1, gap: 15 },
+  statCard: { padding: 10, borderRadius: 15, borderWidth: 1 },
+  statTitle: { fontFamily: "PoppinsSemiBold", fontSize: 16 },
+  statValue: { fontFamily: "PoppinsSemiBold", fontSize: 20 },
   calendar: {
     marginVertical: 10,
     borderRadius: 10,
@@ -380,15 +343,8 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
-  selectedDateHeader: {
-    flexDirection: "row",
-    gap: 10,
-    alignItems: "center",
-  },
-  dateInfo: {
-    flexDirection: "column",
-    alignItems: "center",
-  },
+  selectedDateHeader: { flexDirection: "row", gap: 10, alignItems: "center" },
+  dateInfo: { flexDirection: "column", alignItems: "center" },
   dateText: {
     fontSize: 32,
     fontFamily: "PoppinsSemiBold",
@@ -402,14 +358,8 @@ const styles = StyleSheet.create({
     width: 50,
     textAlign: "center",
   },
-  details: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  detailText: {
-    fontSize: 16,
-    color: colors.text,
-  },
+  details: { flex: 1, marginLeft: 10 },
+  detailText: { fontSize: 16, color: colors.text },
 });
 
 export default CalendarComponent;
